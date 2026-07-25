@@ -1,0 +1,675 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Reward API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Reward
+  description: Reward Company Controller
+paths:
+  /api/v3/rewards/companies/{id}:
+    get:
+      tags:
+      - Reward
+      summary: 리워드 기업 상세 조회
+      operationId: getUsingGET_9
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RewardCompany'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v3/rewards/orders:
+    get:
+      tags:
+      - Reward
+      summary: 나의 리워드 주문 목록 조회
+      operationId: listUsingGET_6
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RewardOrder'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Reward
+      summary: 나의 리워드 주문 생성
+      operationId: createUsingPOST_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardOrder'
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v3/rewards/orders/{id}:
+    get:
+      tags:
+      - Reward
+      summary: 나의 리워드 주문 상세 조회
+      operationId: getUsingGET_10
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RewardOrder'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Reward
+      summary: 나의 리워드 주문 정보 수정
+      operationId: updateUsingPUT_4
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardOrder'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Reward
+      summary: 나의 리워드 주문 취소
+      operationId: deleteUsingDELETE_5
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v3/rewards/companies/{companyId}/programs:
+    get:
+      tags:
+      - Reward
+      summary: 리워드 기업의 리워드 프로그램 목록 조회 (검색/필터/페이징)
+      operationId: listByCompanyUsingGET_1
+      parameters:
+      - name: closeFrom
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: closeTo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: companyId
+        in: query
+        description: companyId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: openFrom
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: openTo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageNo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PagedResponse«RewardProgram»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v3/rewards/programs:
+    get:
+      tags:
+      - Reward
+      summary: 리워드 프로그램 목록 조회
+      operationId: listAllUsingGET_1
+      parameters:
+      - name: closeFrom
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: closeTo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: companyId
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: openFrom
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: openTo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageNo
+        in: query
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PagedResponse«RewardProgram»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v3/rewards/programs/{id}:
+    get:
+      tags:
+      - Reward
+      summary: 리워드 프로그램 상세 조회
+      operationId: getUsingGET_11
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RewardProgram'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    RewardOrder:
+      title: RewardOrder
+      type: object
+      properties:
+        buyerId:
+          type: string
+          description: 구매자 ID (user.id_usr)
+        cancelReason:
+          type: string
+          description: 취소 사유
+        canceledAt:
+          type: string
+          description: 취소 일시
+          format: date-time
+        canceledBy:
+          type: string
+          description: 취소 주체
+          enum:
+          - ADMIN
+          - SYSTEM
+          - USER
+        carrier:
+          type: string
+          description: 택배사명
+        completedAt:
+          type: string
+          description: 거래 완료일
+          format: date-time
+        createdAt:
+          type: string
+          description: 주문 생성일
+          format: date-time
+        creditUsed:
+          type: string
+          description: 크레딧 사용 내역 (JSON)
+        deliveryStatus:
+          type: string
+          description: 배송 상태
+          enum:
+          - DELIVERED
+          - READY
+          - RETURNED
+          - SHIPPED
+          - UNSET
+        id:
+          type: string
+          description: 주문 ID (UUID)
+        paidAt:
+          type: string
+          description: 결제 집행일
+          format: date-time
+        postalCode:
+          type: string
+          description: 우편번호
+        programId:
+          type: string
+          description: 프로그램 ID (UUID)
+        qty:
+          type: integer
+          description: 구매 수량
+          format: int32
+        recipientAddress:
+          type: string
+          description: 배송지 주소
+        recipientAddressDetail:
+          type: string
+          description: 상세 주소
+        recipientName:
+          type: string
+          description: 수령인 이름
+        recipientPhone:
+          type: string
+          description: 수령인 전화번호
+        status:
+          type: string
+          description: 상태
+          enum:
+          - CANCELLED
+          - CANCEL_REQUESTED
+          - COMPLETED
+          - PAID
+          - PAY_REQUESTED
+          - PENDING
+        trackingNo:
+          type: string
+          description: 운송장 번호
+        unitCreditSnapshot:
+          type: number
+          description: 주문 시점 크레딧 단가 스냅샷
+          format: bigdecimal
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
+    RewardCompany:
+      title: RewardCompany
+      type: object
+      properties:
+        agreedTermsPrivacy:
+          type: string
+          description: 개인정보처리방침 동의 일시
+          format: date-time
+        agreedTermsReward:
+          type: string
+          description: 리워드 운영정책 동의 일시
+          format: date-time
+        agreedTermsService:
+          type: string
+          description: 서비스 이용약관 동의 일시
+          format: date-time
+        approvedAt:
+          type: string
+          description: 승인일
+          format: date-time
+        approvedBy:
+          type: string
+          description: 승인자
+        commerceRegDoc:
+          type: string
+          description: 통신판매업 신고 서류 스토리지 URL
+        commerceRegNo:
+          type: string
+          description: 통신판매업 신고 번호
+        companyName:
+          type: string
+          description: 기업명
+        companyNo:
+          type: string
+          description: 기업번호
+        companyRegDoc:
+          type: string
+          description: 등록증 스토리지 URL (JSON)
+        contactEmail:
+          type: string
+          description: 담당자 이메일
+        contactName:
+          type: string
+          description: 담당자 이름
+        contactPhone:
+          type: string
+          description: 담당자 전화번호
+        createdAt:
+          type: string
+          description: 작성일
+          format: date-time
+        id:
+          type: string
+          description: 리워드용 기업 ID (UUID)
+        rejectionReason:
+          type: string
+          description: 반려 사유
+        representativeName:
+          type: string
+          description: 대표자명
+        status:
+          type: string
+          description: 상태
+          enum:
+          - APPROVED
+          - PENDING
+          - REJECTED
+          - SUSPENDED
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
+    RewardProgram:
+      title: RewardProgram
+      type: object
+      properties:
+        buyerCondition:
+          type: string
+          description: 구매자 조건 (JSON)
+        companyId:
+          type: string
+          description: 기업 ID (UUID)
+        content:
+          type: string
+          description: 상세 내용
+        createdAt:
+          type: string
+          description: 작성일
+          format: date-time
+        creditSettings:
+          type: string
+          description: 크레딧 설정 (JSON)
+        creditWeight:
+          type: number
+          description: 가중치
+          format: bigdecimal
+        csPhone:
+          type: string
+          description: 소비자 상담 전화번호
+        endedAt:
+          type: string
+          description: 종료일
+          format: date-time
+        id:
+          type: string
+          description: 프로그램 ID (UUID)
+        imageUrl:
+          type: string
+          description: 이미지 URL (JSON)
+        maxQtyPerUser:
+          type: integer
+          description: 1인당 최대 구매 수량
+          format: int32
+        refundPolicy:
+          type: string
+          description: 반환방법
+        remainingQty:
+          type: integer
+          description: 잔여 수량
+          format: int32
+        rewardName:
+          type: string
+          description: 리워드 명
+        rewardType:
+          type: string
+          description: 리워드 타입
+          enum:
+          - EXPERIENCE
+          - PRODUCT
+          - VOUCHER
+        startedAt:
+          type: string
+          description: 시작일
+          format: date-time
+        status:
+          type: string
+          description: 상태
+          enum:
+          - CANCELLED
+          - CLOSED
+          - DRAFT
+          - ENDED
+          - OPENED
+          - PENDING
+          - REGISTERED
+        thumbnailUrl:
+          type: string
+          description: 썸네일 URL
+        title:
+          type: string
+          description: 프로그램 제목
+        totalQty:
+          type: integer
+          description: 총 수량
+          format: int32
+        unitCreditPrice:
+          type: number
+          description: 리워드 1개당 크레딧 가격
+          format: bigdecimal
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
+        usableStores:
+          type: string
+          description: 이용가능 매장
+        validPeriod:
+          type: string
+          description: 유효기간 및 이용조건
+    PagedResponse«RewardProgram»:
+      title: PagedResponse«RewardProgram»
+      type: object
+      properties:
+        items:
+          type: array
+          description: 목록 데이터
+          items:
+            $ref: '#/components/schemas/RewardProgram'
+        pageInfo:
+          description: 페이징 정보
+          $ref: '#/components/schemas/PageInfo'
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,323 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Ranking API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Ranking
+  description: Rank Controller
+paths:
+  /api/v1/rank/my/list:
+    get:
+      tags:
+      - Ranking
+      summary: 내 랭킹 리스트
+      operationId: myRankListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«MyRank»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/rank/national/list:
+    get:
+      tags:
+      - Ranking
+      summary: 국가 랭킹 리스트
+      operationId: nationalRankListUsingGET
+      parameters:
+      - name: period
+        in: query
+        description: 기간 주, 월
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: periodType
+        in: query
+        description: 기간 타입 (주간, 월간, 전체기간)
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - ALL
+          - MONTH
+          - WEEK
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«NationalRank»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/rank/personal/list:
+    get:
+      tags:
+      - Ranking
+      summary: 개인 랭킹 리스트
+      operationId: personalRankListUsingGET
+      parameters:
+      - name: searchKeyword
+        in: query
+        description: 검색 키워드
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: period
+        in: query
+        description: 기간 주, 월
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: periodType
+        in: query
+        description: 기간 타입 (주간, 월간, 전체기간)
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - ALL
+          - MONTH
+          - WEEK
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«PersonalRank»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    NationalRank:
+      title: NationalRank
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가 코드
+        rank:
+          type: integer
+          description: 순위
+          format: int32
+        tot_amt_retire:
+          type: number
+          description: 포인트, 리타이어 총 수량
+          format: bigdecimal
+        tot_cnt_retire:
+          type: number
+          description: 리타이어 횟수
+          format: bigdecimal
+    WinclResponseDataList«PersonalRank»:
+      title: WinclResponseDataList«PersonalRank»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonalRank'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    MyRank:
+      title: MyRank
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 포인트
+          format: bigdecimal
+        cd_country:
+          type: string
+          description: 유저 거주국가코드
+        cnt_retire:
+          type: integer
+          description: retire시킨 횟수
+          format: int32
+        image_url:
+          type: string
+          description: 사용자 아이콘 이미지 URL
+        month:
+          type: string
+        rank:
+          type: integer
+          description: 순위
+          format: int32
+    WinclResponseDataList«NationalRank»:
+      title: WinclResponseDataList«NationalRank»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NationalRank'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    PersonalRank:
+      title: PersonalRank
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 유저 거주국가코드
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디
+        image_url:
+          type: string
+          description: 사용자 아이콘 이미지 URL
+        nickname:
+          type: string
+          description: 유저 닉네임
+        rank:
+          type: integer
+          description: 순위
+          format: int32
+        tot_amt_retire:
+          type: number
+          description: 포인트, 리타이어 총 수량
+          format: bigdecimal
+    WinclResponseData«List«MyRank»»:
+      title: WinclResponseData«List«MyRank»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MyRank'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

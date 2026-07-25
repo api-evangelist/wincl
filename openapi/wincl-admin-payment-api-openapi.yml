@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Payment API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Payment
+  description: 결제 완료된 건을 관리자가 환불
+paths:
+  /bapi/v2/payment/{purchaseId}/cancel:
+    post:
+      tags:
+      - Admin Payment
+      summary: 사용자가 이미 구매한 배출권 환불하기
+      operationId: refundPaymentUsingPOST
+      parameters:
+      - name: purchaseId
+        in: path
+        description: '`/bapi/v1/wallet/history/buy`에서 받은 `id_usr_prod_buy` 값'
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«RefundPaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    RefundPaymentResultData:
+      title: RefundPaymentResultData
+      type: object
+      properties:
+        cancelablePrice:
+          type: number
+          description: 추가 결제 취소 가능한 금액
+          format: bigdecimal
+        canceledPrice:
+          type: number
+          description: 결제 취소된 금액
+          format: bigdecimal
+        currency:
+          type: string
+          description: 결제 통화
+          enum:
+          - KRW
+          - USD
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        purchaseId:
+          type: string
+          description: 구매 ID (`id_usr_prod_buy`)
+        successful:
+          type: boolean
+    WinclResponseData«RefundPaymentResultData»:
+      title: WinclResponseData«RefundPaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/RefundPaymentResultData'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

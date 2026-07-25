@@ -1,0 +1,714 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Info API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Info
+  description: Admin Info Controller
+paths:
+  /bapi/v1/info/banner:
+    get:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 리스트
+      description: info api 없이 리스트에서 전체를 내려줌
+      operationId: bannerListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Banner»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 등록
+      description: 이미지 등록은 나중에 처리
+      operationId: insertBannerUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminInsertBannerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«BannerResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/banner/hide:
+    delete:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 Hide
+      operationId: hideBannerUsingDELETE
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/banner/show/{id}:
+    get:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 Show
+      operationId: showBannerUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/banner/{id}:
+    get:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 상세조회
+      operationId: getBannerUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«Banner»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 수정
+      operationId: modifyBannerUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminInsertBannerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin Info
+      summary: 마케팅 배너 삭제
+      operationId: deleteBannerUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/popup:
+    get:
+      tags:
+      - Admin Info
+      summary: 공지팝업 리스트
+      operationId: popupListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«NoticePopupDto»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin Info
+      summary: 공지팝업 등록
+      operationId: insertPopupUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminNoticePopupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«NoticePopupResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/popup/hide:
+    delete:
+      tags:
+      - Admin Info
+      summary: 모든 공지팝업 숨기기
+      operationId: hidePopupsUsingDELETE
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/popup/show/{id}:
+    put:
+      tags:
+      - Admin Info
+      summary: 특정 공지팝업 보이기
+      operationId: showPopupUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/info/popup/{id}:
+    get:
+      tags:
+      - Admin Info
+      summary: 공지팝업 상세조회
+      operationId: getPopupUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«NoticePopupDto»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin Info
+      summary: 공지팝업 수정
+      operationId: modifyPopupUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminNoticePopupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin Info
+      summary: 공지팝업 삭제
+      operationId: deletePopupUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseData«NoticePopupResponse»:
+      title: WinclResponseData«NoticePopupResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupResponse'
+        message:
+          type: string
+    WinclResponseData«Banner»:
+      title: WinclResponseData«Banner»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Banner'
+        message:
+          type: string
+    WinclResponseData«BannerResponse»:
+      title: WinclResponseData«BannerResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/BannerResponse'
+        message:
+          type: string
+    BannerResponse:
+      title: BannerResponse
+      type: object
+      properties:
+        id_banner:
+          type: string
+    NoticePopupDto:
+      title: NoticePopupDto
+      type: object
+      properties:
+        contentsEn:
+          type: string
+          description: 공지팝업 영어 내용
+        contentsKr:
+          type: string
+          description: 공지팝업 한글 내용
+        enabled:
+          type: boolean
+          description: 공지 팝업 활성상태
+          example: false
+        endTimestamp:
+          type: integer
+          description: 공지팝업 종료 시간
+          format: int64
+        imageEnUrl:
+          type: string
+          description: 공지팝업 영어 이미지
+        imageKrUrl:
+          type: string
+          description: 공지팝업 한글 이미지
+        linkEnUrl:
+          type: string
+          description: 공지팝업 영어 링크
+        linkKrUrl:
+          type: string
+          description: 공지팝업 한글 링크
+        noticePopupId:
+          type: integer
+          description: 공지 팝업 아이디
+          format: int32
+        registerTimestamp:
+          type: integer
+          description: 공지팝업 등록 시간
+          format: int64
+        startTimestamp:
+          type: integer
+          description: 공지팝업 시작 시간
+          format: int64
+        titleEn:
+          type: string
+          description: 공지팝업 영어 제목
+        titleKr:
+          type: string
+          description: 공지팝업 한글 제목
+    AdminNoticePopupRequest:
+      title: AdminNoticePopupRequest
+      type: object
+      properties:
+        contentsEn:
+          type: string
+          description: 공지팝업 영어 내용
+        contentsKr:
+          type: string
+          description: 공지팝업 한글 내용
+        endTimestamp:
+          type: integer
+          description: 공지팝업 종료 시간
+          format: int64
+        imageEnUrl:
+          type: string
+          description: 공지팝업 영어 이미지
+        imageKrUrl:
+          type: string
+          description: 공지팝업 한글 이미지
+        linkEnUrl:
+          type: string
+          description: 공지팝업 영어 링크
+        linkKrUrl:
+          type: string
+          description: 공지팝업 한글 링크
+        startTimestamp:
+          type: integer
+          description: 공지팝업 시작 시간
+          format: int64
+        titleEn:
+          type: string
+          description: 공지팝업 영어 제목
+        titleKr:
+          type: string
+          description: 공지팝업 한글 제목
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseDataList«Banner»:
+      title: WinclResponseDataList«Banner»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Banner'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminInsertBannerRequest:
+      title: AdminInsertBannerRequest
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+          description: 마케팅 배너 설명
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+          description: 마케팅 배너 타이틀 Kr
+        url:
+          type: string
+    NoticePopupResponse:
+      title: NoticePopupResponse
+      type: object
+      properties:
+        id_notice_popup:
+          type: string
+    WinclResponseDataList«NoticePopupDto»:
+      title: WinclResponseDataList«NoticePopupDto»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NoticePopupDto'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    Banner:
+      title: Banner
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+        dttm_reg:
+          type: integer
+          format: int64
+        id_banner:
+          type: string
+        is_showing:
+          type: boolean
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+        url:
+          type: string
+    WinclResponseData«NoticePopupDto»:
+      title: WinclResponseData«NoticePopupDto»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupDto'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

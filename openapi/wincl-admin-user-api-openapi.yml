@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin User API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin User
+  description: 가입자 목록 조회
+paths:
+  /bapi/v1/user:
+    get:
+      tags:
+      - Admin User
+      summary: 가입 유저 리스트
+      description: '전체 가입자 리스트를 얻는다. 닉네임, 이메일, 기관코드로 필터링할 수 있다. 각 필터는 부분 문자열로 검색한다. loginId 필터는 과거호환성을 위해서 남겨둔다.
+
+
+        **Usage:**
+
+        - /?nickname={nickname}&...
+
+        - /?email={email}&...
+
+        - /?company={company}&...
+
+        - /?nickname={nickname}&email={email}&...'
+      operationId: userListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 로그인 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: nickname
+        in: query
+        description: 닉네임
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: 이메일
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: company
+        in: query
+        description: 기관 코드
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«User»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/user/{id}:
+    get:
+      tags:
+      - Admin User
+      summary: 가입 유저 상세정보
+      description: UserID로 가입자 상세 정보를 얻는다.
+      operationId: userInfoUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«UserDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseData«UserDetail»:
+      title: WinclResponseData«UserDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserDetail'
+        message:
+          type: string
+    User:
+      title: User
+      type: object
+      properties:
+        b2bCustomerCode:
+          type: string
+          description: user.b2b_customer_code
+        b2bRpCode:
+          type: string
+          description: user.b2b_rp_code
+        b2bUser:
+          type: boolean
+        cd_country:
+          type: string
+          description: 거주국가코드
+        company_code:
+          type: string
+          description: 회사코드
+        dttm_expire:
+          type: string
+        dttm_reg:
+          type: string
+        dttm_upd:
+          type: string
+        email:
+          type: string
+          description: 유저가 설정한 이메일
+        email_social:
+          type: string
+          description: 소셜로그인 에서 받아온 이메일
+        id_corp:
+          type: string
+          description: 소셜 로그인 회사
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        id_social_usr:
+          type: string
+          description: 소셜로그인에서 주는 유저식별 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_profile:
+          type: string
+          description: 유저 프로필 이미지
+        nickname:
+          type: string
+          description: 유저 닉네임
+        nm_usr:
+          type: string
+          description: 유저 이름
+        phone_number:
+          type: string
+        reg_unixtime:
+          type: integer
+          format: int64
+        status:
+          type: string
+          description: '유저 상태: REGISTERING, REGISTERED, DEREGISTERED, ARCHIVED'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
+    WinclResponseDataList«User»:
+      title: WinclResponseDataList«User»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    UserDetail:
+      title: UserDetail
+      type: object
+      properties:
+        addr:
+          type: string
+          description: 지갑 주소
+        cd_country:
+          type: string
+          description: 거주국가코드
+        company_code:
+          type: string
+          description: 기관 코드
+        dttm_expire:
+          type: string
+          description: 마감날짜
+        dttm_reg:
+          type: integer
+          description: 가입날짜
+          format: int64
+        dttm_upd:
+          type: integer
+          description: 변경날짜
+          format: int64
+        email:
+          type: string
+          description: 유저가 설정한 이메일
+        email_social:
+          type: string
+          description: 소셜로그인 에서 받아온 이메일
+        id_corp:
+          type: string
+          description: 소셜 로그인 회사
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        id_social_usr:
+          type: string
+          description: 소셜로그인에서 주는 유저식별 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_profile:
+          type: string
+          description: 유저 프로필 이미지
+        nickname:
+          type: string
+          description: 유저 닉네임
+        nm_usr:
+          type: string
+          description: 유저 이름
+        reg_unixtime:
+          type: integer
+          description: 가입 유닉스 시간
+          format: int64
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

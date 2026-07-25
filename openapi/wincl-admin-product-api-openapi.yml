@@ -1,0 +1,1003 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Product API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Product
+  description: Admin Product Controller
+paths:
+  /bapi/v1/product:
+    get:
+      tags:
+      - Admin Product
+      summary: product 리스트
+      operationId: productListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«ProductDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin Product
+      summary: product 등록
+      operationId: insertProductUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminInsertProductRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ProductResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/product/home:
+    get:
+      tags:
+      - Admin Product
+      summary: Home Products 리스트
+      operationId: homeProductsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«HomeProduct»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/product/home/{id}:
+    put:
+      tags:
+      - Admin Product
+      summary: Update Home Product Order
+      operationId: updateHomeProductUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHomeProductRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin Product
+      summary: Home Products 에 Product 추가
+      operationId: addHomeProductUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddHomeProductRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin Product
+      summary: Home Products 에 Product 제거
+      operationId: removeHomeProductUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/product/{id}:
+    get:
+      tags:
+      - Admin Product
+      summary: product 상세정보
+      operationId: productInfoUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ProductDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin Product
+      summary: product 수정
+      operationId: modifyProductUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminModifyProductRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin Product
+      summary: product 삭제
+      description: status_srv == ready 일때만 삭제가능
+      operationId: deleteProductUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/product/{id}/history:
+    get:
+      tags:
+      - Admin Product
+      summary: Product Balance History 리스트
+      operationId: productBalanceHistoryListUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«ProductBalanceHistory»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/product/{id}/increment:
+    put:
+      tags:
+      - Admin Product
+      summary: product 수량변경
+      operationId: updateVolumeUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUpdateProductVolumeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    ProductDetail:
+      title: ProductDetail
+      type: object
+      properties:
+        agencyRegistry:
+          description: 인증기관에 등록된 프로젝트 정보
+          $ref: '#/components/schemas/ProjectAgencyRegistry'
+        amt_lock:
+          type: number
+          description: lock 수량
+          format: bigdecimal
+        amt_offset:
+          type: number
+          description: offset 수량
+          format: bigdecimal
+        amt_offset_resrv:
+          type: number
+          description: offset 예약 수량
+          format: bigdecimal
+        amt_sold:
+          type: number
+          description: 팔린 수량
+          format: bigdecimal
+        amt_stock:
+          type: number
+          description: 재고 수량
+          format: bigdecimal
+        areaHectare:
+          type: number
+          description: 면적 (hectare)
+          format: bigdecimal
+        assign_vol_proj:
+          type: number
+          description: 프로젝트의 assign 된 수량
+          format: bigdecimal
+        attachmentUrls:
+          type: array
+          description: 첨부 파일 URL 목록
+          items:
+            type: string
+        cert_desc:
+          type: string
+          description: 인증기관 설명
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+          enum:
+          - KRW
+          - USD
+        dttm_reg:
+          type: integer
+          description: 프로덕트 등록 시간
+          format: int64
+        dttm_reg_cert:
+          type: integer
+          description: 인증서 인증 날짜
+          format: int64
+        dttm_upd:
+          type: integer
+          description: 프로덕트 업데이트 시간
+          format: int64
+        env_desc:
+          type: string
+          description: 환경효과 내용
+        env_icon:
+          type: string
+          description: 환경효과 아이콘
+        env_ttl:
+          type: string
+          description: 환경효과 타이틀
+        hederaTopicId:
+          type: string
+          description: 프로젝트 전용 Hedera Topic ID
+        id_prod:
+          type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_bg_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_bg_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 썸네일 이미지
+        introductionTextEn:
+          type: string
+          description: 소개글 (영문)
+        introductionTextKo:
+          type: string
+          description: 소개글 (한글)
+        locationImageUrl:
+          type: string
+          description: 프로젝트 위치 URL
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        nationCode:
+          type: string
+          description: 프로젝트 생성 국가 코드
+        nation_nm_en:
+          type: string
+          description: 프로젝트 생성국가 영어 이름
+        nation_nm_kr:
+          type: string
+          description: 프로젝트 생성국가 한글 이름
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        nm_serial:
+          type: string
+          description: 프로젝트 인증서 시리얼번호
+        productDetailImageUrls:
+          type: array
+          description: 프로덕트 상세 이미지 url 목록
+          items:
+            type: string
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        productStoryEn:
+          type: string
+          description: 프로덕트 스토리 (영어)
+        productStoryKo:
+          type: string
+          description: 프로덕트 스토리 (한국어)
+        projectEffects:
+          type: array
+          description: 프로젝트 효과
+          items:
+            $ref: '#/components/schemas/ProjectEffect'
+        projectNameEn:
+          type: string
+          description: 프로젝트 이름 (영어)
+        projectNameKr:
+          type: string
+          description: 프로젝트 이름 (한국어)
+        project_type:
+          type: string
+          description: 프로젝트 타입 코드 리스트
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        status_srv:
+          type: string
+          description: 프로덕트 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        tot_vol_proj:
+          type: number
+          description: 프로젝트의 total 수량
+          format: bigdecimal
+        unit_price:
+          type: number
+          description: 톤당 가격
+          format: bigdecimal
+        unit_price_usd:
+          type: number
+          description: 톤당 가격 usd
+          format: bigdecimal
+        vol:
+          type: number
+          description: 수량
+          format: bigdecimal
+        yn_corrs_adj:
+          type: string
+          description: 상응조정률 사용 여부
+          enum:
+          - N
+          - Y
+    AdminUpdateProductVolumeRequest:
+      title: AdminUpdateProductVolumeRequest
+      type: object
+      properties:
+        type:
+          type: string
+          description: + or -
+          enum:
+          - MINUS
+          - PLUS
+        value:
+          type: number
+          description: 변경할 수량 절대값
+          format: bigdecimal
+    ProjectEffect:
+      title: ProjectEffect
+      type: object
+      properties:
+        effectCode:
+          type: string
+          description: 프로젝트 효과 코드
+          enum:
+          - AFFORDABLE_AND_CLEAN_ENERGY
+          - CLEAN_WATER_AND_SANITATION
+          - CLIMATE_ACTION
+          - DECENT_WORK_AND_ECONOMIC_GROWTH
+          - GENDER_EQUALITY
+          - GOOD_HEALTH_AND_WELLBEING
+          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+          - LIFE_BELLOW_WATER
+          - LIFE_ON_LAND
+          - NO_POVERTY
+          - PARTNERSHIPS_FOR_THE_GOALS
+          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+          - QUALITY_EDUCATION
+          - REDUCED_INEQUALITIES
+          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+          - SUSTAINABLE_CITIES_AND_COMMUNITIES
+          - ZERO_HUNGER
+        effectDescriptionEn:
+          type: string
+          description: 프로젝트 효과 설명 (영어)
+        effectDescriptionKr:
+          type: string
+          description: 프로젝트 효과 설명 (한국어)
+        effectImageUrl:
+          type: string
+          description: 프로젝트 효과 이미지 URL
+    WinclResponseDataList«ProductDetail»:
+      title: WinclResponseDataList«ProductDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDetail'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    UpdateHomeProductRequest:
+      title: UpdateHomeProductRequest
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+    AdminModifyProductRequest:
+      title: AdminModifyProductRequest
+      type: object
+      properties:
+        env_desc:
+          type: string
+          description: 환경효과 내용
+        env_icon:
+          type: string
+          description: 환경효과 아이콘 url
+        env_ttl:
+          type: string
+          description: 환경효과 타이틀
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_bg_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_bg_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        productDetailImageUrls:
+          type: array
+          description: 프로덕트 상세 이미지 url 목록
+          items:
+            type: string
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        productStoryEn:
+          type: string
+          description: 프로덕트 스토리 (영어)
+        productStoryKo:
+          type: string
+          description: 프로덕트 스토리 (한국어)
+        status_srv:
+          type: string
+          description: 프로덕트 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        unit_price:
+          type: integer
+          description: 톤당 가격
+          format: int32
+    HomeProduct:
+      title: HomeProduct
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        id_prod:
+          type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_background_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_background_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        nm_prod:
+          type: string
+          description: 상품 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        order:
+          type: string
+          description: 프로덕트 순서
+    AddHomeProductRequest:
+      title: AddHomeProductRequest
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+    WinclResponseData«ProductDetail»:
+      title: WinclResponseData«ProductDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProductDetail'
+        message:
+          type: string
+    WinclResponseDataList«ProductBalanceHistory»:
+      title: WinclResponseDataList«ProductBalanceHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductBalanceHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData«List«HomeProduct»»:
+      title: WinclResponseData«List«HomeProduct»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeProduct'
+        message:
+          type: string
+    AdminInsertProductRequest:
+      title: AdminInsertProductRequest
+      type: object
+      properties:
+        env_desc:
+          type: string
+          description: 환경효과 내용
+        env_icon:
+          type: string
+          description: 환경효과 아이콘 url
+        env_ttl:
+          type: string
+          description: 환경효과 타이틀
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_bg_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_bg_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        productDetailImageUrls:
+          type: array
+          description: 프로덕트 상세 이미지 url 목록
+          items:
+            type: string
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        productStoryEn:
+          type: string
+          description: 프로덕트 스토리 (영어)
+        productStoryKo:
+          type: string
+          description: 프로덕트 스토리 (한국어)
+        unit_price:
+          type: integer
+          description: 톤당 가격
+          format: int32
+        vol:
+          type: number
+          description: 수량
+          format: bigdecimal
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ProjectAgencyRegistry:
+      title: ProjectAgencyRegistry
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          description: 인증기관 ID
+          format: int32
+        averageAnnualEmissionReduction:
+          type: number
+          description: 연 평균 탄소감축량
+          format: bigdecimal
+        mechanism:
+          type: string
+          description: 메카니즘
+        methodology:
+          type: string
+          description: 방법론
+        registryId:
+          type: string
+          description: 등록 ID
+        registryUrl:
+          type: string
+          description: 인증기관 레지스트리 URL
+        vintage:
+          type: integer
+          description: 빈티지
+          format: int32
+    WinclResponseData«ProductResponse»:
+      title: WinclResponseData«ProductResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProductResponse'
+        message:
+          type: string
+    ProductResponse:
+      title: ProductResponse
+      type: object
+      properties:
+        id_prod:
+          type: string
+    ProductBalanceHistory:
+      title: ProductBalanceHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        dttm_reg:
+          type: integer
+          format: int64
+        id_prod:
+          type: string
+        id_prod_bal_history:
+          type: string
+        id_req_txn:
+          type: string
+        nm_prod:
+          type: string
+        status_act:
+          type: string
+          enum:
+          - BURN
+          - HAND_OVER
+          - MINUS
+          - PLUS
+          - SELL
+        vol_after:
+          type: number
+          format: bigdecimal
+        vol_before:
+          type: number
+          format: bigdecimal
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

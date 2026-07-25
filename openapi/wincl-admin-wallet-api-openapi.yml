@@ -1,0 +1,1803 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Wallet API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Wallet
+  description: Admin Wallet Controller
+paths:
+  /bapi/v1/wallet/cert:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 Cert List
+      operationId: certListUsingGET
+      parameters:
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 유저 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: projId
+        in: query
+        description: 프로젝트 아이디
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: projName
+        in: query
+        description: 프로젝트 이름
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endDate
+        in: query
+        description: 종료일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«AdminCert»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/cert/{projId}/{userId}:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 Cert Detail
+      operationId: certDetailUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: projId
+        in: path
+        description: projId
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminCertDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/credit:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 Credit list
+      operationId: creditListUsingGET
+      parameters:
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 유저 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: projId
+        in: query
+        description: 프로젝트 아이디
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: projName
+        in: query
+        description: 프로젝트 이름
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endDate
+        in: query
+        description: 종료일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«AdminCredit»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/credit/offset:
+    post:
+      tags:
+      - Admin Wallet
+      summary: Credit 일괄 상쇄하기
+      operationId: offsetCreditUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OffsetableUserProductRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«string»»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '915':
+          description: ITEM_NOT_FOUND
+        '927':
+          description: AMOUNT_MUST_BE_GRATER_THAN_ZERO
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/credit/{projId}/{userId}:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 Credit Detail
+      operationId: creditDetailUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: projId
+        in: path
+        description: projId
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminCreditDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/gift/receive:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 받은 선물 리스트
+      operationId: receivedGiftListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 유저 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endDate
+        in: query
+        description: 종료일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«AdminReceivedGift»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/gift/receive/{id}:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 받은 선물 Detail
+      operationId: receiveGiftDetailUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminReceivedGift»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/gift/sent:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 보낸 선물 리스트
+      operationId: sentGiftListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 유저 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endDate
+        in: query
+        description: 종료일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«AdminSentGift»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/gift/sent/{id}:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 보낸 선물 Detail
+      operationId: sentGiftDetailUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminSentGift»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/history/buy:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 구매내역
+      operationId: buyHistoryListUsingGET
+      parameters:
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: loginId
+        in: query
+        description: 유저 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: projId
+        in: query
+        description: 프로젝트 아이디
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: prodId
+        in: query
+        description: 프로덕트 아이디
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: projName
+        in: query
+        description: 프로젝트 이름
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: prodName
+        in: query
+        description: 프로덕트 이름
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endDate
+        in: query
+        description: 종료일
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«AdminBuyHistory»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/history/buy/cancel:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 환불 내역
+      operationId: cancelHistoryListUsingGET
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: socialEmail
+        in: query
+        description: 유저 소셜 이메일
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«UserProductCancelHistory»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/history/buy/{id}:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 유저의 구매내역
+      operationId: buyHistoryDetailUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminBuyHistory»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/info:
+    get:
+      tags:
+      - Admin Wallet
+      summary: 회원 wallet 정보
+      operationId: walletInfoUsingGET
+      parameters:
+      - name: userId
+        in: query
+        description: userId
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«Wallet»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/wallet/regenerate-topic:
+    post:
+      tags:
+      - Admin Wallet
+      summary: 토픽 미보유 지갑 재발급
+      description: topicId가 없는 지갑을 신규 Hedera 계정/토픽으로 재발급합니다.
+      operationId: regenerateWalletTopicsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«int»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    Credit:
+      title: Credit
+      type: object
+      properties:
+        amt_avail:
+          type: number
+          description: 보유수량
+          format: bigdecimal
+        blockchainPurchaseStatus:
+          type: string
+          description: 블록체인에 기록된 구매 상태
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        blockchainTransactionType:
+          type: string
+          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
+        can_transfer:
+          type: boolean
+          description: 선물가능한지
+          example: false
+        dttm_buy:
+          type: integer
+          description: 구매 일자
+          format: int64
+        dttm_expire:
+          type: integer
+          description: 유효기한
+          format: int64
+        id_credit:
+          type: string
+          description: credit id
+    WinclResponseDataList«AdminBuyHistory»:
+      title: WinclResponseDataList«AdminBuyHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminBuyHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminCertDetail:
+      title: AdminCertDetail
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 탄소 소멸량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        cert_serial:
+          type: string
+          description: 인증번호
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        id_login:
+          type: string
+          description: 유저 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nickname:
+          type: string
+          description: 유저 닉네임
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+    UserProductCancelHistory:
+      title: UserProductCancelHistory
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          description: 환불 처리자 이메일
+        adminName:
+          type: string
+          description: 환불 처리자
+        cancelAmount:
+          type: number
+          description: 취소한 수량(톤)
+          format: bigdecimal
+        currency:
+          type: string
+          description: 결제 통화
+          enum:
+          - KRW
+          - USD
+        pgCanceledPrice:
+          type: number
+          description: PG 결제 취소 금액
+          format: bigdecimal
+        procTime:
+          type: string
+          description: 처리 일시
+        prodName:
+          type: string
+          description: 취소한 프로덕트명
+        refundName:
+          type: string
+          description: 사용자 닉네임
+        socialEmail:
+          type: string
+          description: 사용자 Email
+        userId:
+          type: string
+          description: 사용자 ID
+    AdminCert:
+      title: AdminCert
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 탄소 소멸량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        dttm_reg:
+          type: integer
+          format: int64
+        id_login:
+          type: string
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        id_usr:
+          type: string
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nickname:
+          type: string
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+    WinclResponseDataList«AdminCredit»:
+      title: WinclResponseDataList«AdminCredit»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminCredit'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData«AdminSentGift»:
+      title: WinclResponseData«AdminSentGift»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminSentGift'
+        message:
+          type: string
+    AdminBuyHistory:
+      title: AdminBuyHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 구매 구매수량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로덕트 생성국가
+        currency:
+          type: string
+        dttm_buy:
+          type: integer
+          description: 구매 날짜
+          format: int64
+        id_login:
+          type: string
+        id_prod:
+          type: string
+        id_proj:
+          type: integer
+          format: int32
+        id_usr_prod_buy:
+          type: string
+          description: 구매 아이디
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일
+        nickname:
+          type: string
+        nm_prod:
+          type: string
+          description: 프로덕트 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+        orderId:
+          type: string
+          description: 윈클 내부 주문 ID
+        pgOrderId:
+          type: string
+          description: orderId와 맵핑되는 PG 주문 ID
+        price_tot_krw:
+          type: number
+          description: 총 구매가격
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 총 구매가격 usd
+          format: bigdecimal
+        project_type:
+          type: string
+          description: 프로덕트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        status_act:
+          type: string
+          description: 구매 상태
+          enum:
+          - CANCELED
+          - FAIL
+          - PENDING
+          - SUCCESS
+    WinclResponseData«AdminCreditDetail»:
+      title: WinclResponseData«AdminCreditDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminCreditDetail'
+        message:
+          type: string
+    WinclResponseData«AdminBuyHistory»:
+      title: WinclResponseData«AdminBuyHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminBuyHistory'
+        message:
+          type: string
+    WinclResponseData«List«string»»:
+      title: WinclResponseData«List«string»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+    WinclResponseData«AdminCertDetail»:
+      title: WinclResponseData«AdminCertDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminCertDetail'
+        message:
+          type: string
+    WinclResponseDataList«AdminSentGift»:
+      title: WinclResponseDataList«AdminSentGift»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminSentGift'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData«AdminReceivedGift»:
+      title: WinclResponseData«AdminReceivedGift»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminReceivedGift'
+        message:
+          type: string
+    AdminReceivedGift:
+      title: AdminReceivedGift
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 선물 수량
+          format: bigdecimal
+        dttm_receive:
+          type: integer
+          description: 수령 일시
+          format: int64
+        dttm_send:
+          type: integer
+          description: 발송 일시
+          format: int64
+        email_transfer:
+          type: string
+          description: GiftCode 보낸 이메일
+        id_gift:
+          type: string
+          description: 받은 선물 id
+        id_login_rcv:
+          type: string
+          description: 받는 유저 로그인 아이디
+        id_login_send:
+          type: string
+          description: 보낸 유저 로그인 아이디
+        id_usr_prod_rcv:
+          type: string
+        id_usr_rcv:
+          type: string
+          description: 받는 유저 아이디
+        id_usr_send:
+          type: string
+          description: 보낸 유저 아이디
+        nm_proj:
+          type: string
+        phone_transfer:
+          type: string
+          description: GiftCode 보낸 PhoneNumber
+        status:
+          type: string
+          description: 받은 선물 상태
+          enum:
+          - AUTO_CANCEL
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+        tp_transfer:
+          type: string
+          description: 선물 받은 타입 (eamil, phone)
+          enum:
+          - COUPON
+          - EMAIL
+          - PHONE
+    WinclResponseDataList«AdminCert»:
+      title: WinclResponseDataList«AdminCert»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminCert'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseDataList«AdminReceivedGift»:
+      title: WinclResponseDataList«AdminReceivedGift»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminReceivedGift'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminCredit:
+      title: AdminCredit
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 구매/획득 수량
+          format: bigdecimal
+        amt_available:
+          type: number
+          description: 사용가능 수량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        dttm_expire:
+          type: integer
+          description: 유효기간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: 구매날짜
+          format: int64
+        id_login:
+          type: string
+          description: 유저 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+    AdminCreditDetail:
+      title: AdminCreditDetail
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 구매/획득 수량
+          format: bigdecimal
+        amt_available:
+          type: number
+          description: 사용가능 수량
+          format: bigdecimal
+        amt_offset_transfer:
+          type: number
+          description: 소멸/양도량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        credit_list:
+          type: array
+          description: Credit 구매한 로그
+          items:
+            $ref: '#/components/schemas/Credit'
+        dttm_expire:
+          type: integer
+          description: 유효기간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: 구매날짜
+          format: int64
+        id_login:
+          type: string
+          description: 유저 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+    Wallet:
+      title: Wallet
+      type: object
+      properties:
+        addr:
+          type: string
+        cnt_offset:
+          type: integer
+          format: int32
+        cnt_transfer:
+          type: integer
+          format: int32
+        encCredential:
+          type: string
+        id_usr:
+          type: string
+        id_usr_wallet:
+          type: string
+        publicKey:
+          type: string
+        topicId:
+          type: string
+    OffsetableUserProductRequest:
+      title: OffsetableUserProductRequest
+      type: object
+      properties:
+        email:
+          type: string
+        endDate:
+          type: integer
+          format: int64
+        limit:
+          type: integer
+          format: int32
+        startDate:
+          type: integer
+          format: int64
+    WinclResponseData«int»:
+      title: WinclResponseData«int»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: integer
+          format: int32
+        message:
+          type: string
+    WinclResponseDataList«UserProductCancelHistory»:
+      title: WinclResponseDataList«UserProductCancelHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProductCancelHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminSentGift:
+      title: AdminSentGift
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        dttm_deadline:
+          type: integer
+          format: int64
+        dttm_receive:
+          type: integer
+          format: int64
+        dttm_send:
+          type: integer
+          format: int64
+        email:
+          type: string
+        id_gift:
+          type: string
+        id_login_send:
+          type: string
+        id_proj:
+          type: string
+        id_usr_send:
+          type: string
+        nm_proj:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+          - AUTO_CANCEL
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+        tp_transfer:
+          type: string
+          enum:
+          - COUPON
+          - EMAIL
+          - PHONE
+    WinclResponseData«Wallet»:
+      title: WinclResponseData«Wallet»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Wallet'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

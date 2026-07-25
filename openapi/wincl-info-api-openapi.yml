@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Info API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Info
+  description: Info Controller
+paths:
+  /api/v1/info/banner:
+    get:
+      tags:
+      - Info
+      summary: 활성중인 마케팅 배너
+      operationId: getBannerUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«Banner»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/info/popup:
+    get:
+      tags:
+      - Info
+      summary: 최근 공지 팝업
+      operationId: getPopupUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«NoticePopupDto»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseData«Banner»:
+      title: WinclResponseData«Banner»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Banner'
+        message:
+          type: string
+    NoticePopupDto:
+      title: NoticePopupDto
+      type: object
+      properties:
+        contentsEn:
+          type: string
+          description: 공지팝업 영어 내용
+        contentsKr:
+          type: string
+          description: 공지팝업 한글 내용
+        enabled:
+          type: boolean
+          description: 공지 팝업 활성상태
+          example: false
+        endTimestamp:
+          type: integer
+          description: 공지팝업 종료 시간
+          format: int64
+        imageEnUrl:
+          type: string
+          description: 공지팝업 영어 이미지
+        imageKrUrl:
+          type: string
+          description: 공지팝업 한글 이미지
+        linkEnUrl:
+          type: string
+          description: 공지팝업 영어 링크
+        linkKrUrl:
+          type: string
+          description: 공지팝업 한글 링크
+        noticePopupId:
+          type: integer
+          description: 공지 팝업 아이디
+          format: int32
+        registerTimestamp:
+          type: integer
+          description: 공지팝업 등록 시간
+          format: int64
+        startTimestamp:
+          type: integer
+          description: 공지팝업 시작 시간
+          format: int64
+        titleEn:
+          type: string
+          description: 공지팝업 영어 제목
+        titleKr:
+          type: string
+          description: 공지팝업 한글 제목
+    Banner:
+      title: Banner
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+        dttm_reg:
+          type: integer
+          format: int64
+        id_banner:
+          type: string
+        is_showing:
+          type: boolean
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+        url:
+          type: string
+    WinclResponseData«NoticePopupDto»:
+      title: WinclResponseData«NoticePopupDto»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupDto'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

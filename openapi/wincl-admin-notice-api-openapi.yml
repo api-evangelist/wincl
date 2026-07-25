@@ -1,0 +1,377 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Notice API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Notice
+  description: Admin Notice Controller
+paths:
+  /bapi/v1/notice:
+    get:
+      tags:
+      - Admin Notice
+      summary: 공지사항 리스트
+      operationId: noticeListUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: 카테고리
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: searchKeyword
+        in: query
+        description: 검색 키워드
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Notice»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin Notice
+      summary: 공지사항 등록
+      operationId: insertNoticeUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminInsertNoticeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/notice/active:
+    get:
+      tags:
+      - Admin Notice
+      summary: 활성화된 공지사항 리스트
+      operationId: activeNoticeListUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: 카테고리
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: searchKeyword
+        in: query
+        description: 검색 키워드
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Notice»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/notice/{id}:
+    get:
+      tags:
+      - Admin Notice
+      summary: 공지사항 상세정보
+      operationId: noticeInfoUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«Notice»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin Notice
+      summary: 공지사항 수정
+      operationId: modifyNoticeUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminModifyNoticeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin Notice
+      summary: 공지사항 삭제
+      operationId: deleteNoticeUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    Notice:
+      title: Notice
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 콘텐츠
+        expireTimestamp:
+          type: integer
+          description: 공지사항 만료시간
+          format: int64
+        noticeId:
+          type: string
+          description: 공지사항 아이디
+        registerTimestamp:
+          type: integer
+          description: 공지사항 등록시간
+          format: int64
+        status:
+          type: string
+          description: 공지사항 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        title:
+          type: string
+          description: 공지사항 타이틀
+    WinclResponseData«Notice»:
+      title: WinclResponseData«Notice»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Notice'
+        message:
+          type: string
+    AdminModifyNoticeRequest:
+      title: AdminModifyNoticeRequest
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 내용
+        title:
+          type: string
+          description: 공지사항 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    AdminInsertNoticeRequest:
+      title: AdminInsertNoticeRequest
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 내용
+        title:
+          type: string
+          description: 공지사항 타이틀
+    WinclResponseDataList«Notice»:
+      title: WinclResponseDataList«Notice»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notice'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

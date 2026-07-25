@@ -1,0 +1,378 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin QnA API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: QnA
+  description: Qna Controller
+paths:
+  /api/v1/qna:
+    get:
+      tags:
+      - QnA
+      summary: 1대1 문의 리스트
+      operationId: qnaListUsingGET_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: searchKeyword
+        in: query
+        description: 검색어
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Qna»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - QnA
+      summary: 1대1 문의 등록
+      operationId: insertQuestionUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsertQuestionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/qna/{id}:
+    get:
+      tags:
+      - QnA
+      summary: 1대1 문의 상세내용
+      operationId: qnaInfoUsingGET_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«QnaDetail»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - QnA
+      summary: 1대1 문의 수정
+      operationId: updateQuestionUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQuestionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '910':
+          description: CANNOT_UPDATE_QUESTION
+        '911':
+          description: CANNOT_UPDATE_OTHERS_QUESTION
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - QnA
+      summary: 1대1 문의 취소
+      operationId: cancelQuestionUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '909':
+          description: CANNOT_CANCEL_QUESTION
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseDataList«Qna»:
+      title: WinclResponseDataList«Qna»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Qna'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    QnaDetail:
+      title: QnaDetail
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_answer:
+          type: integer
+          description: 답변 시간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_adm_reg:
+          type: string
+          description: 답변한 운영자 아이디
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        nm_adm:
+          type: string
+          description: 답변한 운영자 이름
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
+    UpdateQuestionRequest:
+      title: UpdateQuestionRequest
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: 질문 내용
+        ttl:
+          type: string
+          description: 질문 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    InsertQuestionRequest:
+      title: InsertQuestionRequest
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: 질문 내용
+        ttl:
+          type: string
+          description: 질문 타이틀
+    WinclResponseData«QnaDetail»:
+      title: WinclResponseData«QnaDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/QnaDetail'
+        message:
+          type: string
+    Qna:
+      title: Qna
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,366 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin FAQ API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin FAQ
+  description: Admin Faq Controller
+paths:
+  /bapi/v1/faq:
+    get:
+      tags:
+      - Admin FAQ
+      summary: FAQ 리스트
+      operationId: getFaqByCategoryUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: 카테고리
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: searchKeyword
+        in: query
+        description: 검색 키워드
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Faq»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin FAQ
+      summary: FAQ 등록
+      operationId: createFaqUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFaqRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/faq/category:
+    get:
+      tags:
+      - Admin FAQ
+      summary: FAQ 카테고리 리스트
+      operationId: getFaqCategoryUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«FaqCategory»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/faq/{id}:
+    get:
+      tags:
+      - Admin FAQ
+      summary: FAQ Detail
+      operationId: getFaqUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: GET `/faq` 응답의 seq 값
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«Faq»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin FAQ
+      summary: FAQ 수정
+      operationId: updateFaqUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFaqRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin FAQ
+      summary: FAQ 삭제
+      operationId: deleteFaqUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    CreateFaqRequest:
+      title: CreateFaqRequest
+      type: object
+      properties:
+        answer_en:
+          type: string
+          description: FAQ 답변 영어
+        answer_kr:
+          type: string
+          description: FAQ 답변 한글
+        cd_faq_cate:
+          type: string
+          description: FAQ 카테고리 코드
+        quest_en:
+          type: string
+          description: FAQ 질문 영어
+        quest_kr:
+          type: string
+          description: FAQ 질문 한글
+    WinclResponseData«List«FaqCategory»»:
+      title: WinclResponseData«List«FaqCategory»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FaqCategory'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Faq:
+      title: Faq
+      type: object
+      properties:
+        answerEn:
+          type: string
+          description: FAQ 답변 영어
+        answerKr:
+          type: string
+          description: FAQ 답변 한글
+        category:
+          type: string
+          description: FAQ 카테고리
+        faqId:
+          type: string
+          description: FAQ ID
+        questionEn:
+          type: string
+          description: FAQ 질문 영어
+        questionKr:
+          type: string
+          description: FAQ 질문 한글
+    WinclResponseDataList«Faq»:
+      title: WinclResponseDataList«Faq»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Faq'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData«Faq»:
+      title: WinclResponseData«Faq»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Faq'
+        message:
+          type: string
+    FaqCategory:
+      title: FaqCategory
+      type: object
+      properties:
+        cd:
+          type: string
+          description: FAQ 카테고리 코드
+        nm_en:
+          type: string
+          description: FAQ 카테고리 영어 이름
+        nm_kr:
+          type: string
+          description: FAQ 카테고리 한글 이름
+        seq:
+          type: integer
+          description: FAQ 카테고리 순번
+          format: int32
+    UpdateFaqRequest:
+      title: UpdateFaqRequest
+      type: object
+      properties:
+        answer_en:
+          type: string
+          description: FAQ 답변 영어
+        answer_kr:
+          type: string
+          description: FAQ 답변 한글
+        cd_faq_cate:
+          type: string
+          description: FAQ 카테고리 코드
+        quest_en:
+          type: string
+          description: FAQ 질문 영어
+        quest_kr:
+          type: string
+          description: FAQ 질문 한글
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

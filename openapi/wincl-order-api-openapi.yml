@@ -1,0 +1,502 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Order API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Order
+  description: 결제 전 주문 단계
+paths:
+  /api/v1/order:
+    post:
+      tags:
+      - Order
+      summary: 주문하기
+      description: 상품을 주문한다.
+      operationId: requestOrderUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderWebRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«OrderWebResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '921':
+          description: SHOPPING_BASKET_IS_EMPTY
+        '923':
+          description: PRODUCT_STATUS_IS_NOT_ACTIVE
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/one-dollar-product:
+    post:
+      tags:
+      - Order
+      summary: 1달러 랜덤 프로덕트 주문
+      operationId: orderOneDollarProductUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderOneDollarProductWebRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«OrderWebResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/payment/{orderId}:
+    get:
+      tags:
+      - Order
+      summary: 주문 확인
+      operationId: selectPaymentUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ConfirmPaymentWebResponse»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '915':
+          description: ITEM_NOT_FOUND
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/stripe/confirm:
+    post:
+      tags:
+      - Order
+      summary: 스트라이프 주문 확인
+      operationId: confirmOrderUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeConfirmOrderWebRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ConfirmPaymentWebResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/stripe/create-payment-intent:
+    post:
+      tags:
+      - Order
+      summary: Stripe Create payment-intent
+      operationId: createPaymentIntentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeCreatePaymentIntentWebRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«StripeCreatePaymentIntentWebResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/stripe/reserve:
+    post:
+      tags:
+      - Order
+      summary: Reserve 스트라이프
+      operationId: reserveStripeOrderUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeReserveOrderWebRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/order/{id}:
+    get:
+      tags:
+      - Order
+      summary: 주문 내역
+      operationId: orderResultUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«OrderHistoryWebResponse»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/order/cancel:
+    post:
+      tags:
+      - Order
+      summary: PG 결제창 끄거나 취소 누를 시 (PG 공통)
+      description: order status 를 cancel 로 바꾸고 product amt unlock
+      operationId: cancelOrderUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOrderRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '925':
+          description: PAYMENT_IS_NOT_PROCESSING
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/order/{orderId}:
+    get:
+      tags:
+      - Order
+      summary: 주문 내역
+      operationId: getOrderSheetUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«GetOrderSheetResultData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseData«OrderHistoryWebResponse»:
+      title: WinclResponseData«OrderHistoryWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OrderHistoryWebResponse'
+        message:
+          type: string
+    StripeReserveOrderWebRequest:
+      title: StripeReserveOrderWebRequest
+      type: object
+      properties:
+        id_ord:
+          type: string
+        payment_intent:
+          type: string
+    GetOrderSheetResultData:
+      title: GetOrderSheetResultData
+      type: object
+      properties:
+        currency:
+          type: string
+        orderId:
+          type: string
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderSheetItem'
+        totalAmount:
+          type: number
+          format: bigdecimal
+        totalPrice:
+          type: number
+          format: bigdecimal
+    WinclResponseData«ConfirmPaymentWebResponse»:
+      title: WinclResponseData«ConfirmPaymentWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ConfirmPaymentWebResponse'
+        message:
+          type: string
+    StripeCreatePaymentIntentWebRequest:
+      title: StripeCreatePaymentIntentWebRequest
+      type: object
+      properties:
+        id_ord:
+          type: string
+    GetOrderSheetItem:
+      title: GetOrderSheetItem
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: bigdecimal
+        creditPrice:
+          type: number
+          format: bigdecimal
+        orderItemId:
+          type: string
+        productName:
+          type: string
+    WinclResponseData«GetOrderSheetResultData»:
+      title: WinclResponseData«GetOrderSheetResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetOrderSheetResultData'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    StripeCreatePaymentIntentWebResponse:
+      title: StripeCreatePaymentIntentWebResponse
+      type: object
+      properties:
+        client_secret:
+          type: string
+        payment_intent:
+          type: string
+        price_tot_usd:
+          type: number
+          format: bigdecimal
+    OrderOneDollarProductWebRequest:
+      title: OrderOneDollarProductWebRequest
+      type: object
+      properties:
+        currency:
+          type: string
+          enum:
+          - KRW
+          - USD
+    CancelOrderRequest:
+      title: CancelOrderRequest
+      type: object
+      properties:
+        orderId:
+          type: string
+    WinclResponseData«OrderWebResponse»:
+      title: WinclResponseData«OrderWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OrderWebResponse'
+        message:
+          type: string
+    OrderWebResponse:
+      title: OrderWebResponse
+      type: object
+      properties:
+        id_ord:
+          type: string
+    OrderHistoryWebResponse:
+      title: OrderHistoryWebResponse
+      type: object
+      properties:
+        amt_tot:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        id_ord:
+          type: string
+        price_tot:
+          type: number
+          format: bigdecimal
+    ConfirmPaymentWebResponse:
+      title: ConfirmPaymentWebResponse
+      type: object
+      properties:
+        amt_tot:
+          type: number
+          format: bigdecimal
+        approval_amount:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        error_code:
+          type: string
+        error_message:
+          type: string
+        method_of_payment:
+          type: string
+        price_tot:
+          type: number
+          format: bigdecimal
+        purchaseIDs:
+          type: array
+          items:
+            type: string
+        success:
+          type: boolean
+    StripeConfirmOrderWebRequest:
+      title: StripeConfirmOrderWebRequest
+      type: object
+      properties:
+        payment_intent:
+          type: string
+    WinclResponseData«StripeCreatePaymentIntentWebResponse»:
+      title: WinclResponseData«StripeCreatePaymentIntentWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/StripeCreatePaymentIntentWebResponse'
+        message:
+          type: string
+    OrderWebRequest:
+      title: OrderWebRequest
+      type: object
+      properties:
+        currency:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

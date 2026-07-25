@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Auth API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Auth
+  description: Admin Auth Controller
+paths:
+  /bapi/v1/auth/clear-firebase-claim:
+    post:
+      tags:
+      - Admin Auth
+      summary: 어드민 계정 로그인
+      operationId: passwordResetUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInAdminRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/auth/forgot-password:
+    post:
+      tags:
+      - Admin Auth
+      summary: 비밀번호 초기화 요청
+      description: 이메일로 임시 비밀번호를 발송합니다.
+      operationId: requestForgotPasswordUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInAdminRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/auth/signin:
+    post:
+      tags:
+      - Admin Auth
+      summary: 어드민 계정 로그인
+      operationId: signInUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInAdminRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«SignInAdminResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    SignInAdminResponse:
+      title: SignInAdminResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Access Token
+        refresh_token:
+          type: string
+          description: Refresh Token
+        token_type:
+          type: string
+          description: jwt 토큰 타입
+    SignInAdminRequest:
+      title: SignInAdminRequest
+      type: object
+      properties:
+        google_id_token:
+          type: string
+    WinclResponseData«SignInAdminResponse»:
+      title: WinclResponseData«SignInAdminResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/SignInAdminResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,351 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin User API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: User
+  description: User Controller
+paths:
+  /api/v1/user/profile:
+    get:
+      tags:
+      - User
+      summary: 유저 프로필
+      operationId: userProfileUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«UserProfile»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - User
+      summary: 유저 프로필 수정
+      operationId: modifyUserProfileUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyUserProfileRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/user/profile/image:
+    put:
+      tags:
+      - User
+      summary: 유저 프로파일 이미지를 업로드해서 수정하기
+      operationId: modifyUserProfileImageUsingPUT
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - image_file
+              type: object
+              properties:
+                image_file:
+                  type: string
+                  description: 프로파일 이미지 파일
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ModifyUserProfileImageResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/user/{id_login}:
+    delete:
+      tags:
+      - User
+      summary: 가입자 탈퇴
+      description: 기존 가입자를 탈퇴시킨다.
+      operationId: deregisterUsingDELETE
+      parameters:
+      - name: id_login
+        in: path
+        description: 사용자가 입력한 로그인 ID
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«DeregisterResponse»'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '935':
+          description: USER_NOT_EXIST
+        '936':
+          description: ILLEGAL_USER_STATE
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/user/{id_login}/reincarnate:
+    put:
+      tags:
+      - User
+      summary: 가입자 탈퇴를 취소
+      description: 가입자 탈퇴를 취소하는데 사용한다.
+      operationId: reincarnateUsingPUT
+      parameters:
+      - name: id_login
+        in: path
+        description: 사용자가 입력한 로그인 ID
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ReincarnationResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '935':
+          description: USER_NOT_EXIST
+        '936':
+          description: ILLEGAL_USER_STATE
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseData«DeregisterResponse»:
+      title: WinclResponseData«DeregisterResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/DeregisterResponse'
+        message:
+          type: string
+    WinclResponseData«ReincarnationResponse»:
+      title: WinclResponseData«ReincarnationResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ReincarnationResponse'
+        message:
+          type: string
+    ModifyUserProfileImageResponse:
+      title: ModifyUserProfileImageResponse
+      type: object
+      properties:
+        image_url:
+          type: string
+          description: 업로드한 프로파일 이미지에 접근하기 위한 URL
+    DeregisterResponse:
+      title: DeregisterResponse
+      type: object
+      properties:
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        status:
+          type: string
+          description: '유저 상태: DEREGISTERED 만 가능'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    UserProfile:
+      title: UserProfile
+      type: object
+      properties:
+        addr:
+          type: string
+          description: 유저 지갑 주소
+        b2bCustomerCode:
+          type: string
+          description: user.b2b_customer_code
+        b2bRpCode:
+          type: string
+          description: user.b2b_rp_code
+        b2bUser:
+          type: boolean
+        cd_country:
+          type: string
+          description: 거주국가 코드
+        company_code:
+          type: string
+          description: 회사 코드
+        didDocumentCid:
+          type: string
+          description: CID of the registered DID document on IPFS
+        didDocumentUrl:
+          type: string
+          description: Gateway URL of the registered DID document on IPFS
+        email:
+          type: string
+          description: 유저가 설정한 이메일
+        email_social:
+          type: string
+          description: 소셜로그인 에서 받아온 이메일
+        hederaDid:
+          type: string
+          description: Hedera DID
+        hederaPublicKey:
+          type: string
+          description: Hedera public key (URL-safe Base64)
+        hederaTopicId:
+          type: string
+          description: Hedera topic ID associated with the wallet
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_profile:
+          type: string
+          description: 유저 프로필 이미지
+        nickname:
+          type: string
+          description: 유저 닉네임
+        nm_usr:
+          type: string
+          description: 유저 이름
+        phone_number:
+          type: string
+          description: 휴대 전화번호
+        vcDocumentCid:
+          type: string
+          description: CID of the issued verifiable credential document on IPFS
+        vcDocumentUrl:
+          type: string
+          description: Gateway URL of the issued verifiable credential document on IPFS
+        walletCreationPending:
+          type: boolean
+          description: True when Hedera wallet provisioning is still running asynchronously
+          example: false
+        walletStatusMessage:
+          type: string
+          description: Human-readable status message about Hedera wallet provisioning
+    WinclResponseData«ModifyUserProfileImageResponse»:
+      title: WinclResponseData«ModifyUserProfileImageResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ModifyUserProfileImageResponse'
+        message:
+          type: string
+    ReincarnationResponse:
+      title: ReincarnationResponse
+      type: object
+      properties:
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        status:
+          type: string
+          description: '유저 상태: REGISTERED 만 가능'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
+    ModifyUserProfileRequest:
+      title: ModifyUserProfileRequest
+      type: object
+      properties:
+        cd_country:
+          type: string
+          description: 거주국가 코드
+        email:
+          type: string
+          description: 유저가 설정한 이메일
+        nickname:
+          type: string
+          description: 유저 닉네임
+        phone_number:
+          type: string
+          description: 휴대 전화번호
+    WinclResponseData«UserProfile»:
+      title: WinclResponseData«UserProfile»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

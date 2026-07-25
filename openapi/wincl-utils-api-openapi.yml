@@ -1,0 +1,383 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Utils API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Utils
+  description: Utils Controller
+paths:
+  /api/v1/utils/exchange_rate:
+    post:
+      tags:
+      - Utils
+      summary: 환율 정보
+      operationId: exchangeRateUsingPOST
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - currency
+              type: object
+              properties:
+                currency:
+                  type: string
+                  description: Currency
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ExchangeRate»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/nation/list:
+    get:
+      tags:
+      - Utils
+      summary: 국가 리스트
+      operationId: nationalListUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«Nation»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/otp/auth:
+    post:
+      tags:
+      - Utils
+      summary: OTP 발송
+      description: 휴대폰 인증을 위한 OTP 발송하기
+      operationId: authOtpUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsAuthyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/otp/verify:
+    post:
+      tags:
+      - Utils
+      summary: OTP 확인
+      description: 수신한 OTP 번호가 맞는지 확인하기
+      operationId: verifyOtpUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsVerifyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/sms/message:
+    post:
+      tags:
+      - Utils
+      summary: SMS 발송
+      description: SMS 발송하기
+      operationId: sendSmsUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsMessageRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/submit/partner:
+    post:
+      tags:
+      - Utils
+      summary: 파트너 요청
+      operationId: submitPartnerUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitPartnerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/utils/upload/image:
+    post:
+      tags:
+      - Utils
+      summary: 이미지 업로드
+      operationId: uploadImageUsingPOST_1
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - imageFile
+              - path
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  description: 이미지 파일
+                  format: binary
+                path:
+                  type: string
+                  description: S3 파일 Path
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«UploadFileResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    UploadFileResponse:
+      title: UploadFileResponse
+      type: object
+      properties:
+        url:
+          type: string
+    SmsVerifyRequest:
+      title: SmsVerifyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+        verificationCode:
+          type: string
+          description: SMS로 수신한 인증코드
+    SubmitPartnerRequest:
+      title: SubmitPartnerRequest
+      type: object
+      properties:
+        companyName:
+          type: string
+        contents:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        questionCategory:
+          type: string
+    SmsMessageRequest:
+      title: SmsMessageRequest
+      type: object
+      properties:
+        messageContents:
+          type: string
+          description: 발신할 SMS 내용
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    SmsResult:
+      title: SmsResult
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Otp 상태. 기대값 = {/otp/auth: `pending`, /otp/verify: `approved`, /sms/message: `accepted`}'
+    WinclResponseData«UploadFileResponse»:
+      title: WinclResponseData«UploadFileResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseData«List«Nation»»:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
+        message:
+          type: string
+    WinclResponseData«SmsResult»:
+      title: WinclResponseData«SmsResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/SmsResult'
+        message:
+          type: string
+    WinclResponseData«ExchangeRate»:
+      title: WinclResponseData«ExchangeRate»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ExchangeRate'
+        message:
+          type: string
+    SmsAuthyRequest:
+      title: SmsAuthyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    Nation:
+      title: Nation
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가코드 3자리
+          example: KOR
+        cd_nation2:
+          type: string
+          description: 국가코드 2자리
+          example: KR
+        cd_phone:
+          type: string
+          description: 국제전화 국가번호
+          example: '+82'
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+          example: 0.3
+        nm_en:
+          type: string
+          description: 국가 영어 이름
+        nm_kr:
+          type: string
+          description: 국가 한글 이름
+        num_nation:
+          type: integer
+          description: 국가코드 숫자
+          format: int32
+          example: 410
+    ExchangeRate:
+      title: ExchangeRate
+      type: object
+      properties:
+        currency:
+          type: string
+        dttm_reg:
+          type: string
+          format: date-time
+        rate:
+          type: number
+          format: bigdecimal
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

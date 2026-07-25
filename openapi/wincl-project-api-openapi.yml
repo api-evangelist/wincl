@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Project API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Project
+  description: Project Controller
+paths:
+  /api/v1/project/effect/list:
+    get:
+      tags:
+      - Project
+      summary: 프로젝트 효과 리스트
+      operationId: projectEffectListUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/project/type/list:
+    get:
+      tags:
+      - Project
+      summary: 프로젝트 유형 리스트
+      operationId: projectTypeListUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    CommonCode:
+      title: CommonCode
+      type: object
+      properties:
+        cd:
+          type: string
+          description: 코드
+        cd_grp:
+          type: string
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
+    WinclResponseData«List«CommonCode»»:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

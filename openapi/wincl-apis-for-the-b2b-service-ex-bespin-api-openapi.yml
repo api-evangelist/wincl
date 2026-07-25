@@ -1,0 +1,630 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin APIs for the B2B service (ex. Bespin) API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: APIs for the B2B service (ex. Bespin)
+  description: B 2 B Store Controller
+paths:
+  /b2b/v2/auth/signup:
+    post:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B customer signup
+      operationId: b2bSignUpUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BSignUpRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«B2BSignInResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/auth/token:
+    post:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B customer signin
+      operationId: b2bSignInUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BTokenRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«B2BSignInResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/emails/{email}/duplicated:
+    get:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B email duplication
+      operationId: b2bCheckEmailUsingGET
+      parameters:
+      - name: email
+        in: path
+        description: email
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«boolean»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/products:
+    get:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B product list
+      description: B2B customers retieves the list available products.
+      operationId: b2bListProductsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseDataList«Product»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/users/duplicated:
+    get:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B duplication check for email and phone number
+      operationId: b2bCheckPhoneNumberUsingGET
+      parameters:
+      - name: email
+        in: query
+        description: email
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        description: phoneNumber
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ContactDuplicated»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/users/{userId}/transactions/purchase:
+    get:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B purchase history
+      description: List purchase of a customer
+      operationId: listPurchaseHistoryUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /b2b/v2/users/{userId}/transactions/purchase/{purchaseId}:
+    get:
+      tags:
+      - APIs for the B2B service (ex. Bespin)
+      summary: B2B purchase detail
+      description: Retrieve purchase detail
+      operationId: b2bGetPurchaseDetailUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: purchaseId
+        in: path
+        description: 선택한 구매 ID (`id_usr_prod_buy` 값)
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«BuyHistory»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    WinclResponseDataList«Product»:
+      title: WinclResponseDataList«Product»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData«B2BSignInResponse»:
+      title: WinclResponseData«B2BSignInResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/B2BSignInResponse'
+        message:
+          type: string
+    B2BSignUpRequest:
+      title: B2BSignUpRequest
+      type: object
+      properties:
+        b2bCustomerCode:
+          type: string
+          description: Passed from the B2B API service. user.b2b_customer_code
+        b2bRpCode:
+          type: string
+          description: Relying party code. user.b2b_rp_code
+        customerCompanyName:
+          type: string
+          description: Company name the user enter manually. user.company_code
+        customerCountryCode:
+          type: string
+          description: Customer country code
+        customerDisplayName:
+          type: string
+          description: Customer display name (unique)
+        customerEmail:
+          type: string
+          description: Customer email (unique)
+        customerPhoneNumber:
+          type: string
+          description: 'Customer phone number (E.164 format. ex: +821012345678)'
+        customerUserName:
+          type: string
+          description: 사용자 이름
+    CpInfo:
+      title: CpInfo
+      type: object
+      properties:
+        cpId:
+          type: string
+        cpNm:
+          type: string
+        cpNo:
+          type: string
+    Product:
+      title: Product
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        id_prod:
+          type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_background_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_background_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        nm_cert_agc:
+          type: string
+          description: 탄소배출권 인증기관명
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        product_stock_amount:
+          type: string
+          description: 상품 재고량 (톤)
+        projectNameEn:
+          type: string
+          description: 프로젝트 이름 (영어)
+        projectNameKr:
+          type: string
+          description: 프로젝트 이름 (한국어)
+        project_effect:
+          type: array
+          description: 프로젝트 효과 코드 리스트
+          items:
+            type: string
+        project_type:
+          type: string
+          description: 프로젝트 타입 코드 리스트
+        unit_price:
+          type: number
+          description: 톤당 가격
+          format: bigdecimal
+    WinclResponseData«ContactDuplicated»:
+      title: WinclResponseData«ContactDuplicated»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ContactDuplicated'
+        message:
+          type: string
+    PurchaseHistoryAggregation:
+      title: PurchaseHistoryAggregation
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 집합한 구매수량
+          format: bigdecimal
+        price_tot_krw:
+          type: number
+          description: 집합한 구매가격 (원화)
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 집합한 구매가격 (달러)
+          format: bigdecimal
+    WinclResponseData«BuyHistory»:
+      title: WinclResponseData«BuyHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/BuyHistory'
+        message:
+          type: string
+    BuyHistory:
+      title: BuyHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 구매 구매수량
+          format: bigdecimal
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        cd_nation:
+          type: string
+          description: 프로덕트 생성국가
+        certificateAgency:
+          type: string
+          description: 프로젝트 인증기관
+        currency:
+          type: string
+          description: 통화
+        dttm_buy:
+          type: integer
+          description: 구매 날짜
+          format: int64
+        id_usr_prod_buy:
+          type: string
+          description: 구매 아이디
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일
+        nm_prod:
+          type: string
+          description: 프로덕트 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+        orderId:
+          type: string
+          description: 윈클 내부 주문 ID
+        paymentMethod:
+          type: string
+          description: 결제수단
+        pgOrderId:
+          type: string
+          description: orderId와 맵핑되는 PG 주문 ID
+        price_tot_krw:
+          type: number
+          description: 총 구매가격
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 총 구매가격 usd
+          format: bigdecimal
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        project_type:
+          type: string
+          description: 프로덕트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        status_act:
+          type: string
+          description: 구매 상태
+          enum:
+          - CANCELED
+          - FAIL
+          - PENDING
+          - SUCCESS
+    B2BTokenRequest:
+      title: B2BTokenRequest
+      type: object
+      properties:
+        cpInfo:
+          $ref: '#/components/schemas/CpInfo'
+        userId:
+          type: string
+    WinclResponseData«boolean»:
+      title: WinclResponseData«boolean»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: boolean
+        message:
+          type: string
+    ContactDuplicated:
+      title: ContactDuplicated
+      type: object
+      properties:
+        emailDuplidated:
+          type: boolean
+        phoneNumberDuplidated:
+          type: boolean
+    B2BSignInResponse:
+      title: B2BSignInResponse
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+          description: jwt 토큰 타입
+        userId:
+          type: string
+    WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»:
+      title: WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/PurchaseHistoryAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuyHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

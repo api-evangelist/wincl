@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Admin Utils API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin Utils
+  description: Admin Utils Controller
+paths:
+  /bapi/v1/utils/nation:
+    put:
+      tags:
+      - Admin Utils
+      summary: 국가 상응조정률 수정
+      operationId: updateCorrespondingAdjustmentRateUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminModifyNationRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/utils/nation/list:
+    get:
+      tags:
+      - Admin Utils
+      summary: 국가 리스트
+      operationId: nationalListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«Nation»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/utils/upload/image:
+    post:
+      tags:
+      - Admin Utils
+      summary: 이미지 업로드
+      operationId: uploadImageUsingPOST
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - image_file
+              - path
+              type: object
+              properties:
+                image_file:
+                  type: string
+                  description: 이미지 파일
+                  format: binary
+                path:
+                  type: string
+                  description: S3 파일 Path
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«UploadFileResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    UploadFileResponse:
+      title: UploadFileResponse
+      type: object
+      properties:
+        url:
+          type: string
+    WinclResponseData«UploadFileResponse»:
+      title: WinclResponseData«UploadFileResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    WinclResponseData«List«Nation»»:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Nation:
+      title: Nation
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가코드 3자리
+          example: KOR
+        cd_nation2:
+          type: string
+          description: 국가코드 2자리
+          example: KR
+        cd_phone:
+          type: string
+          description: 국제전화 국가번호
+          example: '+82'
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+          example: 0.3
+        nm_en:
+          type: string
+          description: 국가 영어 이름
+        nm_kr:
+          type: string
+          description: 국가 한글 이름
+        num_nation:
+          type: integer
+          description: 국가코드 숫자
+          format: int32
+          example: 410
+    AdminModifyNationRequest:
+      title: AdminModifyNationRequest
+      required:
+      - cd_nation
+      - corrs_adj
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가코드 3자리
+          example: KOR
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+          example: 0.3
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Shopping API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Shopping
+  description: Shopping Controller
+paths:
+  /api/v1/shopping:
+    get:
+      tags:
+      - Shopping
+      summary: 장바구니 리스트
+      description: 페이지네이션 없음 Max 10 개
+      operationId: shoppingListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingBasketListResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Shopping
+      summary: 장바구니 아이템 수량 변경
+      operationId: modifyShoppingItemUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyShoppingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«UpdateShoppingItemResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '916':
+          description: EXCEED_PURCHASABLE_AMOUNT
+        '927':
+          description: AMOUNT_MUST_BE_GRATER_THAN_ZERO
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Shopping
+      summary: 장바구니 담기
+      description: 최대 5개
+      operationId: insertShoppingUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsertShoppingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«InsertShoppingResponse»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '916':
+          description: EXCEED_PURCHASABLE_AMOUNT
+        '926':
+          description: SHOPPING_BASKET_IS_FULL
+        '927':
+          description: AMOUNT_MUST_BE_GRATER_THAN_ZERO
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Shopping
+      summary: 장바구니 아이템 삭제
+      description: delete all 은 모든 id_shopping_basket 을 주면 됨
+      operationId: deleteShoppingItemUsingDELETE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteShoppingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v1/shopping/inactive:
+    delete:
+      tags:
+      - Shopping
+      summary: 장바구니 판매불가능 아이템 삭제
+      operationId: deleteInactiveShoppingItemUsingDELETE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    UpdateShoppingItemResponse:
+      title: UpdateShoppingItemResponse
+      type: object
+      properties:
+        average_price:
+          type: number
+          format: bigdecimal
+        average_price_usd:
+          type: number
+          format: bigdecimal
+        total_amount:
+          type: number
+          format: bigdecimal
+        total_price:
+          type: number
+          format: bigdecimal
+        total_price_usd:
+          type: number
+          format: bigdecimal
+    ShoppingBasketListResponse:
+      title: ShoppingBasketListResponse
+      type: object
+      properties:
+        average_price:
+          type: number
+          format: bigdecimal
+        average_price_usd:
+          type: number
+          format: bigdecimal
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingBasket'
+        message:
+          type: string
+        total_amount:
+          type: number
+          format: bigdecimal
+        total_price:
+          type: number
+          format: bigdecimal
+        total_price_usd:
+          type: number
+          format: bigdecimal
+    UpdateShoppingDto:
+      title: UpdateShoppingDto
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        id_shopping_basket:
+          type: string
+    InsertShoppingResponse:
+      title: InsertShoppingResponse
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        nm_prod:
+          type: string
+        total_price_krw:
+          type: number
+          format: bigdecimal
+        total_price_usd:
+          type: number
+          format: bigdecimal
+        unit_price_krw:
+          type: number
+          format: bigdecimal
+        unit_price_usd:
+          type: number
+          format: bigdecimal
+    DeleteShoppingRequest:
+      title: DeleteShoppingRequest
+      type: object
+      properties:
+        id_shopping_baskets:
+          type: array
+          items:
+            type: string
+    ShoppingBasket:
+      title: ShoppingBasket
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 장바구니 구매수량
+          format: bigdecimal
+        amt_stock:
+          type: number
+          description: 구매가능수량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성 국가 코드
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        id_prod:
+          type: string
+          description: 상품 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        id_shopping_basket:
+          type: string
+          description: 장바구니 Id
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_prod:
+          type: string
+          description: 상품 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        status_srv_prod:
+          type: string
+          description: 프로덕트 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        tot_price:
+          type: number
+          description: 총 가격
+          format: bigdecimal
+        tot_price_usd:
+          type: number
+          description: 총 가격 usd
+          format: bigdecimal
+        unit_price:
+          type: number
+          description: 톤당 가격
+          format: bigdecimal
+        unit_price_usd:
+          type: number
+          description: 톤당 가격 usd
+          format: bigdecimal
+        yn_corrs_adj:
+          type: string
+          description: 상응조정률 사용 여부
+          enum:
+          - N
+          - Y
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseData«InsertShoppingResponse»:
+      title: WinclResponseData«InsertShoppingResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/InsertShoppingResponse'
+        message:
+          type: string
+    WinclResponseData«UpdateShoppingItemResponse»:
+      title: WinclResponseData«UpdateShoppingItemResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UpdateShoppingItemResponse'
+        message:
+          type: string
+    InsertShoppingRequest:
+      title: InsertShoppingRequest
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        id_prod:
+          type: string
+        id_proj:
+          type: integer
+          format: int32
+    ModifyShoppingRequest:
+      title: ModifyShoppingRequest
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateShoppingDto'
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

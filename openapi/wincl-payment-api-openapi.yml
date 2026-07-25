@@ -1,0 +1,630 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Payment API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Payment
+  description: 주문 후 PG사 결제 단계 (Payco)
+paths:
+  /api/v2/payment/kcp/approve:
+    post:
+      tags:
+      - Payment
+      summary: Approval Kcp Order
+      operationId: approveKcpPaymentUsingPOST
+      parameters:
+      - name: request
+        in: query
+        description: request
+        required: true
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/kcp/reserve:
+    post:
+      tags:
+      - Payment
+      summary: Reserve KCP Order
+      operationId: reserveKcpPaymentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentReserveRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/payco/approve:
+    post:
+      tags:
+      - Payment
+      summary: Approval Payco Order
+      operationId: approvePaycoPaymentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaycoApproveRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/payco/reserve:
+    post:
+      tags:
+      - Payment
+      summary: Reserve Payco Order
+      operationId: reservePaycoPaymentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentReserveRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/approve:
+    post:
+      tags:
+      - Payment
+      summary: Approve Stripe Payment
+      operationId: approveStripePaymentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeApproveRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/latest-order:
+    get:
+      tags:
+      - Payment
+      summary: retrieveLatestOrder
+      operationId: retrieveLatestOrderUsingGET
+      parameters:
+      - name: userId
+        in: query
+        description: userId
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«LatestOrderData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/reserve:
+    post:
+      tags:
+      - Payment
+      summary: Reserve Stripe Payment
+      operationId: reserveStripePaymentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentReserveRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/test/approve:
+    get:
+      tags:
+      - Payment
+      summary: Test approving Stripe Payment
+      operationId: testApproveStripePaymentUsingGET
+      parameters:
+      - name: session_id
+        in: query
+        description: session_id
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/test/checkout:
+    get:
+      tags:
+      - Payment
+      summary: testHtmlCheckout
+      operationId: testHtmlCheckoutUsingGET
+      parameters:
+      - name: orderId
+        in: query
+        description: orderId
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/test/greeting:
+    get:
+      tags:
+      - Payment
+      summary: testGreeting
+      operationId: testGreetingUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/test/reserve:
+    post:
+      tags:
+      - Payment
+      summary: Test reserving Stripe Payment
+      operationId: testReserveStripePaymentUsingPOST
+      parameters:
+      - name: request
+        in: query
+        description: request
+        required: true
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '904':
+          description: INSUFFICIENT_PRODUCT_STOCK
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+        '906':
+          description: NON_PURCHASABLE_PRODUCT
+        '924':
+          description: UNSUPPORTED_CURRENCY
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/payment/stripe/webhook:
+    post:
+      tags:
+      - Payment
+      summary: Stripe Webhook
+      operationId: handleWebhookUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '905':
+          description: ALREADY_PROCESSED_ORDER
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    PaymentReserveRequest:
+      title: PaymentReserveRequest
+      type: object
+      properties:
+        orderChannel:
+          type: string
+          enum:
+          - MOBILE
+          - PC
+        orderId:
+          type: string
+        relayed:
+          type: boolean
+          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
+          example: false
+        returnUrl:
+          type: string
+    Payment:
+      title: Payment
+      type: object
+      properties:
+        amt_discount:
+          type: number
+          format: bigdecimal
+        amt_tax:
+          type: number
+          format: bigdecimal
+        amt_tot_payment:
+          type: number
+          format: bigdecimal
+        amt_vat:
+          type: number
+          format: bigdecimal
+        corp_approve_key:
+          type: string
+        corp_email_member:
+          type: string
+        corp_id_ord:
+          type: string
+        corp_id_seller:
+          type: string
+        corp_nm_member:
+          type: string
+        detail_info:
+          type: string
+        dttm_complete:
+          type: string
+          format: date-time
+        id_ord:
+          type: string
+        id_req_payment:
+          type: string
+        method_payment:
+          type: string
+        paymentMethodAndCorp:
+          type: string
+        payment_bank_corp_nm:
+          type: string
+        payment_bank_num:
+          type: string
+        payment_card_corp_cd:
+          type: string
+        payment_card_corp_nm:
+          type: string
+        payment_card_num:
+          type: string
+        payment_non_bank_acct:
+          type: string
+        payment_non_bank_corp_nm:
+          type: string
+        payment_non_bank_corp_num:
+          type: string
+        payment_phone_corp_nm:
+          type: string
+        payment_phone_num:
+          type: string
+        status_payment:
+          type: string
+          enum:
+          - CANCELED
+          - FAIL
+          - SUCCESS
+        yn_easy_payment:
+          type: string
+          enum:
+          - N
+          - Y
+    LatestOrderData:
+      title: LatestOrderData
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        orderId:
+          type: string
+        price:
+          type: number
+          format: bigdecimal
+    ApprovePaymentResultData:
+      title: ApprovePaymentResultData
+      type: object
+      properties:
+        orderId:
+          type: string
+        payment:
+          $ref: '#/components/schemas/Payment'
+        pgApproveId:
+          type: string
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        successful:
+          type: boolean
+    StripeApproveRequest:
+      title: StripeApproveRequest
+      type: object
+      properties:
+        checkoutSessionId:
+          type: string
+        orderId:
+          type: string
+        totalPaymentCent:
+          type: number
+          description: 센트단위의 주문금액
+          format: bigdecimal
+    WinclResponseData«ReservePaymentResultData»:
+      title: WinclResponseData«ReservePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ReservePaymentResultData'
+        message:
+          type: string
+    PaycoApproveRequest:
+      title: PaycoApproveRequest
+      type: object
+      properties:
+        code:
+          type: string
+        discountAmt:
+          type: number
+          format: bigdecimal
+        mainPgCode:
+          type: string
+        paymentCertifyToken:
+          type: string
+        pointAmt:
+          type: number
+          format: bigdecimal
+        reserveOrderNo:
+          type: string
+        sellerOrderReferenceKey:
+          type: string
+        totalPaymentAmt:
+          type: number
+          format: bigdecimal
+        totalRemoteAreaDeliveryFeeAmt:
+          type: number
+          format: bigdecimal
+    WinclResponseData«ApprovePaymentResultData»:
+      title: WinclResponseData«ApprovePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ApprovePaymentResultData'
+        message:
+          type: string
+    WinclResponseData«LatestOrderData»:
+      title: WinclResponseData«LatestOrderData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/LatestOrderData'
+        message:
+          type: string
+    ReservePaymentResultData:
+      title: ReservePaymentResultData
+      type: object
+      properties:
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgPaymentUrl:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        pgReserveId:
+          type: string
+        successful:
+          type: boolean
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

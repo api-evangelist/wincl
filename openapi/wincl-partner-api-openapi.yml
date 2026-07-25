@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin Partner API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Partner
+  description: Partner Controller
+paths:
+  /api/v1/partner/question/category:
+    get:
+      tags:
+      - Partner
+      summary: 파트너 문의 카테고리 리스트
+      operationId: getPartnerQuestionCategoryListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    CommonCode:
+      title: CommonCode
+      type: object
+      properties:
+        cd:
+          type: string
+          description: 코드
+        cd_grp:
+          type: string
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
+    WinclResponseData«List«CommonCode»»:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

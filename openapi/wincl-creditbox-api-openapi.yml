@@ -1,0 +1,676 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin CreditBox API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: CreditBox
+  description: Credit Box Controller
+paths:
+  /api/v2/creditbox/item:
+    get:
+      tags:
+      - CreditBox
+      summary: 탄소배출권 보관함 아이템 리스트
+      operationId: listCreditItemsUsingGET
+      parameters:
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/creditbox/item/{id}:
+    get:
+      tags:
+      - CreditBox
+      summary: 탄소배출권 보관함 아이템 상세정보
+      operationId: getCreditBoxItemUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: 프로젝트 아이디
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+      - name: sortType
+        in: query
+        description: 정렬기준
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - TRANSACTION_TYPE_ASC
+          - TRANSACTION_TYPE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+      - name: pageSize
+        in: query
+        description: 페이지당 아이템 개수
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: pageNum
+        in: query
+        description: 페이지 넘버
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: transactionTypes
+        in: query
+        description: '트랜잭션 유형 (예: `=PURCHASE` 또는 `=PURCHASE,OFFSET`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - OFFSET
+          - PURCHASE
+          - PURCHASE_CANCEL
+          - RECEIVE
+          - SEND
+          - SEND_CANCEL
+          - UNSPECIFIED
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '915':
+          description: ITEM_NOT_FOUND
+      security:
+      - Bearer 토큰 값:
+        - global
+  /api/v2/creditbox/item/{id}/credits:
+    get:
+      tags:
+      - CreditBox
+      summary: 프로젝트별 보유 크레딧 목록 (상쇄/선물용)
+      operationId: getUserCreditsForProjectUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: 프로젝트 아이디
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    CreditBoxItemAggregation:
+      title: CreditBoxItemAggregation
+      type: object
+      properties:
+        canceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        certificateAgencyName:
+          type: string
+          description: 인증기관 이름
+        correspondanceAdjustmentRatio:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        expireTimestamp:
+          type: integer
+          description: 유효 시간
+          format: int64
+        lockedAmount:
+          type: number
+          description: 잠긴 수량 (현재까지는 없음)
+          format: bigdecimal
+        nationCode:
+          type: string
+          description: 프로젝트 생성국가
+        nationEnglishName:
+          type: string
+          description: 프로젝트 생성국가 영어 이름
+        nationKoreanName:
+          type: string
+          description: 프로젝트 생성국가 한글 이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        productName:
+          type: string
+          description: 탄소배출권 상품 이름
+        projectDeveloperName:
+          type: string
+          description: 프로젝트 개발자이름
+        projectEffect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        projectName:
+          type: string
+          description: 프로젝트 이름
+        projectRegistrationTimestamp:
+          type: integer
+          description: 프로젝트 인증 시간
+          format: int64
+        projectThumbnailUrl:
+          type: string
+          description: 프로젝트 이미지
+        projectType:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        purchasedAmount:
+          type: number
+          description: 구매 수량
+          format: bigdecimal
+        receivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        sentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        totalAmount:
+          type: number
+          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
+          format: bigdecimal
+        usablePrice:
+          type: number
+          description: 사용가능한 탄소배출권 가격
+          format: bigdecimal
+    WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»:
+      title: WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/CreditBoxItemAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBoxItemEntry'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    CreditBoxItem:
+      title: CreditBoxItem
+      type: object
+      properties:
+        acquiredAmount:
+          type: number
+          description: 구매/획득 수량
+          format: bigdecimal
+        canceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        certificateAgencyName:
+          type: string
+          description: 인증기관 이름
+        correspondanceAdjustmentRatio:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        expireTimestamp:
+          type: integer
+          description: 유효 시간
+          format: int64
+        nationCode:
+          type: string
+          description: 프로젝트 생성국가
+        nationEnglishName:
+          type: string
+          description: 프로젝트 생성국가 영어 이름
+        nationKoreanName:
+          type: string
+          description: 프로젝트 생성국가 한글 이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        productName:
+          type: string
+          description: 탄소배출권 상품 이름
+        projectDeveloperName:
+          type: string
+          description: 프로젝트 개발자이름
+        projectEffect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        projectName:
+          type: string
+          description: 프로젝트 이름
+        projectRegistrationTimestamp:
+          type: integer
+          description: 프로젝트 인증 시간
+          format: int64
+        projectThumbnailUrl:
+          type: string
+          description: 프로젝트 이미지
+        projectType:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        receivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        sentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능 수량
+          format: bigdecimal
+        usablePrice:
+          type: number
+          description: 사용가능한 탄소배출권 가격
+          format: bigdecimal
+    WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»:
+      title: WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/CreditBoxAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBoxItem'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    CreditBoxAggregation:
+      title: CreditBoxAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+        totalCanceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        totalLockedAmount:
+          type: number
+          description: 잠긴 수량 (현재까지는 없음)
+          format: bigdecimal
+        totalOffsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        totalPurchasedAmount:
+          type: number
+          description: 구매 수량
+          format: bigdecimal
+        totalReceivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        totalSentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        totalUsableAmount:
+          type: number
+          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
+          format: bigdecimal
+        totalUsablePrice:
+          type: number
+          description: 보유한 총 탄소배출권 가격
+          format: bigdecimal
+        totalWholeAmount:
+          type: number
+          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+    CreditBoxItemEntry:
+      title: CreditBoxItemEntry
+      type: object
+      properties:
+        blockchainPurchaseStatus:
+          type: string
+          description: 블록체인에 기록된 구매 상태
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        blockchainTransactionType:
+          type: string
+          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
+        creditId:
+          type: string
+          description: credit id
+        expectedExpirationDateTime:
+          type: string
+          description: 예정된 유효기한 타임스탬프
+          format: date-time
+        expectedExpirationTimestamp:
+          type: integer
+          description: 예정된 유효기한 타임스탬프
+          format: int64
+        productCurrency:
+          type: string
+          description: 제품 기본 통화
+          enum:
+          - KRW
+          - USD
+        transactionAmount:
+          type: number
+          description: 트랜잭션 수량
+          format: bigdecimal
+        transactionDateTime:
+          type: string
+          description: 트랜잭션 일시
+          format: date-time
+        transactionPrice:
+          type: number
+          description: ' 금액'
+          format: bigdecimal
+        transactionStatus:
+          type: string
+          description: '트랜잭션 상태: [SUCCESS, PENDING, CANCELED, RECEIVE, SND_CANCEL]'
+          enum:
+          - CANCELED
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+          - SUCCESS
+          - UNSPECIFIED
+        transactionTimestamp:
+          type: integer
+          description: 트랜잭션 타임스탬프
+          format: int64
+        transactionType:
+          type: string
+          description: 트랜잭션 타입
+          enum:
+          - OFFSET
+          - PURCHASE
+          - PURCHASE_CANCEL
+          - RECEIVE
+          - SEND
+          - SEND_CANCEL
+          - UNSPECIFIED
+        transferable:
+          type: boolean
+          description: 선물 가능 여부
+          example: false
+        unitPrice:
+          type: number
+          description: 제품 단위 가격
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능한 수량
+          format: bigdecimal
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

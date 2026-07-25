@@ -1,0 +1,431 @@
+openapi: 3.0.3
+info:
+  title: Wincl Admin API
+  version: '1.0'
+  description: Admin Controller
+servers:
+- url: https://api.wincl.io:443
+  description: Inferred Url
+tags:
+- name: Admin
+  description: Admin Controller
+paths:
+  /bapi/v1/admin:
+    get:
+      tags:
+      - Admin
+      summary: 어드민 리스트
+      operationId: getAdminListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«AdminUser»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    post:
+      tags:
+      - Admin
+      summary: 어드민 생성
+      operationId: createAdminUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdminRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/admin/authority:
+    get:
+      tags:
+      - Admin
+      summary: 어드민 권한 리스트
+      operationId: getAuthoritiesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/admin/profile:
+    get:
+      tags:
+      - Admin
+      summary: 어드민 프로필
+      operationId: getAdminProfileUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminUser»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/admin/tab:
+    get:
+      tags:
+      - Admin
+      summary: 어드민 탭 리스트
+      operationId: getTabListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminTabResponse»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+  /bapi/v1/admin/{id}:
+    get:
+      tags:
+      - Admin
+      summary: 어드민 디테일
+      operationId: getAdminDetailUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponseData«AdminUser»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    put:
+      tags:
+      - Admin
+      summary: 어드민 수정
+      operationId: updateAdminUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAdminRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+      - Bearer 토큰 값:
+        - global
+    delete:
+      tags:
+      - Admin
+      summary: 어드민 삭제
+      operationId: deleteAdminUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WinclResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - Bearer 토큰 값:
+        - global
+components:
+  schemas:
+    AdminUser:
+      title: AdminUser
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            type: string
+        dttm_expire:
+          type: integer
+          format: int64
+        dttm_reg:
+          type: integer
+          format: int64
+        email:
+          type: string
+        google_uid:
+          type: string
+        id_adm_reg:
+          type: string
+        nm_adm:
+          type: string
+    CreateAdminRequest:
+      title: CreateAdminRequest
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            type: string
+            enum:
+            - ADMIN
+            - BANNER
+            - CERTIFICATE
+            - CREDIT
+            - FAQ
+            - GIFT_RECEIVE
+            - GIFT_SEND
+            - HEDERA
+            - HOME_PRODUCT
+            - INQUIRY
+            - NEWS
+            - NOTICE
+            - PAYMENT
+            - PRODUCT
+            - PROJECT
+            - REFUND
+            - REWARD_COMPANY
+            - REWARD_ISSUED
+            - REWARD_ORDER
+            - REWARD_PAYMENT_LOG
+            - REWARD_PROGRAM
+            - USER
+        email:
+          type: string
+        name:
+          type: string
+    WinclResponseData«List«AdminUser»»:
+      title: WinclResponseData«List«AdminUser»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUser'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseData«AdminTabResponse»:
+      title: WinclResponseData«AdminTabResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminTabResponse'
+        message:
+          type: string
+    AdminTabResponse:
+      title: AdminTabResponse
+      type: object
+      properties:
+        adminTabs:
+          type: array
+          items:
+            type: string
+            enum:
+            - ADMIN
+            - BANNER
+            - CERTIFICATE
+            - CREDIT
+            - FAQ
+            - GIFT_RECEIVE
+            - GIFT_SEND
+            - HEDERA
+            - HOME_PRODUCT
+            - INQUIRY
+            - NEWS
+            - NOTICE
+            - PAYMENT
+            - PRODUCT
+            - PROJECT
+            - REFUND
+            - REWARD_COMPANY
+            - REWARD_ISSUED
+            - REWARD_ORDER
+            - REWARD_PAYMENT_LOG
+            - REWARD_PROGRAM
+            - USER
+    WinclResponseData«AdminUser»:
+      title: WinclResponseData«AdminUser»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminUser'
+        message:
+          type: string
+    UpdateAdminRequest:
+      title: UpdateAdminRequest
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            type: string
+            enum:
+            - ADMIN
+            - BANNER
+            - CERTIFICATE
+            - CREDIT
+            - FAQ
+            - GIFT_RECEIVE
+            - GIFT_SEND
+            - HEDERA
+            - HOME_PRODUCT
+            - INQUIRY
+            - NEWS
+            - NOTICE
+            - PAYMENT
+            - PRODUCT
+            - PROJECT
+            - REFUND
+            - REWARD_COMPANY
+            - REWARD_ISSUED
+            - REWARD_ORDER
+            - REWARD_PAYMENT_LOG
+            - REWARD_PROGRAM
+            - USER
+        name:
+          type: string
+    WinclResponseData«List«CommonCode»»:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
+    CommonCode:
+      title: CommonCode
+      type: object
+      properties:
+        cd:
+          type: string
+          description: 코드
+        cd_grp:
+          type: string
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
+  securitySchemes:
+    Bearer 토큰 값:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
