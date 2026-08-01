@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: Published OpenAPI 3.0.3 document at https://api.wincl.io/v3/api-docs (271 operations).
+  - id: jwt-bearer-auth
+    conforms: true
+    evidence: securityScheme type http/bearer with bearerFormat JWT.
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme declared; social sign-in (PAYCO/OAuth) is brokered server-side into a JWT.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use numeric business status codes + symbolic names, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: Offset pagination via pageNo/pageSize with PageInfo/PagedResponse envelopes.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header/parameter declared.
+carbon_standards:
+  - id: verra-vcs
+    conforms: true
+    evidence: Marketplace sells Verra (VCS) certified carbon credits (per product docs).
+  - id: gold-standard
+    conforms: true
+    evidence: Marketplace sells Gold Standard certified carbon credits.
+  - id: i-rec
+    conforms: true
+    evidence: Sells I-REC renewable energy certificates.
+notes: >-
+  Carbon-standard conformance reflects the certification standards of the credits
+  WinCL brokers (surfaced on the marketplace / product pages), not a security or
+  interoperability compliance program. No SOC 2 / ISO 27001 / other audited
+  compliance program was found published, so no Compliance pointer is emitted.

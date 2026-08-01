@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+summary: >-
+  Cross-cutting request/response semantics for the Wincl API, derived from the
+  published OpenAPI (271 operations). The API is a JSON/HTTPS service split into a
+  consumer surface (/api/vN/...) and a B2B surface (/bapi/v1/...), authenticated
+  with a Bearer JWT.
+authentication:
+  style: bearer-jwt
+  header: 'Authorization: Bearer <JWT>'
+  token_issue_operations: [createJWTUsingPOST, oAuthSignInUsingPOST]
+  cross_ref: authentication/wincl-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header or parameter is declared anywhere in the OpenAPI.
+    Order/payment reservation is instead guarded server-side by the
+    ALREADY_PROCESSED_ORDER (905) business error on re-submission.
+pagination:
+  style: offset
+  params: [pageNo, pageNum, pageSize, sortType]
+  response_envelope: PageInfo / PagedResponse«T»
+  note: Offset-based paging via pageNo/pageNum + pageSize; sortType controls ordering.
+versioning:
+  scheme: uri-path
+  surfaces:
+    - prefix: /api/v1, /api/v2, /api/v3
+      audience: consumer / rewards
+    - prefix: /bapi/v1
+      audience: B2B (e.g. Bespin)
+  note: Multiple major versions coexist in-path (v1 71 ops, v2 22, v3 15).
+error_envelope:
+  style: business-status-codes
+  note: >-
+    Standard HTTP 401/403/404 for auth+not-found; a registry of numeric business
+    status codes in the 9xx range (each with a SCREAMING_SNAKE_CASE name) for
+    domain errors.
+  cross_ref: errors/wincl-error-codes.yml
+rate_limit_signaling:
+  documented: false
+request_tracing:
+  documented: false

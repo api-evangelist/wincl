@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+versioning:
+  scheme: uri-path
+  versions_in_use: [v1, v2, v3]
+  current: v3
+  note: >-
+    Consumer API versions coexist in-path (/api/v1, /api/v2, /api/v3); B2B under
+    /bapi/v1. No published version-deprecation policy was found.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecated_operations: []
+  note: No operations are flagged deprecated in the OpenAPI, and no deprecation policy page was found.
+sla:
+  url: null
+status_page:
+  url: null
+  note: No public status page discovered (no status.wincl.io; site is Wix-hosted).
+health_check:
+  note: The spec exposes a health-check-controller tag with a health endpoint.

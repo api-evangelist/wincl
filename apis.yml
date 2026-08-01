@@ -1,20 +1,1196 @@
 aid: wincl
 name: WinCL
-description: WinCL is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  WinCL (윈클) is a Korean integrated carbon-management platform that helps enterprises
+  calculate greenhouse-gas emissions, produce climate disclosures and reports, and offset
+  their footprint end-to-end. It combines WinCL Monitoring (emissions accounting and climate
+  disclosure), a WinCL Marketplace for buying globally certified carbon credits (Verra, Gold
+  Standard) and I-REC renewable-energy certificates, a WinCL Reward marketing layer, and
+  consulting services. The WinCL API (api.wincl.io, 271 operations, Bearer JWT) exposes wallet,
+  credit box, certificate box, product, order, Stripe/KCP payment, and Hedera on-chain
+  minting/offset operations so customers can embed carbon purchasing and credit retirement
+  directly into their own applications.
 url: https://raw.githubusercontent.com/api-evangelist/wincl/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://static.wixstatic.com/media/7a0600_6dd50be2bc40458f9398c57c7c238c15~mv2.png/v1/fill/w_432,h_228,al_c/7a0600_6dd50be2bc40458f9398c57c7c238c15~mv2.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 500-global
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: real-api-discovered
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Carbon Management
+- Sustainability
+- Greenhouse Gas
+- Carbon Credits
+- Carbon Offset
+- ESG
+- Climate
+- Marketplace
+- Payments
+- Blockchain
+- Hedera
+apis:
+- aid: wincl:wincl-admin-api
+  name: WinCL Admin API
+  description: Admin Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-auth-api
+  name: WinCL Admin Auth API
+  description: Admin Auth Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-auth-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-faq-api
+  name: WinCL Admin FAQ API
+  description: Admin Faq Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin FAQ
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-faq-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-hedera-api
+  name: WinCL Admin Hedera API
+  description: Admin Hedera Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Hedera
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-hedera-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-info-api
+  name: WinCL Admin Info API
+  description: Admin Info Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Info
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-info-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-news-api
+  name: WinCL Admin News API
+  description: Admin News Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin News
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-news-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-notice-api
+  name: WinCL Admin Notice API
+  description: Admin Notice Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Notice
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-notice-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-order-api
+  name: WinCL Admin Order API
+  description: Admin Order Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Order
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-order-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-payment-api
+  name: WinCL Admin Payment API
+  description: 결제 완료된 건을 관리자가 환불
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-payment-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-product-api
+  name: WinCL Admin Product API
+  description: Admin Product Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Product
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-product-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-project-api
+  name: WinCL Admin Project API
+  description: Admin Project Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Project
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-project-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-qna-api
+  name: WinCL Admin QnA API
+  description: Admin Qna Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin QnA
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-qna-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-reward-api
+  name: WinCL Admin Reward API
+  description: Admin Reward Program Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Reward
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-reward-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-smart-contract-api
+  name: WinCL Admin Smart Contract API
+  description: Admin Smart Contract Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Smart Contract
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-smart-contract-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-user-api
+  name: WinCL Admin User API
+  description: 가입자 목록 조회
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin User
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-user-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-utils-api
+  name: WinCL Admin Utils API
+  description: Admin Utils Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Utils
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-utils-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-admin-wallet-api
+  name: WinCL Admin Wallet API
+  description: Admin Wallet Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Admin Wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-admin-wallet-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-apis-for-the-b2b-service-ex-bespin-api
+  name: WinCL APIs for the B2B service (ex. Bespin) API
+  description: B 2 B Store Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - APIs for the B2B service (ex. Bespin)
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-apis-for-the-b2b-service-ex-bespin-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-auth-api
+  name: WinCL Auth API
+  description: Auth Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-auth-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-certificatebox-api
+  name: WinCL CertificateBox API
+  description: Certificate Box Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - CertificateBox
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-certificatebox-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-coupon-api
+  name: WinCL Coupon API
+  description: Coupon Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Coupon
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-coupon-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-creditbox-api
+  name: WinCL CreditBox API
+  description: Credit Box Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - CreditBox
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-creditbox-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-dashboard-api
+  name: WinCL Dashboard API
+  description: Dashboard Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Dashboard
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-dashboard-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-faq-api
+  name: WinCL FAQ API
+  description: Faq Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - FAQ
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-faq-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-health-check-controller-api
+  name: WinCL health-check-controller API
+  description: Health Check Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - health-check-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-health-check-controller-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-hedera-contract-info-api
+  name: WinCL Hedera Contract Info API
+  description: Hedera Contract Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Hedera Contract Info
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-hedera-contract-info-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-info-api
+  name: WinCL Info API
+  description: Info Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-info-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-internal-reward-api
+  name: WinCL Internal Reward API
+  description: Internal Reward Company Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Internal Reward
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-internal-reward-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-news-api
+  name: WinCL News API
+  description: News Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - News
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-news-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-notice-api
+  name: WinCL Notice API
+  description: Notice Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Notice
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-notice-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-order-api
+  name: WinCL Order API
+  description: 결제 전 주문 단계
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-order-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-partner-api
+  name: WinCL Partner API
+  description: Partner Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Partner
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-partner-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-payment-api
+  name: WinCL Payment API
+  description: 주문 후 PG사 결제 단계 (Payco)
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-payment-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-product-api
+  name: WinCL Product API
+  description: Product Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-product-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-project-api
+  name: WinCL Project API
+  description: Project Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-project-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-qna-api
+  name: WinCL QnA API
+  description: Qna Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - QnA
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-qna-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-ranking-api
+  name: WinCL Ranking API
+  description: Rank Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Ranking
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-ranking-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-reward-api
+  name: WinCL Reward API
+  description: Reward Company Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Reward
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-reward-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-shopping-api
+  name: WinCL Shopping API
+  description: Shopping Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Shopping
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-shopping-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-store-api
+  name: WinCL Store API
+  description: Store Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Store
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-store-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-user-api
+  name: WinCL User API
+  description: User Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-user-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-utils-api
+  name: WinCL Utils API
+  description: Utils Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Utils
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-utils-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-wallet-api
+  name: WinCL Wallet API
+  description: Wallet Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-wallet-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-webhook-api
+  name: WinCL Webhook API
+  description: Webhook Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-webhook-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +1199,34 @@ maintainers:
 common:
 - type: Website
   url: https://wincl.io
+- type: Documentation
+  url: https://www.wincl.io/wincl-api
+- type: APIReference
+  url: https://api.wincl.io/v3/api-docs
+- type: Authentication
+  url: authentication/wincl-authentication.yml
+- type: Conventions
+  url: conventions/wincl-conventions.yml
+- type: ErrorCatalog
+  url: errors/wincl-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/wincl-lifecycle.yml
+- type: Conformance
+  url: conformance/wincl-conformance.yml
+- type: DataModel
+  url: data-model/wincl-data-model.yml
+- type: MCPServer
+  url: mcp/wincl-mcp.yml
+- type: LLMsTxt
+  url: llms/wincl-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/wincl-agentic-access.yml
+- type: DomainSecurity
+  url: security/wincl-domain-security.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

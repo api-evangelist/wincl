@@ -1,0 +1,129 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+format: business-status-codes
+notes: >-
+  The Wincl API returns standard HTTP 401/403/404 for auth and not-found, and a
+  registry of application-specific numeric business status codes in the 9xx range
+  (returned as the HTTP status on the response). Each carries a stable symbolic
+  name (SCREAMING_SNAKE_CASE) documented in the OpenAPI response descriptions.
+  Derived from the 4xx/5xx/9xx responses across 271 operations; not RFC 9457
+  problem+json.
+standard_errors:
+  - status: 401
+    name: UNAUTHORIZED
+    meaning: Missing or invalid Bearer JWT.
+    remediation: "Obtain a token via the Auth endpoints and send it as `Authorization: Bearer <JWT>`."
+  - status: 403
+    name: FORBIDDEN
+    meaning: Authenticated but not permitted (e.g. admin-only or partner-only route).
+  - status: 404
+    name: NOT_FOUND
+    meaning: The requested resource does not exist.
+business_error_codes:
+  - code: 904
+    name: INSUFFICIENT_PRODUCT_STOCK
+    area: Order/Payment
+    remediation: Reduce quantity or choose a product with available stock before reserving payment.
+    example_operations: [reserveKcpPaymentUsingPOST, requestOrderUsingPOST, reserveStripeOrderUsingPOST]
+  - code: 905
+    name: ALREADY_PROCESSED_ORDER
+    area: Order/Payment
+    remediation: The order was already processed; do not re-submit. Fetch order status instead.
+    example_operations: [approveKcpPaymentUsingPOST, reserveStripeOrderUsingPOST]
+  - code: 906
+    name: NON_PURCHASABLE_PRODUCT
+    area: Product/Order
+    remediation: Product is not purchasable (inactive or restricted); select an active product.
+    example_operations: [orderOneDollarProductUsingPOST, reserveStripeOrderUsingPOST]
+  - code: 909
+    name: CANNOT_CANCEL_QUESTION
+    area: QnA
+    example_operations: [cancelQuestionUsingDELETE]
+  - code: 910
+    name: CANNOT_UPDATE_QUESTION
+    area: QnA
+    example_operations: [updateQuestionUsingPUT]
+  - code: 911
+    name: CANNOT_UPDATE_OTHERS_QUESTION
+    area: QnA
+    remediation: You may only edit your own questions.
+    example_operations: [updateQuestionUsingPUT]
+  - code: 912
+    name: SENDER_AND_RECEIVER_SHOULD_NOT_SAME
+    area: Reward/Gift
+    example_operations: [receiveGiftUsingPOST]
+  - code: 913
+    name: GIFT_NOT_EXIST
+    area: Reward/Gift
+    example_operations: [receiveGiftUsingPOST]
+  - code: 914
+    name: ALREADY_SIGNED_UP_USER
+    area: Auth
+    example_operations: [oAuthSignUpUsingPOST]
+  - code: 915
+    name: ITEM_NOT_FOUND
+    area: CreditBox/CertificateBox
+    remediation: The credit or certificate item does not exist in the user's box.
+    example_operations: [offsetCreditUsingPOST, getCertificateBoxItemUsingGET, getCreditBoxItemUsingGET]
+  - code: 916
+    name: EXCEED_PURCHASABLE_AMOUNT
+    area: Shopping
+    example_operations: [modifyShoppingItemUsingPUT, insertShoppingUsingPOST]
+  - code: 917
+    name: ALREADY_RECEIVED_GIFT
+    area: Reward/Gift
+    example_operations: [receiveGiftUsingPOST, cancelGiftUsingDELETE]
+  - code: 918
+    name: ALREADY_CANCELED_GIFT
+    area: Reward/Gift
+    example_operations: [receiveGiftUsingPOST, cancelGiftUsingDELETE]
+  - code: 919
+    name: INVALID_LOGIN_ID
+    area: Auth
+    example_operations: [checkLoginIdUsingPOST, oAuthSignUpUsingPOST]
+  - code: 920
+    name: INVALID_NICKNAME
+    area: Auth/User
+    example_operations: [checkNicknameUsingPOST, oAuthSignUpUsingPOST]
+  - code: 921
+    name: SHOPPING_BASKET_IS_EMPTY
+    area: Order
+    example_operations: [requestOrderUsingPOST]
+  - code: 923
+    name: PRODUCT_STATUS_IS_NOT_ACTIVE
+    area: Order/Product
+    example_operations: [requestOrderUsingPOST]
+  - code: 924
+    name: UNSUPPORTED_CURRENCY
+    area: Payment
+    remediation: Use a supported currency for the selected payment method.
+    example_operations: [confirmOrderUsingPOST, createPaymentIntentUsingPOST]
+  - code: 925
+    name: PAYMENT_IS_NOT_PROCESSING
+    area: Payment/Order
+    example_operations: [cancelOrderUsingPOST]
+  - code: 926
+    name: SHOPPING_BASKET_IS_FULL
+    area: Shopping
+    example_operations: [insertShoppingUsingPOST]
+  - code: 927
+    name: AMOUNT_MUST_BE_GRATER_THAN_ZERO
+    area: Shopping/Credit
+    example_operations: [offsetCreditUsingPOST, insertShoppingUsingPOST]
+  - code: 928
+    name: EXPIRED_DEADLINE
+    area: Reward/Gift
+    example_operations: [receiveGiftUsingPOST]
+  - code: 935
+    name: USER_NOT_EXIST
+    area: User
+    example_operations: [deregisterUsingDELETE, reincarnateUsingPUT]
+  - code: 936
+    name: ILLEGAL_USER_STATE
+    area: User
+    example_operations: [deregisterUsingDELETE, reincarnateUsingPUT]
+  - code: 940
+    name: INVALID_SOCIAL_EMAIL
+    area: Auth
+    example_operations: [checkEmailUsingPOST]

@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Wincl API
+  version: 1.0.0
+extends: openapi/wincl-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: wincl
+      x-apievangelist-industry: carbon-management
+      x-apievangelist-summary: >-
+        Integrated carbon-management platform API — emissions monitoring, a carbon
+        credit / I-REC marketplace, wallet & offset certificates, with on-chain
+        (Hedera) credit records. Bearer JWT auth; consumer (/api) and B2B (/bapi) surfaces.
+      x-apievangelist-artifacts:
+        authentication: authentication/wincl-authentication.yml
+        conventions: conventions/wincl-conventions.yml
+        errors: errors/wincl-error-codes.yml
+        data-model: data-model/wincl-data-model.yml
+        agentic-access: agentic-access/wincl-agentic-access.yml
+  - target: $.servers
+    update:
+      - url: https://api.wincl.io
+        description: Wincl production API

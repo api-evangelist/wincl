@@ -1,0 +1,80 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+summary: >-
+  Entity-relationship graph derived from the Wincl API OpenAPI (290 schemas). The
+  domain centers on a user's carbon wallet: credits and offset certificates held in
+  boxes, purchased via orders/payments from products tied to carbon projects, with
+  on-chain (Hedera) minting and certificate records, plus a rewards/marketing layer.
+entities:
+  - name: User
+    description: Account holder (consumer or B2B), authenticated via JWT.
+  - name: Wallet
+    description: A user's holdings of carbon credits and certificates.
+  - name: Credit
+    description: A carbon credit balance/lot held by a user, tied to a project.
+  - name: CreditBoxItem
+    description: A credit item in the user's CreditBox.
+  - name: CertificateBoxItem
+    description: A carbon-offset certificate in the user's CertificateBox.
+  - name: CarbonOffsetCertificate
+    description: Issued offset certificate document (subject + serial).
+  - name: Product
+    description: A purchasable carbon-credit / offset product on the marketplace.
+  - name: Project
+    description: The underlying carbon project a product/credit derives from (with certifying agency).
+  - name: Order
+    description: A purchase order for products; reserved/confirmed via KCP or Stripe.
+  - name: Payment
+    description: A payment against an order (Stripe PaymentIntent or KCP).
+  - name: ShoppingItem
+    description: A basket line item prior to ordering.
+  - name: CreditOffset
+    description: A retirement/offset action reducing a credit balance, recorded on Hedera.
+  - name: RewardProgram
+    description: A rewards/marketing program (Internal Reward layer) with orders and payment logs.
+relationships:
+  - from: Wallet
+    to: Credit
+    type: has_many
+  - from: Wallet
+    to: CertificateBoxItem
+    type: has_many
+  - from: Credit
+    to: Project
+    type: belongs_to
+    via: projId
+  - from: CreditBoxItem
+    to: Project
+    type: belongs_to
+  - from: Product
+    to: Project
+    type: belongs_to
+  - from: Order
+    to: Product
+    type: has_many
+    via: shopping basket
+  - from: Order
+    to: Payment
+    type: has_one
+  - from: Payment
+    to: Order
+    type: belongs_to
+  - from: CreditOffset
+    to: Credit
+    type: belongs_to
+  - from: CarbonOffsetCertificate
+    to: CreditOffset
+    type: has_one
+  - from: RewardProgram
+    to: Order
+    type: has_many
+    via: programId
+  - from: ShoppingItem
+    to: Product
+    type: belongs_to
+onchain:
+  ledger: Hedera
+  note: >-
+    Credit minting, offset records, and smart-contract info are recorded on Hedera
+    (Hedera Contract Info + Admin Smart Contract + credit-operator mint/offset ops).

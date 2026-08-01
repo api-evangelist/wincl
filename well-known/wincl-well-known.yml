@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: probed
+source: live probes of /.well-known/ on WinCL hosts
+note: >-
+  No /.well-known/ discovery documents are served. The API host returns 500 and the
+  Wix-hosted marketing host returns 400 for every probed path. Absence is valid,
+  recorded data — no WellKnown/SecurityTxt artifact is wired.
+hosts:
+  - host: https://api.wincl.io
+    documents:
+      - {path: /.well-known/security.txt, status: 500}
+      - {path: /.well-known/openid-configuration, status: 500}
+      - {path: /.well-known/oauth-authorization-server, status: 500}
+      - {path: /.well-known/api-catalog, status: 500}
+  - host: https://www.wincl.io
+    documents:
+      - {path: /.well-known/security.txt, status: 400}
+      - {path: /.well-known/openid-configuration, status: 400}
+      - {path: /.well-known/oauth-authorization-server, status: 400}
+      - {path: /.well-known/api-catalog, status: 400}

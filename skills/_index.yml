@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/wincl-openapi-original.json
+skills:
+  - file: wincl-buy-and-offset-credit.md
+    name: Buy and offset a carbon credit with WinCL
+    api: openapi/wincl-openapi-original.json
+    operations: [productListUsingGET, insertShoppingUsingPOST, requestOrderUsingPOST, reserveStripeOrderUsingPOST, confirmOrderUsingPOST, creditSummaryUsingGET, offsetCreditUsingPOST_1]
+  - file: wincl-view-carbon-wallet.md
+    name: Sign in and read a WinCL carbon wallet
+    api: openapi/wincl-openapi-original.json
+    operations: [oAuthSignInUsingPOST, createJWTUsingPOST, creditSummaryUsingGET, listCreditItemsUsingGET, getCreditBoxItemUsingGET, getCertificateBoxItemUsingGET]

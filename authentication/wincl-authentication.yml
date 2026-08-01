@@ -1,0 +1,13 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/wincl-openapi-original.json
+summary:
+  types:
+  - http
+schemes:
+- name: Bearer 토큰 값
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/wincl-openapi-original.json

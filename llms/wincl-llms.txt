@@ -1,0 +1,66 @@
+# 윈클
+> 윈클은 기업의 온실가스 배출량 산정부터 보고, 상쇄까지 전 과정을 원스톱으로 관리하는 통합 탄소 관리 플랫폼입니다. 이 사이트는 윈클 모니터링, 탄소크레딧 마켓, API 등 다양한 솔루션과 전문 컨설팅 서비스를 제공합니다. 윈클은 기업이 탄소 리스크를 효율적으로 관리하고 지속 가능한 경영을 실현할 수 있도록 지원합니다. 이를 통해 기업은 탄소 배출량 감축 목표 설정 및 달성, 탄소 크레딧 확보 및 상쇄 등 복잡한 탄소 관리 업무를 간소화할 수 있습니다.
+
+## Homepage link
+- [home](https://www.wincl.io/)
+
+## AI 에이전트 액세스
+
+본 사이트는 Wix 기반으로 하며 에이전트 AI 액세스를 위한 Model Context Protocol(MCP)을 지원합니다. AI 에이전트가 라이브, 최신 사이트 콘텐츠에 
+직접 연결하여 가져올 수 있으며 스크래핑이 필요 없습니다.
+
+- [**사이트 MCP 엔드포인트**](https://www.wincl.io/_api/mcp)
+- [**Wix MCP 문서**](https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp)
+
+## 이용 가능한 MCP 도구
+
+### GetBusinessDetails
+시간대, 이메일, 전화, 주소 등 비즈니스 및 사이트 정보를 불러옵니다.
+- 파라미터가 필요하지 않습니다.
+
+### SearchInSite
+사이트에서 정보를 검색합니다.
+- **searchTerm** - 사이트에서 검색할 용어.
+
+### SearchSiteApiDocs
+본 사이트에 설치된 Wix 비즈니스 솔루션의 API 문서를 불러오고, AI 클라이언트에게 API 사용 방법을 안내합니다. (SearchInSite 대신) 
+제품 및 서비스를 쿼리할 때 해당 도구를 사용하세요.
+- **searchTerm** - 사이트 API 문서에서 검색할 용어.
+
+### GenerateVisitorToken
+새 방문자 세션을 생성하고 사이트의 방문자 액세스 토큰을 얻습니다.
+컨텍스트에 방문자 토큰이 없는 경우 
+CallWixSiteAPI 요청을 하기 전에 호출해야 합니다.
+- 파라미터가 필요하지 않습니다.
+
+### CallWixSiteAPI
+사이트에서 API 메서드를 호출하여 방문자를 대신하여 사이트 데이터 쿼리, 
+일대일 세션 예약, 구매 시작 등의 작업을 수행합니다.
+- **visitorToken** - 방문자 액세스 토큰. 사용할 수 없는 경우 GenerateVisitorToken을 먼저 사용하세요.
+- **url** - 호출할 API 메서드의 절대 URL(예: https://www.wixapis.com/...). SearchSiteApiDocs를 사용하여 불러오세요.
+- **method** - API 호출에 사용할 HTTP 메서드.
+- **body** - 유효한 JSON 문자열 형식의 요청 본문.
+
+### ReadFullDocsArticle
+Wix 개발자 문서 포털에서 전체 문서를 가져옵니다.
+- **articleUrl** - Wix 개발자 문서 포털에 있는 문서의 URL.
+
+### ReadFullDocsMethodSchema
+Wix API 메서드의 전체 스키마를 가져옵니다. CallWixSiteAPI를 통해 
+실제 메서드를 호출하기 전에 호출되어야 합니다.
+- **articleUrl** - Wix API 메서드에 대한 참조 문서의 URL.
+
+## AI + MCP를 통해 방문자가 할 수 있는 작업
+
+- 비즈니스 정보 가져오기(연락처 정보, 위치, 영업시간)
+- 제공되는 제품 및 서비스 둘러보기
+- 서비스 예약 및 예매
+- 구매 시작 및 사이트에서 체크아웃 완료
+- 사이트를 검색하지 않고 질문하고 관련 답변 받기
+
+## 참고 사항
+
+- MCP 엔드포인트에 연결하는 데 인증이 필요하지 않습니다.
+- 사이트에서 접근 가능한 공개 정보만 이용 가능합니다.
+- 콘텐츠는 항상 실시간으로 최신 상태로 유지됩니다.
+- 도구 업데이트를 받으려면 도구 업데이트 알림 수신 시 tools/list 호출을 구현하세요.
