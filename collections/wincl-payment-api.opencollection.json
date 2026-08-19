@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Payment API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Approval Kcp Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/kcp/approve",
+            "params": [
+              {
+                "name": "request",
+                "value": "",
+                "type": "query",
+                "description": "request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approval Kcp Order"
+        },
+        {
+          "info": {
+            "name": "Reserve KCP Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/kcp/reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reserve KCP Order"
+        },
+        {
+          "info": {
+            "name": "Approval Payco Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/payco/approve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approval Payco Order"
+        },
+        {
+          "info": {
+            "name": "Reserve Payco Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/payco/reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reserve Payco Order"
+        },
+        {
+          "info": {
+            "name": "Approve Stripe Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/approve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approve Stripe Payment"
+        },
+        {
+          "info": {
+            "name": "retrieveLatestOrder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/latest-order",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "userId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "retrieveLatestOrder"
+        },
+        {
+          "info": {
+            "name": "Reserve Stripe Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reserve Stripe Payment"
+        },
+        {
+          "info": {
+            "name": "Test approving Stripe Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/test/approve",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query",
+                "description": "session_id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Test approving Stripe Payment"
+        },
+        {
+          "info": {
+            "name": "testHtmlCheckout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/test/checkout",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "orderId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "testHtmlCheckout"
+        },
+        {
+          "info": {
+            "name": "testGreeting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/test/greeting",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "testGreeting"
+        },
+        {
+          "info": {
+            "name": "Test reserving Stripe Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/test/reserve",
+            "params": [
+              {
+                "name": "request",
+                "value": "",
+                "type": "query",
+                "description": "request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Test reserving Stripe Payment"
+        },
+        {
+          "info": {
+            "name": "Stripe Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/payment/stripe/webhook",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stripe Webhook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

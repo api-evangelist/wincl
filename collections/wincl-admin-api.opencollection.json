@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "어드민 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/admin",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 리스트"
+        },
+        {
+          "info": {
+            "name": "어드민 생성",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/admin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 생성"
+        },
+        {
+          "info": {
+            "name": "어드민 권한 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/authority",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 권한 리스트"
+        },
+        {
+          "info": {
+            "name": "어드민 프로필",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/profile",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 프로필"
+        },
+        {
+          "info": {
+            "name": "어드민 탭 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/tab",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 탭 리스트"
+        },
+        {
+          "info": {
+            "name": "어드민 디테일",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 디테일"
+        },
+        {
+          "info": {
+            "name": "어드민 수정",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 수정"
+        },
+        {
+          "info": {
+            "name": "어드민 삭제",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.wincl.io:443/bapi/v1/admin/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 삭제"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

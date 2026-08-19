@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Order API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "주문하기",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "상품을 주문한다."
+        },
+        {
+          "info": {
+            "name": "1달러 랜덤 프로덕트 주문",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/order/one-dollar-product",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "1달러 랜덤 프로덕트 주문"
+        },
+        {
+          "info": {
+            "name": "주문 확인",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/order/payment/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "orderId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "주문 확인"
+        },
+        {
+          "info": {
+            "name": "스트라이프 주문 확인",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/order/stripe/confirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "스트라이프 주문 확인"
+        },
+        {
+          "info": {
+            "name": "Stripe Create payment-intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/order/stripe/create-payment-intent",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stripe Create payment-intent"
+        },
+        {
+          "info": {
+            "name": "Reserve 스트라이프",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/order/stripe/reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reserve 스트라이프"
+        },
+        {
+          "info": {
+            "name": "주문 내역",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "주문 내역"
+        },
+        {
+          "info": {
+            "name": "PG 결제창 끄거나 취소 누를 시 (PG 공통)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v2/order/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "order status 를 cancel 로 바꾸고 product amt unlock"
+        },
+        {
+          "info": {
+            "name": "주문 내역",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "orderId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "주문 내역"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin CreditBox API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CreditBox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "탄소배출권 보관함 아이템 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/creditbox/item",
+            "params": [
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "탄소배출권 보관함 아이템 리스트"
+        },
+        {
+          "info": {
+            "name": "탄소배출권 보관함 아이템 상세정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/creditbox/item/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "transactionTypes",
+                "value": "",
+                "type": "query",
+                "description": "트랜잭션 유형 (예: `=PURCHASE` 또는 `=PURCHASE,OFFSET`"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "탄소배출권 보관함 아이템 상세정보"
+        },
+        {
+          "info": {
+            "name": "프로젝트별 보유 크레딧 목록 (상쇄/선물용)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/creditbox/item/:id/credits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "프로젝트 아이디"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "프로젝트별 보유 크레딧 목록 (상쇄/선물용)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

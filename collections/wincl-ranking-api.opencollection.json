@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Ranking API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ranking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "내 랭킹 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/rank/my/list",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "내 랭킹 리스트"
+        },
+        {
+          "info": {
+            "name": "국가 랭킹 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/rank/national/list",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "기간 주, 월"
+              },
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query",
+                "description": "기간 타입 (주간, 월간, 전체기간)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "국가 랭킹 리스트"
+        },
+        {
+          "info": {
+            "name": "개인 랭킹 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/rank/personal/list",
+            "params": [
+              {
+                "name": "searchKeyword",
+                "value": "",
+                "type": "query",
+                "description": "검색 키워드"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "기간 주, 월"
+              },
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query",
+                "description": "기간 타입 (주간, 월간, 전체기간)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "개인 랭킹 리스트"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

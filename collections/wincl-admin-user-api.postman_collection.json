@@ -1,0 +1,640 @@
+{
+  "item": [
+    {
+      "id": "0ff7a2bd-11e8-49e7-8cf4-af305f7a33f8",
+      "name": "Admin User",
+      "description": {
+        "content": "가입자 목록 조회",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9411fe03-4e1e-42db-b7aa-5b05206df389",
+          "name": "가입 유저 리스트",
+          "request": {
+            "name": "가입 유저 리스트",
+            "description": {
+              "content": "전체 가입자 리스트를 얻는다. 닉네임, 이메일, 기관코드로 필터링할 수 있다. 각 필터는 부분 문자열로 검색한다. loginId 필터는 과거호환성을 위해서 남겨둔다.\n\n**Usage:**\n- /?nickname={nickname}&...\n- /?email={email}&...\n- /?company={company}&...\n- /?nickname={nickname}&email={email}&...",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                },
+                {
+                  "disabled": false,
+                  "key": "loginId",
+                  "value": "<string>",
+                  "description": "로그인 아이디"
+                },
+                {
+                  "disabled": false,
+                  "key": "nickname",
+                  "value": "<string>",
+                  "description": "닉네임"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "이메일"
+                },
+                {
+                  "disabled": false,
+                  "key": "company",
+                  "value": "<string>",
+                  "description": "기관 코드"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c79bb93a-8ec3-40a9-8e52-2eb2d1671097",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "loginId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"currentPageNum\": 4664,\n  \"items\": [\n    {\n      \"b2bCustomerCode\": \"string\",\n      \"b2bRpCode\": \"string\",\n      \"b2bUser\": true,\n      \"cd_country\": \"string\",\n      \"company_code\": \"string\",\n      \"dttm_expire\": \"string\",\n      \"dttm_reg\": \"string\",\n      \"dttm_upd\": \"string\",\n      \"email\": \"string\",\n      \"email_social\": \"string\",\n      \"id_corp\": \"FACEBOOK\",\n      \"id_login\": \"string\",\n      \"id_social_usr\": \"string\",\n      \"id_usr\": \"string\",\n      \"img_profile\": \"string\",\n      \"nickname\": \"string\",\n      \"nm_usr\": \"string\",\n      \"phone_number\": \"string\",\n      \"reg_unixtime\": 1042,\n      \"status\": \"ARCHIVED\"\n    },\n    {\n      \"b2bCustomerCode\": \"string\",\n      \"b2bRpCode\": \"string\",\n      \"b2bUser\": true,\n      \"cd_country\": \"string\",\n      \"company_code\": \"string\",\n      \"dttm_expire\": \"string\",\n      \"dttm_reg\": \"string\",\n      \"dttm_upd\": \"string\",\n      \"email\": \"string\",\n      \"email_social\": \"string\",\n      \"id_corp\": \"FACEBOOK\",\n      \"id_login\": \"string\",\n      \"id_social_usr\": \"string\",\n      \"id_usr\": \"string\",\n      \"img_profile\": \"string\",\n      \"nickname\": \"string\",\n      \"nm_usr\": \"string\",\n      \"phone_number\": \"string\",\n      \"reg_unixtime\": 701,\n      \"status\": \"REGISTERING\"\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 5725,\n  \"sortType\": \"PRICE_DESC\",\n  \"totalCount\": 8641,\n  \"totalPages\": 1513\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cccb7959-183c-4b6e-82a4-7eb279f02412",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "loginId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d04ef211-43ec-4369-9ac8-c4358e80a0be",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "loginId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce7341b7-e8f2-4873-b3da-b6ebf1a2e555",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "loginId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a291072-37cc-45f2-a6ef-8385830daaa3",
+          "name": "가입 유저 상세정보",
+          "request": {
+            "name": "가입 유저 상세정보",
+            "description": {
+              "content": "UserID로 가입자 상세 정보를 얻는다.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "user",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c74613c9-4478-42c3-a219-d72597d3b116",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": {\n    \"addr\": \"string\",\n    \"cd_country\": \"string\",\n    \"company_code\": \"string\",\n    \"dttm_expire\": \"string\",\n    \"dttm_reg\": 7191,\n    \"dttm_upd\": 3410,\n    \"email\": \"string\",\n    \"email_social\": \"string\",\n    \"id_corp\": \"PAYCO\",\n    \"id_login\": \"string\",\n    \"id_social_usr\": \"string\",\n    \"id_usr\": \"string\",\n    \"img_profile\": \"string\",\n    \"nickname\": \"string\",\n    \"nm_usr\": \"string\",\n    \"reg_unixtime\": 4989\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27ae4e25-6a04-48b8-8cb9-c9c347fa789e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fa066157-2f17-45fa-9da0-12997b761ba2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aae52b26-adb9-4eb3-b282-0063fb9760e0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wincl.io:443",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2cafb7bc-bf2f-4551-bd20-ae6f9ffc9581",
+    "name": "Wincl Admin Admin User API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin Controller",
+      "type": "text/plain"
+    }
+  }
+}

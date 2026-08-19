@@ -1,0 +1,2539 @@
+{
+  "item": [
+    {
+      "id": "852895c3-15ee-42b5-83e1-fef88545704a",
+      "name": "Admin Project",
+      "description": {
+        "content": "Admin Project Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afc9b0d6-64f7-4125-8ac0-09893a3c389e",
+          "name": "프로젝트 리스트",
+          "request": {
+            "name": "프로젝트 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b5dc10c-4c52-41a4-8379-1c8c2a8ca621",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"currentPageNum\": 628,\n  \"items\": [\n    {\n      \"agencyRegistry\": {\n        \"agencyId\": 4525,\n        \"averageAnnualEmissionReduction\": 6736.253049121364,\n        \"mechanism\": \"string\",\n        \"methodology\": \"string\",\n        \"registryId\": \"string\",\n        \"registryUrl\": \"string\",\n        \"vintage\": 8377\n      },\n      \"amt_assign\": 954.8314090329679,\n      \"areaHectare\": 7477.680127798483,\n      \"attachmentUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"corrs_adj\": 5725.315388083647,\n      \"dttm_reg\": 579,\n      \"dttm_reg_cert\": 9206,\n      \"dttm_upd\": 3846,\n      \"hederaTopicId\": \"string\",\n      \"id_proj\": 4958,\n      \"img_thumbnail_proj\": \"string\",\n      \"introductionTextEn\": \"string\",\n      \"introductionTextKo\": \"string\",\n      \"locationImageUrl\": \"string\",\n      \"nationCode\": \"string\",\n      \"nation_nm_en\": \"string\",\n      \"nation_nm_kr\": \"string\",\n      \"nm_cert_agc\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"nm_serial\": \"string\",\n      \"projectEffects\": [\n        {\n          \"effectCode\": \"SUSTAINABLE_CITIES_AND_COMMUNITIES\",\n          \"effectDescriptionEn\": \"string\",\n          \"effectDescriptionKr\": \"string\",\n          \"effectImageUrl\": \"string\"\n        },\n        {\n          \"effectCode\": \"GOOD_HEALTH_AND_WELLBEING\",\n          \"effectDescriptionEn\": \"string\",\n          \"effectDescriptionKr\": \"string\",\n          \"effectImageUrl\": \"string\"\n        }\n      ],\n      \"projectNameEn\": \"string\",\n      \"projectNameKr\": \"string\",\n      \"project_type\": \"CHEMICAL_INDUSTRY\",\n      \"serial_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tot_vol\": 4783.629263869838,\n      \"typeNameInEnglish\": \"string\",\n      \"typeNameInKorean\": \"string\",\n      \"yn_corrs_adj\": \"N\"\n    },\n    {\n      \"agencyRegistry\": {\n        \"agencyId\": 919,\n        \"averageAnnualEmissionReduction\": 300.4443889195929,\n        \"mechanism\": \"string\",\n        \"methodology\": \"string\",\n        \"registryId\": \"string\",\n        \"registryUrl\": \"string\",\n        \"vintage\": 3924\n      },\n      \"amt_assign\": 1732.6933188787075,\n      \"areaHectare\": 3963.407302409253,\n      \"attachmentUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"corrs_adj\": 5250.533681985909,\n      \"dttm_reg\": 6613,\n      \"dttm_reg_cert\": 8837,\n      \"dttm_upd\": 5640,\n      \"hederaTopicId\": \"string\",\n      \"id_proj\": 2634,\n      \"img_thumbnail_proj\": \"string\",\n      \"introductionTextEn\": \"string\",\n      \"introductionTextKo\": \"string\",\n      \"locationImageUrl\": \"string\",\n      \"nationCode\": \"string\",\n      \"nation_nm_en\": \"string\",\n      \"nation_nm_kr\": \"string\",\n      \"nm_cert_agc\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"nm_serial\": \"string\",\n      \"projectEffects\": [\n        {\n          \"effectCode\": \"CLIMATE_ACTION\",\n          \"effectDescriptionEn\": \"string\",\n          \"effectDescriptionKr\": \"string\",\n          \"effectImageUrl\": \"string\"\n        },\n        {\n          \"effectCode\": \"PARTNERSHIPS_FOR_THE_GOALS\",\n          \"effectDescriptionEn\": \"string\",\n          \"effectDescriptionKr\": \"string\",\n          \"effectImageUrl\": \"string\"\n        }\n      ],\n      \"projectNameEn\": \"string\",\n      \"projectNameKr\": \"string\",\n      \"project_type\": \"TRANSPORT\",\n      \"serial_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tot_vol\": 35.88780444048978,\n      \"typeNameInEnglish\": \"string\",\n      \"typeNameInKorean\": \"string\",\n      \"yn_corrs_adj\": \"Y\"\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 8975,\n  \"sortType\": \"AMOUNT_ASC\",\n  \"totalCount\": 8542,\n  \"totalPages\": 6355\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30820c24-0618-4299-ad67-8964fd73d5b2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1291fa75-08c8-4ac6-ad06-39e0649ebb6a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3abc861e-d0e5-4769-8846-331656d9402e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bfc7e05-5779-4b85-84f4-371fb70bf0ad",
+          "name": "프로젝트 등록",
+          "request": {
+            "name": "프로젝트 등록",
+            "description": {
+              "content": "프로젝트 이미지는 upload/image 를 사용해서 추가 ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd0a8d59-0616-4d06-ad90-bc3e34956f82",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": {\n    \"id_proj\": 6986\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31ab63c9-7925-4b94-ad9d-6e78dac303dc",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c8ee7c1-8a02-4489-965a-70bfa553a481",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29a9e864-bab9-45a5-b6fc-f9f04e7a8039",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c02a87c6-d494-4932-888c-ef29d030948e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"tot_vol\": \"<bigdecimal>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a82d7f6-945b-441e-a878-2743f08a7169",
+          "name": "프로젝트 인증 기관 리스트",
+          "request": {
+            "name": "프로젝트 인증 기관 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                "agency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "34a52751-a3c2-4be6-a8a7-06bcab5da5ac",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "agency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": [\n    {\n      \"cert_desc\": \"string\",\n      \"id_cert_agc\": 5992,\n      \"nm_cert_agc\": \"string\"\n    },\n    {\n      \"cert_desc\": \"string\",\n      \"id_cert_agc\": 2319,\n      \"nm_cert_agc\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6fd6862-6f90-4a1d-bc66-690e74d29f4c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "agency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6bca3d93-adb2-4dbd-af2c-f1af16249f3c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "agency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b89dac1-e301-451a-aafd-82d8337685c6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "agency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ebf10ac-9b50-457a-a18e-8c93338eafcf",
+          "name": "프로젝트 효과 리스트",
+          "request": {
+            "name": "프로젝트 효과 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                "effect",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "76a637f7-2a49-43c2-bcd3-f5eece29843b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "effect",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": [\n    {\n      \"cd\": \"string\",\n      \"cd_grp\": \"ADMIN_AUTHORITY\",\n      \"nm_en\": \"string\",\n      \"nm_kr\": \"string\",\n      \"pos\": 3951\n    },\n    {\n      \"cd\": \"string\",\n      \"cd_grp\": \"ADMIN_AUTHORITY\",\n      \"nm_en\": \"string\",\n      \"nm_kr\": \"string\",\n      \"pos\": 9936\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7f5cc1d-3fb0-4928-b8d9-427baa9b6c65",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "effect",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14fbeeac-ddbd-437a-bfd7-d45a3ddf3482",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "effect",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb938671-4c59-411d-9831-c9b8f9f0cc14",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "effect",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa170bdf-9fc0-4da8-b826-eed32552a54f",
+          "name": "프로젝트 유형 리스트",
+          "request": {
+            "name": "프로젝트 유형 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                "type",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "513b4232-3878-4705-97ed-9a779b522357",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": [\n    {\n      \"cd\": \"string\",\n      \"cd_grp\": \"FAQ_CATEGORY\",\n      \"nm_en\": \"string\",\n      \"nm_kr\": \"string\",\n      \"pos\": 3489\n    },\n    {\n      \"cd\": \"string\",\n      \"cd_grp\": \"NEWS_CATEGORY\",\n      \"nm_en\": \"string\",\n      \"nm_kr\": \"string\",\n      \"pos\": 2153\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b625e7-312a-4887-8d0c-03b4336964d9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c42a356-f7ed-4c88-a978-3e1489bc38a1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2fe8fb1-13f7-4098-9220-41f97d5b768d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8051909e-51e2-4cf0-80ac-069e190ae7ef",
+          "name": "프로젝트 상세정보",
+          "request": {
+            "name": "프로젝트 상세정보",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a3930c7-83a5-4881-b044-003872472836",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": {\n    \"agencyRegistry\": {\n      \"agencyId\": \"<integer>\",\n      \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n      \"mechanism\": \"<string>\",\n      \"methodology\": \"<string>\",\n      \"registryId\": \"<string>\",\n      \"registryUrl\": \"<string>\",\n      \"vintage\": \"<integer>\"\n    },\n    \"amt_assign\": 9381.157631418891,\n    \"areaHectare\": 1560.2369088311962,\n    \"attachmentUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"corrs_adj\": 1625.9278784111898,\n    \"dttm_reg\": 9993,\n    \"dttm_reg_cert\": 719,\n    \"dttm_upd\": 1733,\n    \"hederaTopicId\": \"string\",\n    \"id_proj\": 596,\n    \"img_thumbnail_proj\": \"string\",\n    \"introductionTextEn\": \"string\",\n    \"introductionTextKo\": \"string\",\n    \"locationImageUrl\": \"string\",\n    \"nationCode\": \"string\",\n    \"nation_nm_en\": \"string\",\n    \"nation_nm_kr\": \"string\",\n    \"nm_cert_agc\": \"string\",\n    \"nm_proj_dev\": \"string\",\n    \"nm_serial\": \"string\",\n    \"projectEffects\": [\n      {\n        \"effectCode\": \"<string>\",\n        \"effectDescriptionEn\": \"<string>\",\n        \"effectDescriptionKr\": \"<string>\",\n        \"effectImageUrl\": \"<string>\"\n      },\n      {\n        \"effectCode\": \"<string>\",\n        \"effectDescriptionEn\": \"<string>\",\n        \"effectDescriptionKr\": \"<string>\",\n        \"effectImageUrl\": \"<string>\"\n      }\n    ],\n    \"projectNameEn\": \"string\",\n    \"projectNameKr\": \"string\",\n    \"project_type\": \"MANUFACTURING_INDUSTRIES\",\n    \"serial_list\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tot_vol\": 1333.5657676170242,\n    \"typeNameInEnglish\": \"string\",\n    \"typeNameInKorean\": \"string\",\n    \"yn_corrs_adj\": \"N\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a98563e-dd0e-4028-be5f-9f944ae7ac4e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c65c250-a05b-40f8-b40d-1735867c581f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da7fdbb5-a0ee-4f24-ab21-7dbc3695886d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7937cf46-7f0f-4c46-bbe9-53d5218723b2",
+          "name": "프로젝트 수정",
+          "request": {
+            "name": "프로젝트 수정",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d07eba0e-6fe1-4d3a-a126-cb9007abec67",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8df7d63e-1072-473b-b88b-84d6180ed8cb",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41b4a1db-f7ef-40f5-8864-a05daa995016",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60814f46-d9a6-42f5-a178-8ac1146df133",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7c70419-58e0-493c-b964-79ea89c272e2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agencyRegistry\": {\n    \"agencyId\": \"<integer>\",\n    \"averageAnnualEmissionReduction\": \"<bigdecimal>\",\n    \"mechanism\": \"<string>\",\n    \"methodology\": \"<string>\",\n    \"registryId\": \"<string>\",\n    \"registryUrl\": \"<string>\",\n    \"vintage\": \"<integer>\"\n  },\n  \"areaHectare\": \"<bigdecimal>\",\n  \"attachmentUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cd_tp_proj\": \"<string>\",\n  \"dttm_reg_cert\": \"<long>\",\n  \"effects\": [\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    },\n    {\n      \"effectCode\": \"<string>\",\n      \"effectDescriptionEn\": \"<string>\",\n      \"effectDescriptionKr\": \"<string>\",\n      \"effectImageUrl\": \"<string>\"\n    }\n  ],\n  \"img_thumbnail_proj\": \"<string>\",\n  \"introductionTextEn\": \"<string>\",\n  \"introductionTextKo\": \"<string>\",\n  \"locationImageUrl\": \"<string>\",\n  \"nationCode\": \"<string>\",\n  \"nm_proj_dev\": \"<string>\",\n  \"nm_serial\": \"<string>\",\n  \"projectNameEn\": \"<string>\",\n  \"projectNameKr\": \"<string>\",\n  \"yn_corrs_adj\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "858fb613-4bfe-420e-9a55-09c6a94cefab",
+          "name": "Project Balance History 리스트",
+          "request": {
+            "name": "Project Balance History 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                ":id",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96f13609-184b-457a-9a40-df987c5a72e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"currentPageNum\": 5842,\n  \"items\": [\n    {\n      \"amt\": 5928.3294055585275,\n      \"dttm_reg\": 2765,\n      \"id_proj\": 3917,\n      \"id_proj_bal\": \"string\",\n      \"id_usr_admin\": \"string\",\n      \"nm_proj\": \"string\",\n      \"status_act\": \"PLUS\",\n      \"vol_after\": 9472.083167588089,\n      \"vol_before\": 3043.318005214682\n    },\n    {\n      \"amt\": 2578.716407016134,\n      \"dttm_reg\": 4157,\n      \"id_proj\": 8345,\n      \"id_proj_bal\": \"string\",\n      \"id_usr_admin\": \"string\",\n      \"nm_proj\": \"string\",\n      \"status_act\": \"MINUS\",\n      \"vol_after\": 9311.875844390994,\n      \"vol_before\": 9269.452058514426\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 2399,\n  \"sortType\": \"PRICE_ASC\",\n  \"totalCount\": 7212,\n  \"totalPages\": 7432\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e62bbbc7-9022-45e5-b6ed-cdfc63fe2dfa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a663087f-f858-4a85-8059-a0bd281f22d2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17e72968-1de5-4be7-b126-b3d12106c207",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "957263c6-c527-478c-bf9a-2f32510c1d36",
+          "name": "프로젝트 수량변경",
+          "request": {
+            "name": "프로젝트 수량변경",
+            "description": {},
+            "url": {
+              "path": [
+                "bapi",
+                "v1",
+                "project",
+                ":id",
+                "increment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16dc0483-ccae-4a3c-b218-2902b73f3d79",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb1c5a85-f715-41d6-a2a5-3b610c0901a3",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2309141-c3dc-49f0-a76c-1fc83a59f7b7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6f84c6e-8baa-4fb2-913c-aa25e1d0edb1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8eb08d62-25ee-4e60-83bd-f8279f2d7186",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bapi",
+                    "v1",
+                    "project",
+                    ":id",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serial_end\": \"<string>\",\n  \"serial_postfix\": \"<string>\",\n  \"serial_prefix\": \"<string>\",\n  \"serial_start\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<bigdecimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wincl.io:443",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1455b849-7b3d-40e7-a6bb-01f57c537eb6",
+    "name": "Wincl Admin Admin Project API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin Controller",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,550 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin Wallet API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "유저의 Cert List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/cert",
+            "params": [
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "유저 아이디"
+              },
+              {
+                "name": "projId",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "projName",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 이름"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "시작일"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "종료일"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 Cert List"
+        },
+        {
+          "info": {
+            "name": "유저의 Cert Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/cert/:projId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "userId"
+              },
+              {
+                "name": "projId",
+                "value": "",
+                "type": "path",
+                "description": "projId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 Cert Detail"
+        },
+        {
+          "info": {
+            "name": "유저의 Credit list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/credit",
+            "params": [
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "유저 아이디"
+              },
+              {
+                "name": "projId",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "projName",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 이름"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "시작일"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "종료일"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 Credit list"
+        },
+        {
+          "info": {
+            "name": "Credit 일괄 상쇄하기",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/credit/offset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Credit 일괄 상쇄하기"
+        },
+        {
+          "info": {
+            "name": "유저의 Credit Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/credit/:projId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "userId"
+              },
+              {
+                "name": "projId",
+                "value": "",
+                "type": "path",
+                "description": "projId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 Credit Detail"
+        },
+        {
+          "info": {
+            "name": "유저의 받은 선물 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/gift/receive",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "유저 아이디"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "시작일"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "종료일"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 받은 선물 리스트"
+        },
+        {
+          "info": {
+            "name": "유저의 받은 선물 Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/gift/receive/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 받은 선물 Detail"
+        },
+        {
+          "info": {
+            "name": "유저의 보낸 선물 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/gift/sent",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "유저 아이디"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "시작일"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "종료일"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 보낸 선물 리스트"
+        },
+        {
+          "info": {
+            "name": "유저의 보낸 선물 Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/gift/sent/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 보낸 선물 Detail"
+        },
+        {
+          "info": {
+            "name": "유저의 구매내역",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/history/buy",
+            "params": [
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "유저 아이디"
+              },
+              {
+                "name": "projId",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "prodId",
+                "value": "",
+                "type": "query",
+                "description": "프로덕트 아이디"
+              },
+              {
+                "name": "projName",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 이름"
+              },
+              {
+                "name": "prodName",
+                "value": "",
+                "type": "query",
+                "description": "프로덕트 이름"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "시작일"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "종료일"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 구매내역"
+        },
+        {
+          "info": {
+            "name": "유저의 환불 내역",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/history/buy/cancel",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "socialEmail",
+                "value": "",
+                "type": "query",
+                "description": "유저 소셜 이메일"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 환불 내역"
+        },
+        {
+          "info": {
+            "name": "유저의 구매내역",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/history/buy/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저의 구매내역"
+        },
+        {
+          "info": {
+            "name": "회원 wallet 정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/info",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "userId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "회원 wallet 정보"
+        },
+        {
+          "info": {
+            "name": "토픽 미보유 지갑 재발급",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/wallet/regenerate-topic",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "topicId가 없는 지갑을 신규 Hedera 계정/토픽으로 재발급합니다."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

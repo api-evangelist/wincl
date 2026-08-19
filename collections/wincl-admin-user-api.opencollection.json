@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin User API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "가입 유저 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/user",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "loginId",
+                "value": "",
+                "type": "query",
+                "description": "로그인 아이디"
+              },
+              {
+                "name": "nickname",
+                "value": "",
+                "type": "query",
+                "description": "닉네임"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "이메일"
+              },
+              {
+                "name": "company",
+                "value": "",
+                "type": "query",
+                "description": "기관 코드"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "전체 가입자 리스트를 얻는다. 닉네임, 이메일, 기관코드로 필터링할 수 있다. 각 필터는 부분 문자열로 검색한다. loginId 필터는 과거호환성을 위해서 남겨둔다.\n\n**Usage:**\n- /?nickname={nickname}&...\n- /?email={email}&...\n- /?company={company}&...\n- /?nickname={nickname}&email={email}&..."
+        },
+        {
+          "info": {
+            "name": "가입 유저 상세정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "UserID로 가입자 상세 정보를 얻는다."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

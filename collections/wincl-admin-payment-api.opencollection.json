@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin Payment API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "사용자가 이미 구매한 배출권 환불하기",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v2/payment/:purchaseId/cancel",
+            "params": [
+              {
+                "name": "purchaseId",
+                "value": "",
+                "type": "path",
+                "description": "`/bapi/v1/wallet/history/buy`에서 받은 `id_usr_prod_buy` 값"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "사용자가 이미 구매한 배출권 환불하기"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

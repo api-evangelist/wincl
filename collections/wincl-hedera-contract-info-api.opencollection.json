@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Hedera Contract Info API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hedera Contract Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "스마트 컨트랙트 정보 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/hedera/contracts",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "스마트 컨트랙트 정보 조회"
+        },
+        {
+          "info": {
+            "name": "프로젝트별 온체인 토큰 정보 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/hedera/holdings",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "projectId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "프로젝트별 온체인 토큰 정보 조회"
+        },
+        {
+          "info": {
+            "name": "ERC-1155 토큰 메타데이터 (HashScan 등 외부 탐색기용)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/hedera/metadata/:tokenId",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "tokenId"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "ERC-1155 토큰 메타데이터 (HashScan 등 외부 탐색기용)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Utils API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Utils",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "환율 정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/exchange_rate",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "currency",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "환율 정보"
+        },
+        {
+          "info": {
+            "name": "국가 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/utils/nation/list",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "국가 리스트"
+        },
+        {
+          "info": {
+            "name": "OTP 발송",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/otp/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "휴대폰 인증을 위한 OTP 발송하기"
+        },
+        {
+          "info": {
+            "name": "OTP 확인",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/otp/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "수신한 OTP 번호가 맞는지 확인하기"
+        },
+        {
+          "info": {
+            "name": "SMS 발송",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/sms/message",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "SMS 발송하기"
+        },
+        {
+          "info": {
+            "name": "파트너 요청",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/submit/partner",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "파트너 요청"
+        },
+        {
+          "info": {
+            "name": "이미지 업로드",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/api/v1/utils/upload/image",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "imageFile",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "path",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "이미지 업로드"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

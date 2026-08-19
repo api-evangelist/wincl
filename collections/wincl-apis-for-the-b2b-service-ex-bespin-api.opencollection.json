@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin APIs for the B2B service (ex. Bespin) API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "APIs for the B2B service (ex. Bespin)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "B2B customer signup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/b2b/v2/auth/signup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "B2B customer signup"
+        },
+        {
+          "info": {
+            "name": "B2B customer signin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/b2b/v2/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "B2B customer signin"
+        },
+        {
+          "info": {
+            "name": "B2B email duplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/b2b/v2/emails/:email/duplicated",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "email"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "B2B email duplication"
+        },
+        {
+          "info": {
+            "name": "B2B product list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/b2b/v2/products",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "B2B customers retieves the list available products."
+        },
+        {
+          "info": {
+            "name": "B2B duplication check for email and phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/b2b/v2/users/duplicated",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "email"
+              },
+              {
+                "name": "phoneNumber",
+                "value": "",
+                "type": "query",
+                "description": "phoneNumber"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "B2B duplication check for email and phone number"
+        },
+        {
+          "info": {
+            "name": "B2B purchase history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/b2b/v2/users/:userId/transactions/purchase",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "userId"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List purchase of a customer"
+        },
+        {
+          "info": {
+            "name": "B2B purchase detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/b2b/v2/users/:userId/transactions/purchase/:purchaseId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "userId"
+              },
+              {
+                "name": "purchaseId",
+                "value": "",
+                "type": "path",
+                "description": "선택한 구매 ID (`id_usr_prod_buy` 값)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve purchase detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

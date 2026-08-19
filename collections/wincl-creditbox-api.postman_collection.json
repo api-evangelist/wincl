@@ -1,0 +1,1003 @@
+{
+  "item": [
+    {
+      "id": "663e1e53-e5c8-4d38-b007-6ca0f452d710",
+      "name": "CreditBox",
+      "description": {
+        "content": "Credit Box Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "007f26f5-eb67-4aa8-968e-dc81f96c2d3a",
+          "name": "탄소배출권 보관함 아이템 리스트",
+          "request": {
+            "name": "탄소배출권 보관함 아이템 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "creditbox",
+                "item"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sortType",
+                  "value": "<string>",
+                  "description": "정렬기준"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "feb5be2b-80e6-41c7-8e5f-db8a3cdfb43e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aggregation\": {\n    \"currency\": \"string\",\n    \"totalCanceledAmount\": 4077.6330005302807,\n    \"totalLockedAmount\": 5279.540229631066,\n    \"totalOffsetAmount\": 373.7169064429568,\n    \"totalPurchasedAmount\": 8075.501273268583,\n    \"totalReceivedAmount\": 8012.25992753546,\n    \"totalSentAmount\": 1292.197892784852,\n    \"totalUsableAmount\": 8834.54068488347,\n    \"totalUsablePrice\": 4956.314324117581,\n    \"totalWholeAmount\": 2399.0379714207243,\n    \"unitPrice\": 6858.892241811576\n  },\n  \"code\": \"string\",\n  \"currentPageNum\": 4441,\n  \"items\": [\n    {\n      \"acquiredAmount\": 8635.755400155676,\n      \"canceledAmount\": 9855.382240618079,\n      \"certificateAgencyName\": \"string\",\n      \"correspondanceAdjustmentRatio\": 131.59745802527988,\n      \"currency\": \"string\",\n      \"expireTimestamp\": 7670,\n      \"nationCode\": \"string\",\n      \"nationEnglishName\": \"string\",\n      \"nationKoreanName\": \"string\",\n      \"offsetAmount\": 1823.1996211800372,\n      \"productName\": \"string\",\n      \"projectDeveloperName\": \"string\",\n      \"projectEffect\": [\n        \"INDUSTRY_INNOVATION_AND_INFRASTRUCTURE\",\n        \"NO_POVERTY\"\n      ],\n      \"projectId\": 8141,\n      \"projectName\": \"string\",\n      \"projectRegistrationTimestamp\": 5539,\n      \"projectThumbnailUrl\": \"string\",\n      \"projectType\": \"AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE\",\n      \"receivedAmount\": 4965.2930443009745,\n      \"sentAmount\": 5867.919520609639,\n      \"unitPrice\": 6736.074700359978,\n      \"usableAmount\": 8677.402106162499,\n      \"usablePrice\": 2647.773593752407\n    },\n    {\n      \"acquiredAmount\": 324.16935121658776,\n      \"canceledAmount\": 4220.792670614412,\n      \"certificateAgencyName\": \"string\",\n      \"correspondanceAdjustmentRatio\": 7476.680511898727,\n      \"currency\": \"string\",\n      \"expireTimestamp\": 5490,\n      \"nationCode\": \"string\",\n      \"nationEnglishName\": \"string\",\n      \"nationKoreanName\": \"string\",\n      \"offsetAmount\": 2392.2665354835303,\n      \"productName\": \"string\",\n      \"projectDeveloperName\": \"string\",\n      \"projectEffect\": [\n        \"GOOD_HEALTH_AND_WELLBEING\",\n        \"QUALITY_EDUCATION\"\n      ],\n      \"projectId\": 9554,\n      \"projectName\": \"string\",\n      \"projectRegistrationTimestamp\": 2978,\n      \"projectThumbnailUrl\": \"string\",\n      \"projectType\": \"AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS\",\n      \"receivedAmount\": 1253.1684491517515,\n      \"sentAmount\": 7812.996106135254,\n      \"unitPrice\": 3736.5007217379307,\n      \"usableAmount\": 2590.637147494812,\n      \"usablePrice\": 7288.237856242772\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 8378,\n  \"sortType\": \"PRICE_DESC\",\n  \"totalCount\": 9249,\n  \"totalPages\": 2265\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c451b75a-e9f6-41a0-9aea-541533335f78",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1203e720-7383-421b-b21d-4d33f3c26f41",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df45097f-2f80-4d4e-8c0b-446a28f49072",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fff1835-850f-461c-81db-b8af41410c10",
+          "name": "탄소배출권 보관함 아이템 상세정보",
+          "request": {
+            "name": "탄소배출권 보관함 아이템 상세정보",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "creditbox",
+                "item",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sortType",
+                  "value": "<string>",
+                  "description": "정렬기준"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionTypes",
+                  "value": "<string>",
+                  "description": "트랜잭션 유형 (예: `=PURCHASE` 또는 `=PURCHASE,OFFSET`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) 프로젝트 아이디"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0dac188f-d9a1-4150-8382-6ee19aab3f26",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aggregation\": {\n    \"canceledAmount\": 5993.69684513725,\n    \"certificateAgencyName\": \"string\",\n    \"correspondanceAdjustmentRatio\": 4408.880037632347,\n    \"currency\": \"string\",\n    \"expireTimestamp\": 6984,\n    \"lockedAmount\": 7046.541093522031,\n    \"nationCode\": \"string\",\n    \"nationEnglishName\": \"string\",\n    \"nationKoreanName\": \"string\",\n    \"offsetAmount\": 1773.849485335558,\n    \"productName\": \"string\",\n    \"projectDeveloperName\": \"string\",\n    \"projectEffect\": [\n      \"INDUSTRY_INNOVATION_AND_INFRASTRUCTURE\",\n      \"INDUSTRY_INNOVATION_AND_INFRASTRUCTURE\"\n    ],\n    \"projectId\": 9011,\n    \"projectName\": \"string\",\n    \"projectRegistrationTimestamp\": 6055,\n    \"projectThumbnailUrl\": \"string\",\n    \"projectType\": \"FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS\",\n    \"purchasedAmount\": 2454.4914899406576,\n    \"receivedAmount\": 335.43461764843795,\n    \"sentAmount\": 5351.809590941271,\n    \"totalAmount\": 3928.4139564541274,\n    \"unitPrice\": 1117.536969735743,\n    \"usableAmount\": 499.41504530052305,\n    \"usablePrice\": 5344.282892083599\n  },\n  \"code\": \"string\",\n  \"currentPageNum\": 8573,\n  \"items\": [\n    {\n      \"blockchainPurchaseStatus\": \"string\",\n      \"blockchainTransactionHash\": \"string\",\n      \"blockchainTransactionType\": \"string\",\n      \"creditId\": \"string\",\n      \"expectedExpirationDateTime\": \"2023-04-02T03:50:59.235Z\",\n      \"expectedExpirationTimestamp\": 7677,\n      \"productCurrency\": \"KRW\",\n      \"transactionAmount\": 1197.8000440851245,\n      \"transactionDateTime\": \"1964-09-09T04:42:39.882Z\",\n      \"transactionPrice\": 9428.013619713402,\n      \"transactionStatus\": \"SUCCESS\",\n      \"transactionTimestamp\": 365,\n      \"transactionType\": \"PURCHASE\",\n      \"transferable\": false,\n      \"unitPrice\": 5186.049910586365,\n      \"usableAmount\": 1179.8760131039644\n    },\n    {\n      \"blockchainPurchaseStatus\": \"string\",\n      \"blockchainTransactionHash\": \"string\",\n      \"blockchainTransactionType\": \"string\",\n      \"creditId\": \"string\",\n      \"expectedExpirationDateTime\": \"1968-05-30T06:20:51.746Z\",\n      \"expectedExpirationTimestamp\": 2039,\n      \"productCurrency\": \"USD\",\n      \"transactionAmount\": 3233.5265023996076,\n      \"transactionDateTime\": \"1984-10-19T19:54:53.672Z\",\n      \"transactionPrice\": 513.8636247458505,\n      \"transactionStatus\": \"SND_CANCEL\",\n      \"transactionTimestamp\": 2795,\n      \"transactionType\": \"RECEIVE\",\n      \"transferable\": false,\n      \"unitPrice\": 2976.9237626332488,\n      \"usableAmount\": 3319.097885985687\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 460,\n  \"sortType\": \"UNIT_PRICE_ASC\",\n  \"totalCount\": 6829,\n  \"totalPages\": 9732\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2382f6f-8a3f-4c36-8bf7-11e04637444e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de1c4be7-36e5-4a64-8397-63a0d0f9f840",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5315ac5-40d9-456f-8d86-fc5b513c2518",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ed4350c-0129-403d-b114-82f6a812b9f1",
+              "name": "ITEM_NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 915,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "173bd79b-7126-4693-8a62-67f7439eceb7",
+          "name": "프로젝트별 보유 크레딧 목록 (상쇄/선물용)",
+          "request": {
+            "name": "프로젝트별 보유 크레딧 목록 (상쇄/선물용)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "creditbox",
+                "item",
+                ":id",
+                "credits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) 프로젝트 아이디"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3bac8c64-8710-40e5-aae4-cbf29614cee0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id",
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f24c14ac-83a8-4e43-bd8f-4a9129ae9ba3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id",
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f49afb76-d5ae-4fc9-b731-88a1db2cab43",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id",
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d944deb-1849-45a0-abcb-e696f478b9f1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "creditbox",
+                    "item",
+                    ":id",
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) 프로젝트 아이디"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wincl.io:443",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5e1e31f-1f29-42b9-a305-80fb9b3633ca",
+    "name": "Wincl Admin CreditBox API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin Controller",
+      "type": "text/plain"
+    }
+  }
+}

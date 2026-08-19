@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin Auth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "어드민 계정 로그인",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/auth/clear-firebase-claim",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 계정 로그인"
+        },
+        {
+          "info": {
+            "name": "비밀번호 초기화 요청",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/auth/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "이메일로 임시 비밀번호를 발송합니다."
+        },
+        {
+          "info": {
+            "name": "어드민 계정 로그인",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/auth/signin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "어드민 계정 로그인"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

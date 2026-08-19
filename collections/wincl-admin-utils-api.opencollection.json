@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin Utils API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Utils",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "국가 상응조정률 수정",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wincl.io:443/bapi/v1/utils/nation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "국가 상응조정률 수정"
+        },
+        {
+          "info": {
+            "name": "국가 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/utils/nation/list",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "국가 리스트"
+        },
+        {
+          "info": {
+            "name": "이미지 업로드",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/utils/upload/image",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "image_file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "path",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "이미지 업로드"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

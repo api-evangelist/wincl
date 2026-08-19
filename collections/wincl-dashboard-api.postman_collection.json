@@ -1,0 +1,247 @@
+{
+  "item": [
+    {
+      "id": "6cb5fd2f-0c44-46bd-a54f-4d92154f5557",
+      "name": "Dashboard",
+      "description": {
+        "content": "Dashboard Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea75f58a-e6e8-45dc-9dea-8736c3c36841",
+          "name": "대쉬보드 내역 모음",
+          "request": {
+            "name": "대쉬보드 내역 모음",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "dashboard",
+                "transactionCards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b8b8b4d7-99c7-4ee7-8bd1-a7fbf2fa906f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dashboard",
+                    "transactionCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"currentPageNum\": 6793,\n  \"items\": [\n    {\n      \"cardName\": \"string\",\n      \"currency\": \"KRW\",\n      \"recentTransactions\": [\n        {\n          \"amount\": 5898.6697967869095,\n          \"productName\": \"string\",\n          \"timestamp\": 8833\n        },\n        {\n          \"amount\": 7583.026592658448,\n          \"productName\": \"string\",\n          \"timestamp\": 2836\n        }\n      ],\n      \"totalAmount\": 3807.6711077539085,\n      \"totalPrice\": 7057.340029718872\n    },\n    {\n      \"cardName\": \"string\",\n      \"currency\": \"USD\",\n      \"recentTransactions\": [\n        {\n          \"amount\": 8989.070203834535,\n          \"productName\": \"string\",\n          \"timestamp\": 2005\n        },\n        {\n          \"amount\": 8549.134885620593,\n          \"productName\": \"string\",\n          \"timestamp\": 4079\n        }\n      ],\n      \"totalAmount\": 8380.221313824279,\n      \"totalPrice\": 5034.459516363534\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 4433,\n  \"sortType\": \"NONE\",\n  \"totalCount\": 7991,\n  \"totalPages\": 591\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f08da7-7942-4b2c-95ba-5f773c024700",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dashboard",
+                    "transactionCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "66f760eb-aa62-4807-bf31-86b81ff85393",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dashboard",
+                    "transactionCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2507c67-cbe3-47e4-bc74-ccdab274ac76",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dashboard",
+                    "transactionCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wincl.io:443",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "942d11bb-6738-4156-b619-bba30476c5e4",
+    "name": "Wincl Admin Dashboard API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin Controller",
+      "type": "text/plain"
+    }
+  }
+}

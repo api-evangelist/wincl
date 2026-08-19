@@ -2,14 +2,12 @@ generated: '2026-07-21'
 method: searched
 status: published
 source: https://www.wincl.io/llms.txt
-notes: >-
-  WinCL's marketing site (www.wincl.io) is built on Wix and exposes the generic
-  Wix Site MCP endpoint (no authentication required, public site content only) —
-  this is a real, published, hosted MCP server, but its tools are the generic Wix
-  site tools (business details, site search, site-API docs, checkout), NOT the
-  carbon-management product API at api.wincl.io. The product API (openapi/wincl-openapi-original.json,
-  271 operations) has no dedicated MCP server published; a candidate tool set derived
-  from its OpenAPI operations is listed under candidate_tools below.
+notes: WinCL's marketing site (www.wincl.io) is built on Wix and exposes the generic Wix Site MCP endpoint
+  (no authentication required, public site content only) — this is a real, published, hosted MCP server,
+  but its tools are the generic Wix site tools (business details, site search, site-API docs, checkout),
+  NOT the carbon-management product API at api.wincl.io. The product API (openapi/wincl-openapi-original.json,
+  271 operations) has no dedicated MCP server published; a candidate tool set derived from its OpenAPI
+  operations is listed under candidate_tools below.
 server:
   name: wincl-site
   transport: http
@@ -17,38 +15,46 @@ server:
   auth: none
   docs: https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp
 tools:
-  - name: GetBusinessDetails
-    description: Retrieve business and site info (timezone, email, phone, address).
-  - name: SearchInSite
-    description: Search the site for information (param searchTerm).
-  - name: SearchSiteApiDocs
-    description: Retrieve API docs for Wix business solutions installed on the site and guide API usage.
-  - name: GenerateVisitorToken
-    description: Create a new visitor session and obtain a visitor access token.
-  - name: CallWixSiteAPI
-    description: Call a site API method on behalf of a visitor (query data, book sessions, start purchases).
-  - name: ReadFullDocsArticle
-    description: Fetch a full article from the Wix developer docs portal.
-  - name: ReadFullDocsMethodSchema
-    description: Fetch the full schema of a Wix API method.
+- name: GetBusinessDetails
+  description: Retrieve business and site info (timezone, email, phone, address).
+- name: SearchInSite
+  description: Search the site for information (param searchTerm).
+- name: SearchSiteApiDocs
+  description: Retrieve API docs for Wix business solutions installed on the site and guide API usage.
+- name: GenerateVisitorToken
+  description: Create a new visitor session and obtain a visitor access token.
+- name: CallWixSiteAPI
+  description: Call a site API method on behalf of a visitor (query data, book sessions, start purchases).
+- name: ReadFullDocsArticle
+  description: Fetch a full article from the Wix developer docs portal.
+- name: ReadFullDocsMethodSchema
+  description: Fetch the full schema of a Wix API method.
 candidate:
   status: candidate
   source: openapi/wincl-openapi-original.json
   note: Not published by WinCL — a derived tool set for the product API, one tool per marquee operation.
   candidate_tools:
-    - name: get_credit_box
-      source_operation: openapi/wincl-openapi-original.json#getCreditBoxItemUsingGET
-    - name: offset_credit
-      source_operation: openapi/wincl-openapi-original.json#offsetCreditUsingPOST
-    - name: get_certificate_box_item
-      source_operation: openapi/wincl-openapi-original.json#getCertificateBoxItemUsingGET
-    - name: list_products
-      source_operation: openapi/wincl-openapi-original.json#productListUsingGET
-    - name: request_order
-      source_operation: openapi/wincl-openapi-original.json#requestOrderUsingPOST
-    - name: reserve_stripe_order
-      source_operation: openapi/wincl-openapi-original.json#reserveStripeOrderUsingPOST
-    - name: create_payment_intent
-      source_operation: openapi/wincl-openapi-original.json#createPaymentIntentUsingPOST
-    - name: get_wallet
-      source_operation: openapi/wincl-openapi-original.json#walletInfoUsingGET
+  - name: get_credit_box
+    source_operation: openapi/wincl-openapi-original.json#getCreditBoxItemUsingGET
+  - name: offset_credit
+    source_operation: openapi/wincl-openapi-original.json#offsetCreditUsingPOST
+  - name: get_certificate_box_item
+    source_operation: openapi/wincl-openapi-original.json#getCertificateBoxItemUsingGET
+  - name: list_products
+    source_operation: openapi/wincl-openapi-original.json#productListUsingGET
+  - name: request_order
+    source_operation: openapi/wincl-openapi-original.json#requestOrderUsingPOST
+  - name: reserve_stripe_order
+    source_operation: openapi/wincl-openapi-original.json#reserveStripeOrderUsingPOST
+  - name: create_payment_intent
+    source_operation: openapi/wincl-openapi-original.json#createPaymentIntentUsingPOST
+  - name: get_wallet
+    source_operation: openapi/wincl-openapi-original.json#walletInfoUsingGET
+deployment:
+  mode: remote
+  endpoint: https://www.wincl.io/_api/mcp
+  verified: probed
+  probe: live
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census

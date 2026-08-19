@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin CertificateBox API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CertificateBox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "상쇄인증서 보관함 아이템 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/certificatebox/item",
+            "params": [
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "상쇄인증서 보관함 아이템 리스트"
+        },
+        {
+          "info": {
+            "name": "상쇄인증서 보관함 아이템 상세정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/certificatebox/item/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬기준"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "상쇄인증서 보관함 아이템 상세정보"
+        },
+        {
+          "info": {
+            "name": "상쇄인증서 VC 문서 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v2/certificatebox/item/:id/vc",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "프로젝트 아이디"
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "VC 재발급 여부"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "운영 DID로 서명된 상쇄인증서 VC를 반환합니다."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

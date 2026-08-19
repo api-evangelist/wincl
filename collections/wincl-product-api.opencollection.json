@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Product API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Product 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/project/product",
+            "params": [
+              {
+                "name": "projectTypes",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 유형"
+              },
+              {
+                "name": "projectEffects",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 효과"
+              },
+              {
+                "name": "nationCodes",
+                "value": "",
+                "type": "query",
+                "description": "프로젝트 생성국가"
+              },
+              {
+                "name": "searchKeyword",
+                "value": "",
+                "type": "query",
+                "description": "검색 키워드"
+              },
+              {
+                "name": "sortType",
+                "value": "",
+                "type": "query",
+                "description": "정렬 타입"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Product 리스트"
+        },
+        {
+          "info": {
+            "name": "Home Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/project/product/home",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Home Product"
+        },
+        {
+          "info": {
+            "name": "Product 상세정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/project/product/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Product 상세정보"
+        },
+        {
+          "info": {
+            "name": "Product Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/project/product/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Product Preview"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

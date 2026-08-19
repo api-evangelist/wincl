@@ -1,0 +1,362 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin Admin Smart Contract API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Smart Contract",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "토큰 잔고 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/carbon-token/balance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "토큰 잔고 조회"
+        },
+        {
+          "info": {
+            "name": "토큰 메타데이터 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/carbon-token/metadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "토큰 메타데이터 조회"
+        },
+        {
+          "info": {
+            "name": "CreditOperator 정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/credit-operator/info",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "CreditOperator 정보"
+        },
+        {
+          "info": {
+            "name": "토큰 민팅",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/credit-operator/mint",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "토큰 민팅"
+        },
+        {
+          "info": {
+            "name": "CreditOperator Pause",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/credit-operator/pause",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "CreditOperator Pause"
+        },
+        {
+          "info": {
+            "name": "CreditOperator Unpause",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/credit-operator/unpause",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "CreditOperator Unpause"
+        },
+        {
+          "info": {
+            "name": "기존 거래 마이그레이션 실행 (비동기)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/migration/execute",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "기존 거래 마이그레이션 실행 (비동기)"
+        },
+        {
+          "info": {
+            "name": "취소된 선물 토큰 보정",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/migration/fix-canceled-gifts",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "취소된 선물 토큰 보정"
+        },
+        {
+          "info": {
+            "name": "기존 거래 마이그레이션 미리보기",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/migration/preview",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "기존 거래 마이그레이션 미리보기"
+        },
+        {
+          "info": {
+            "name": "마이그레이션 진행 상태",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/migration/status",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "마이그레이션 진행 상태"
+        },
+        {
+          "info": {
+            "name": "컨트랙트 Overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/overview",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "컨트랙트 Overview"
+        },
+        {
+          "info": {
+            "name": "Paymaster 사용자 추가",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/add-user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster 사용자 추가"
+        },
+        {
+          "info": {
+            "name": "Paymaster HBAR 입금",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/deposit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster HBAR 입금"
+        },
+        {
+          "info": {
+            "name": "Paymaster 정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/info",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster 정보"
+        },
+        {
+          "info": {
+            "name": "Paymaster 사용자 제거",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/remove-user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster 사용자 제거"
+        },
+        {
+          "info": {
+            "name": "Paymaster 사용자 정보",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/user-info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster 사용자 정보"
+        },
+        {
+          "info": {
+            "name": "Paymaster HBAR 출금",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/paymaster/withdraw",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Paymaster HBAR 출금"
+        },
+        {
+          "info": {
+            "name": "Registry 기록 수",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/registry/counts",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Registry 기록 수"
+        },
+        {
+          "info": {
+            "name": "Offset 기록 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/registry/offset-record",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Offset 기록 조회"
+        },
+        {
+          "info": {
+            "name": "Transfer 기록 조회",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wincl.io:443/bapi/v1/hedera/contracts/registry/transfer-record",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Transfer 기록 조회"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

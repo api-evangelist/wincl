@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin User API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "유저 프로필",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/user/profile",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저 프로필"
+        },
+        {
+          "info": {
+            "name": "유저 프로필 수정",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wincl.io:443/api/v1/user/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저 프로필 수정"
+        },
+        {
+          "info": {
+            "name": "유저 프로파일 이미지를 업로드해서 수정하기",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wincl.io:443/api/v1/user/profile/image",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "image_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "유저 프로파일 이미지를 업로드해서 수정하기"
+        },
+        {
+          "info": {
+            "name": "가입자 탈퇴",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.wincl.io:443/api/v1/user/:id_login",
+            "params": [
+              {
+                "name": "id_login",
+                "value": "",
+                "type": "path",
+                "description": "사용자가 입력한 로그인 ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "기존 가입자를 탈퇴시킨다."
+        },
+        {
+          "info": {
+            "name": "가입자 탈퇴를 취소",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wincl.io:443/api/v1/user/:id_login/reincarnate",
+            "params": [
+              {
+                "name": "id_login",
+                "value": "",
+                "type": "path",
+                "description": "사용자가 입력한 로그인 ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "가입자 탈퇴를 취소하는데 사용한다."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wincl Admin FAQ API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FAQ",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "자주찾는 질문 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/faq",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "카테고리"
+              },
+              {
+                "name": "searchKeyword",
+                "value": "",
+                "type": "query",
+                "description": "검색 키워드"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "페이지당 아이템 개수"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "페이지 넘버"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "자주찾는 질문 리스트"
+        },
+        {
+          "info": {
+            "name": "FAQ 카테고리 리스트",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/faq/category",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "FAQ 카테고리 리스트"
+        },
+        {
+          "info": {
+            "name": "FAQ Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wincl.io:443/api/v1/faq/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "GET `/faq` 응답의 seq 값"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "FAQ Detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

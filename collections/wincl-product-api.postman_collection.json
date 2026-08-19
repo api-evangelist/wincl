@@ -1,0 +1,1151 @@
+{
+  "item": [
+    {
+      "id": "c544273c-fe30-4113-b34c-66c161a8dc2c",
+      "name": "Product",
+      "description": {
+        "content": "Product Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2c321cb-f2d8-4686-9eff-bd4ba196bd2e",
+          "name": "Product 리스트",
+          "request": {
+            "name": "Product 리스트",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "project",
+                "product"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectTypes",
+                  "value": "<string>",
+                  "description": "프로젝트 유형"
+                },
+                {
+                  "disabled": false,
+                  "key": "projectEffects",
+                  "value": "<string>",
+                  "description": "프로젝트 효과"
+                },
+                {
+                  "disabled": false,
+                  "key": "nationCodes",
+                  "value": "<string>",
+                  "description": "프로젝트 생성국가"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchKeyword",
+                  "value": "<string>",
+                  "description": "검색 키워드"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortType",
+                  "value": "<string>",
+                  "description": "정렬 타입"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지 넘버"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) 페이지당 아이템 개수"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4178143-2c4c-430d-887c-3f1ce3ab37a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectEffects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationCodes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"currentPageNum\": 7923,\n  \"items\": [\n    {\n      \"cd_nation\": \"string\",\n      \"id_prod\": \"string\",\n      \"id_proj\": 5769,\n      \"img_background_prod\": \"string\",\n      \"img_mobile_background_prod\": \"string\",\n      \"img_thumbnail_prod\": \"string\",\n      \"nm_cert_agc\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"productNameEn\": \"string\",\n      \"productNameKr\": \"string\",\n      \"product_stock_amount\": \"string\",\n      \"projectNameEn\": \"string\",\n      \"projectNameKr\": \"string\",\n      \"project_effect\": [\n        \"string\",\n        \"string\"\n      ],\n      \"project_type\": \"string\",\n      \"unit_price\": 6027.2624988517455\n    },\n    {\n      \"cd_nation\": \"string\",\n      \"id_prod\": \"string\",\n      \"id_proj\": 2617,\n      \"img_background_prod\": \"string\",\n      \"img_mobile_background_prod\": \"string\",\n      \"img_thumbnail_prod\": \"string\",\n      \"nm_cert_agc\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"productNameEn\": \"string\",\n      \"productNameKr\": \"string\",\n      \"product_stock_amount\": \"string\",\n      \"projectNameEn\": \"string\",\n      \"projectNameKr\": \"string\",\n      \"project_effect\": [\n        \"string\",\n        \"string\"\n      ],\n      \"project_type\": \"string\",\n      \"unit_price\": 9958.950197816404\n    }\n  ],\n  \"message\": \"string\",\n  \"pageSize\": 4585,\n  \"sortType\": \"NONE\",\n  \"totalCount\": 8631,\n  \"totalPages\": 3179\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ecd9596-69a2-4038-9113-a1288b548c25",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectEffects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationCodes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44382875-1392-4d93-bd49-5d380d499e46",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectEffects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationCodes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4db714a4-c74c-486d-bc5e-3d1889a3bf57",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectEffects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationCodes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e016d6f9-d888-4542-8002-25b65f7c9a85",
+          "name": "Home Product",
+          "request": {
+            "name": "Home Product",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "project",
+                "product",
+                "home"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a3a992b-7ab6-4d47-a77f-7b2d40b1a37c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    "home"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": [\n    {\n      \"cd_nation\": \"string\",\n      \"id_prod\": \"string\",\n      \"id_proj\": 5907,\n      \"img_background_prod\": \"string\",\n      \"img_mobile_background_prod\": \"string\",\n      \"img_thumbnail_prod\": \"string\",\n      \"nm_prod\": \"string\",\n      \"nm_proj\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"order\": \"string\"\n    },\n    {\n      \"cd_nation\": \"string\",\n      \"id_prod\": \"string\",\n      \"id_proj\": 1357,\n      \"img_background_prod\": \"string\",\n      \"img_mobile_background_prod\": \"string\",\n      \"img_thumbnail_prod\": \"string\",\n      \"nm_prod\": \"string\",\n      \"nm_proj\": \"string\",\n      \"nm_proj_dev\": \"string\",\n      \"order\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "472a4b99-10d5-4d7f-8329-4ebf5279165a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    "home"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d657ca5-ed04-4d48-9789-5b72e4bddd84",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    "home"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f90dcbf-87c4-4025-b0e5-d9ee2f8769fd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    "home"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4965ce6a-6200-452a-b1fc-0c813d075c26",
+          "name": "Product 상세정보",
+          "request": {
+            "name": "Product 상세정보",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "project",
+                "product",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f39e306-92a8-4599-acdf-62dc688c4bd8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": {\n    \"agencyRegistry\": {\n      \"agencyId\": 8707,\n      \"averageAnnualEmissionReduction\": 8497.41508721944,\n      \"mechanism\": \"string\",\n      \"methodology\": \"string\",\n      \"registryId\": \"string\",\n      \"registryUrl\": \"string\",\n      \"vintage\": 528\n    },\n    \"amt_lock\": 9272.010227262432,\n    \"amt_offset\": 359.4839818775464,\n    \"amt_offset_resrv\": 6985.142740900527,\n    \"amt_sold\": 4111.553907879852,\n    \"amt_stock\": 1283.31614172558,\n    \"areaHectare\": 6487.586009994519,\n    \"assign_vol_proj\": 1249.5357460855316,\n    \"attachmentUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cert_desc\": \"string\",\n    \"corrs_adj\": 6057.754977062472,\n    \"currency\": \"KRW\",\n    \"dttm_reg\": 2245,\n    \"dttm_reg_cert\": 5009,\n    \"dttm_upd\": 9750,\n    \"env_desc\": \"string\",\n    \"env_icon\": \"string\",\n    \"env_ttl\": \"string\",\n    \"hederaTopicId\": \"string\",\n    \"id_prod\": \"string\",\n    \"id_proj\": 1188,\n    \"img_bg_prod\": \"string\",\n    \"img_mobile_bg_prod\": \"string\",\n    \"img_thumbnail_prod\": \"string\",\n    \"img_thumbnail_proj\": \"string\",\n    \"introductionTextEn\": \"string\",\n    \"introductionTextKo\": \"string\",\n    \"locationImageUrl\": \"string\",\n    \"minimum_buy_vol\": 8882.778798601776,\n    \"nationCode\": \"string\",\n    \"nation_nm_en\": \"string\",\n    \"nation_nm_kr\": \"string\",\n    \"nm_cert_agc\": \"string\",\n    \"nm_proj_dev\": \"string\",\n    \"nm_serial\": \"string\",\n    \"productDetailImageUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"productNameEn\": \"string\",\n    \"productNameKr\": \"string\",\n    \"productStoryEn\": \"string\",\n    \"productStoryKo\": \"string\",\n    \"projectEffects\": [\n      {\n        \"effectCode\": \"LIFE_BELLOW_WATER\",\n        \"effectDescriptionEn\": \"string\",\n        \"effectDescriptionKr\": \"string\",\n        \"effectImageUrl\": \"string\"\n      },\n      {\n        \"effectCode\": \"RESPONSIBLE_CONSUMPTION_AND_PRODUCTION\",\n        \"effectDescriptionEn\": \"string\",\n        \"effectDescriptionKr\": \"string\",\n        \"effectImageUrl\": \"string\"\n      }\n    ],\n    \"projectNameEn\": \"string\",\n    \"projectNameKr\": \"string\",\n    \"project_type\": \"METAL_PRODUCTION\",\n    \"status_srv\": \"DELETED\",\n    \"tot_vol_proj\": 5226.402281274833,\n    \"unit_price\": 58.44658815931214,\n    \"unit_price_usd\": 823.7781133425948,\n    \"vol\": 8536.815275928282,\n    \"yn_corrs_adj\": \"Y\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfce8f76-f11a-4baa-b19d-51d767ebd173",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f46a1598-e2df-4116-8072-369425284f91",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36e38395-eee0-4139-a5da-4cd3246d3374",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84670935-e9c7-4e12-8baf-75f8656f3f6e",
+          "name": "Product Preview",
+          "request": {
+            "name": "Product Preview",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "project",
+                "product",
+                ":id",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "346419df-908e-464d-9936-870a8a737cfd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"data\": {\n    \"agencyRegistry\": {\n      \"agencyId\": 1380,\n      \"averageAnnualEmissionReduction\": 608.4216894388251,\n      \"mechanism\": \"string\",\n      \"methodology\": \"string\",\n      \"registryId\": \"string\",\n      \"registryUrl\": \"string\",\n      \"vintage\": 4466\n    },\n    \"amt_lock\": 6557.724760070647,\n    \"amt_offset\": 339.08554614062615,\n    \"amt_offset_resrv\": 3033.1639984838034,\n    \"amt_sold\": 857.7050139738296,\n    \"amt_stock\": 7104.1993376237,\n    \"areaHectare\": 8471.599085607688,\n    \"assign_vol_proj\": 9519.72145459926,\n    \"attachmentUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cert_desc\": \"string\",\n    \"corrs_adj\": 8587.518553144637,\n    \"currency\": \"USD\",\n    \"dttm_reg\": 4245,\n    \"dttm_reg_cert\": 1102,\n    \"dttm_upd\": 4679,\n    \"env_desc\": \"string\",\n    \"env_icon\": \"string\",\n    \"env_ttl\": \"string\",\n    \"hederaTopicId\": \"string\",\n    \"id_prod\": \"string\",\n    \"id_proj\": 6177,\n    \"img_bg_prod\": \"string\",\n    \"img_mobile_bg_prod\": \"string\",\n    \"img_thumbnail_prod\": \"string\",\n    \"img_thumbnail_proj\": \"string\",\n    \"introductionTextEn\": \"string\",\n    \"introductionTextKo\": \"string\",\n    \"locationImageUrl\": \"string\",\n    \"minimum_buy_vol\": 6013.239339253736,\n    \"nationCode\": \"string\",\n    \"nation_nm_en\": \"string\",\n    \"nation_nm_kr\": \"string\",\n    \"nm_cert_agc\": \"string\",\n    \"nm_proj_dev\": \"string\",\n    \"nm_serial\": \"string\",\n    \"productDetailImageUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"productNameEn\": \"string\",\n    \"productNameKr\": \"string\",\n    \"productStoryEn\": \"string\",\n    \"productStoryKo\": \"string\",\n    \"projectEffects\": [\n      {\n        \"effectCode\": \"RESPONSIBLE_CONSUMPTION_AND_PRODUCTION\",\n        \"effectDescriptionEn\": \"string\",\n        \"effectDescriptionKr\": \"string\",\n        \"effectImageUrl\": \"string\"\n      },\n      {\n        \"effectCode\": \"ZERO_HUNGER\",\n        \"effectDescriptionEn\": \"string\",\n        \"effectDescriptionKr\": \"string\",\n        \"effectImageUrl\": \"string\"\n      }\n    ],\n    \"projectNameEn\": \"string\",\n    \"projectNameKr\": \"string\",\n    \"project_type\": \"MINING_MINERAL_ODUCTION\",\n    \"status_srv\": \"READY\",\n    \"tot_vol_proj\": 4603.29305111238,\n    \"unit_price\": 4490.325599666061,\n    \"unit_price_usd\": 364.2195073028254,\n    \"vol\": 7764.096183468029,\n    \"yn_corrs_adj\": \"N\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "419b2c61-d1bc-4567-a944-7e64d83695bb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae0bbc12-a5ed-4241-b058-e09b2f9a457a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1306f9fc-a3c1-49f8-90a6-cebeca5637d6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "project",
+                    "product",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wincl.io:443",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f15b50c3-4a56-4412-972f-60978c3316d2",
+    "name": "Wincl Admin Product API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin Controller",
+      "type": "text/plain"
+    }
+  }
+}
