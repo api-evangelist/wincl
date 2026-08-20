@@ -494,7 +494,8 @@ apis:
   description: B 2 B Store Controller
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
-  tags:
+  tags: []
+  tags_raw:
   - APIs for the B2B service (ex. Bespin)
   properties:
   - type: OpenAPI
@@ -521,6 +522,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -1145,6 +1148,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Wallets
+  tags_raw:
   - Wallet
   properties:
   - type: OpenAPI
