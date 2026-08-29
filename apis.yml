@@ -11,6 +11,17 @@ description: >-
   minting/offset operations so customers can embed carbon purchasing and credit retirement
   directly into their own applications.
 url: https://raw.githubusercontent.com/api-evangelist/wincl/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -1202,6 +1213,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/wincl-capability-edges.yml
+  name: WinCL Business Capability Map
 - type: Overlay
   url: overlays/wincl-openapi-overlay.yaml
 - type: Website
