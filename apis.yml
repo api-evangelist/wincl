@@ -972,32 +972,6 @@ apis:
     url: data-model/wincl-data-model.yml
   - type: AgenticAccess
     url: agentic-access/wincl-agentic-access.yml
-- aid: wincl:wincl-qna-api
-  name: WinCL QnA API
-  description: Qna Controller
-  humanURL: https://www.wincl.io/wincl-api
-  baseURL: https://api.wincl.io
-  tags:
-  - QnA
-  properties:
-  - type: OpenAPI
-    url: openapi/wincl-qna-api-openapi.yml
-  - type: APIReference
-    url: https://api.wincl.io/v3/api-docs
-  - type: Authentication
-    url: authentication/wincl-authentication.yml
-  - type: Conventions
-    url: conventions/wincl-conventions.yml
-  - type: ErrorCatalog
-    url: errors/wincl-error-codes.yml
-  - type: Lifecycle
-    url: lifecycle/wincl-lifecycle.yml
-  - type: Conformance
-    url: conformance/wincl-conformance.yml
-  - type: DataModel
-    url: data-model/wincl-data-model.yml
-  - type: AgenticAccess
-    url: agentic-access/wincl-agentic-access.yml
 - aid: wincl:wincl-ranking-api
   name: WinCL Ranking API
   description: Rank Controller
@@ -1192,6 +1166,32 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/wincl-webhook-api-openapi.yml
+  - type: APIReference
+    url: https://api.wincl.io/v3/api-docs
+  - type: Authentication
+    url: authentication/wincl-authentication.yml
+  - type: Conventions
+    url: conventions/wincl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/wincl-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/wincl-lifecycle.yml
+  - type: Conformance
+    url: conformance/wincl-conformance.yml
+  - type: DataModel
+    url: data-model/wincl-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/wincl-agentic-access.yml
+- aid: wincl:wincl-qn-a-api
+  name: WinCL Qn A API
+  description: Qna Controller
+  humanURL: https://www.wincl.io/wincl-api
+  baseURL: https://api.wincl.io
+  tags:
+  - Qn A
+  properties:
+  - type: OpenAPI
+    url: openapi/wincl-qn-a-api-openapi.yml
   - type: APIReference
     url: https://api.wincl.io/v3/api-docs
   - type: Authentication
