@@ -640,6 +640,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Dashboards
+  tags_raw:
   - Dashboard
   properties:
   - type: OpenAPI
@@ -874,6 +876,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Partners
+  tags_raw:
   - Partner
   properties:
   - type: OpenAPI
@@ -900,6 +904,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Payments
+  tags_raw:
   - Payment
   properties:
   - type: OpenAPI
@@ -978,6 +984,8 @@ apis:
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io
   tags:
+  - Rankings
+  tags_raw:
   - Ranking
   properties:
   - type: OpenAPI
