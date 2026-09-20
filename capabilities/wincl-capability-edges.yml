@@ -24,7 +24,8 @@ edges:
   reason: Operations list one-to-one customer inquiries and create/edit/delete agent answers — inbound
     customer inquiry handling and resolution.
 - tag: QnA
-  spec_file: wincl-qna-api-openapi.yml
+  spec_file: wincl-qn-a-api-openapi.yml
+  reanchored_from: wincl-qna-api-openapi.yml
   capability_id: BC-430.10
   capability_id_l1: BC-430
   capability_name: Customer Inquiry Management
