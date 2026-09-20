@@ -1,0 +1,93 @@
+slug: wincl
+provider: WinCL
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Admin QnA
+  spec_file: wincl-admin-qna-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.85
+  evidence: GET /bapi/v1/qna qnaListUsingGET 1대1 문의 리스트; POST /bapi/v1/qna/{id}/answer insertQnaAnswerUsingPOST
+    1:1 문의 답변 등록
+  reason: Operations list one-to-one customer inquiries and create/edit/delete agent answers — inbound
+    customer inquiry handling and resolution.
+- tag: QnA
+  spec_file: wincl-qna-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.8
+  evidence: POST /api/v1/qna insertQuestionUsingPOST '1대1 문의 등록'; GET /api/v1/qna/{id} '1대1 문의 상세내용'
+  reason: Full CRUD over one-to-one customer inquiries (submit, list, view, amend, cancel) with Qna/QnaDetail
+    schemas — inbound customer contact capture and resolution.
+- tag: Admin FAQ
+  spec_file: wincl-admin-faq-api-openapi.yml
+  capability_id: BC-430.40
+  capability_id_l1: BC-430
+  capability_name: Self-Service Management
+  confidence: 0.75
+  evidence: POST /bapi/v1/faq 'FAQ 등록'; GET /bapi/v1/faq/category 'FAQ 카테고리 리스트'; PUT /bapi/v1/faq/{id}
+    'FAQ 수정'
+  reason: Back-office management of customer-facing FAQ content and categories maps to self-service knowledge
+    base management.
+- tag: FAQ
+  spec_file: wincl-faq-api-openapi.yml
+  capability_id: BC-430.40
+  capability_id_l1: BC-430
+  capability_name: Self-Service Management
+  confidence: 0.75
+  evidence: GET /api/v1/faq 자주찾는 질문 리스트; GET /api/v1/faq/category FAQ 카테고리 리스트
+  reason: Serves FAQ content and categories to users — matches self-service management (FAQ, knowledge
+    base, self-service portals) within customer service.
+- tag: Admin
+  spec_file: wincl-admin-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /bapi/v1/admin '어드민 생성'; GET /bapi/v1/admin/authority '어드민 권한 리스트'; schemas AdminUser,
+    CreateAdminRequest
+  reason: CRUD over back-office admin accounts and their authorities/tabs — internal administrative user
+    and permission management, i.e. identity & access management.
+- tag: CertificateBox
+  spec_file: wincl-certificatebox-api-openapi.yml
+  capability_id: BC-740.20
+  capability_id_l1: BC-740
+  capability_name: Climate & Carbon Management
+  confidence: 0.7
+  evidence: GET /api/v2/certificatebox/item 상쇄인증서 보관함 아이템 리스트; schema CarbonOffsetCertificateDocument
+  reason: Operations retrieve carbon-offset certificates (and their verifiable-credential documents) held
+    by an enterprise — the offsetting/carbon-management side of the vendor's platform, i.e. climate &
+    carbon management. Some ambiguity vs. ESG reporting.
+- tag: CreditBox
+  spec_file: wincl-creditbox-api-openapi.yml
+  capability_id: BC-740.20
+  capability_id_l1: BC-740
+  capability_name: Climate & Carbon Management
+  confidence: 0.7
+  evidence: GET /api/v2/creditbox/item 탄소배출권 보관함 아이템 리스트; 프로젝트별 보유 크레딧 목록 (상쇄/선물용)
+  reason: Read surface over an enterprise's holdings of carbon emission credits per project, used for
+    offsetting — carbon/climate management rather than generic asset accounting.
+- tag: Wallet
+  spec_file: wincl-wallet-api-openapi.yml
+  capability_id: BC-740.20
+  capability_id_l1: BC-740
+  capability_name: Climate & Carbon Management
+  confidence: 0.7
+  evidence: POST /api/v1/wallet/credit/offset offsetCreditUsingPOST 'Credit 상쇄하기'; GET /api/v1/wallet/cert
+    '상쇄인증서 리스트'; schemas OffsetCredit, ProjectCert
+  reason: Operations hold, offset and transfer carbon credits and issue/retrieve offset certificates for
+    the holder — carbon footprint offsetting and related certification, which is Climate & Carbon Management.
+    Some ambiguity as parts of the surface (gifting, purchase history) are commerce mechanics.
