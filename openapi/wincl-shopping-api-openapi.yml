@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Shopping API
+  title: Wincl Shopping API
   version: '1.0'
-  description: Admin Controller
+  description: Shopping Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -49,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«UpdateShoppingItemResponse»'
+                $ref: '#/components/schemas/WinclResponseData_UpdateShoppingItemResponse'
         '201':
           description: Created
         '401':
@@ -82,7 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«InsertShoppingResponse»'
+                $ref: '#/components/schemas/WinclResponseData_InsertShoppingResponse'
         '201':
           description: Created
         '401':
@@ -151,25 +151,14 @@ paths:
         - global
 components:
   schemas:
-    UpdateShoppingItemResponse:
-      title: UpdateShoppingItemResponse
+    DeleteShoppingRequest:
+      title: DeleteShoppingRequest
       type: object
       properties:
-        average_price:
-          type: number
-          format: bigdecimal
-        average_price_usd:
-          type: number
-          format: bigdecimal
-        total_amount:
-          type: number
-          format: bigdecimal
-        total_price:
-          type: number
-          format: bigdecimal
-        total_price_usd:
-          type: number
-          format: bigdecimal
+        id_shopping_baskets:
+          type: array
+          items:
+            type: string
     ShoppingBasketListResponse:
       title: ShoppingBasketListResponse
       type: object
@@ -197,6 +186,53 @@ components:
         total_price_usd:
           type: number
           format: bigdecimal
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseData_UpdateShoppingItemResponse:
+      title: WinclResponseData«UpdateShoppingItemResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UpdateShoppingItemResponse'
+        message:
+          type: string
+    UpdateShoppingItemResponse:
+      title: UpdateShoppingItemResponse
+      type: object
+      properties:
+        average_price:
+          type: number
+          format: bigdecimal
+        average_price_usd:
+          type: number
+          format: bigdecimal
+        total_amount:
+          type: number
+          format: bigdecimal
+        total_price:
+          type: number
+          format: bigdecimal
+        total_price_usd:
+          type: number
+          format: bigdecimal
+    WinclResponseData_InsertShoppingResponse:
+      title: WinclResponseData«InsertShoppingResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/InsertShoppingResponse'
+        message:
+          type: string
     UpdateShoppingDto:
       title: UpdateShoppingDto
       type: object
@@ -206,6 +242,26 @@ components:
           format: bigdecimal
         id_shopping_basket:
           type: string
+    ModifyShoppingRequest:
+      title: ModifyShoppingRequest
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateShoppingDto'
+    InsertShoppingRequest:
+      title: InsertShoppingRequest
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        id_prod:
+          type: string
+        id_proj:
+          type: integer
+          format: int32
     InsertShoppingResponse:
       title: InsertShoppingResponse
       type: object
@@ -227,14 +283,6 @@ components:
         unit_price_usd:
           type: number
           format: bigdecimal
-    DeleteShoppingRequest:
-      title: DeleteShoppingRequest
-      type: object
-      properties:
-        id_shopping_baskets:
-          type: array
-          items:
-            type: string
     ShoppingBasket:
       title: ShoppingBasket
       type: object
@@ -313,56 +361,8 @@ components:
           enum:
           - N
           - Y
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData«InsertShoppingResponse»:
-      title: WinclResponseData«InsertShoppingResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/InsertShoppingResponse'
-        message:
-          type: string
-    WinclResponseData«UpdateShoppingItemResponse»:
-      title: WinclResponseData«UpdateShoppingItemResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UpdateShoppingItemResponse'
-        message:
-          type: string
-    InsertShoppingRequest:
-      title: InsertShoppingRequest
-      type: object
-      properties:
-        amt:
-          type: number
-          format: bigdecimal
-        id_prod:
-          type: string
-        id_proj:
-          type: integer
-          format: int32
-    ModifyShoppingRequest:
-      title: ModifyShoppingRequest
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateShoppingDto'
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

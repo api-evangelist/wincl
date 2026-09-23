@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Payment API
+  title: Wincl Payment API
   version: '1.0'
-  description: Admin Controller
+  description: 주문 후 PG사 결제 단계 (Payco)
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -33,7 +33,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ApprovePaymentResultData'
         '201':
           description: Created
         '401':
@@ -64,7 +64,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ReservePaymentResultData'
         '201':
           description: Created
         '401':
@@ -101,7 +101,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ApprovePaymentResultData'
         '201':
           description: Created
         '401':
@@ -132,7 +132,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ReservePaymentResultData'
         '201':
           description: Created
         '401':
@@ -169,7 +169,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ApprovePaymentResultData'
         '201':
           description: Created
         '401':
@@ -203,7 +203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«LatestOrderData»'
+                $ref: '#/components/schemas/WinclResponseData_LatestOrderData'
         '401':
           description: Unauthorized
         '403':
@@ -230,7 +230,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ReservePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ReservePaymentResultData'
         '201':
           description: Created
         '401':
@@ -270,7 +270,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ApprovePaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_ApprovePaymentResultData'
         '401':
           description: Unauthorized
         '403':
@@ -414,23 +414,66 @@ paths:
         - global
 components:
   schemas:
-    PaymentReserveRequest:
-      title: PaymentReserveRequest
+    PaycoApproveRequest:
+      title: PaycoApproveRequest
       type: object
       properties:
-        orderChannel:
+        code:
           type: string
-          enum:
-          - MOBILE
-          - PC
+        discountAmt:
+          type: number
+          format: bigdecimal
+        mainPgCode:
+          type: string
+        paymentCertifyToken:
+          type: string
+        pointAmt:
+          type: number
+          format: bigdecimal
+        reserveOrderNo:
+          type: string
+        sellerOrderReferenceKey:
+          type: string
+        totalPaymentAmt:
+          type: number
+          format: bigdecimal
+        totalRemoteAreaDeliveryFeeAmt:
+          type: number
+          format: bigdecimal
+    StripeApproveRequest:
+      title: StripeApproveRequest
+      type: object
+      properties:
+        checkoutSessionId:
+          type: string
         orderId:
           type: string
-        relayed:
-          type: boolean
-          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
-          example: false
-        returnUrl:
+        totalPaymentCent:
+          type: number
+          description: 센트단위의 주문금액
+          format: bigdecimal
+    ApprovePaymentResultData:
+      title: ApprovePaymentResultData
+      type: object
+      properties:
+        orderId:
           type: string
+        payment:
+          $ref: '#/components/schemas/Payment'
+        pgApproveId:
+          type: string
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        successful:
+          type: boolean
     Payment:
       title: Payment
       type: object
@@ -513,77 +556,7 @@ components:
         price:
           type: number
           format: bigdecimal
-    ApprovePaymentResultData:
-      title: ApprovePaymentResultData
-      type: object
-      properties:
-        orderId:
-          type: string
-        payment:
-          $ref: '#/components/schemas/Payment'
-        pgApproveId:
-          type: string
-        pgCode:
-          type: string
-        pgMessage:
-          type: string
-        pgProvider:
-          type: string
-          enum:
-          - KCP
-          - PAYCO
-          - STRIPE
-        successful:
-          type: boolean
-    StripeApproveRequest:
-      title: StripeApproveRequest
-      type: object
-      properties:
-        checkoutSessionId:
-          type: string
-        orderId:
-          type: string
-        totalPaymentCent:
-          type: number
-          description: 센트단위의 주문금액
-          format: bigdecimal
-    WinclResponseData«ReservePaymentResultData»:
-      title: WinclResponseData«ReservePaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ReservePaymentResultData'
-        message:
-          type: string
-    PaycoApproveRequest:
-      title: PaycoApproveRequest
-      type: object
-      properties:
-        code:
-          type: string
-        discountAmt:
-          type: number
-          format: bigdecimal
-        mainPgCode:
-          type: string
-        paymentCertifyToken:
-          type: string
-        pointAmt:
-          type: number
-          format: bigdecimal
-        reserveOrderNo:
-          type: string
-        sellerOrderReferenceKey:
-          type: string
-        totalPaymentAmt:
-          type: number
-          format: bigdecimal
-        totalRemoteAreaDeliveryFeeAmt:
-          type: number
-          format: bigdecimal
-    WinclResponseData«ApprovePaymentResultData»:
+    WinclResponseData_ApprovePaymentResultData:
       title: WinclResponseData«ApprovePaymentResultData»
       type: object
       properties:
@@ -593,7 +566,7 @@ components:
           $ref: '#/components/schemas/ApprovePaymentResultData'
         message:
           type: string
-    WinclResponseData«LatestOrderData»:
+    WinclResponseData_LatestOrderData:
       title: WinclResponseData«LatestOrderData»
       type: object
       properties:
@@ -601,6 +574,33 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/LatestOrderData'
+        message:
+          type: string
+    PaymentReserveRequest:
+      title: PaymentReserveRequest
+      type: object
+      properties:
+        orderChannel:
+          type: string
+          enum:
+          - MOBILE
+          - PC
+        orderId:
+          type: string
+        relayed:
+          type: boolean
+          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
+          example: false
+        returnUrl:
+          type: string
+    WinclResponseData_ReservePaymentResultData:
+      title: WinclResponseData«ReservePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ReservePaymentResultData'
         message:
           type: string
     ReservePaymentResultData:
@@ -624,7 +624,7 @@ components:
         successful:
           type: boolean
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

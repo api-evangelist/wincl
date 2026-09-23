@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Admin Payment API
+  title: Wincl Admin Payment API
   version: '1.0'
-  description: Admin Controller
+  description: 결제 완료된 건을 관리자가 환불
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -30,7 +30,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«RefundPaymentResultData»'
+                $ref: '#/components/schemas/WinclResponseData_RefundPaymentResultData'
         '201':
           description: Created
         '401':
@@ -44,6 +44,16 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_RefundPaymentResultData:
+      title: WinclResponseData«RefundPaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/RefundPaymentResultData'
+        message:
+          type: string
     RefundPaymentResultData:
       title: RefundPaymentResultData
       type: object
@@ -77,18 +87,8 @@ components:
           description: 구매 ID (`id_usr_prod_buy`)
         successful:
           type: boolean
-    WinclResponseData«RefundPaymentResultData»:
-      title: WinclResponseData«RefundPaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/RefundPaymentResultData'
-        message:
-          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

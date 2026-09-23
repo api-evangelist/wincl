@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Utils API
+  title: Wincl Utils API
   version: '1.0'
-  description: Admin Controller
+  description: Utils Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -33,7 +33,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ExchangeRate»'
+                $ref: '#/components/schemas/WinclResponseData_ExchangeRate'
         '201':
           description: Created
         '401':
@@ -57,7 +57,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«Nation»»'
+                $ref: '#/components/schemas/WinclResponseData_List_Nation'
         '401':
           description: Unauthorized
         '403':
@@ -85,7 +85,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+                $ref: '#/components/schemas/WinclResponseData_SmsResult'
         '201':
           description: Created
         '401':
@@ -115,7 +115,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+                $ref: '#/components/schemas/WinclResponseData_SmsResult'
         '201':
           description: Created
         '401':
@@ -145,7 +145,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«SmsResult»'
+                $ref: '#/components/schemas/WinclResponseData_SmsResult'
         '201':
           description: Created
         '401':
@@ -214,7 +214,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«UploadFileResponse»'
+                $ref: '#/components/schemas/WinclResponseData_UploadFileResponse'
         '201':
           description: Created
         '401':
@@ -228,110 +228,6 @@ paths:
         - global
 components:
   schemas:
-    UploadFileResponse:
-      title: UploadFileResponse
-      type: object
-      properties:
-        url:
-          type: string
-    SmsVerifyRequest:
-      title: SmsVerifyRequest
-      type: object
-      properties:
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
-        verificationCode:
-          type: string
-          description: SMS로 수신한 인증코드
-    SubmitPartnerRequest:
-      title: SubmitPartnerRequest
-      type: object
-      properties:
-        companyName:
-          type: string
-        contents:
-          type: string
-        email:
-          type: string
-        name:
-          type: string
-        questionCategory:
-          type: string
-    SmsMessageRequest:
-      title: SmsMessageRequest
-      type: object
-      properties:
-        messageContents:
-          type: string
-          description: 발신할 SMS 내용
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
-    SmsResult:
-      title: SmsResult
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Otp 상태. 기대값 = {/otp/auth: `pending`, /otp/verify: `approved`, /sms/message: `accepted`}'
-    WinclResponseData«UploadFileResponse»:
-      title: WinclResponseData«UploadFileResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UploadFileResponse'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData«List«Nation»»:
-      title: WinclResponseData«List«Nation»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nation'
-        message:
-          type: string
-    WinclResponseData«SmsResult»:
-      title: WinclResponseData«SmsResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/SmsResult'
-        message:
-          type: string
-    WinclResponseData«ExchangeRate»:
-      title: WinclResponseData«ExchangeRate»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ExchangeRate'
-        message:
-          type: string
-    SmsAuthyRequest:
-      title: SmsAuthyRequest
-      type: object
-      properties:
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
     Nation:
       title: Nation
       type: object
@@ -364,6 +260,52 @@ components:
           description: 국가코드 숫자
           format: int32
           example: 410
+    WinclResponseData_UploadFileResponse:
+      title: WinclResponseData«UploadFileResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    UploadFileResponse:
+      title: UploadFileResponse
+      type: object
+      properties:
+        url:
+          type: string
+    SmsMessageRequest:
+      title: SmsMessageRequest
+      type: object
+      properties:
+        messageContents:
+          type: string
+          description: 발신할 SMS 내용
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    WinclResponseData_List_Nation:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
+        message:
+          type: string
     ExchangeRate:
       title: ExchangeRate
       type: object
@@ -376,8 +318,66 @@ components:
         rate:
           type: number
           format: bigdecimal
+    SubmitPartnerRequest:
+      title: SubmitPartnerRequest
+      type: object
+      properties:
+        companyName:
+          type: string
+        contents:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        questionCategory:
+          type: string
+    SmsVerifyRequest:
+      title: SmsVerifyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+        verificationCode:
+          type: string
+          description: SMS로 수신한 인증코드
+    WinclResponseData_SmsResult:
+      title: WinclResponseData«SmsResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/SmsResult'
+        message:
+          type: string
+    SmsResult:
+      title: SmsResult
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Otp 상태. 기대값 = {/otp/auth: `pending`, /otp/verify: `approved`, /sms/message: `accepted`}'
+    SmsAuthyRequest:
+      title: SmsAuthyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    WinclResponseData_ExchangeRate:
+      title: WinclResponseData«ExchangeRate»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ExchangeRate'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

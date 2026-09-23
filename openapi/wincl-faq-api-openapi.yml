@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin FAQ API
+  title: Wincl FAQ API
   version: '1.0'
-  description: Admin Controller
+  description: Faq Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«Faq»'
+                $ref: '#/components/schemas/WinclResponseDataList_Faq'
         '401':
           description: Unauthorized
         '403':
@@ -75,7 +75,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«FaqCategory»»'
+                $ref: '#/components/schemas/WinclResponseData_List_FaqCategory'
         '401':
           description: Unauthorized
         '403':
@@ -106,7 +106,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«Faq»'
+                $ref: '#/components/schemas/WinclResponseData_Faq'
         '401':
           description: Unauthorized
         '403':
@@ -118,41 +118,7 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData«List«FaqCategory»»:
-      title: WinclResponseData«List«FaqCategory»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FaqCategory'
-        message:
-          type: string
-    Faq:
-      title: Faq
-      type: object
-      properties:
-        answerEn:
-          type: string
-          description: FAQ 답변 영어
-        answerKr:
-          type: string
-          description: FAQ 답변 한글
-        category:
-          type: string
-          description: FAQ 카테고리
-        faqId:
-          type: string
-          description: FAQ ID
-        questionEn:
-          type: string
-          description: FAQ 질문 영어
-        questionKr:
-          type: string
-          description: FAQ 질문 한글
-    WinclResponseDataList«Faq»:
+    WinclResponseDataList_Faq:
       title: WinclResponseDataList«Faq»
       type: object
       properties:
@@ -193,7 +159,29 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    WinclResponseData«Faq»:
+    Faq:
+      title: Faq
+      type: object
+      properties:
+        answerEn:
+          type: string
+          description: FAQ 답변 영어
+        answerKr:
+          type: string
+          description: FAQ 답변 한글
+        category:
+          type: string
+          description: FAQ 카테고리
+        faqId:
+          type: string
+          description: FAQ ID
+        questionEn:
+          type: string
+          description: FAQ 질문 영어
+        questionKr:
+          type: string
+          description: FAQ 질문 한글
+    WinclResponseData_Faq:
       title: WinclResponseData«Faq»
       type: object
       properties:
@@ -220,8 +208,20 @@ components:
           type: integer
           description: FAQ 카테고리 순번
           format: int32
+    WinclResponseData_List_FaqCategory:
+      title: WinclResponseData«List«FaqCategory»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FaqCategory'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

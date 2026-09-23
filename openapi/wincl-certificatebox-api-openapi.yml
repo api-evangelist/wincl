@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin CertificateBox API
+  title: Wincl Certificate Box API
   version: '1.0'
-  description: Admin Controller
+  description: Certificate Box Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»'
+                $ref: '#/components/schemas/WinclAggregationResponse_CertificateBoxItem_CertificateBoxAggregation'
         '401':
           description: Unauthorized
         '403':
@@ -122,7 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»'
+                $ref: '#/components/schemas/WinclAggregationResponse_CertificateBoxItemEntry_CertificateBoxItemAggregation'
         '401':
           description: Unauthorized
         '403':
@@ -163,7 +163,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«CertificateVcResponse»'
+                $ref: '#/components/schemas/WinclResponseData_CertificateVcResponse'
         '401':
           description: Unauthorized
         '403':
@@ -175,6 +175,76 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_CertificateVcResponse:
+      title: WinclResponseData«CertificateVcResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CertificateVcResponse'
+        message:
+          type: string
+    OffsetEventMeta:
+      title: OffsetEventMeta
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        creditId:
+          type: string
+        offsetTimestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        transactionId:
+          type: string
+    WinclAggregationResponse_CertificateBoxItem_CertificateBoxAggregation:
+      title: WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/CertificateBoxAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CertificateBoxItem'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
     CertificateBoxItemEntry:
       title: CertificateBoxItemEntry
       type: object
@@ -246,23 +316,216 @@ components:
           type: number
           description: 제품 단위 가격
           format: bigdecimal
-    OffsetEventMeta:
-      title: OffsetEventMeta
+    CarbonOffsetCertificateDocument:
+      title: CarbonOffsetCertificateDocument
       type: object
       properties:
-        amount:
-          type: number
-          format: bigdecimal
-        creditId:
+        '@context':
+          type: array
+          items:
+            type: string
+        credentialSubject:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarbonOffsetCertificateSubject'
+        id:
           type: string
+        issuanceDate:
+          type: string
+        issuer:
+          type: string
+        proof:
+          $ref: '#/components/schemas/Proof'
+        type:
+          type: array
+          items:
+            type: string
+    Proof:
+      title: Proof
+      type: object
+      properties:
+        created:
+          type: string
+        jws:
+          type: string
+        proofPurpose:
+          type: string
+        type:
+          type: string
+        verificationMethod:
+          type: string
+    CertificateBoxItem:
+      title: CertificateBoxItem
+      type: object
+      properties:
+        certificateAgencyName:
+          type: string
+          description: 인증기관 이름
+        certificateVcCid:
+          type: string
+          description: 인증서 VC CID
+        certificateVcIssuedTimestamp:
+          type: integer
+          description: 인증서 VC 최신 발급 타임스탬프(UTC epoch)
+          format: int64
+        certificateVcIssuing:
+          type: boolean
+          description: 새 상쇄분이 반영된 VC가 발급 중인지 여부
+          example: false
+        correspondanceAdjustmentRatio:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        nationCode:
+          type: string
+          description: 프로젝트 생성국가
+        nationEnglishName:
+          type: string
+          description: 프로젝트 생성국가 영어 이름
+        nationKoreanName:
+          type: string
+          description: 프로젝트 생성국가 한글 이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        offsetPrice:
+          type: number
+          description: 상쇄한 탄소배출권 가격
+          format: bigdecimal
         offsetTimestamp:
           type: integer
+          description: 상쇄 타임스탬프
           format: int64
-        status:
+        productName:
           type: string
-        transactionId:
+          description: 탄소배출권 상품 이름
+        projectDeveloperName:
           type: string
-    WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»:
+          description: 프로젝트 개발자이름
+        projectEffect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        projectName:
+          type: string
+          description: 프로젝트 이름
+        projectThumbnailUrl:
+          type: string
+          description: 프로젝트 이미지
+        projectType:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+    CarbonOffsetCertificateSubject:
+      title: CarbonOffsetCertificateSubject
+      type: object
+      properties:
+        certificateAgencyName:
+          type: string
+        certificateSerial:
+          type: string
+        correspondenceAdjustmentRatio:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        id:
+          type: string
+        lastOffsetTimestamp:
+          type: integer
+          format: int64
+        nationCode:
+          type: string
+        nationEnglishName:
+          type: string
+        nationKoreanName:
+          type: string
+        offsetAmount:
+          type: number
+          format: bigdecimal
+        offsetEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffsetEventMeta'
+        productName:
+          type: string
+        projectDeveloperName:
+          type: string
+        projectEffects:
+          type: array
+          items:
+            type: string
+        projectId:
+          type: integer
+          format: int32
+        projectName:
+          type: string
+        projectTopicId:
+          type: string
+        projectType:
+          type: string
+        userId:
+          type: string
+        userNickname:
+          type: string
+    WinclAggregationResponse_CertificateBoxItemEntry_CertificateBoxItemAggregation:
       title: WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»
       type: object
       properties:
@@ -443,84 +706,23 @@ components:
           type: number
           description: 상쇄한 탄소배출권 가격
           format: bigdecimal
-    WinclResponseData«CertificateVcResponse»:
-      title: WinclResponseData«CertificateVcResponse»
+    CertificateVcResponse:
+      title: CertificateVcResponse
       type: object
       properties:
-        code:
+        credentialCid:
           type: string
-        data:
-          $ref: '#/components/schemas/CertificateVcResponse'
-        message:
+        credentialId:
           type: string
-    CarbonOffsetCertificateDocument:
-      title: CarbonOffsetCertificateDocument
-      type: object
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-        credentialSubject:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarbonOffsetCertificateSubject'
-        id:
+        credentialUrl:
           type: string
-        issuanceDate:
+        document:
+          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
+        issuedAt:
           type: string
-        issuer:
-          type: string
-        proof:
-          $ref: '#/components/schemas/Proof'
-        type:
-          type: array
-          items:
-            type: string
-    WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»:
-      title: WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/CertificateBoxAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CertificateBoxItem'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
+          format: date-time
+        newlyIssued:
+          type: boolean
     CertificateBoxAggregation:
       title: CertificateBoxAggregation
       type: object
@@ -572,210 +774,8 @@ components:
           type: number
           description: 탄소배출권 단위 가격
           format: bigdecimal
-    CertificateBoxItem:
-      title: CertificateBoxItem
-      type: object
-      properties:
-        certificateAgencyName:
-          type: string
-          description: 인증기관 이름
-        certificateVcCid:
-          type: string
-          description: 인증서 VC CID
-        certificateVcIssuedTimestamp:
-          type: integer
-          description: 인증서 VC 최신 발급 타임스탬프(UTC epoch)
-          format: int64
-        certificateVcIssuing:
-          type: boolean
-          description: 새 상쇄분이 반영된 VC가 발급 중인지 여부
-          example: false
-        correspondanceAdjustmentRatio:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-        currency:
-          type: string
-          description: 통화
-        nationCode:
-          type: string
-          description: 프로젝트 생성국가
-        nationEnglishName:
-          type: string
-          description: 프로젝트 생성국가 영어 이름
-        nationKoreanName:
-          type: string
-          description: 프로젝트 생성국가 한글 이름
-        offsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        offsetPrice:
-          type: number
-          description: 상쇄한 탄소배출권 가격
-          format: bigdecimal
-        offsetTimestamp:
-          type: integer
-          description: 상쇄 타임스탬프
-          format: int64
-        productName:
-          type: string
-          description: 탄소배출권 상품 이름
-        projectDeveloperName:
-          type: string
-          description: 프로젝트 개발자이름
-        projectEffect:
-          type: array
-          description: 프로젝트 이펙트
-          items:
-            type: string
-            enum:
-            - AFFORDABLE_AND_CLEAN_ENERGY
-            - CLEAN_WATER_AND_SANITATION
-            - CLIMATE_ACTION
-            - DECENT_WORK_AND_ECONOMIC_GROWTH
-            - GENDER_EQUALITY
-            - GOOD_HEALTH_AND_WELLBEING
-            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-            - LIFE_BELLOW_WATER
-            - LIFE_ON_LAND
-            - NO_POVERTY
-            - PARTNERSHIPS_FOR_THE_GOALS
-            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-            - QUALITY_EDUCATION
-            - REDUCED_INEQUALITIES
-            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-            - SUSTAINABLE_CITIES_AND_COMMUNITIES
-            - ZERO_HUNGER
-        projectId:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        projectName:
-          type: string
-          description: 프로젝트 이름
-        projectThumbnailUrl:
-          type: string
-          description: 프로젝트 이미지
-        projectType:
-          type: string
-          description: 프로젝트 타입
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        unitPrice:
-          type: number
-          description: 탄소배출권 단위 가격
-          format: bigdecimal
-    CertificateVcResponse:
-      title: CertificateVcResponse
-      type: object
-      properties:
-        credentialCid:
-          type: string
-        credentialId:
-          type: string
-        credentialUrl:
-          type: string
-        document:
-          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
-        issuedAt:
-          type: string
-          format: date-time
-        newlyIssued:
-          type: boolean
-    Proof:
-      title: Proof
-      type: object
-      properties:
-        created:
-          type: string
-        jws:
-          type: string
-        proofPurpose:
-          type: string
-        type:
-          type: string
-        verificationMethod:
-          type: string
-    CarbonOffsetCertificateSubject:
-      title: CarbonOffsetCertificateSubject
-      type: object
-      properties:
-        certificateAgencyName:
-          type: string
-        certificateSerial:
-          type: string
-        correspondenceAdjustmentRatio:
-          type: number
-          format: bigdecimal
-        currency:
-          type: string
-        id:
-          type: string
-        lastOffsetTimestamp:
-          type: integer
-          format: int64
-        nationCode:
-          type: string
-        nationEnglishName:
-          type: string
-        nationKoreanName:
-          type: string
-        offsetAmount:
-          type: number
-          format: bigdecimal
-        offsetEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/OffsetEventMeta'
-        productName:
-          type: string
-        projectDeveloperName:
-          type: string
-        projectEffects:
-          type: array
-          items:
-            type: string
-        projectId:
-          type: integer
-          format: int32
-        projectName:
-          type: string
-        projectTopicId:
-          type: string
-        projectType:
-          type: string
-        userId:
-          type: string
-        userNickname:
-          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

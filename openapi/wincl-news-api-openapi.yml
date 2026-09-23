@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin News API
+  title: Wincl News API
   version: '1.0'
-  description: Admin Controller
+  description: News Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -70,7 +70,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«News»'
+                $ref: '#/components/schemas/WinclResponseDataList_News'
         '401':
           description: Unauthorized
         '403':
@@ -92,7 +92,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+                $ref: '#/components/schemas/WinclResponseData_List_CommonCode'
         '401':
           description: Unauthorized
         '403':
@@ -123,7 +123,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«News»'
+                $ref: '#/components/schemas/WinclResponseData_News'
         '401':
           description: Unauthorized
         '403':
@@ -154,17 +154,35 @@ components:
         updateTimestamp:
           type: integer
           format: int64
-    WinclResponseData«News»:
-      title: WinclResponseData«News»
+    CommonCode:
+      title: CommonCode
       type: object
       properties:
-        code:
+        cd:
           type: string
-        data:
-          $ref: '#/components/schemas/News'
-        message:
+          description: 코드
+        cd_grp:
           type: string
-    WinclResponseDataList«News»:
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
+    WinclResponseDataList_News:
       title: WinclResponseDataList«News»
       type: object
       properties:
@@ -205,7 +223,17 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    WinclResponseData«List«CommonCode»»:
+    WinclResponseData_News:
+      title: WinclResponseData«News»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/News'
+        message:
+          type: string
+    WinclResponseData_List_CommonCode:
       title: WinclResponseData«List«CommonCode»»
       type: object
       properties:
@@ -217,36 +245,8 @@ components:
             $ref: '#/components/schemas/CommonCode'
         message:
           type: string
-    CommonCode:
-      title: CommonCode
-      type: object
-      properties:
-        cd:
-          type: string
-          description: 코드
-        cd_grp:
-          type: string
-          description: 코드 그룹
-          enum:
-          - ADMIN_AUTHORITY
-          - B2B_PARTNER_QUESTION_CATEGORY
-          - FAQ_CATEGORY
-          - NEWS_CATEGORY
-          - PROJECT_EFFECT
-          - PROJECT_TYPE
-          - QNA_TYPE
-        nm_en:
-          type: string
-          description: 영어 이름
-        nm_kr:
-          type: string
-          description: 한글 이름
-        pos:
-          type: integer
-          description: 표시 순서
-          format: int32
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

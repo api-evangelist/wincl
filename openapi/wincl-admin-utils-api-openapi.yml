@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Admin Utils API
+  title: Wincl Admin Utils API
   version: '1.0'
-  description: Admin Controller
+  description: Admin Utils Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«Nation»»'
+                $ref: '#/components/schemas/WinclResponseData_List_Nation'
         '401':
           description: Unauthorized
         '403':
@@ -89,7 +89,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«UploadFileResponse»'
+                $ref: '#/components/schemas/WinclResponseData_UploadFileResponse'
         '201':
           description: Created
         '401':
@@ -103,42 +103,6 @@ paths:
         - global
 components:
   schemas:
-    UploadFileResponse:
-      title: UploadFileResponse
-      type: object
-      properties:
-        url:
-          type: string
-    WinclResponseData«UploadFileResponse»:
-      title: WinclResponseData«UploadFileResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UploadFileResponse'
-        message:
-          type: string
-    WinclResponseData«List«Nation»»:
-      title: WinclResponseData«List«Nation»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nation'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     Nation:
       title: Nation
       type: object
@@ -187,8 +151,44 @@ components:
           description: 상응조정률
           format: bigdecimal
           example: 0.3
+    WinclResponseData_UploadFileResponse:
+      title: WinclResponseData«UploadFileResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    UploadFileResponse:
+      title: UploadFileResponse
+      type: object
+      properties:
+        url:
+          type: string
+    WinclResponseData_List_Nation:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

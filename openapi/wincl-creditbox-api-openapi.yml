@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin CreditBox API
+  title: Wincl Credit Box API
   version: '1.0'
-  description: Admin Controller
+  description: Credit Box Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»'
+                $ref: '#/components/schemas/WinclAggregationResponse_CreditBoxItem_CreditBoxAggregation'
         '401':
           description: Unauthorized
         '403':
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»'
+                $ref: '#/components/schemas/WinclAggregationResponse_CreditBoxItemEntry_CreditBoxItemAggregation'
         '401':
           description: Unauthorized
         '403':
@@ -323,7 +323,7 @@ components:
           type: number
           description: 사용가능한 탄소배출권 가격
           format: bigdecimal
-    WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»:
+    WinclAggregationResponse_CreditBoxItemEntry_CreditBoxItemAggregation:
       title: WinclAggregationResponse«CreditBoxItemEntry,CreditBoxItemAggregation»
       type: object
       properties:
@@ -340,6 +340,176 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreditBoxItemEntry'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    CreditBoxItemEntry:
+      title: CreditBoxItemEntry
+      type: object
+      properties:
+        blockchainPurchaseStatus:
+          type: string
+          description: 블록체인에 기록된 구매 상태
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        blockchainTransactionType:
+          type: string
+          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
+        creditId:
+          type: string
+          description: credit id
+        expectedExpirationDateTime:
+          type: string
+          description: 예정된 유효기한 타임스탬프
+          format: date-time
+        expectedExpirationTimestamp:
+          type: integer
+          description: 예정된 유효기한 타임스탬프
+          format: int64
+        productCurrency:
+          type: string
+          description: 제품 기본 통화
+          enum:
+          - KRW
+          - USD
+        transactionAmount:
+          type: number
+          description: 트랜잭션 수량
+          format: bigdecimal
+        transactionDateTime:
+          type: string
+          description: 트랜잭션 일시
+          format: date-time
+        transactionPrice:
+          type: number
+          description: ' 금액'
+          format: bigdecimal
+        transactionStatus:
+          type: string
+          description: '트랜잭션 상태: [SUCCESS, PENDING, CANCELED, RECEIVE, SND_CANCEL]'
+          enum:
+          - CANCELED
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+          - SUCCESS
+          - UNSPECIFIED
+        transactionTimestamp:
+          type: integer
+          description: 트랜잭션 타임스탬프
+          format: int64
+        transactionType:
+          type: string
+          description: 트랜잭션 타입
+          enum:
+          - OFFSET
+          - PURCHASE
+          - PURCHASE_CANCEL
+          - RECEIVE
+          - SEND
+          - SEND_CANCEL
+          - UNSPECIFIED
+        transferable:
+          type: boolean
+          description: 선물 가능 여부
+          example: false
+        unitPrice:
+          type: number
+          description: 제품 단위 가격
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능한 수량
+          format: bigdecimal
+    CreditBoxAggregation:
+      title: CreditBoxAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+        totalCanceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        totalLockedAmount:
+          type: number
+          description: 잠긴 수량 (현재까지는 없음)
+          format: bigdecimal
+        totalOffsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        totalPurchasedAmount:
+          type: number
+          description: 구매 수량
+          format: bigdecimal
+        totalReceivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        totalSentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        totalUsableAmount:
+          type: number
+          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
+          format: bigdecimal
+        totalUsablePrice:
+          type: number
+          description: 보유한 총 탄소배출권 가격
+          format: bigdecimal
+        totalWholeAmount:
+          type: number
+          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+    WinclAggregationResponse_CreditBoxItem_CreditBoxAggregation:
+      title: WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/CreditBoxAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBoxItem'
         message:
           type: string
         pageSize:
@@ -499,178 +669,8 @@ components:
           type: number
           description: 사용가능한 탄소배출권 가격
           format: bigdecimal
-    WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»:
-      title: WinclAggregationResponse«CreditBoxItem,CreditBoxAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/CreditBoxAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditBoxItem'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    CreditBoxAggregation:
-      title: CreditBoxAggregation
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 통화
-        totalCanceledAmount:
-          type: number
-          description: 구매 취소한 수량
-          format: bigdecimal
-        totalLockedAmount:
-          type: number
-          description: 잠긴 수량 (현재까지는 없음)
-          format: bigdecimal
-        totalOffsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        totalPurchasedAmount:
-          type: number
-          description: 구매 수량
-          format: bigdecimal
-        totalReceivedAmount:
-          type: number
-          description: 선물받은 수량
-          format: bigdecimal
-        totalSentAmount:
-          type: number
-          description: 선물한 수량
-          format: bigdecimal
-        totalUsableAmount:
-          type: number
-          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
-          format: bigdecimal
-        totalUsablePrice:
-          type: number
-          description: 보유한 총 탄소배출권 가격
-          format: bigdecimal
-        totalWholeAmount:
-          type: number
-          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
-          format: bigdecimal
-        unitPrice:
-          type: number
-          description: 탄소배출권 단위 가격
-          format: bigdecimal
-    CreditBoxItemEntry:
-      title: CreditBoxItemEntry
-      type: object
-      properties:
-        blockchainPurchaseStatus:
-          type: string
-          description: 블록체인에 기록된 구매 상태
-        blockchainTransactionHash:
-          type: string
-          description: 블록체인 트랜잭션 해쉬
-        blockchainTransactionType:
-          type: string
-          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
-        creditId:
-          type: string
-          description: credit id
-        expectedExpirationDateTime:
-          type: string
-          description: 예정된 유효기한 타임스탬프
-          format: date-time
-        expectedExpirationTimestamp:
-          type: integer
-          description: 예정된 유효기한 타임스탬프
-          format: int64
-        productCurrency:
-          type: string
-          description: 제품 기본 통화
-          enum:
-          - KRW
-          - USD
-        transactionAmount:
-          type: number
-          description: 트랜잭션 수량
-          format: bigdecimal
-        transactionDateTime:
-          type: string
-          description: 트랜잭션 일시
-          format: date-time
-        transactionPrice:
-          type: number
-          description: ' 금액'
-          format: bigdecimal
-        transactionStatus:
-          type: string
-          description: '트랜잭션 상태: [SUCCESS, PENDING, CANCELED, RECEIVE, SND_CANCEL]'
-          enum:
-          - CANCELED
-          - PENDING
-          - RECEIVE
-          - SND_CANCEL
-          - SUCCESS
-          - UNSPECIFIED
-        transactionTimestamp:
-          type: integer
-          description: 트랜잭션 타임스탬프
-          format: int64
-        transactionType:
-          type: string
-          description: 트랜잭션 타입
-          enum:
-          - OFFSET
-          - PURCHASE
-          - PURCHASE_CANCEL
-          - RECEIVE
-          - SEND
-          - SEND_CANCEL
-          - UNSPECIFIED
-        transferable:
-          type: boolean
-          description: 선물 가능 여부
-          example: false
-        unitPrice:
-          type: number
-          description: 제품 단위 가격
-          format: bigdecimal
-        usableAmount:
-          type: number
-          description: 사용가능한 수량
-          format: bigdecimal
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin APIs for the B2B service (ex. Bespin) API
+  title: Wincl APIs for the B2B service (ex. Bespin) API
   version: '1.0'
-  description: Admin Controller
+  description: B 2 B Store Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -27,7 +27,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«B2BSignInResponse»'
+                $ref: '#/components/schemas/WinclResponseData_B2BSignInResponse'
         '201':
           description: Created
         '401':
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«B2BSignInResponse»'
+                $ref: '#/components/schemas/WinclResponseData_B2BSignInResponse'
         '201':
           description: Created
         '401':
@@ -88,7 +88,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«boolean»'
+                $ref: '#/components/schemas/WinclResponseData_boolean'
         '401':
           description: Unauthorized
         '403':
@@ -111,7 +111,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«Product»'
+                $ref: '#/components/schemas/WinclResponseDataList_Product'
         '401':
           description: Unauthorized
         '403':
@@ -148,7 +148,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ContactDuplicated»'
+                $ref: '#/components/schemas/WinclResponseData_ContactDuplicated'
         '401':
           description: Unauthorized
         '403':
@@ -212,7 +212,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»'
+                $ref: '#/components/schemas/WinclAggregationResponse_BuyHistory_PurchaseHistoryAggregation'
         '401':
           description: Unauthorized
         '403':
@@ -250,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«BuyHistory»'
+                $ref: '#/components/schemas/WinclResponseData_BuyHistory'
         '401':
           description: Unauthorized
         '403':
@@ -262,187 +262,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseDataList«Product»:
-      title: WinclResponseDataList«Product»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData«B2BSignInResponse»:
-      title: WinclResponseData«B2BSignInResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/B2BSignInResponse'
-        message:
-          type: string
-    B2BSignUpRequest:
-      title: B2BSignUpRequest
-      type: object
-      properties:
-        b2bCustomerCode:
-          type: string
-          description: Passed from the B2B API service. user.b2b_customer_code
-        b2bRpCode:
-          type: string
-          description: Relying party code. user.b2b_rp_code
-        customerCompanyName:
-          type: string
-          description: Company name the user enter manually. user.company_code
-        customerCountryCode:
-          type: string
-          description: Customer country code
-        customerDisplayName:
-          type: string
-          description: Customer display name (unique)
-        customerEmail:
-          type: string
-          description: Customer email (unique)
-        customerPhoneNumber:
-          type: string
-          description: 'Customer phone number (E.164 format. ex: +821012345678)'
-        customerUserName:
-          type: string
-          description: 사용자 이름
-    CpInfo:
-      title: CpInfo
-      type: object
-      properties:
-        cpId:
-          type: string
-        cpNm:
-          type: string
-        cpNo:
-          type: string
-    Product:
-      title: Product
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 프로젝트 생성국가
-        id_prod:
-          type: string
-          description: 프로덕트 아이디
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_background_prod:
-          type: string
-          description: 프로덕트 배경 이미지 url
-        img_mobile_background_prod:
-          type: string
-          description: 프로덕트 모바일 배경 이미지 url
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일 이미지 url
-        nm_cert_agc:
-          type: string
-          description: 탄소배출권 인증기관명
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자 이름
-        productNameEn:
-          type: string
-          description: 상품 이름 (영어)
-        productNameKr:
-          type: string
-          description: 상품 이름 (한국어)
-        product_stock_amount:
-          type: string
-          description: 상품 재고량 (톤)
-        projectNameEn:
-          type: string
-          description: 프로젝트 이름 (영어)
-        projectNameKr:
-          type: string
-          description: 프로젝트 이름 (한국어)
-        project_effect:
-          type: array
-          description: 프로젝트 효과 코드 리스트
-          items:
-            type: string
-        project_type:
-          type: string
-          description: 프로젝트 타입 코드 리스트
-        unit_price:
-          type: number
-          description: 톤당 가격
-          format: bigdecimal
-    WinclResponseData«ContactDuplicated»:
-      title: WinclResponseData«ContactDuplicated»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ContactDuplicated'
-        message:
-          type: string
-    PurchaseHistoryAggregation:
-      title: PurchaseHistoryAggregation
-      type: object
-      properties:
-        amt:
-          type: number
-          description: 집합한 구매수량
-          format: bigdecimal
-        price_tot_krw:
-          type: number
-          description: 집합한 구매가격 (원화)
-          format: bigdecimal
-        price_tot_usd:
-          type: number
-          description: 집합한 구매가격 (달러)
-          format: bigdecimal
-    WinclResponseData«BuyHistory»:
-      title: WinclResponseData«BuyHistory»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/BuyHistory'
-        message:
-          type: string
     BuyHistory:
       title: BuyHistory
       type: object
@@ -540,6 +359,34 @@ components:
           - FAIL
           - PENDING
           - SUCCESS
+    B2BSignUpRequest:
+      title: B2BSignUpRequest
+      type: object
+      properties:
+        b2bCustomerCode:
+          type: string
+          description: Passed from the B2B API service. user.b2b_customer_code
+        b2bRpCode:
+          type: string
+          description: Relying party code. user.b2b_rp_code
+        customerCompanyName:
+          type: string
+          description: Company name the user enter manually. user.company_code
+        customerCountryCode:
+          type: string
+          description: Customer country code
+        customerDisplayName:
+          type: string
+          description: Customer display name (unique)
+        customerEmail:
+          type: string
+          description: Customer email (unique)
+        customerPhoneNumber:
+          type: string
+          description: 'Customer phone number (E.164 format. ex: +821012345678)'
+        customerUserName:
+          type: string
+          description: 사용자 이름
     B2BTokenRequest:
       title: B2BTokenRequest
       type: object
@@ -548,38 +395,7 @@ components:
           $ref: '#/components/schemas/CpInfo'
         userId:
           type: string
-    WinclResponseData«boolean»:
-      title: WinclResponseData«boolean»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: boolean
-        message:
-          type: string
-    ContactDuplicated:
-      title: ContactDuplicated
-      type: object
-      properties:
-        emailDuplidated:
-          type: boolean
-        phoneNumberDuplidated:
-          type: boolean
-    B2BSignInResponse:
-      title: B2BSignInResponse
-      type: object
-      properties:
-        accessToken:
-          type: string
-        refreshToken:
-          type: string
-        tokenType:
-          type: string
-          description: jwt 토큰 타입
-        userId:
-          type: string
-    WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»:
+    WinclAggregationResponse_BuyHistory_PurchaseHistoryAggregation:
       title: WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»
       type: object
       properties:
@@ -623,8 +439,192 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    ContactDuplicated:
+      title: ContactDuplicated
+      type: object
+      properties:
+        emailDuplidated:
+          type: boolean
+        phoneNumberDuplidated:
+          type: boolean
+    WinclResponseData_ContactDuplicated:
+      title: WinclResponseData«ContactDuplicated»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ContactDuplicated'
+        message:
+          type: string
+    WinclResponseDataList_Product:
+      title: WinclResponseDataList«Product»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    PurchaseHistoryAggregation:
+      title: PurchaseHistoryAggregation
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 집합한 구매수량
+          format: bigdecimal
+        price_tot_krw:
+          type: number
+          description: 집합한 구매가격 (원화)
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 집합한 구매가격 (달러)
+          format: bigdecimal
+    Product:
+      title: Product
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        id_prod:
+          type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_background_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_background_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        nm_cert_agc:
+          type: string
+          description: 탄소배출권 인증기관명
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        product_stock_amount:
+          type: string
+          description: 상품 재고량 (톤)
+        projectNameEn:
+          type: string
+          description: 프로젝트 이름 (영어)
+        projectNameKr:
+          type: string
+          description: 프로젝트 이름 (한국어)
+        project_effect:
+          type: array
+          description: 프로젝트 효과 코드 리스트
+          items:
+            type: string
+        project_type:
+          type: string
+          description: 프로젝트 타입 코드 리스트
+        unit_price:
+          type: number
+          description: 톤당 가격
+          format: bigdecimal
+    B2BSignInResponse:
+      title: B2BSignInResponse
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+          description: jwt 토큰 타입
+        userId:
+          type: string
+    WinclResponseData_boolean:
+      title: WinclResponseData«boolean»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: boolean
+        message:
+          type: string
+    CpInfo:
+      title: CpInfo
+      type: object
+      properties:
+        cpId:
+          type: string
+        cpNm:
+          type: string
+        cpNo:
+          type: string
+    WinclResponseData_B2BSignInResponse:
+      title: WinclResponseData«B2BSignInResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/B2BSignInResponse'
+        message:
+          type: string
+    WinclResponseData_BuyHistory:
+      title: WinclResponseData«BuyHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/BuyHistory'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

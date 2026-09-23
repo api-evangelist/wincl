@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Admin Project API
+  title: Wincl Admin Project API
   version: '1.0'
-  description: Admin Controller
+  description: Admin Project Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -39,7 +39,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«ProjectDetail»'
+                $ref: '#/components/schemas/WinclResponseDataList_ProjectDetail'
         '401':
           description: Unauthorized
         '403':
@@ -53,7 +53,7 @@ paths:
       tags:
       - Admin Project
       summary: 프로젝트 등록
-      description: '프로젝트 이미지는 upload/image 를 사용해서 추가 '
+      description: 프로젝트 이미지는 upload/image 를 사용해서 추가
       operationId: insertProjectUsingPOST
       requestBody:
         content:
@@ -66,7 +66,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ProjectResponse»'
+                $ref: '#/components/schemas/WinclResponseData_ProjectResponse'
         '201':
           description: Created
         '401':
@@ -90,7 +90,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«CertificationAgency»»'
+                $ref: '#/components/schemas/WinclResponseData_List_CertificationAgency'
         '401':
           description: Unauthorized
         '403':
@@ -112,7 +112,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+                $ref: '#/components/schemas/WinclResponseData_List_CommonCode'
         '401':
           description: Unauthorized
         '403':
@@ -134,7 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«CommonCode»»'
+                $ref: '#/components/schemas/WinclResponseData_List_CommonCode'
         '401':
           description: Unauthorized
         '403':
@@ -165,7 +165,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ProjectDetail»'
+                $ref: '#/components/schemas/WinclResponseData_ProjectDetail'
         '401':
           description: Unauthorized
         '403':
@@ -249,7 +249,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«ProjectBalanceHistory»'
+                $ref: '#/components/schemas/WinclResponseDataList_ProjectBalanceHistory'
         '401':
           description: Unauthorized
         '403':
@@ -299,68 +299,57 @@ paths:
         - global
 components:
   schemas:
-    CommonCode:
-      title: CommonCode
+    WinclResponseData_ProjectDetail:
+      title: WinclResponseData«ProjectDetail»
       type: object
       properties:
-        cd:
+        code:
           type: string
-          description: 코드
-        cd_grp:
+        data:
+          $ref: '#/components/schemas/ProjectDetail'
+        message:
           type: string
-          description: 코드 그룹
-          enum:
-          - ADMIN_AUTHORITY
-          - B2B_PARTNER_QUESTION_CATEGORY
-          - FAQ_CATEGORY
-          - NEWS_CATEGORY
-          - PROJECT_EFFECT
-          - PROJECT_TYPE
-          - QNA_TYPE
-        nm_en:
+    WinclResponseDataList_ProjectDetail:
+      title: WinclResponseDataList«ProjectDetail»
+      type: object
+      properties:
+        code:
           type: string
-          description: 영어 이름
-        nm_kr:
-          type: string
-          description: 한글 이름
-        pos:
+        currentPageNum:
           type: integer
-          description: 표시 순서
+          description: 현재 페이지 번호
           format: int32
-    ProjectEffect:
-      title: ProjectEffect
-      type: object
-      properties:
-        effectCode:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDetail'
+        message:
           type: string
-          description: 프로젝트 효과 코드
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
           enum:
-          - AFFORDABLE_AND_CLEAN_ENERGY
-          - CLEAN_WATER_AND_SANITATION
-          - CLIMATE_ACTION
-          - DECENT_WORK_AND_ECONOMIC_GROWTH
-          - GENDER_EQUALITY
-          - GOOD_HEALTH_AND_WELLBEING
-          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-          - LIFE_BELLOW_WATER
-          - LIFE_ON_LAND
-          - NO_POVERTY
-          - PARTNERSHIPS_FOR_THE_GOALS
-          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-          - QUALITY_EDUCATION
-          - REDUCED_INEQUALITIES
-          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-          - SUSTAINABLE_CITIES_AND_COMMUNITIES
-          - ZERO_HUNGER
-        effectDescriptionEn:
-          type: string
-          description: 프로젝트 효과 설명 (영어)
-        effectDescriptionKr:
-          type: string
-          description: 프로젝트 효과 설명 (한국어)
-        effectImageUrl:
-          type: string
-          description: 프로젝트 효과 이미지 URL
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
     AdminModifyProjectRequest:
       title: AdminModifyProjectRequest
       type: object
@@ -449,136 +438,6 @@ components:
           enum:
           - N
           - Y
-    AdminInsertProjectRequest:
-      title: AdminInsertProjectRequest
-      type: object
-      properties:
-        agencyRegistry:
-          description: 인증기관에 등록된 프로젝트 정보
-          $ref: '#/components/schemas/ProjectAgencyRegistry'
-        areaHectare:
-          type: number
-          description: 면적 (hectare)
-          format: bigdecimal
-        attachmentUrls:
-          type: array
-          description: 첨부 파일 URL 목록
-          items:
-            type: string
-        cd_tp_proj:
-          type: string
-          description: 프로젝트 타입 코드 리스트
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        dttm_reg_cert:
-          type: integer
-          description: 인증서 인증 날짜
-          format: int64
-        effects:
-          type: array
-          description: 프로젝트 효과
-          items:
-            $ref: '#/components/schemas/ProjectEffect'
-        img_thumbnail_proj:
-          type: string
-          description: 프로젝트 썸네일 이미지
-        introductionTextEn:
-          type: string
-          description: 소개글 (영어)
-        introductionTextKo:
-          type: string
-          description: 소개글 (한국어)
-        locationImageUrl:
-          type: string
-          description: 프로젝트 위치 URL
-        nationCode:
-          type: string
-          description: 프로젝트 생성 국가 코드
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자 이름
-        nm_serial:
-          type: string
-          description: 프로젝트 인증서 시리얼번호
-        projectNameEn:
-          type: string
-          description: 프로젝트 이름 (영어)
-        projectNameKr:
-          type: string
-          description: 프로젝트 이름 (한국어)
-        serial_end:
-          type: string
-          description: 프로젝트 인증서 시리얼 마지막 번호
-        serial_postfix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Postfix
-        serial_prefix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Prefix
-        serial_start:
-          type: string
-          description: 프로젝트 인증서 시리얼 시작 번호
-        tot_vol:
-          type: number
-          description: 총 수량
-          format: bigdecimal
-        yn_corrs_adj:
-          type: string
-          description: 상응조정률 사용 여부
-          enum:
-          - N
-          - Y
-    AdminUpdateProjectVolumeRequest:
-      title: AdminUpdateProjectVolumeRequest
-      type: object
-      properties:
-        serial_end:
-          type: string
-          description: 프로젝트 인증서 시리얼 마지막 번호
-        serial_postfix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Postfix
-        serial_prefix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Prefix
-        serial_start:
-          type: string
-          description: 프로젝트 인증서 시리얼 시작 번호
-        type:
-          type: string
-          description: + or -
-          enum:
-          - MINUS
-          - PLUS
-        value:
-          type: number
-          description: 변경할 수량 절대값
-          format: bigdecimal
     ProjectResponse:
       title: ProjectResponse
       type: object
@@ -586,6 +445,55 @@ components:
         id_proj:
           type: integer
           format: int32
+    WinclResponseDataList_ProjectBalanceHistory:
+      title: WinclResponseDataList«ProjectBalanceHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectBalanceHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ProjectBalanceHistory:
       title: ProjectBalanceHistory
       type: object
@@ -616,6 +524,34 @@ components:
         vol_before:
           type: number
           format: bigdecimal
+    CommonCode:
+      title: CommonCode
+      type: object
+      properties:
+        cd:
+          type: string
+          description: 코드
+        cd_grp:
+          type: string
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
     ProjectAgencyRegistry:
       title: ProjectAgencyRegistry
       type: object
@@ -644,6 +580,54 @@ components:
           type: integer
           description: 빈티지
           format: int32
+    CertificationAgency:
+      title: CertificationAgency
+      type: object
+      properties:
+        cert_desc:
+          type: string
+          description: 인증기관 설명
+        id_cert_agc:
+          type: integer
+          description: 인증기관 아이디
+          format: int32
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+    ProjectEffect:
+      title: ProjectEffect
+      type: object
+      properties:
+        effectCode:
+          type: string
+          description: 프로젝트 효과 코드
+          enum:
+          - AFFORDABLE_AND_CLEAN_ENERGY
+          - CLEAN_WATER_AND_SANITATION
+          - CLIMATE_ACTION
+          - DECENT_WORK_AND_ECONOMIC_GROWTH
+          - GENDER_EQUALITY
+          - GOOD_HEALTH_AND_WELLBEING
+          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+          - LIFE_BELLOW_WATER
+          - LIFE_ON_LAND
+          - NO_POVERTY
+          - PARTNERSHIPS_FOR_THE_GOALS
+          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+          - QUALITY_EDUCATION
+          - REDUCED_INEQUALITIES
+          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+          - SUSTAINABLE_CITIES_AND_COMMUNITIES
+          - ZERO_HUNGER
+        effectDescriptionEn:
+          type: string
+          description: 프로젝트 효과 설명 (영어)
+        effectDescriptionKr:
+          type: string
+          description: 프로젝트 효과 설명 (한국어)
+        effectImageUrl:
+          type: string
+          description: 프로젝트 효과 이미지 URL
     ProjectDetail:
       title: ProjectDetail
       type: object
@@ -779,133 +763,7 @@ components:
           enum:
           - N
           - Y
-    WinclResponseDataList«ProjectDetail»:
-      title: WinclResponseDataList«ProjectDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectDetail'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData«List«CommonCode»»:
-      title: WinclResponseData«List«CommonCode»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
-        message:
-          type: string
-    CertificationAgency:
-      title: CertificationAgency
-      type: object
-      properties:
-        cert_desc:
-          type: string
-          description: 인증기관 설명
-        id_cert_agc:
-          type: integer
-          description: 인증기관 아이디
-          format: int32
-        nm_cert_agc:
-          type: string
-          description: 인증기관 이름
-    WinclResponseData«ProjectDetail»:
-      title: WinclResponseData«ProjectDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ProjectDetail'
-        message:
-          type: string
-    WinclResponseDataList«ProjectBalanceHistory»:
-      title: WinclResponseDataList«ProjectBalanceHistory»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectBalanceHistory'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData«ProjectResponse»:
+    WinclResponseData_ProjectResponse:
       title: WinclResponseData«ProjectResponse»
       type: object
       properties:
@@ -915,7 +773,137 @@ components:
           $ref: '#/components/schemas/ProjectResponse'
         message:
           type: string
-    WinclResponseData«List«CertificationAgency»»:
+    AdminInsertProjectRequest:
+      title: AdminInsertProjectRequest
+      type: object
+      properties:
+        agencyRegistry:
+          description: 인증기관에 등록된 프로젝트 정보
+          $ref: '#/components/schemas/ProjectAgencyRegistry'
+        areaHectare:
+          type: number
+          description: 면적 (hectare)
+          format: bigdecimal
+        attachmentUrls:
+          type: array
+          description: 첨부 파일 URL 목록
+          items:
+            type: string
+        cd_tp_proj:
+          type: string
+          description: 프로젝트 타입 코드 리스트
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        dttm_reg_cert:
+          type: integer
+          description: 인증서 인증 날짜
+          format: int64
+        effects:
+          type: array
+          description: 프로젝트 효과
+          items:
+            $ref: '#/components/schemas/ProjectEffect'
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 썸네일 이미지
+        introductionTextEn:
+          type: string
+          description: 소개글 (영어)
+        introductionTextKo:
+          type: string
+          description: 소개글 (한국어)
+        locationImageUrl:
+          type: string
+          description: 프로젝트 위치 URL
+        nationCode:
+          type: string
+          description: 프로젝트 생성 국가 코드
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        nm_serial:
+          type: string
+          description: 프로젝트 인증서 시리얼번호
+        projectNameEn:
+          type: string
+          description: 프로젝트 이름 (영어)
+        projectNameKr:
+          type: string
+          description: 프로젝트 이름 (한국어)
+        serial_end:
+          type: string
+          description: 프로젝트 인증서 시리얼 마지막 번호
+        serial_postfix:
+          type: string
+          description: 프로젝트 인증서 시리얼 Postfix
+        serial_prefix:
+          type: string
+          description: 프로젝트 인증서 시리얼 Prefix
+        serial_start:
+          type: string
+          description: 프로젝트 인증서 시리얼 시작 번호
+        tot_vol:
+          type: number
+          description: 총 수량
+          format: bigdecimal
+        yn_corrs_adj:
+          type: string
+          description: 상응조정률 사용 여부
+          enum:
+          - N
+          - Y
+    AdminUpdateProjectVolumeRequest:
+      title: AdminUpdateProjectVolumeRequest
+      type: object
+      properties:
+        serial_end:
+          type: string
+          description: 프로젝트 인증서 시리얼 마지막 번호
+        serial_postfix:
+          type: string
+          description: 프로젝트 인증서 시리얼 Postfix
+        serial_prefix:
+          type: string
+          description: 프로젝트 인증서 시리얼 Prefix
+        serial_start:
+          type: string
+          description: 프로젝트 인증서 시리얼 시작 번호
+        type:
+          type: string
+          description: + or -
+          enum:
+          - MINUS
+          - PLUS
+        value:
+          type: number
+          description: 변경할 수량 절대값
+          format: bigdecimal
+    WinclResponseData_List_CertificationAgency:
       title: WinclResponseData«List«CertificationAgency»»
       type: object
       properties:
@@ -927,8 +915,20 @@ components:
             $ref: '#/components/schemas/CertificationAgency'
         message:
           type: string
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

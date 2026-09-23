@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Admin Product API
+  title: Wincl Admin Product API
   version: '1.0'
-  description: Admin Controller
+  description: Admin Product Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -39,7 +39,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«ProductDetail»'
+                $ref: '#/components/schemas/WinclResponseDataList_ProductDetail'
         '401':
           description: Unauthorized
         '403':
@@ -65,7 +65,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ProductResponse»'
+                $ref: '#/components/schemas/WinclResponseData_ProductResponse'
         '201':
           description: Created
         '401':
@@ -89,7 +89,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«List«HomeProduct»»'
+                $ref: '#/components/schemas/WinclResponseData_List_HomeProduct'
         '401':
           description: Unauthorized
         '403':
@@ -221,7 +221,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ProductDetail»'
+                $ref: '#/components/schemas/WinclResponseData_ProductDetail'
         '401':
           description: Unauthorized
         '403':
@@ -333,7 +333,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseDataList«ProductBalanceHistory»'
+                $ref: '#/components/schemas/WinclResponseDataList_ProductBalanceHistory'
         '401':
           description: Unauthorized
         '403':
@@ -382,6 +382,405 @@ paths:
         - global
 components:
   schemas:
+    AddHomeProductRequest:
+      title: AddHomeProductRequest
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+    WinclResponseData_ProductResponse:
+      title: WinclResponseData«ProductResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProductResponse'
+        message:
+          type: string
+    WinclResponseData_ProductDetail:
+      title: WinclResponseData«ProductDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProductDetail'
+        message:
+          type: string
+    HomeProduct:
+      title: HomeProduct
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        id_prod:
+          type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_background_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_background_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        nm_prod:
+          type: string
+          description: 상품 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        order:
+          type: string
+          description: 프로덕트 순서
+    AdminModifyProductRequest:
+      title: AdminModifyProductRequest
+      type: object
+      properties:
+        env_desc:
+          type: string
+          description: 환경효과 내용
+        env_icon:
+          type: string
+          description: 환경효과 아이콘 url
+        env_ttl:
+          type: string
+          description: 환경효과 타이틀
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_bg_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_bg_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        productDetailImageUrls:
+          type: array
+          description: 프로덕트 상세 이미지 url 목록
+          items:
+            type: string
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        productStoryEn:
+          type: string
+          description: 프로덕트 스토리 (영어)
+        productStoryKo:
+          type: string
+          description: 프로덕트 스토리 (한국어)
+        status_srv:
+          type: string
+          description: 프로덕트 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        unit_price:
+          type: integer
+          description: 톤당 가격
+          format: int32
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ProjectAgencyRegistry:
+      title: ProjectAgencyRegistry
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          description: 인증기관 ID
+          format: int32
+        averageAnnualEmissionReduction:
+          type: number
+          description: 연 평균 탄소감축량
+          format: bigdecimal
+        mechanism:
+          type: string
+          description: 메카니즘
+        methodology:
+          type: string
+          description: 방법론
+        registryId:
+          type: string
+          description: 등록 ID
+        registryUrl:
+          type: string
+          description: 인증기관 레지스트리 URL
+        vintage:
+          type: integer
+          description: 빈티지
+          format: int32
+    ProductResponse:
+      title: ProductResponse
+      type: object
+      properties:
+        id_prod:
+          type: string
+    AdminUpdateProductVolumeRequest:
+      title: AdminUpdateProductVolumeRequest
+      type: object
+      properties:
+        type:
+          type: string
+          description: + or -
+          enum:
+          - MINUS
+          - PLUS
+        value:
+          type: number
+          description: 변경할 수량 절대값
+          format: bigdecimal
+    ProjectEffect:
+      title: ProjectEffect
+      type: object
+      properties:
+        effectCode:
+          type: string
+          description: 프로젝트 효과 코드
+          enum:
+          - AFFORDABLE_AND_CLEAN_ENERGY
+          - CLEAN_WATER_AND_SANITATION
+          - CLIMATE_ACTION
+          - DECENT_WORK_AND_ECONOMIC_GROWTH
+          - GENDER_EQUALITY
+          - GOOD_HEALTH_AND_WELLBEING
+          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+          - LIFE_BELLOW_WATER
+          - LIFE_ON_LAND
+          - NO_POVERTY
+          - PARTNERSHIPS_FOR_THE_GOALS
+          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+          - QUALITY_EDUCATION
+          - REDUCED_INEQUALITIES
+          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+          - SUSTAINABLE_CITIES_AND_COMMUNITIES
+          - ZERO_HUNGER
+        effectDescriptionEn:
+          type: string
+          description: 프로젝트 효과 설명 (영어)
+        effectDescriptionKr:
+          type: string
+          description: 프로젝트 효과 설명 (한국어)
+        effectImageUrl:
+          type: string
+          description: 프로젝트 효과 이미지 URL
+    UpdateHomeProductRequest:
+      title: UpdateHomeProductRequest
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+    WinclResponseDataList_ProductDetail:
+      title: WinclResponseDataList«ProductDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDetail'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminInsertProductRequest:
+      title: AdminInsertProductRequest
+      type: object
+      properties:
+        env_desc:
+          type: string
+          description: 환경효과 내용
+        env_icon:
+          type: string
+          description: 환경효과 아이콘 url
+        env_ttl:
+          type: string
+          description: 환경효과 타이틀
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_bg_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_bg_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        minimum_buy_vol:
+          type: number
+          description: 최소 구매 수량
+          format: bigdecimal
+        productDetailImageUrls:
+          type: array
+          description: 프로덕트 상세 이미지 url 목록
+          items:
+            type: string
+        productNameEn:
+          type: string
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        productStoryEn:
+          type: string
+          description: 프로덕트 스토리 (영어)
+        productStoryKo:
+          type: string
+          description: 프로덕트 스토리 (한국어)
+        unit_price:
+          type: integer
+          description: 톤당 가격
+          format: int32
+        vol:
+          type: number
+          description: 수량
+          format: bigdecimal
+    WinclResponseDataList_ProductBalanceHistory:
+      title: WinclResponseDataList«ProductBalanceHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductBalanceHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData_List_HomeProduct:
+      title: WinclResponseData«List«HomeProduct»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeProduct'
+        message:
+          type: string
+    ProductBalanceHistory:
+      title: ProductBalanceHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        dttm_reg:
+          type: integer
+          format: int64
+        id_prod:
+          type: string
+        id_prod_bal_history:
+          type: string
+        id_req_txn:
+          type: string
+        nm_prod:
+          type: string
+        status_act:
+          type: string
+          enum:
+          - BURN
+          - HAND_OVER
+          - MINUS
+          - PLUS
+          - SELL
+        vol_after:
+          type: number
+          format: bigdecimal
+        vol_before:
+          type: number
+          format: bigdecimal
     ProductDetail:
       title: ProductDetail
       type: object
@@ -597,407 +996,8 @@ components:
           enum:
           - N
           - Y
-    AdminUpdateProductVolumeRequest:
-      title: AdminUpdateProductVolumeRequest
-      type: object
-      properties:
-        type:
-          type: string
-          description: + or -
-          enum:
-          - MINUS
-          - PLUS
-        value:
-          type: number
-          description: 변경할 수량 절대값
-          format: bigdecimal
-    ProjectEffect:
-      title: ProjectEffect
-      type: object
-      properties:
-        effectCode:
-          type: string
-          description: 프로젝트 효과 코드
-          enum:
-          - AFFORDABLE_AND_CLEAN_ENERGY
-          - CLEAN_WATER_AND_SANITATION
-          - CLIMATE_ACTION
-          - DECENT_WORK_AND_ECONOMIC_GROWTH
-          - GENDER_EQUALITY
-          - GOOD_HEALTH_AND_WELLBEING
-          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-          - LIFE_BELLOW_WATER
-          - LIFE_ON_LAND
-          - NO_POVERTY
-          - PARTNERSHIPS_FOR_THE_GOALS
-          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-          - QUALITY_EDUCATION
-          - REDUCED_INEQUALITIES
-          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-          - SUSTAINABLE_CITIES_AND_COMMUNITIES
-          - ZERO_HUNGER
-        effectDescriptionEn:
-          type: string
-          description: 프로젝트 효과 설명 (영어)
-        effectDescriptionKr:
-          type: string
-          description: 프로젝트 효과 설명 (한국어)
-        effectImageUrl:
-          type: string
-          description: 프로젝트 효과 이미지 URL
-    WinclResponseDataList«ProductDetail»:
-      title: WinclResponseDataList«ProductDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductDetail'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    UpdateHomeProductRequest:
-      title: UpdateHomeProductRequest
-      type: object
-      properties:
-        order:
-          type: integer
-          format: int32
-    AdminModifyProductRequest:
-      title: AdminModifyProductRequest
-      type: object
-      properties:
-        env_desc:
-          type: string
-          description: 환경효과 내용
-        env_icon:
-          type: string
-          description: 환경효과 아이콘 url
-        env_ttl:
-          type: string
-          description: 환경효과 타이틀
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_bg_prod:
-          type: string
-          description: 프로덕트 배경 이미지 url
-        img_mobile_bg_prod:
-          type: string
-          description: 프로덕트 모바일 배경 이미지 url
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일 이미지 url
-        minimum_buy_vol:
-          type: number
-          description: 최소 구매 수량
-          format: bigdecimal
-        productDetailImageUrls:
-          type: array
-          description: 프로덕트 상세 이미지 url 목록
-          items:
-            type: string
-        productNameEn:
-          type: string
-          description: 상품 이름 (영어)
-        productNameKr:
-          type: string
-          description: 상품 이름 (한국어)
-        productStoryEn:
-          type: string
-          description: 프로덕트 스토리 (영어)
-        productStoryKo:
-          type: string
-          description: 프로덕트 스토리 (한국어)
-        status_srv:
-          type: string
-          description: 프로덕트 상태
-          enum:
-          - ACTIVE
-          - DELETED
-          - INACTIVE
-          - READY
-        unit_price:
-          type: integer
-          description: 톤당 가격
-          format: int32
-    HomeProduct:
-      title: HomeProduct
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 프로젝트 생성국가
-        id_prod:
-          type: string
-          description: 프로덕트 아이디
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_background_prod:
-          type: string
-          description: 프로덕트 배경 이미지 url
-        img_mobile_background_prod:
-          type: string
-          description: 프로덕트 모바일 배경 이미지 url
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일 이미지 url
-        nm_prod:
-          type: string
-          description: 상품 이름
-        nm_proj:
-          type: string
-          description: 프로젝트 이름
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자 이름
-        order:
-          type: string
-          description: 프로덕트 순서
-    AddHomeProductRequest:
-      title: AddHomeProductRequest
-      type: object
-      properties:
-        order:
-          type: integer
-          format: int32
-    WinclResponseData«ProductDetail»:
-      title: WinclResponseData«ProductDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ProductDetail'
-        message:
-          type: string
-    WinclResponseDataList«ProductBalanceHistory»:
-      title: WinclResponseDataList«ProductBalanceHistory»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductBalanceHistory'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData«List«HomeProduct»»:
-      title: WinclResponseData«List«HomeProduct»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeProduct'
-        message:
-          type: string
-    AdminInsertProductRequest:
-      title: AdminInsertProductRequest
-      type: object
-      properties:
-        env_desc:
-          type: string
-          description: 환경효과 내용
-        env_icon:
-          type: string
-          description: 환경효과 아이콘 url
-        env_ttl:
-          type: string
-          description: 환경효과 타이틀
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_bg_prod:
-          type: string
-          description: 프로덕트 배경 이미지 url
-        img_mobile_bg_prod:
-          type: string
-          description: 프로덕트 모바일 배경 이미지 url
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일 이미지 url
-        minimum_buy_vol:
-          type: number
-          description: 최소 구매 수량
-          format: bigdecimal
-        productDetailImageUrls:
-          type: array
-          description: 프로덕트 상세 이미지 url 목록
-          items:
-            type: string
-        productNameEn:
-          type: string
-          description: 상품 이름 (영어)
-        productNameKr:
-          type: string
-          description: 상품 이름 (한국어)
-        productStoryEn:
-          type: string
-          description: 프로덕트 스토리 (영어)
-        productStoryKo:
-          type: string
-          description: 프로덕트 스토리 (한국어)
-        unit_price:
-          type: integer
-          description: 톤당 가격
-          format: int32
-        vol:
-          type: number
-          description: 수량
-          format: bigdecimal
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ProjectAgencyRegistry:
-      title: ProjectAgencyRegistry
-      type: object
-      properties:
-        agencyId:
-          type: integer
-          description: 인증기관 ID
-          format: int32
-        averageAnnualEmissionReduction:
-          type: number
-          description: 연 평균 탄소감축량
-          format: bigdecimal
-        mechanism:
-          type: string
-          description: 메카니즘
-        methodology:
-          type: string
-          description: 방법론
-        registryId:
-          type: string
-          description: 등록 ID
-        registryUrl:
-          type: string
-          description: 인증기관 레지스트리 URL
-        vintage:
-          type: integer
-          description: 빈티지
-          format: int32
-    WinclResponseData«ProductResponse»:
-      title: WinclResponseData«ProductResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ProductResponse'
-        message:
-          type: string
-    ProductResponse:
-      title: ProductResponse
-      type: object
-      properties:
-        id_prod:
-          type: string
-    ProductBalanceHistory:
-      title: ProductBalanceHistory
-      type: object
-      properties:
-        amt:
-          type: number
-          format: bigdecimal
-        dttm_reg:
-          type: integer
-          format: int64
-        id_prod:
-          type: string
-        id_prod_bal_history:
-          type: string
-        id_req_txn:
-          type: string
-        nm_prod:
-          type: string
-        status_act:
-          type: string
-          enum:
-          - BURN
-          - HAND_OVER
-          - MINUS
-          - PLUS
-          - SELL
-        vol_after:
-          type: number
-          format: bigdecimal
-        vol_before:
-          type: number
-          format: bigdecimal
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

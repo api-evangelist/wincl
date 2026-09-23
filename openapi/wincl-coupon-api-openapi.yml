@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Coupon API
+  title: Wincl Coupon API
   version: '1.0'
-  description: Admin Controller
+  description: Coupon Controller
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -14,8 +14,10 @@ paths:
     delete:
       tags:
       - Coupon
-      summary: 이벤트, 매직쿠폰 및 연결된 개인쿠폰들을 삭제합니다.
-      description: '`eventId`는 `/magic/register`에 사용한 값과 같아야 합니다.<br>이벤트, 매직쿠폰 및 발행된 모든 개인쿠폰을 삭제합니다.'
+      summary: 이벤트, 매직쿠폰 및 연결된 개인쿠폰들을 삭제합니다
+      description: '`eventId`는 `/magic/register`에 사용한 값과 같아야 합니다.
+
+        이벤트, 매직쿠폰 및 발행된 모든 개인쿠폰을 삭제합니다.'
       operationId: deleteEventUsingDELETE
       parameters:
       - name: eventId
@@ -31,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«DeleteEventResult»'
+                $ref: '#/components/schemas/WinclResponseData_DeleteEventResult'
         '204':
           description: No Content
         '401':
@@ -45,8 +47,12 @@ paths:
     post:
       tags:
       - Coupon
-      summary: 2. 이벤트용 사용자 쿠폰을 벌크로 발행합니다.
-      description: '`eventId, magicCouponCode, amount`는 `/magic/register`에 사용한 값과 같아야 합니다.<br>이벤트 참여 1개당 개인쿠폰 1개씩 서버 내부에서 연결됩니다.<br>발행할 개인쿠폰 갯수 (`couponCount`)도 윈클로부터 받아야 합니다.'
+      summary: 2. 이벤트용 사용자 쿠폰을 벌크로 발행합니다
+      description: '`eventId, magicCouponCode, amount`는 `/magic/register`에 사용한 값과 같아야 합니다.
+
+        이벤트 참여 1개당 개인쿠폰 1개씩 서버 내부에서 연결됩니다.
+
+        발행할 개인쿠폰 갯수 (`couponCount`)도 윈클로부터 받아야 합니다.'
       operationId: issueIndividualCouponsUsingPOST
       requestBody:
         content:
@@ -59,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«IssueCouponsResult»'
+                $ref: '#/components/schemas/WinclResponseData_IssueCouponsResult'
         '201':
           description: Created
         '401':
@@ -75,8 +81,20 @@ paths:
     post:
       tags:
       - Coupon
-      summary: 1. 이벤트용 매직 쿠폰을 발행합니다.
-      description: '호출하면 `event*` 필드들로 이벤트를 생성한 후, 나머지 필드들로 매직쿠폰을 생성합니다.<br>`eventId`는 아무 값이나 쓰면 되고, `eventName, eventDescription`은 윈클로부터 받습니다.<br>매직쿠폰은 모든 이벤트 참여자가 공용으로 사용하는 단일쿠폰입니다.<br>`magicCouponCode, productId`는 윈클에서 정해서 알려주어야 합니다.<br>`senderUserId`는 상품을 벌크구매한 윈클 대표 가입자ID이고 `creditId`는 윈클의 구매ID로 둘 다 내부에서 알 수 있습니다.<br>`productId`는 상품ID 입니다. (예: 캄보이아 = 1676884519406W4iqG0qk2W)<br>지급 금액 (`amount`)은 윈클에서 결정하는 각 이벤트 참여자에게 지급할 배출권 양(톤)입니다.'
+      summary: 1. 이벤트용 매직 쿠폰을 발행합니다
+      description: '호출하면 `event*` 필드들로 이벤트를 생성한 후, 나머지 필드들로 매직쿠폰을 생성합니다.
+
+        `eventId`는 아무 값이나 쓰면 되고, `eventName, eventDescription`은 윈클로부터 받습니다.
+
+        매직쿠폰은 모든 이벤트 참여자가 공용으로 사용하는 단일쿠폰입니다.
+
+        `magicCouponCode, productId`는 윈클에서 정해서 알려주어야 합니다.
+
+        `senderUserId`는 상품을 벌크구매한 윈클 대표 가입자ID이고 `creditId`는 윈클의 구매ID로 둘 다 내부에서 알 수 있습니다.
+
+        `productId`는 상품ID 입니다. (예: 캄보이아 = 1676884519406W4iqG0qk2W)
+
+        지급 금액 (`amount`)은 윈클에서 결정하는 각 이벤트 참여자에게 지급할 배출권 양(톤)입니다.'
       operationId: registerMagicCouponsUsingPOST
       requestBody:
         content:
@@ -89,7 +107,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«WinclCoupon»'
+                $ref: '#/components/schemas/WinclResponseData_WinclCoupon'
         '201':
           description: Created
         '401':
@@ -119,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«GatherEventApplyResult»'
+                $ref: '#/components/schemas/WinclResponseData_GatherEventApplyResult'
         '201':
           description: Created
         '401':
@@ -136,7 +154,9 @@ paths:
       tags:
       - Coupon
       summary: 4. 쿠폰을 사용하여 탄소배출권을 얻습니다. (접근토큰이 필요함)
-      description: 가입 후 이벤트 때 받았던 매직쿠폰 코드를 입력하면, 사용자 지갑에 배출권을 넣어줍니다.<br>서버 내부에서는 개인쿠폰으로 변환하고, 배출권을 윈클 지갑에서 꺼내 개인 지갑으로 이동시킵니다.
+      description: '가입 후 이벤트 때 받았던 매직쿠폰 코드를 입력하면, 사용자 지갑에 배출권을 넣어줍니다.
+
+        서버 내부에서는 개인쿠폰으로 변환하고, 배출권을 윈클 지갑에서 꺼내 개인 지갑으로 이동시킵니다.'
       operationId: consumeMagicCouponUsingPOST
       requestBody:
         content:
@@ -149,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ConsumeCouponResult»'
+                $ref: '#/components/schemas/WinclResponseData_ConsumeCouponResult'
         '201':
           description: Created
         '401':
@@ -171,17 +191,29 @@ components:
           type: string
         magicCouponCode:
           type: string
-    WinclResponseData«GatherEventApplyResult»:
-      title: WinclResponseData«GatherEventApplyResult»
+    RegisterMagicCouponRequest:
+      title: RegisterMagicCouponRequest
       type: object
       properties:
-        code:
+        amount:
+          type: number
+          description: 참자가에게 지급할 배출권 양 (톤)
+          format: bigdecimal
+        creditId:
           type: string
-        data:
-          $ref: '#/components/schemas/GatherEventApplyResult'
-        message:
+        eventDescription:
           type: string
-    WinclResponseData«IssueCouponsResult»:
+        eventId:
+          type: string
+        eventName:
+          type: string
+        magicCouponCode:
+          type: string
+        productId:
+          type: string
+        senderUserId:
+          type: string
+    WinclResponseData_IssueCouponsResult:
       title: WinclResponseData«IssueCouponsResult»
       type: object
       properties:
@@ -189,53 +221,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/IssueCouponsResult'
-        message:
-          type: string
-    DeleteEventResult:
-      title: DeleteEventResult
-      type: object
-      properties:
-        deleteed:
-          type: boolean
-        eventId:
-          type: string
-    GatherEventApplyResult:
-      title: GatherEventApplyResult
-      type: object
-      properties:
-        eventId:
-          type: string
-        gathered:
-          type: boolean
-    WinclResponseData«ConsumeCouponResult»:
-      title: WinclResponseData«ConsumeCouponResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ConsumeCouponResult'
-        message:
-          type: string
-    IssueCouponsResult:
-      title: IssueCouponsResult
-      type: object
-      properties:
-        eventId:
-          type: string
-        issuedCount:
-          type: integer
-          format: int32
-        magicCouponCode:
-          type: string
-    WinclResponseData«WinclCoupon»:
-      title: WinclResponseData«WinclCoupon»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/WinclCoupon'
         message:
           type: string
     WinclCoupon:
@@ -288,16 +273,6 @@ components:
           type: string
         magicCouponCode:
           type: string
-    WinclResponseData«DeleteEventResult»:
-      title: WinclResponseData«DeleteEventResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/DeleteEventResult'
-        message:
-          type: string
     ConsumeCouponResult:
       title: ConsumeCouponResult
       type: object
@@ -313,28 +288,6 @@ components:
           - UNUSED
           - USED
           - USING
-    RegisterMagicCouponRequest:
-      title: RegisterMagicCouponRequest
-      type: object
-      properties:
-        amount:
-          type: number
-          description: 참자가에게 지급할 배출권 양 (톤)
-          format: bigdecimal
-        creditId:
-          type: string
-        eventDescription:
-          type: string
-        eventId:
-          type: string
-        eventName:
-          type: string
-        magicCouponCode:
-          type: string
-        productId:
-          type: string
-        senderUserId:
-          type: string
     GatherEventAnswersRequest:
       title: GatherEventAnswersRequest
       type: object
@@ -354,8 +307,75 @@ components:
         questionSetId:
           type: string
           description: 질문 세트 ID (한 이벤트에 질문지 세트가 여럿인 경우 구별)
+    DeleteEventResult:
+      title: DeleteEventResult
+      type: object
+      properties:
+        deleteed:
+          type: boolean
+        eventId:
+          type: string
+    WinclResponseData_WinclCoupon:
+      title: WinclResponseData«WinclCoupon»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/WinclCoupon'
+        message:
+          type: string
+    WinclResponseData_DeleteEventResult:
+      title: WinclResponseData«DeleteEventResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/DeleteEventResult'
+        message:
+          type: string
+    IssueCouponsResult:
+      title: IssueCouponsResult
+      type: object
+      properties:
+        eventId:
+          type: string
+        issuedCount:
+          type: integer
+          format: int32
+        magicCouponCode:
+          type: string
+    WinclResponseData_GatherEventApplyResult:
+      title: WinclResponseData«GatherEventApplyResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GatherEventApplyResult'
+        message:
+          type: string
+    GatherEventApplyResult:
+      title: GatherEventApplyResult
+      type: object
+      properties:
+        eventId:
+          type: string
+        gathered:
+          type: boolean
+    WinclResponseData_ConsumeCouponResult:
+      title: WinclResponseData«ConsumeCouponResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ConsumeCouponResult'
+        message:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT

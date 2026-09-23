@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wincl Admin Order API
+  title: Wincl Order API
   version: '1.0'
-  description: Admin Controller
+  description: 결제 전 주문 단계
 servers:
 - url: https://api.wincl.io:443
   description: Inferred Url
@@ -28,7 +28,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«OrderWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_OrderWebResponse'
         '201':
           description: Created
         '401':
@@ -63,7 +63,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«OrderWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_OrderWebResponse'
         '201':
           description: Created
         '401':
@@ -97,7 +97,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ConfirmPaymentWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_ConfirmPaymentWebResponse'
         '401':
           description: Unauthorized
         '403':
@@ -126,7 +126,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«ConfirmPaymentWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_ConfirmPaymentWebResponse'
         '201':
           description: Created
         '401':
@@ -157,7 +157,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WinclResponseData«StripeCreatePaymentIntentWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_StripeCreatePaymentIntentWebResponse'
         '201':
           description: Created
         '401':
@@ -228,7 +228,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«OrderHistoryWebResponse»'
+                $ref: '#/components/schemas/WinclResponseData_OrderHistoryWebResponse'
         '401':
           description: Unauthorized
         '403':
@@ -292,7 +292,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WinclResponseData«GetOrderSheetResultData»'
+                $ref: '#/components/schemas/WinclResponseData_GetOrderSheetResultData'
         '401':
           description: Unauthorized
         '403':
@@ -306,7 +306,19 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData«OrderHistoryWebResponse»:
+    CancelOrderRequest:
+      title: CancelOrderRequest
+      type: object
+      properties:
+        orderId:
+          type: string
+    OrderWebResponse:
+      title: OrderWebResponse
+      type: object
+      properties:
+        id_ord:
+          type: string
+    WinclResponseData_OrderHistoryWebResponse:
       title: WinclResponseData«OrderHistoryWebResponse»
       type: object
       properties:
@@ -316,13 +328,32 @@ components:
           $ref: '#/components/schemas/OrderHistoryWebResponse'
         message:
           type: string
-    StripeReserveOrderWebRequest:
-      title: StripeReserveOrderWebRequest
+    WinclResponse:
+      title: WinclResponse
       type: object
       properties:
-        id_ord:
+        code:
           type: string
-        payment_intent:
+        message:
+          type: string
+    OrderOneDollarProductWebRequest:
+      title: OrderOneDollarProductWebRequest
+      type: object
+      properties:
+        currency:
+          type: string
+          enum:
+          - KRW
+          - USD
+    WinclResponseData_ConfirmPaymentWebResponse:
+      title: WinclResponseData«ConfirmPaymentWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ConfirmPaymentWebResponse'
+        message:
           type: string
     GetOrderSheetResultData:
       title: GetOrderSheetResultData
@@ -342,53 +373,11 @@ components:
         totalPrice:
           type: number
           format: bigdecimal
-    WinclResponseData«ConfirmPaymentWebResponse»:
-      title: WinclResponseData«ConfirmPaymentWebResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ConfirmPaymentWebResponse'
-        message:
-          type: string
     StripeCreatePaymentIntentWebRequest:
       title: StripeCreatePaymentIntentWebRequest
       type: object
       properties:
         id_ord:
-          type: string
-    GetOrderSheetItem:
-      title: GetOrderSheetItem
-      type: object
-      properties:
-        creditAmount:
-          type: number
-          format: bigdecimal
-        creditPrice:
-          type: number
-          format: bigdecimal
-        orderItemId:
-          type: string
-        productName:
-          type: string
-    WinclResponseData«GetOrderSheetResultData»:
-      title: WinclResponseData«GetOrderSheetResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/GetOrderSheetResultData'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
           type: string
     StripeCreatePaymentIntentWebResponse:
       title: StripeCreatePaymentIntentWebResponse
@@ -401,36 +390,29 @@ components:
         price_tot_usd:
           type: number
           format: bigdecimal
-    OrderOneDollarProductWebRequest:
-      title: OrderOneDollarProductWebRequest
-      type: object
-      properties:
-        currency:
-          type: string
-          enum:
-          - KRW
-          - USD
-    CancelOrderRequest:
-      title: CancelOrderRequest
-      type: object
-      properties:
-        orderId:
-          type: string
-    WinclResponseData«OrderWebResponse»:
-      title: WinclResponseData«OrderWebResponse»
+    WinclResponseData_StripeCreatePaymentIntentWebResponse:
+      title: WinclResponseData«StripeCreatePaymentIntentWebResponse»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/OrderWebResponse'
+          $ref: '#/components/schemas/StripeCreatePaymentIntentWebResponse'
         message:
           type: string
-    OrderWebResponse:
-      title: OrderWebResponse
+    StripeReserveOrderWebRequest:
+      title: StripeReserveOrderWebRequest
       type: object
       properties:
         id_ord:
+          type: string
+        payment_intent:
+          type: string
+    StripeConfirmOrderWebRequest:
+      title: StripeConfirmOrderWebRequest
+      type: object
+      properties:
+        payment_intent:
           type: string
     OrderHistoryWebResponse:
       title: OrderHistoryWebResponse
@@ -446,6 +428,16 @@ components:
         price_tot:
           type: number
           format: bigdecimal
+    WinclResponseData_OrderWebResponse:
+      title: WinclResponseData«OrderWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OrderWebResponse'
+        message:
+          type: string
     ConfirmPaymentWebResponse:
       title: ConfirmPaymentWebResponse
       type: object
@@ -473,30 +465,38 @@ components:
             type: string
         success:
           type: boolean
-    StripeConfirmOrderWebRequest:
-      title: StripeConfirmOrderWebRequest
-      type: object
-      properties:
-        payment_intent:
-          type: string
-    WinclResponseData«StripeCreatePaymentIntentWebResponse»:
-      title: WinclResponseData«StripeCreatePaymentIntentWebResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/StripeCreatePaymentIntentWebResponse'
-        message:
-          type: string
     OrderWebRequest:
       title: OrderWebRequest
       type: object
       properties:
         currency:
           type: string
+    WinclResponseData_GetOrderSheetResultData:
+      title: WinclResponseData«GetOrderSheetResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetOrderSheetResultData'
+        message:
+          type: string
+    GetOrderSheetItem:
+      title: GetOrderSheetItem
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: bigdecimal
+        creditPrice:
+          type: number
+          format: bigdecimal
+        orderItemId:
+          type: string
+        productName:
+          type: string
   securitySchemes:
-    Bearer 토큰 값:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT
