@@ -689,7 +689,7 @@ apis:
   - type: AgenticAccess
     url: agentic-access/wincl-agentic-access.yml
 - aid: wincl:wincl-health-check-controller-api
-  name: WinCL health-check-controller API
+  name: WinCL Health Check Controller API
   description: Health Check Controller
   humanURL: https://www.wincl.io/wincl-api
   baseURL: https://api.wincl.io

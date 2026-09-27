@@ -122,47 +122,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseDataList_User:
-      title: WinclResponseDataList«User»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
     UserDetail:
       title: UserDetail
       type: object
@@ -223,6 +182,57 @@ components:
           type: integer
           description: 가입 유닉스 시간
           format: int64
+    WinclResponseDataList_User:
+      title: WinclResponseDataList«User»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData_UserDetail:
+      title: WinclResponseData«UserDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserDetail'
+        message:
+          type: string
     User:
       title: User
       type: object
@@ -292,16 +302,6 @@ components:
           - DEREGISTERED
           - REGISTERED
           - REGISTERING
-    WinclResponseData_UserDetail:
-      title: WinclResponseData«UserDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UserDetail'
-        message:
-          type: string
   securitySchemes:
     Bearer:
       type: http

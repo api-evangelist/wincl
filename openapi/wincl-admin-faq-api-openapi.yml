@@ -211,6 +211,16 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_Faq:
+      title: WinclResponseData«Faq»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Faq'
+        message:
+          type: string
     WinclResponse:
       title: WinclResponse
       type: object
@@ -219,47 +229,42 @@ components:
           type: string
         message:
           type: string
-    WinclResponseDataList_Faq:
-      title: WinclResponseDataList«Faq»
+    FaqCategory:
+      title: FaqCategory
       type: object
       properties:
-        code:
+        cd:
           type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Faq'
-        message:
+          description: FAQ 카테고리 코드
+        nm_en:
           type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
+          description: FAQ 카테고리 영어 이름
+        nm_kr:
           type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
+          description: FAQ 카테고리 한글 이름
+        seq:
           type: integer
-          description: 전체 아이템 개수
+          description: FAQ 카테고리 순번
           format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
+    UpdateFaqRequest:
+      title: UpdateFaqRequest
+      type: object
+      properties:
+        answer_en:
+          type: string
+          description: FAQ 답변 영어
+        answer_kr:
+          type: string
+          description: FAQ 답변 한글
+        cd_faq_cate:
+          type: string
+          description: FAQ 카테고리 코드
+        quest_en:
+          type: string
+          description: FAQ 질문 영어
+        quest_kr:
+          type: string
+          description: FAQ 질문 한글
     CreateFaqRequest:
       title: CreateFaqRequest
       type: object
@@ -301,32 +306,46 @@ components:
         questionKr:
           type: string
           description: FAQ 질문 한글
-    WinclResponseData_Faq:
-      title: WinclResponseData«Faq»
+    WinclResponseDataList_Faq:
+      title: WinclResponseDataList«Faq»
       type: object
       properties:
         code:
           type: string
-        data:
-          $ref: '#/components/schemas/Faq'
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Faq'
         message:
           type: string
-    FaqCategory:
-      title: FaqCategory
-      type: object
-      properties:
-        cd:
-          type: string
-          description: FAQ 카테고리 코드
-        nm_en:
-          type: string
-          description: FAQ 카테고리 영어 이름
-        nm_kr:
-          type: string
-          description: FAQ 카테고리 한글 이름
-        seq:
+        pageSize:
           type: integer
-          description: FAQ 카테고리 순번
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
           format: int32
     WinclResponseData_List_FaqCategory:
       title: WinclResponseData«List«FaqCategory»»
@@ -340,25 +359,6 @@ components:
             $ref: '#/components/schemas/FaqCategory'
         message:
           type: string
-    UpdateFaqRequest:
-      title: UpdateFaqRequest
-      type: object
-      properties:
-        answer_en:
-          type: string
-          description: FAQ 답변 영어
-        answer_kr:
-          type: string
-          description: FAQ 답변 한글
-        cd_faq_cate:
-          type: string
-          description: FAQ 카테고리 코드
-        quest_en:
-          type: string
-          description: FAQ 질문 영어
-        quest_kr:
-          type: string
-          description: FAQ 질문 한글
   securitySchemes:
     Bearer:
       type: http

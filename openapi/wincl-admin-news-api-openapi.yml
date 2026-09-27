@@ -284,12 +284,6 @@ paths:
         - global
 components:
   schemas:
-    DeleteNewsCategoryRequest:
-      title: DeleteNewsCategoryRequest
-      type: object
-      properties:
-        code:
-          type: string
     News:
       title: News
       type: object
@@ -309,6 +303,16 @@ components:
         updateTimestamp:
           type: integer
           format: int64
+    WinclResponseData_News:
+      title: WinclResponseData«News»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/News'
+        message:
+          type: string
     WinclResponse:
       title: WinclResponse
       type: object
@@ -317,63 +321,17 @@ components:
           type: string
         message:
           type: string
-    CommonCode:
-      title: CommonCode
-      type: object
-      properties:
-        cd:
-          type: string
-          description: 코드
-        cd_grp:
-          type: string
-          description: 코드 그룹
-          enum:
-          - ADMIN_AUTHORITY
-          - B2B_PARTNER_QUESTION_CATEGORY
-          - FAQ_CATEGORY
-          - NEWS_CATEGORY
-          - PROJECT_EFFECT
-          - PROJECT_TYPE
-          - QNA_TYPE
-        nm_en:
-          type: string
-          description: 영어 이름
-        nm_kr:
-          type: string
-          description: 한글 이름
-        pos:
-          type: integer
-          description: 표시 순서
-          format: int32
-    UpdateNewsRequest:
-      title: UpdateNewsRequest
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        title:
-          type: string
-    AddNewsRequest:
-      title: AddNewsRequest
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        title:
-          type: string
-    AddNewsCategoryRequest:
-      title: AddNewsCategoryRequest
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
       type: object
       properties:
         code:
           type: string
-        nameEn:
-          type: string
-        nameKr:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
           type: string
     WinclResponseDataList_News:
       title: WinclResponseDataList«News»
@@ -416,28 +374,70 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    WinclResponseData_News:
-      title: WinclResponseData«News»
+    AddNewsCategoryRequest:
+      title: AddNewsCategoryRequest
       type: object
       properties:
         code:
           type: string
-        data:
-          $ref: '#/components/schemas/News'
-        message:
+        nameEn:
           type: string
-    WinclResponseData_List_CommonCode:
-      title: WinclResponseData«List«CommonCode»»
+        nameKr:
+          type: string
+    DeleteNewsCategoryRequest:
+      title: DeleteNewsCategoryRequest
       type: object
       properties:
         code:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
-        message:
+    AddNewsRequest:
+      title: AddNewsRequest
+      type: object
+      properties:
+        category:
           type: string
+        contents:
+          type: string
+        title:
+          type: string
+    UpdateNewsRequest:
+      title: UpdateNewsRequest
+      type: object
+      properties:
+        category:
+          type: string
+        contents:
+          type: string
+        title:
+          type: string
+    CommonCode:
+      title: CommonCode
+      type: object
+      properties:
+        cd:
+          type: string
+          description: 코드
+        cd_grp:
+          type: string
+          description: 코드 그룹
+          enum:
+          - ADMIN_AUTHORITY
+          - B2B_PARTNER_QUESTION_CATEGORY
+          - FAQ_CATEGORY
+          - NEWS_CATEGORY
+          - PROJECT_EFFECT
+          - PROJECT_TYPE
+          - QNA_TYPE
+        nm_en:
+          type: string
+          description: 영어 이름
+        nm_kr:
+          type: string
+          description: 한글 이름
+        pos:
+          type: integer
+          description: 표시 순서
+          format: int32
   securitySchemes:
     Bearer:
       type: http

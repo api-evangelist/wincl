@@ -197,6 +197,65 @@ paths:
         - global
 components:
   schemas:
+    QnaDetail:
+      title: QnaDetail
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_answer:
+          type: integer
+          description: 답변 시간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_adm_reg:
+          type: string
+          description: 답변한 운영자 아이디
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        nm_adm:
+          type: string
+          description: 답변한 운영자 이름
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     WinclResponseDataList_Qna:
       title: WinclResponseDataList«Qna»
       type: object
@@ -276,74 +335,8 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     AdminInsertAnswerRequest:
       title: AdminInsertAnswerRequest
-      type: object
-      properties:
-        answer:
-          type: string
-          description: 답변 내용
-    QnaDetail:
-      title: QnaDetail
-      type: object
-      properties:
-        answer:
-          type: string
-          description: 답변 내용
-        cd_tp_qna:
-          type: string
-          description: Qna 타입
-          enum:
-          - ACCOUNT
-          - GIFT_AND_DECLARATION
-          - OTHERS
-          - PAYMENT
-        cts:
-          type: string
-          description: Qna 내용
-        dttm_answer:
-          type: integer
-          description: 답변 시간
-          format: int64
-        dttm_reg:
-          type: integer
-          description: Qna 등록일자
-          format: int64
-        id_adm_reg:
-          type: string
-          description: 답변한 운영자 아이디
-        id_login:
-          type: string
-          description: id_login
-        id_qna:
-          type: string
-          description: Qna 아이디
-        id_usr:
-          type: string
-          description: 유저 아이디
-        nm_adm:
-          type: string
-          description: 답변한 운영자 이름
-        status_prog:
-          type: string
-          description: Qna 진행 상태
-          enum:
-          - CANCEL
-          - COMPLETE
-          - PENDING
-        ttl:
-          type: string
-          description: Qna 타이틀
-    AdminUpdateAnswerRequest:
-      title: AdminUpdateAnswerRequest
       type: object
       properties:
         answer:
@@ -359,6 +352,13 @@ components:
           $ref: '#/components/schemas/QnaDetail'
         message:
           type: string
+    AdminUpdateAnswerRequest:
+      title: AdminUpdateAnswerRequest
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
   securitySchemes:
     Bearer:
       type: http

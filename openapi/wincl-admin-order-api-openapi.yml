@@ -91,6 +91,40 @@ components:
           $ref: '#/components/schemas/Order'
         message:
           type: string
+    Order:
+      title: Order
+      type: object
+      properties:
+        amt_tot:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        id_ord:
+          type: string
+        id_usr:
+          type: string
+        price_tot:
+          type: number
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          format: bigdecimal
+        status_prog:
+          type: string
+          enum:
+          - AB_ROLLBACK
+          - CANCELED
+          - FAIL
+          - PROCESSING
+          - ROLLBACK
+          - SUCCESS
+        unit_price_avg:
+          type: number
+          format: bigdecimal
+        unit_price_avg_usd:
+          type: number
+          format: bigdecimal
     WinclResponseDataList_Order:
       title: WinclResponseDataList«Order»
       type: object
@@ -132,40 +166,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    Order:
-      title: Order
-      type: object
-      properties:
-        amt_tot:
-          type: number
-          format: bigdecimal
-        currency:
-          type: string
-        id_ord:
-          type: string
-        id_usr:
-          type: string
-        price_tot:
-          type: number
-          format: bigdecimal
-        price_tot_usd:
-          type: number
-          format: bigdecimal
-        status_prog:
-          type: string
-          enum:
-          - AB_ROLLBACK
-          - CANCELED
-          - FAIL
-          - PROCESSING
-          - ROLLBACK
-          - SUCCESS
-        unit_price_avg:
-          type: number
-          format: bigdecimal
-        unit_price_avg_usd:
-          type: number
-          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

@@ -223,55 +223,6 @@ paths:
         - global
 components:
   schemas:
-    AdminTabResponse:
-      title: AdminTabResponse
-      type: object
-      properties:
-        adminTabs:
-          type: array
-          items:
-            type: string
-            enum:
-            - ADMIN
-            - BANNER
-            - CERTIFICATE
-            - CREDIT
-            - FAQ
-            - GIFT_RECEIVE
-            - GIFT_SEND
-            - HEDERA
-            - HOME_PRODUCT
-            - INQUIRY
-            - NEWS
-            - NOTICE
-            - PAYMENT
-            - PRODUCT
-            - PROJECT
-            - REFUND
-            - REWARD_COMPANY
-            - REWARD_ISSUED
-            - REWARD_ORDER
-            - REWARD_PAYMENT_LOG
-            - REWARD_PROGRAM
-            - USER
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData_AdminUser:
-      title: WinclResponseData«AdminUser»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/AdminUser'
-        message:
-          type: string
     CommonCode:
       title: CommonCode
       type: object
@@ -300,6 +251,36 @@ components:
           type: integer
           description: 표시 순서
           format: int32
+    WinclResponseData_AdminTabResponse:
+      title: WinclResponseData«AdminTabResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminTabResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
     CreateAdminRequest:
       title: CreateAdminRequest
       type: object
@@ -368,14 +349,47 @@ components:
             - USER
         name:
           type: string
-    WinclResponseData_AdminTabResponse:
-      title: WinclResponseData«AdminTabResponse»
+    AdminTabResponse:
+      title: AdminTabResponse
+      type: object
+      properties:
+        adminTabs:
+          type: array
+          items:
+            type: string
+            enum:
+            - ADMIN
+            - BANNER
+            - CERTIFICATE
+            - CREDIT
+            - FAQ
+            - GIFT_RECEIVE
+            - GIFT_SEND
+            - HEDERA
+            - HOME_PRODUCT
+            - INQUIRY
+            - NEWS
+            - NOTICE
+            - PAYMENT
+            - PRODUCT
+            - PROJECT
+            - REFUND
+            - REWARD_COMPANY
+            - REWARD_ISSUED
+            - REWARD_ORDER
+            - REWARD_PAYMENT_LOG
+            - REWARD_PROGRAM
+            - USER
+    WinclResponseData_List_AdminUser:
+      title: WinclResponseData«List«AdminUser»»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/AdminTabResponse'
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUser'
         message:
           type: string
     AdminUser:
@@ -400,28 +414,14 @@ components:
           type: string
         nm_adm:
           type: string
-    WinclResponseData_List_AdminUser:
-      title: WinclResponseData«List«AdminUser»»
+    WinclResponseData_AdminUser:
+      title: WinclResponseData«AdminUser»
       type: object
       properties:
         code:
           type: string
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdminUser'
-        message:
-          type: string
-    WinclResponseData_List_CommonCode:
-      title: WinclResponseData«List«CommonCode»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
+          $ref: '#/components/schemas/AdminUser'
         message:
           type: string
   securitySchemes:

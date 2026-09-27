@@ -110,6 +110,14 @@ components:
           $ref: '#/components/schemas/SignInAdminResponse'
         message:
           type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     SignInAdminResponse:
       title: SignInAdminResponse
       type: object
@@ -128,14 +136,6 @@ components:
       type: object
       properties:
         google_id_token:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
           type: string
   securitySchemes:
     Bearer:

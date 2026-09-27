@@ -183,95 +183,34 @@ paths:
         - global
 components:
   schemas:
-    ConsumeMagicCouponRequest:
-      title: ConsumeMagicCouponRequest
+    GatherEventApplyResult:
+      title: GatherEventApplyResult
       type: object
       properties:
         eventId:
           type: string
-        magicCouponCode:
-          type: string
-    RegisterMagicCouponRequest:
-      title: RegisterMagicCouponRequest
+        gathered:
+          type: boolean
+    IssueCouponsResult:
+      title: IssueCouponsResult
       type: object
       properties:
-        amount:
-          type: number
-          description: 참자가에게 지급할 배출권 양 (톤)
-          format: bigdecimal
-        creditId:
-          type: string
-        eventDescription:
-          type: string
         eventId:
           type: string
-        eventName:
-          type: string
+        issuedCount:
+          type: integer
+          format: int32
         magicCouponCode:
           type: string
-        productId:
-          type: string
-        senderUserId:
-          type: string
-    WinclResponseData_IssueCouponsResult:
-      title: WinclResponseData«IssueCouponsResult»
+    WinclResponseData_WinclCoupon:
+      title: WinclResponseData«WinclCoupon»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/IssueCouponsResult'
+          $ref: '#/components/schemas/WinclCoupon'
         message:
-          type: string
-    WinclCoupon:
-      title: WinclCoupon
-      type: object
-      properties:
-        amount:
-          type: number
-          format: bigdecimal
-        consumedAt:
-          type: string
-          format: date-time
-        couponCode:
-          type: string
-        couponStatus:
-          type: string
-          enum:
-          - ENABLED
-          - UNUSED
-          - USED
-          - USING
-        couponType:
-          type: string
-          enum:
-          - INDIVIDUAL
-          - MAGIC
-        creditId:
-          type: string
-        eventId:
-          type: string
-        id:
-          type: string
-        productId:
-          type: string
-        userId:
-          type: string
-    IssueIndividualCouponsRequest:
-      title: IssueIndividualCouponsRequest
-      type: object
-      properties:
-        amount:
-          type: number
-          description: 참자가에게 지급할 배출권 양 (톤)
-          format: bigdecimal
-        couponCount:
-          type: integer
-          description: 생성할 개인쿠폰 갯수
-          format: int32
-        eventId:
-          type: string
-        magicCouponCode:
           type: string
     ConsumeCouponResult:
       title: ConsumeCouponResult
@@ -307,22 +246,22 @@ components:
         questionSetId:
           type: string
           description: 질문 세트 ID (한 이벤트에 질문지 세트가 여럿인 경우 구별)
-    DeleteEventResult:
-      title: DeleteEventResult
+    ConsumeMagicCouponRequest:
+      title: ConsumeMagicCouponRequest
       type: object
       properties:
-        deleteed:
-          type: boolean
         eventId:
           type: string
-    WinclResponseData_WinclCoupon:
-      title: WinclResponseData«WinclCoupon»
+        magicCouponCode:
+          type: string
+    WinclResponseData_IssueCouponsResult:
+      title: WinclResponseData«IssueCouponsResult»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/WinclCoupon'
+          $ref: '#/components/schemas/IssueCouponsResult'
         message:
           type: string
     WinclResponseData_DeleteEventResult:
@@ -335,15 +274,84 @@ components:
           $ref: '#/components/schemas/DeleteEventResult'
         message:
           type: string
-    IssueCouponsResult:
-      title: IssueCouponsResult
+    DeleteEventResult:
+      title: DeleteEventResult
       type: object
       properties:
+        deleteed:
+          type: boolean
         eventId:
           type: string
-        issuedCount:
+    WinclCoupon:
+      title: WinclCoupon
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        consumedAt:
+          type: string
+          format: date-time
+        couponCode:
+          type: string
+        couponStatus:
+          type: string
+          enum:
+          - ENABLED
+          - UNUSED
+          - USED
+          - USING
+        couponType:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - MAGIC
+        creditId:
+          type: string
+        eventId:
+          type: string
+        id:
+          type: string
+        productId:
+          type: string
+        userId:
+          type: string
+    RegisterMagicCouponRequest:
+      title: RegisterMagicCouponRequest
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 참자가에게 지급할 배출권 양 (톤)
+          format: bigdecimal
+        creditId:
+          type: string
+        eventDescription:
+          type: string
+        eventId:
+          type: string
+        eventName:
+          type: string
+        magicCouponCode:
+          type: string
+        productId:
+          type: string
+        senderUserId:
+          type: string
+    IssueIndividualCouponsRequest:
+      title: IssueIndividualCouponsRequest
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 참자가에게 지급할 배출권 양 (톤)
+          format: bigdecimal
+        couponCount:
           type: integer
+          description: 생성할 개인쿠폰 갯수
           format: int32
+        eventId:
+          type: string
         magicCouponCode:
           type: string
     WinclResponseData_GatherEventApplyResult:
@@ -356,14 +364,6 @@ components:
           $ref: '#/components/schemas/GatherEventApplyResult'
         message:
           type: string
-    GatherEventApplyResult:
-      title: GatherEventApplyResult
-      type: object
-      properties:
-        eventId:
-          type: string
-        gathered:
-          type: boolean
     WinclResponseData_ConsumeCouponResult:
       title: WinclResponseData«ConsumeCouponResult»
       type: object

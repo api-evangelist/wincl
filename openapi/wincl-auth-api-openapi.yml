@@ -229,11 +229,94 @@ paths:
         - global
 components:
   schemas:
-    CheckNicknameRequest:
-      title: CheckNicknameRequest
+    WinclResponseData_OAuthSignInResponse:
+      title: WinclResponseData«OAuthSignInResponse»
       type: object
       properties:
-        nickname:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAuthSignInResponse'
+        message:
+          type: string
+    OAuthSignInRequest:
+      title: OAuthSignInRequest
+      type: object
+      properties:
+        auth_token:
+          type: string
+          description: 소셜로그인에서 준 토큰
+        cd_corp:
+          type: string
+          description: 소셜로그인 회사 코드
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+    WinclResponseData_CheckLoginIdResponse:
+      title: WinclResponseData«CheckLoginIdResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CheckLoginIdResponse'
+        message:
+          type: string
+    OAuthSignUpResponse:
+      title: OAuthSignUpResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+          description: jwt 토큰 타입
+    CreateJwtRequest:
+      title: CreateJwtRequest
+      type: object
+      properties:
+        email:
+          type: string
+        id_corp:
+          type: string
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+        phoneNumber:
+          type: string
+    CheckLoginIdResponse:
+      title: CheckLoginIdResponse
+      type: object
+      properties:
+        conflict:
+          type: boolean
+    CheckEmailRequest:
+      title: CheckEmailRequest
+      type: object
+      properties:
+        email:
+          type: string
+    PaycoAccessTokenResponse:
+      title: PaycoAccessTokenResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+        access_token_secret:
+          type: string
+        expires_in:
+          type: string
+        refresh_token:
+          type: string
+        state:
+          type: string
+        token_type:
           type: string
     WinclResponseData_CheckEmailResponse:
       title: WinclResponseData«CheckEmailResponse»
@@ -245,18 +328,89 @@ components:
           $ref: '#/components/schemas/CheckEmailResponse'
         message:
           type: string
-    CheckEmailResponse:
-      title: CheckEmailResponse
+    WinclResponseData_CreateJwtResponse:
+      title: WinclResponseData«CreateJwtResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CreateJwtResponse'
+        message:
+          type: string
+    OAuthSignUpRequest:
+      title: OAuthSignUpRequest
+      type: object
+      properties:
+        cd_country:
+          type: string
+          description: 거주국가 코드
+        company_code:
+          type: string
+          description: '회사코드(예: BLC)'
+        email:
+          type: string
+          description: 유저 이메일 (중복 불허)
+        id_login:
+          type: string
+          description: 유저 아이디 (Deprecated)
+        id_temp_usr:
+          type: string
+          description: 임시 유저 아이디
+        nickname:
+          type: string
+          description: 유저 닉네임 (중복 불허)
+        verifiedPhoneNumber:
+          type: string
+          description: '인증된 전화번호 (E.164 포맷. 예: +821012345678)'
+    CheckNicknameRequest:
+      title: CheckNicknameRequest
+      type: object
+      properties:
+        nickname:
+          type: string
+    WinclResponseData_OAuthSignUpResponse:
+      title: WinclResponseData«OAuthSignUpResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAuthSignUpResponse'
+        message:
+          type: string
+    WinclResponseData_PaycoAccessTokenResponse:
+      title: WinclResponseData«PaycoAccessTokenResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/PaycoAccessTokenResponse'
+        message:
+          type: string
+    CheckLoginIdRequest:
+      title: CheckLoginIdRequest
+      type: object
+      properties:
+        id_login:
+          type: string
+    WinclResponseData_CheckNicknameResponse:
+      title: WinclResponseData«CheckNicknameResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CheckNicknameResponse'
+        message:
+          type: string
+    CheckNicknameResponse:
+      title: CheckNicknameResponse
       type: object
       properties:
         conflict:
           type: boolean
-    CheckEmailRequest:
-      title: CheckEmailRequest
-      type: object
-      properties:
-        email:
-          type: string
     OAuthSignInResponse:
       title: OAuthSignInResponse
       type: object
@@ -295,101 +449,8 @@ components:
           type: boolean
           description: ' wincl 가입자 유무, false 일때 회원가입 프로세스'
           example: false
-    CheckLoginIdRequest:
-      title: CheckLoginIdRequest
-      type: object
-      properties:
-        id_login:
-          type: string
-    PaycoAccessTokenResponse:
-      title: PaycoAccessTokenResponse
-      type: object
-      properties:
-        access_token:
-          type: string
-        access_token_secret:
-          type: string
-        expires_in:
-          type: string
-        refresh_token:
-          type: string
-        state:
-          type: string
-        token_type:
-          type: string
-    WinclResponseData_CheckNicknameResponse:
-      title: WinclResponseData«CheckNicknameResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CheckNicknameResponse'
-        message:
-          type: string
-    OAuthSignUpResponse:
-      title: OAuthSignUpResponse
-      type: object
-      properties:
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        token_type:
-          type: string
-          description: jwt 토큰 타입
-    WinclResponseData_OAuthSignUpResponse:
-      title: WinclResponseData«OAuthSignUpResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/OAuthSignUpResponse'
-        message:
-          type: string
-    WinclResponseData_CheckLoginIdResponse:
-      title: WinclResponseData«CheckLoginIdResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CheckLoginIdResponse'
-        message:
-          type: string
-    OAuthSignInRequest:
-      title: OAuthSignInRequest
-      type: object
-      properties:
-        auth_token:
-          type: string
-          description: 소셜로그인에서 준 토큰
-        cd_corp:
-          type: string
-          description: 소셜로그인 회사 코드
-          enum:
-          - FACEBOOK
-          - GOOGLE
-          - KAKAO
-          - PAYCO
-    CreateJwtRequest:
-      title: CreateJwtRequest
-      type: object
-      properties:
-        email:
-          type: string
-        id_corp:
-          type: string
-          enum:
-          - FACEBOOK
-          - GOOGLE
-          - KAKAO
-          - PAYCO
-        phoneNumber:
-          type: string
-    CheckNicknameResponse:
-      title: CheckNicknameResponse
+    CheckEmailResponse:
+      title: CheckEmailResponse
       type: object
       properties:
         conflict:
@@ -401,67 +462,6 @@ components:
         accessToken:
           type: string
         refreshToken:
-          type: string
-    WinclResponseData_OAuthSignInResponse:
-      title: WinclResponseData«OAuthSignInResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/OAuthSignInResponse'
-        message:
-          type: string
-    OAuthSignUpRequest:
-      title: OAuthSignUpRequest
-      type: object
-      properties:
-        cd_country:
-          type: string
-          description: 거주국가 코드
-        company_code:
-          type: string
-          description: '회사코드(예: BLC)'
-        email:
-          type: string
-          description: 유저 이메일 (중복 불허)
-        id_login:
-          type: string
-          description: 유저 아이디 (Deprecated)
-        id_temp_usr:
-          type: string
-          description: 임시 유저 아이디
-        nickname:
-          type: string
-          description: 유저 닉네임 (중복 불허)
-        verifiedPhoneNumber:
-          type: string
-          description: '인증된 전화번호 (E.164 포맷. 예: +821012345678)'
-    WinclResponseData_PaycoAccessTokenResponse:
-      title: WinclResponseData«PaycoAccessTokenResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/PaycoAccessTokenResponse'
-        message:
-          type: string
-    CheckLoginIdResponse:
-      title: CheckLoginIdResponse
-      type: object
-      properties:
-        conflict:
-          type: boolean
-    WinclResponseData_CreateJwtResponse:
-      title: WinclResponseData«CreateJwtResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CreateJwtResponse'
-        message:
           type: string
   securitySchemes:
     Bearer:

@@ -155,30 +155,6 @@ paths:
         - global
 components:
   schemas:
-    PersonalRank:
-      title: PersonalRank
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 유저 거주국가코드
-        id_login:
-          type: string
-          description: 유저가 설정한 아이디
-        image_url:
-          type: string
-          description: 사용자 아이콘 이미지 URL
-        nickname:
-          type: string
-          description: 유저 닉네임
-        rank:
-          type: integer
-          description: 순위
-          format: int32
-        tot_amt_retire:
-          type: number
-          description: 포인트, 리타이어 총 수량
-          format: bigdecimal
     MyRank:
       title: MyRank
       type: object
@@ -202,47 +178,6 @@ components:
         rank:
           type: integer
           description: 순위
-          format: int32
-    WinclResponseDataList_PersonalRank:
-      title: WinclResponseDataList«PersonalRank»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PersonalRank'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
           format: int32
     WinclResponseDataList_NationalRank:
       title: WinclResponseDataList«NationalRank»
@@ -316,6 +251,71 @@ components:
             $ref: '#/components/schemas/MyRank'
         message:
           type: string
+    WinclResponseDataList_PersonalRank:
+      title: WinclResponseDataList«PersonalRank»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonalRank'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    PersonalRank:
+      title: PersonalRank
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 유저 거주국가코드
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디
+        image_url:
+          type: string
+          description: 사용자 아이콘 이미지 URL
+        nickname:
+          type: string
+          description: 유저 닉네임
+        rank:
+          type: integer
+          description: 순위
+          format: int32
+        tot_amt_retire:
+          type: number
+          description: 포인트, 리타이어 총 수량
+          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

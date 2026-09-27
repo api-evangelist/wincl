@@ -1034,34 +1034,18 @@ components:
         validPeriod:
           type: string
           description: 유효기간 및 이용조건
-    PagedResponse_RewardOrder:
-      title: PagedResponse«RewardOrder»
+    PagedResponse_RewardCompany:
+      title: PagedResponse«RewardCompany»
       type: object
       properties:
         items:
           type: array
           description: 목록 데이터
           items:
-            $ref: '#/components/schemas/RewardOrder'
+            $ref: '#/components/schemas/RewardCompany'
         pageInfo:
           description: 페이징 정보
           $ref: '#/components/schemas/PageInfo'
-    PageInfo:
-      title: PageInfo
-      type: object
-      properties:
-        pageNo:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        pageSize:
-          type: integer
-          description: 페이지 사이즈
-          format: int32
-        totalPage:
-          type: integer
-          description: 전체 아이템 수
-          format: int32
     RewardOrder:
       title: RewardOrder
       type: object
@@ -1156,15 +1140,15 @@ components:
           type: string
           description: 수정일
           format: date-time
-    PagedResponse_RewardCompany:
-      title: PagedResponse«RewardCompany»
+    PagedResponse_RewardOrder:
+      title: PagedResponse«RewardOrder»
       type: object
       properties:
         items:
           type: array
           description: 목록 데이터
           items:
-            $ref: '#/components/schemas/RewardCompany'
+            $ref: '#/components/schemas/RewardOrder'
         pageInfo:
           description: 페이징 정보
           $ref: '#/components/schemas/PageInfo'
@@ -1279,6 +1263,22 @@ components:
           type: string
           description: 수정일
           format: date-time
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
   securitySchemes:
     Bearer:
       type: http

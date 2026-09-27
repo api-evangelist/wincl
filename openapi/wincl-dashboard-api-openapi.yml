@@ -34,44 +34,6 @@ paths:
         - global
 components:
   schemas:
-    Transaction:
-      title: Transaction
-      type: object
-      properties:
-        amount:
-          type: number
-          format: bigdecimal
-        productName:
-          type: string
-        timestamp:
-          type: integer
-          format: int64
-    TransactionCard:
-      title: TransactionCard
-      type: object
-      properties:
-        cardName:
-          type: string
-          description: 카드 이름
-        currency:
-          type: string
-          description: 통화
-          enum:
-          - KRW
-          - USD
-        recentTransactions:
-          type: array
-          description: 최근 트랜잭션들
-          items:
-            $ref: '#/components/schemas/Transaction'
-        totalAmount:
-          type: number
-          description: 총 수량 (톤)
-          format: bigdecimal
-        totalPrice:
-          type: number
-          description: 총 가격
-          format: bigdecimal
     WinclResponseDataList_TransactionCard:
       title: WinclResponseDataList«TransactionCard»
       type: object
@@ -113,6 +75,44 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    TransactionCard:
+      title: TransactionCard
+      type: object
+      properties:
+        cardName:
+          type: string
+          description: 카드 이름
+        currency:
+          type: string
+          description: 통화
+          enum:
+          - KRW
+          - USD
+        recentTransactions:
+          type: array
+          description: 최근 트랜잭션들
+          items:
+            $ref: '#/components/schemas/Transaction'
+        totalAmount:
+          type: number
+          description: 총 수량 (톤)
+          format: bigdecimal
+        totalPrice:
+          type: number
+          description: 총 가격
+          format: bigdecimal
+    Transaction:
+      title: Transaction
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        productName:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
   securitySchemes:
     Bearer:
       type: http

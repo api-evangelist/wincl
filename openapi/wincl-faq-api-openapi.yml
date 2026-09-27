@@ -118,6 +118,55 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_Faq:
+      title: WinclResponseData«Faq»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Faq'
+        message:
+          type: string
+    FaqCategory:
+      title: FaqCategory
+      type: object
+      properties:
+        cd:
+          type: string
+          description: FAQ 카테고리 코드
+        nm_en:
+          type: string
+          description: FAQ 카테고리 영어 이름
+        nm_kr:
+          type: string
+          description: FAQ 카테고리 한글 이름
+        seq:
+          type: integer
+          description: FAQ 카테고리 순번
+          format: int32
+    Faq:
+      title: Faq
+      type: object
+      properties:
+        answerEn:
+          type: string
+          description: FAQ 답변 영어
+        answerKr:
+          type: string
+          description: FAQ 답변 한글
+        category:
+          type: string
+          description: FAQ 카테고리
+        faqId:
+          type: string
+          description: FAQ ID
+        questionEn:
+          type: string
+          description: FAQ 질문 영어
+        questionKr:
+          type: string
+          description: FAQ 질문 한글
     WinclResponseDataList_Faq:
       title: WinclResponseDataList«Faq»
       type: object
@@ -158,55 +207,6 @@ components:
         totalPages:
           type: integer
           description: 전체 페이지 수
-          format: int32
-    Faq:
-      title: Faq
-      type: object
-      properties:
-        answerEn:
-          type: string
-          description: FAQ 답변 영어
-        answerKr:
-          type: string
-          description: FAQ 답변 한글
-        category:
-          type: string
-          description: FAQ 카테고리
-        faqId:
-          type: string
-          description: FAQ ID
-        questionEn:
-          type: string
-          description: FAQ 질문 영어
-        questionKr:
-          type: string
-          description: FAQ 질문 한글
-    WinclResponseData_Faq:
-      title: WinclResponseData«Faq»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/Faq'
-        message:
-          type: string
-    FaqCategory:
-      title: FaqCategory
-      type: object
-      properties:
-        cd:
-          type: string
-          description: FAQ 카테고리 코드
-        nm_en:
-          type: string
-          description: FAQ 카테고리 영어 이름
-        nm_kr:
-          type: string
-          description: FAQ 카테고리 한글 이름
-        seq:
-          type: integer
-          description: FAQ 카테고리 순번
           format: int32
     WinclResponseData_List_FaqCategory:
       title: WinclResponseData«List«FaqCategory»»

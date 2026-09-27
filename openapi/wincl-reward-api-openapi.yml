@@ -377,18 +377,6 @@ paths:
         - global
 components:
   schemas:
-    PagedResponse_RewardProgram:
-      title: PagedResponse«RewardProgram»
-      type: object
-      properties:
-        items:
-          type: array
-          description: 목록 데이터
-          items:
-            $ref: '#/components/schemas/RewardProgram'
-        pageInfo:
-          description: 페이징 정보
-          $ref: '#/components/schemas/PageInfo'
     RewardProgram:
       title: RewardProgram
       type: object
@@ -486,22 +474,6 @@ components:
         validPeriod:
           type: string
           description: 유효기간 및 이용조건
-    PageInfo:
-      title: PageInfo
-      type: object
-      properties:
-        pageNo:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        pageSize:
-          type: integer
-          description: 페이지 사이즈
-          format: int32
-        totalPage:
-          type: integer
-          description: 전체 아이템 수
-          format: int32
     RewardOrder:
       title: RewardOrder
       type: object
@@ -596,6 +568,18 @@ components:
           type: string
           description: 수정일
           format: date-time
+    PagedResponse_RewardProgram:
+      title: PagedResponse«RewardProgram»
+      type: object
+      properties:
+        items:
+          type: array
+          description: 목록 데이터
+          items:
+            $ref: '#/components/schemas/RewardProgram'
+        pageInfo:
+          description: 페이징 정보
+          $ref: '#/components/schemas/PageInfo'
     RewardCompany:
       title: RewardCompany
       type: object
@@ -668,6 +652,22 @@ components:
           type: string
           description: 수정일
           format: date-time
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
   securitySchemes:
     Bearer:
       type: http

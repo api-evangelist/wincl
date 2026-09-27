@@ -187,93 +187,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseDataList_Qna:
-      title: WinclResponseDataList«Qna»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Qna'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    Qna:
-      title: Qna
-      type: object
-      properties:
-        cd_tp_qna:
-          type: string
-          description: Qna 타입
-          enum:
-          - ACCOUNT
-          - GIFT_AND_DECLARATION
-          - OTHERS
-          - PAYMENT
-        cts:
-          type: string
-          description: Qna 내용
-        dttm_reg:
-          type: integer
-          description: Qna 등록일자
-          format: int64
-        id_login:
-          type: string
-          description: id_login
-        id_qna:
-          type: string
-          description: Qna 아이디
-        id_usr:
-          type: string
-          description: 유저 아이디
-        status_prog:
-          type: string
-          description: Qna 진행 상태
-          enum:
-          - CANCEL
-          - COMPLETE
-          - PENDING
-        ttl:
-          type: string
-          description: Qna 타이틀
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     QnaDetail:
       title: QnaDetail
       type: object
@@ -343,6 +256,55 @@ components:
         ttl:
           type: string
           description: 질문 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseDataList_Qna:
+      title: WinclResponseDataList«Qna»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Qna'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
     UpdateQuestionRequest:
       title: UpdateQuestionRequest
       type: object
@@ -361,6 +323,44 @@ components:
         ttl:
           type: string
           description: 질문 타이틀
+    Qna:
+      title: Qna
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
     WinclResponseData_QnaDetail:
       title: WinclResponseData«QnaDetail»
       type: object

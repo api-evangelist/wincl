@@ -170,13 +170,29 @@ paths:
         - global
 components:
   schemas:
-    ModifyUserProfileImageResponse:
-      title: ModifyUserProfileImageResponse
+    WinclResponse:
+      title: WinclResponse
       type: object
       properties:
-        image_url:
+        code:
           type: string
-          description: 업로드한 프로파일 이미지에 접근하기 위한 URL
+        message:
+          type: string
+    DeregisterResponse:
+      title: DeregisterResponse
+      type: object
+      properties:
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        status:
+          type: string
+          description: '유저 상태: DEREGISTERED 만 가능'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
     UserProfile:
       title: UserProfile
       type: object
@@ -250,31 +266,13 @@ components:
         walletStatusMessage:
           type: string
           description: Human-readable status message about Hedera wallet provisioning
-    ReincarnationResponse:
-      title: ReincarnationResponse
+    ModifyUserProfileImageResponse:
+      title: ModifyUserProfileImageResponse
       type: object
       properties:
-        id_login:
+        image_url:
           type: string
-          description: 유저가 설정한 아이디, 외부노출용
-        status:
-          type: string
-          description: '유저 상태: REGISTERED 만 가능'
-          enum:
-          - ARCHIVED
-          - DEREGISTERED
-          - REGISTERED
-          - REGISTERING
-    WinclResponseData_ModifyUserProfileImageResponse:
-      title: WinclResponseData«ModifyUserProfileImageResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ModifyUserProfileImageResponse'
-        message:
-          type: string
+          description: 업로드한 프로파일 이미지에 접근하기 위한 URL
     WinclResponseData_ReincarnationResponse:
       title: WinclResponseData«ReincarnationResponse»
       type: object
@@ -283,24 +281,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/ReincarnationResponse'
-        message:
-          type: string
-    WinclResponseData_DeregisterResponse:
-      title: WinclResponseData«DeregisterResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/DeregisterResponse'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
         message:
           type: string
     WinclResponseData_UserProfile:
@@ -313,21 +293,6 @@ components:
           $ref: '#/components/schemas/UserProfile'
         message:
           type: string
-    DeregisterResponse:
-      title: DeregisterResponse
-      type: object
-      properties:
-        id_login:
-          type: string
-          description: 유저가 설정한 아이디, 외부노출용
-        status:
-          type: string
-          description: '유저 상태: DEREGISTERED 만 가능'
-          enum:
-          - ARCHIVED
-          - DEREGISTERED
-          - REGISTERED
-          - REGISTERING
     ModifyUserProfileRequest:
       title: ModifyUserProfileRequest
       type: object
@@ -344,6 +309,41 @@ components:
         phone_number:
           type: string
           description: 휴대 전화번호
+    WinclResponseData_ModifyUserProfileImageResponse:
+      title: WinclResponseData«ModifyUserProfileImageResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ModifyUserProfileImageResponse'
+        message:
+          type: string
+    ReincarnationResponse:
+      title: ReincarnationResponse
+      type: object
+      properties:
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        status:
+          type: string
+          description: '유저 상태: REGISTERED 만 가능'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
+    WinclResponseData_DeregisterResponse:
+      title: WinclResponseData«DeregisterResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/DeregisterResponse'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http

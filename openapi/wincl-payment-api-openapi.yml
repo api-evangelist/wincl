@@ -414,57 +414,44 @@ paths:
         - global
 components:
   schemas:
-    PaycoApproveRequest:
-      title: PaycoApproveRequest
+    LatestOrderData:
+      title: LatestOrderData
       type: object
       properties:
-        code:
-          type: string
-        discountAmt:
+        amount:
           type: number
           format: bigdecimal
-        mainPgCode:
-          type: string
-        paymentCertifyToken:
-          type: string
-        pointAmt:
-          type: number
-          format: bigdecimal
-        reserveOrderNo:
-          type: string
-        sellerOrderReferenceKey:
-          type: string
-        totalPaymentAmt:
-          type: number
-          format: bigdecimal
-        totalRemoteAreaDeliveryFeeAmt:
-          type: number
-          format: bigdecimal
-    StripeApproveRequest:
-      title: StripeApproveRequest
-      type: object
-      properties:
-        checkoutSessionId:
-          type: string
         orderId:
           type: string
-        totalPaymentCent:
+        price:
           type: number
-          description: 센트단위의 주문금액
           format: bigdecimal
-    ApprovePaymentResultData:
-      title: ApprovePaymentResultData
+    PaymentReserveRequest:
+      title: PaymentReserveRequest
       type: object
       properties:
+        orderChannel:
+          type: string
+          enum:
+          - MOBILE
+          - PC
         orderId:
           type: string
-        payment:
-          $ref: '#/components/schemas/Payment'
-        pgApproveId:
+        relayed:
+          type: boolean
+          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
+          example: false
+        returnUrl:
           type: string
+    ReservePaymentResultData:
+      title: ReservePaymentResultData
+      type: object
+      properties:
         pgCode:
           type: string
         pgMessage:
+          type: string
+        pgPaymentUrl:
           type: string
         pgProvider:
           type: string
@@ -472,6 +459,8 @@ components:
           - KCP
           - PAYCO
           - STRIPE
+        pgReserveId:
+          type: string
         successful:
           type: boolean
     Payment:
@@ -544,18 +533,40 @@ components:
           enum:
           - N
           - Y
-    LatestOrderData:
-      title: LatestOrderData
+    StripeApproveRequest:
+      title: StripeApproveRequest
       type: object
       properties:
-        amount:
-          type: number
-          format: bigdecimal
+        checkoutSessionId:
+          type: string
         orderId:
           type: string
-        price:
+        totalPaymentCent:
           type: number
+          description: 센트단위의 주문금액
           format: bigdecimal
+    ApprovePaymentResultData:
+      title: ApprovePaymentResultData
+      type: object
+      properties:
+        orderId:
+          type: string
+        payment:
+          $ref: '#/components/schemas/Payment'
+        pgApproveId:
+          type: string
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        successful:
+          type: boolean
     WinclResponseData_ApprovePaymentResultData:
       title: WinclResponseData«ApprovePaymentResultData»
       type: object
@@ -565,33 +576,6 @@ components:
         data:
           $ref: '#/components/schemas/ApprovePaymentResultData'
         message:
-          type: string
-    WinclResponseData_LatestOrderData:
-      title: WinclResponseData«LatestOrderData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/LatestOrderData'
-        message:
-          type: string
-    PaymentReserveRequest:
-      title: PaymentReserveRequest
-      type: object
-      properties:
-        orderChannel:
-          type: string
-          enum:
-          - MOBILE
-          - PC
-        orderId:
-          type: string
-        relayed:
-          type: boolean
-          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
-          example: false
-        returnUrl:
           type: string
     WinclResponseData_ReservePaymentResultData:
       title: WinclResponseData«ReservePaymentResultData»
@@ -603,26 +587,42 @@ components:
           $ref: '#/components/schemas/ReservePaymentResultData'
         message:
           type: string
-    ReservePaymentResultData:
-      title: ReservePaymentResultData
+    PaycoApproveRequest:
+      title: PaycoApproveRequest
       type: object
       properties:
-        pgCode:
+        code:
           type: string
-        pgMessage:
+        discountAmt:
+          type: number
+          format: bigdecimal
+        mainPgCode:
           type: string
-        pgPaymentUrl:
+        paymentCertifyToken:
           type: string
-        pgProvider:
+        pointAmt:
+          type: number
+          format: bigdecimal
+        reserveOrderNo:
           type: string
-          enum:
-          - KCP
-          - PAYCO
-          - STRIPE
-        pgReserveId:
+        sellerOrderReferenceKey:
           type: string
-        successful:
-          type: boolean
+        totalPaymentAmt:
+          type: number
+          format: bigdecimal
+        totalRemoteAreaDeliveryFeeAmt:
+          type: number
+          format: bigdecimal
+    WinclResponseData_LatestOrderData:
+      title: WinclResponseData«LatestOrderData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/LatestOrderData'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http

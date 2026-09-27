@@ -148,6 +148,52 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_Notice:
+      title: WinclResponseData«Notice»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Notice'
+        message:
+          type: string
+    Notice:
+      title: Notice
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 콘텐츠
+        expireTimestamp:
+          type: integer
+          description: 공지사항 만료시간
+          format: int64
+        noticeId:
+          type: string
+          description: 공지사항 아이디
+        registerTimestamp:
+          type: integer
+          description: 공지사항 등록시간
+          format: int64
+        status:
+          type: string
+          description: 공지사항 상태
+          enum:
+          - ACTIVE
+          - DELETED
+          - INACTIVE
+          - READY
+        title:
+          type: string
+          description: 공지사항 타이틀
     WinclResponseDataList_Notice:
       title: WinclResponseDataList«Notice»
       type: object
@@ -189,52 +235,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    Notice:
-      title: Notice
-      type: object
-      properties:
-        category:
-          type: string
-          description: 공지사항 타입
-          enum:
-          - EVENT
-          - GENERAL
-          - MAINTENANCE
-        contents:
-          type: string
-          description: 공지사항 콘텐츠
-        expireTimestamp:
-          type: integer
-          description: 공지사항 만료시간
-          format: int64
-        noticeId:
-          type: string
-          description: 공지사항 아이디
-        registerTimestamp:
-          type: integer
-          description: 공지사항 등록시간
-          format: int64
-        status:
-          type: string
-          description: 공지사항 상태
-          enum:
-          - ACTIVE
-          - DELETED
-          - INACTIVE
-          - READY
-        title:
-          type: string
-          description: 공지사항 타이틀
-    WinclResponseData_Notice:
-      title: WinclResponseData«Notice»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/Notice'
-        message:
-          type: string
   securitySchemes:
     Bearer:
       type: http

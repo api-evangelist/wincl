@@ -175,16 +175,125 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_CertificateVcResponse:
-      title: WinclResponseData«CertificateVcResponse»
+    CertificateBoxItem:
+      title: CertificateBoxItem
       type: object
       properties:
-        code:
+        certificateAgencyName:
           type: string
-        data:
-          $ref: '#/components/schemas/CertificateVcResponse'
-        message:
+          description: 인증기관 이름
+        certificateVcCid:
           type: string
+          description: 인증서 VC CID
+        certificateVcIssuedTimestamp:
+          type: integer
+          description: 인증서 VC 최신 발급 타임스탬프(UTC epoch)
+          format: int64
+        certificateVcIssuing:
+          type: boolean
+          description: 새 상쇄분이 반영된 VC가 발급 중인지 여부
+          example: false
+        correspondanceAdjustmentRatio:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        nationCode:
+          type: string
+          description: 프로젝트 생성국가
+        nationEnglishName:
+          type: string
+          description: 프로젝트 생성국가 영어 이름
+        nationKoreanName:
+          type: string
+          description: 프로젝트 생성국가 한글 이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        offsetPrice:
+          type: number
+          description: 상쇄한 탄소배출권 가격
+          format: bigdecimal
+        offsetTimestamp:
+          type: integer
+          description: 상쇄 타임스탬프
+          format: int64
+        productName:
+          type: string
+          description: 탄소배출권 상품 이름
+        projectDeveloperName:
+          type: string
+          description: 프로젝트 개발자이름
+        projectEffect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        projectName:
+          type: string
+          description: 프로젝트 이름
+        projectThumbnailUrl:
+          type: string
+          description: 프로젝트 이미지
+        projectType:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
     OffsetEventMeta:
       title: OffsetEventMeta
       type: object
@@ -200,6 +309,67 @@ components:
         status:
           type: string
         transactionId:
+          type: string
+    CertificateBoxAggregation:
+      title: CertificateBoxAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+        totalCanceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        totalLockedAmount:
+          type: number
+          description: 잠긴 수량 (현재까지는 없음)
+          format: bigdecimal
+        totalOffsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        totalOffsetPrice:
+          type: number
+          description: 상쇄한 총 탄소배출권 가격
+          format: bigdecimal
+        totalPurchasedAmount:
+          type: number
+          description: 구매 수량
+          format: bigdecimal
+        totalReceivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        totalSentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        totalUsableAmount:
+          type: number
+          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
+          format: bigdecimal
+        totalUsablePrice:
+          type: number
+          description: 보유한 총 탄소배출권 가격
+          format: bigdecimal
+        totalWholeAmount:
+          type: number
+          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+    WinclResponseData_CertificateVcResponse:
+      title: WinclResponseData«CertificateVcResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CertificateVcResponse'
+        message:
           type: string
     WinclAggregationResponse_CertificateBoxItem_CertificateBoxAggregation:
       title: WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»
@@ -340,139 +510,6 @@ components:
           type: array
           items:
             type: string
-    Proof:
-      title: Proof
-      type: object
-      properties:
-        created:
-          type: string
-        jws:
-          type: string
-        proofPurpose:
-          type: string
-        type:
-          type: string
-        verificationMethod:
-          type: string
-    CertificateBoxItem:
-      title: CertificateBoxItem
-      type: object
-      properties:
-        certificateAgencyName:
-          type: string
-          description: 인증기관 이름
-        certificateVcCid:
-          type: string
-          description: 인증서 VC CID
-        certificateVcIssuedTimestamp:
-          type: integer
-          description: 인증서 VC 최신 발급 타임스탬프(UTC epoch)
-          format: int64
-        certificateVcIssuing:
-          type: boolean
-          description: 새 상쇄분이 반영된 VC가 발급 중인지 여부
-          example: false
-        correspondanceAdjustmentRatio:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-        currency:
-          type: string
-          description: 통화
-        nationCode:
-          type: string
-          description: 프로젝트 생성국가
-        nationEnglishName:
-          type: string
-          description: 프로젝트 생성국가 영어 이름
-        nationKoreanName:
-          type: string
-          description: 프로젝트 생성국가 한글 이름
-        offsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        offsetPrice:
-          type: number
-          description: 상쇄한 탄소배출권 가격
-          format: bigdecimal
-        offsetTimestamp:
-          type: integer
-          description: 상쇄 타임스탬프
-          format: int64
-        productName:
-          type: string
-          description: 탄소배출권 상품 이름
-        projectDeveloperName:
-          type: string
-          description: 프로젝트 개발자이름
-        projectEffect:
-          type: array
-          description: 프로젝트 이펙트
-          items:
-            type: string
-            enum:
-            - AFFORDABLE_AND_CLEAN_ENERGY
-            - CLEAN_WATER_AND_SANITATION
-            - CLIMATE_ACTION
-            - DECENT_WORK_AND_ECONOMIC_GROWTH
-            - GENDER_EQUALITY
-            - GOOD_HEALTH_AND_WELLBEING
-            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-            - LIFE_BELLOW_WATER
-            - LIFE_ON_LAND
-            - NO_POVERTY
-            - PARTNERSHIPS_FOR_THE_GOALS
-            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-            - QUALITY_EDUCATION
-            - REDUCED_INEQUALITIES
-            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-            - SUSTAINABLE_CITIES_AND_COMMUNITIES
-            - ZERO_HUNGER
-        projectId:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        projectName:
-          type: string
-          description: 프로젝트 이름
-        projectThumbnailUrl:
-          type: string
-          description: 프로젝트 이미지
-        projectType:
-          type: string
-          description: 프로젝트 타입
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        unitPrice:
-          type: number
-          description: 탄소배출권 단위 가격
-          format: bigdecimal
     CarbonOffsetCertificateSubject:
       title: CarbonOffsetCertificateSubject
       type: object
@@ -524,6 +561,37 @@ components:
         userId:
           type: string
         userNickname:
+          type: string
+    CertificateVcResponse:
+      title: CertificateVcResponse
+      type: object
+      properties:
+        credentialCid:
+          type: string
+        credentialId:
+          type: string
+        credentialUrl:
+          type: string
+        document:
+          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
+        issuedAt:
+          type: string
+          format: date-time
+        newlyIssued:
+          type: boolean
+    Proof:
+      title: Proof
+      type: object
+      properties:
+        created:
+          type: string
+        jws:
+          type: string
+        proofPurpose:
+          type: string
+        type:
+          type: string
+        verificationMethod:
           type: string
     WinclAggregationResponse_CertificateBoxItemEntry_CertificateBoxItemAggregation:
       title: WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»
@@ -705,74 +773,6 @@ components:
         usablePrice:
           type: number
           description: 상쇄한 탄소배출권 가격
-          format: bigdecimal
-    CertificateVcResponse:
-      title: CertificateVcResponse
-      type: object
-      properties:
-        credentialCid:
-          type: string
-        credentialId:
-          type: string
-        credentialUrl:
-          type: string
-        document:
-          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
-        issuedAt:
-          type: string
-          format: date-time
-        newlyIssued:
-          type: boolean
-    CertificateBoxAggregation:
-      title: CertificateBoxAggregation
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 통화
-        totalCanceledAmount:
-          type: number
-          description: 구매 취소한 수량
-          format: bigdecimal
-        totalLockedAmount:
-          type: number
-          description: 잠긴 수량 (현재까지는 없음)
-          format: bigdecimal
-        totalOffsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        totalOffsetPrice:
-          type: number
-          description: 상쇄한 총 탄소배출권 가격
-          format: bigdecimal
-        totalPurchasedAmount:
-          type: number
-          description: 구매 수량
-          format: bigdecimal
-        totalReceivedAmount:
-          type: number
-          description: 선물받은 수량
-          format: bigdecimal
-        totalSentAmount:
-          type: number
-          description: 선물한 수량
-          format: bigdecimal
-        totalUsableAmount:
-          type: number
-          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
-          format: bigdecimal
-        totalUsablePrice:
-          type: number
-          description: 보유한 총 탄소배출권 가격
-          format: bigdecimal
-        totalWholeAmount:
-          type: number
-          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
-          format: bigdecimal
-        unitPrice:
-          type: number
-          description: 탄소배출권 단위 가격
           format: bigdecimal
   securitySchemes:
     Bearer:
