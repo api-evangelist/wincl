@@ -444,55 +444,30 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseDataList_Banner:
-      title: WinclResponseDataList«Banner»
+    NoticePopupResponse:
+      title: NoticePopupResponse
       type: object
       properties:
-        code:
+        id_notice_popup:
           type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Banner'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData_BannerResponse:
-      title: WinclResponseData«BannerResponse»
+    WinclResponseData_Banner:
+      title: WinclResponseData«Banner»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/BannerResponse'
+          $ref: '#/components/schemas/Banner'
+        message:
+          type: string
+    WinclResponseData_NoticePopupResponse:
+      title: WinclResponseData«NoticePopupResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupResponse'
         message:
           type: string
     WinclResponse:
@@ -503,42 +478,22 @@ components:
           type: string
         message:
           type: string
-    AdminNoticePopupRequest:
-      title: AdminNoticePopupRequest
+    AdminInsertBannerRequest:
+      title: AdminInsertBannerRequest
       type: object
       properties:
-        contentsEn:
+        description_en:
           type: string
-          description: 공지팝업 영어 내용
-        contentsKr:
+        description_kr:
           type: string
-          description: 공지팝업 한글 내용
-        endTimestamp:
-          type: integer
-          description: 공지팝업 종료 시간
-          format: int64
-        imageEnUrl:
+          description: 마케팅 배너 설명
+        ttl_en:
           type: string
-          description: 공지팝업 영어 이미지
-        imageKrUrl:
+        ttl_kr:
           type: string
-          description: 공지팝업 한글 이미지
-        linkEnUrl:
+          description: 마케팅 배너 타이틀 Kr
+        url:
           type: string
-          description: 공지팝업 영어 링크
-        linkKrUrl:
-          type: string
-          description: 공지팝업 한글 링크
-        startTimestamp:
-          type: integer
-          description: 공지팝업 시작 시간
-          format: int64
-        titleEn:
-          type: string
-          description: 공지팝업 영어 제목
-        titleKr:
-          type: string
-          description: 공지팝업 한글 제목
     NoticePopupDto:
       title: NoticePopupDto
       type: object
@@ -587,18 +542,42 @@ components:
         titleKr:
           type: string
           description: 공지팝업 한글 제목
-    BannerResponse:
-      title: BannerResponse
+    AdminNoticePopupRequest:
+      title: AdminNoticePopupRequest
       type: object
       properties:
-        id_banner:
+        contentsEn:
           type: string
-    NoticePopupResponse:
-      title: NoticePopupResponse
-      type: object
-      properties:
-        id_notice_popup:
+          description: 공지팝업 영어 내용
+        contentsKr:
           type: string
+          description: 공지팝업 한글 내용
+        endTimestamp:
+          type: integer
+          description: 공지팝업 종료 시간
+          format: int64
+        imageEnUrl:
+          type: string
+          description: 공지팝업 영어 이미지
+        imageKrUrl:
+          type: string
+          description: 공지팝업 한글 이미지
+        linkEnUrl:
+          type: string
+          description: 공지팝업 영어 링크
+        linkKrUrl:
+          type: string
+          description: 공지팝업 한글 링크
+        startTimestamp:
+          type: integer
+          description: 공지팝업 시작 시간
+          format: int64
+        titleEn:
+          type: string
+          description: 공지팝업 영어 제목
+        titleKr:
+          type: string
+          description: 공지팝업 한글 제목
     WinclResponseDataList_NoticePopupDto:
       title: WinclResponseDataList«NoticePopupDto»
       type: object
@@ -640,15 +619,62 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    WinclResponseData_Banner:
-      title: WinclResponseData«Banner»
+    WinclResponseData_NoticePopupDto:
+      title: WinclResponseData«NoticePopupDto»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/Banner'
+          $ref: '#/components/schemas/NoticePopupDto'
         message:
+          type: string
+    WinclResponseDataList_Banner:
+      title: WinclResponseDataList«Banner»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Banner'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    BannerResponse:
+      title: BannerResponse
+      type: object
+      properties:
+        id_banner:
           type: string
     Banner:
       title: Banner
@@ -671,40 +697,14 @@ components:
           type: string
         url:
           type: string
-    AdminInsertBannerRequest:
-      title: AdminInsertBannerRequest
-      type: object
-      properties:
-        description_en:
-          type: string
-        description_kr:
-          type: string
-          description: 마케팅 배너 설명
-        ttl_en:
-          type: string
-        ttl_kr:
-          type: string
-          description: 마케팅 배너 타이틀 Kr
-        url:
-          type: string
-    WinclResponseData_NoticePopupDto:
-      title: WinclResponseData«NoticePopupDto»
+    WinclResponseData_BannerResponse:
+      title: WinclResponseData«BannerResponse»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/NoticePopupDto'
-        message:
-          type: string
-    WinclResponseData_NoticePopupResponse:
-      title: WinclResponseData«NoticePopupResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/NoticePopupResponse'
+          $ref: '#/components/schemas/BannerResponse'
         message:
           type: string
   securitySchemes:

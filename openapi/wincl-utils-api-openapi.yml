@@ -228,6 +228,28 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_SmsResult:
+      title: WinclResponseData«SmsResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/SmsResult'
+        message:
+          type: string
+    ExchangeRate:
+      title: ExchangeRate
+      type: object
+      properties:
+        currency:
+          type: string
+        dttm_reg:
+          type: string
+          format: date-time
+        rate:
+          type: number
+          format: bigdecimal
     WinclResponse:
       title: WinclResponse
       type: object
@@ -268,46 +290,11 @@ components:
           description: 국가코드 숫자
           format: int32
           example: 410
-    ExchangeRate:
-      title: ExchangeRate
+    UploadFileResponse:
+      title: UploadFileResponse
       type: object
       properties:
-        currency:
-          type: string
-        dttm_reg:
-          type: string
-          format: date-time
-        rate:
-          type: number
-          format: bigdecimal
-    SmsAuthyRequest:
-      title: SmsAuthyRequest
-      type: object
-      properties:
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
-    WinclResponseData_List_Nation:
-      title: WinclResponseData«List«Nation»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nation'
-        message:
-          type: string
-    WinclResponseData_SmsResult:
-      title: WinclResponseData«SmsResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/SmsResult'
-        message:
+        url:
           type: string
     WinclResponseData_ExchangeRate:
       title: WinclResponseData«ExchangeRate»
@@ -319,38 +306,15 @@ components:
           $ref: '#/components/schemas/ExchangeRate'
         message:
           type: string
-    SmsMessageRequest:
-      title: SmsMessageRequest
+    WinclResponseData_UploadFileResponse:
+      title: WinclResponseData«UploadFileResponse»
       type: object
       properties:
-        messageContents:
+        code:
           type: string
-          description: 발신할 SMS 내용
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
-    SmsResult:
-      title: SmsResult
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Otp 상태. 기대값 = {/otp/auth: `pending`, /otp/verify: `approved`, /sms/message: `accepted`}'
-    SmsVerifyRequest:
-      title: SmsVerifyRequest
-      type: object
-      properties:
-        recipientPhoneNumber:
-          type: string
-          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
-        verificationCode:
-          type: string
-          description: SMS로 수신한 인증코드
-    UploadFileResponse:
-      title: UploadFileResponse
-      type: object
-      properties:
-        url:
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
           type: string
     SubmitPartnerRequest:
       title: SubmitPartnerRequest
@@ -366,16 +330,52 @@ components:
           type: string
         questionCategory:
           type: string
-    WinclResponseData_UploadFileResponse:
-      title: WinclResponseData«UploadFileResponse»
+    SmsAuthyRequest:
+      title: SmsAuthyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    SmsResult:
+      title: SmsResult
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Otp 상태. 기대값 = {/otp/auth: `pending`, /otp/verify: `approved`, /sms/message: `accepted`}'
+    WinclResponseData_List_Nation:
+      title: WinclResponseData«List«Nation»»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/UploadFileResponse'
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
         message:
           type: string
+    SmsMessageRequest:
+      title: SmsMessageRequest
+      type: object
+      properties:
+        messageContents:
+          type: string
+          description: 발신할 SMS 내용
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+    SmsVerifyRequest:
+      title: SmsVerifyRequest
+      type: object
+      properties:
+        recipientPhoneNumber:
+          type: string
+          description: '수신자 번호 (E.164 포맷. 예: +821012345678)'
+        verificationCode:
+          type: string
+          description: SMS로 수신한 인증코드
   securitySchemes:
     Bearer:
       type: http

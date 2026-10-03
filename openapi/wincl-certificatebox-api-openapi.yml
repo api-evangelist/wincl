@@ -175,6 +175,39 @@ paths:
         - global
 components:
   schemas:
+    CertificateVcResponse:
+      title: CertificateVcResponse
+      type: object
+      properties:
+        credentialCid:
+          type: string
+        credentialId:
+          type: string
+        credentialUrl:
+          type: string
+        document:
+          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
+        issuedAt:
+          type: string
+          format: date-time
+        newlyIssued:
+          type: boolean
+    OffsetEventMeta:
+      title: OffsetEventMeta
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        creditId:
+          type: string
+        offsetTimestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        transactionId:
+          type: string
     CertificateBoxItem:
       title: CertificateBoxItem
       type: object
@@ -294,90 +327,13 @@ components:
           type: number
           description: 탄소배출권 단위 가격
           format: bigdecimal
-    OffsetEventMeta:
-      title: OffsetEventMeta
-      type: object
-      properties:
-        amount:
-          type: number
-          format: bigdecimal
-        creditId:
-          type: string
-        offsetTimestamp:
-          type: integer
-          format: int64
-        status:
-          type: string
-        transactionId:
-          type: string
-    CertificateBoxAggregation:
-      title: CertificateBoxAggregation
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 통화
-        totalCanceledAmount:
-          type: number
-          description: 구매 취소한 수량
-          format: bigdecimal
-        totalLockedAmount:
-          type: number
-          description: 잠긴 수량 (현재까지는 없음)
-          format: bigdecimal
-        totalOffsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        totalOffsetPrice:
-          type: number
-          description: 상쇄한 총 탄소배출권 가격
-          format: bigdecimal
-        totalPurchasedAmount:
-          type: number
-          description: 구매 수량
-          format: bigdecimal
-        totalReceivedAmount:
-          type: number
-          description: 선물받은 수량
-          format: bigdecimal
-        totalSentAmount:
-          type: number
-          description: 선물한 수량
-          format: bigdecimal
-        totalUsableAmount:
-          type: number
-          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
-          format: bigdecimal
-        totalUsablePrice:
-          type: number
-          description: 보유한 총 탄소배출권 가격
-          format: bigdecimal
-        totalWholeAmount:
-          type: number
-          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
-          format: bigdecimal
-        unitPrice:
-          type: number
-          description: 탄소배출권 단위 가격
-          format: bigdecimal
-    WinclResponseData_CertificateVcResponse:
-      title: WinclResponseData«CertificateVcResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CertificateVcResponse'
-        message:
-          type: string
-    WinclAggregationResponse_CertificateBoxItem_CertificateBoxAggregation:
-      title: WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»
+    WinclAggregationResponse_CertificateBoxItemEntry_CertificateBoxItemAggregation:
+      title: WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»
       type: object
       properties:
         aggregation:
           description: 집합 데이터
-          $ref: '#/components/schemas/CertificateBoxAggregation'
+          $ref: '#/components/schemas/CertificateBoxItemAggregation'
         code:
           type: string
         currentPageNum:
@@ -387,7 +343,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/CertificateBoxItem'
+            $ref: '#/components/schemas/CertificateBoxItemEntry'
         message:
           type: string
         pageSize:
@@ -415,191 +371,23 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    CertificateBoxItemEntry:
-      title: CertificateBoxItemEntry
+    WinclResponseData_CertificateVcResponse:
+      title: WinclResponseData«CertificateVcResponse»
       type: object
       properties:
-        blockchainPurchaseStatus:
+        code:
           type: string
-          description: 블록체인에 기록된 구매 상태
-        blockchainTransactionHash:
+        data:
+          $ref: '#/components/schemas/CertificateVcResponse'
+        message:
           type: string
-          description: 블록체인 트랜잭션 해쉬
-        blockchainTransactionType:
-          type: string
-          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
-        creditId:
-          type: string
-          description: 탄소배출권 ID
-        expectedExpirationDateTime:
-          type: string
-          description: 예정된 유효기한 타임스탬프
-          format: date-time
-        expectedExpirationTimestamp:
-          type: integer
-          description: 예정된 유효기한 타임스탬프
-          format: int64
-        productCurrency:
-          type: string
-          description: 제품 기본 통화
-          enum:
-          - KRW
-          - USD
-        transactionAmount:
-          type: number
-          description: 트랜잭션 수량
-          format: bigdecimal
-        transactionDateTime:
-          type: string
-          description: 트랜잭션 일시
-          format: date-time
-        transactionPrice:
-          type: number
-          description: ' 금액'
-          format: bigdecimal
-        transactionStatus:
-          type: string
-          description: '트랜잭션 상태: [SUCCESS, PENDING, CANCELED, RECEIVE, SND_CANCEL]'
-          enum:
-          - CANCELED
-          - PENDING
-          - RECEIVE
-          - SND_CANCEL
-          - SUCCESS
-          - UNSPECIFIED
-        transactionTimestamp:
-          type: integer
-          description: 트랜잭션 타임스탬프
-          format: int64
-        transactionType:
-          type: string
-          description: 트랜잭션 타입
-          enum:
-          - OFFSET
-          - PURCHASE
-          - PURCHASE_CANCEL
-          - RECEIVE
-          - SEND
-          - SEND_CANCEL
-          - UNSPECIFIED
-        unitPrice:
-          type: number
-          description: 제품 단위 가격
-          format: bigdecimal
-    CarbonOffsetCertificateDocument:
-      title: CarbonOffsetCertificateDocument
-      type: object
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-        credentialSubject:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarbonOffsetCertificateSubject'
-        id:
-          type: string
-        issuanceDate:
-          type: string
-        issuer:
-          type: string
-        proof:
-          $ref: '#/components/schemas/Proof'
-        type:
-          type: array
-          items:
-            type: string
-    CarbonOffsetCertificateSubject:
-      title: CarbonOffsetCertificateSubject
-      type: object
-      properties:
-        certificateAgencyName:
-          type: string
-        certificateSerial:
-          type: string
-        correspondenceAdjustmentRatio:
-          type: number
-          format: bigdecimal
-        currency:
-          type: string
-        id:
-          type: string
-        lastOffsetTimestamp:
-          type: integer
-          format: int64
-        nationCode:
-          type: string
-        nationEnglishName:
-          type: string
-        nationKoreanName:
-          type: string
-        offsetAmount:
-          type: number
-          format: bigdecimal
-        offsetEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/OffsetEventMeta'
-        productName:
-          type: string
-        projectDeveloperName:
-          type: string
-        projectEffects:
-          type: array
-          items:
-            type: string
-        projectId:
-          type: integer
-          format: int32
-        projectName:
-          type: string
-        projectTopicId:
-          type: string
-        projectType:
-          type: string
-        userId:
-          type: string
-        userNickname:
-          type: string
-    CertificateVcResponse:
-      title: CertificateVcResponse
-      type: object
-      properties:
-        credentialCid:
-          type: string
-        credentialId:
-          type: string
-        credentialUrl:
-          type: string
-        document:
-          $ref: '#/components/schemas/CarbonOffsetCertificateDocument'
-        issuedAt:
-          type: string
-          format: date-time
-        newlyIssued:
-          type: boolean
-    Proof:
-      title: Proof
-      type: object
-      properties:
-        created:
-          type: string
-        jws:
-          type: string
-        proofPurpose:
-          type: string
-        type:
-          type: string
-        verificationMethod:
-          type: string
-    WinclAggregationResponse_CertificateBoxItemEntry_CertificateBoxItemAggregation:
-      title: WinclAggregationResponse«CertificateBoxItemEntry,CertificateBoxItemAggregation»
+    WinclAggregationResponse_CertificateBoxItem_CertificateBoxAggregation:
+      title: WinclAggregationResponse«CertificateBoxItem,CertificateBoxAggregation»
       type: object
       properties:
         aggregation:
           description: 집합 데이터
-          $ref: '#/components/schemas/CertificateBoxItemAggregation'
+          $ref: '#/components/schemas/CertificateBoxAggregation'
         code:
           type: string
         currentPageNum:
@@ -609,7 +397,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/CertificateBoxItemEntry'
+            $ref: '#/components/schemas/CertificateBoxItem'
         message:
           type: string
         pageSize:
@@ -773,6 +561,218 @@ components:
         usablePrice:
           type: number
           description: 상쇄한 탄소배출권 가격
+          format: bigdecimal
+    CarbonOffsetCertificateSubject:
+      title: CarbonOffsetCertificateSubject
+      type: object
+      properties:
+        certificateAgencyName:
+          type: string
+        certificateSerial:
+          type: string
+        correspondenceAdjustmentRatio:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        id:
+          type: string
+        lastOffsetTimestamp:
+          type: integer
+          format: int64
+        nationCode:
+          type: string
+        nationEnglishName:
+          type: string
+        nationKoreanName:
+          type: string
+        offsetAmount:
+          type: number
+          format: bigdecimal
+        offsetEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffsetEventMeta'
+        productName:
+          type: string
+        projectDeveloperName:
+          type: string
+        projectEffects:
+          type: array
+          items:
+            type: string
+        projectId:
+          type: integer
+          format: int32
+        projectName:
+          type: string
+        projectTopicId:
+          type: string
+        projectType:
+          type: string
+        userId:
+          type: string
+        userNickname:
+          type: string
+    CertificateBoxAggregation:
+      title: CertificateBoxAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+        totalCanceledAmount:
+          type: number
+          description: 구매 취소한 수량
+          format: bigdecimal
+        totalLockedAmount:
+          type: number
+          description: 잠긴 수량 (현재까지는 없음)
+          format: bigdecimal
+        totalOffsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        totalOffsetPrice:
+          type: number
+          description: 상쇄한 총 탄소배출권 가격
+          format: bigdecimal
+        totalPurchasedAmount:
+          type: number
+          description: 구매 수량
+          format: bigdecimal
+        totalReceivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        totalSentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        totalUsableAmount:
+          type: number
+          description: 사용가능 수량 = 구매 - 상쇄 - 선물전송 + 선물수신
+          format: bigdecimal
+        totalUsablePrice:
+          type: number
+          description: 보유한 총 탄소배출권 가격
+          format: bigdecimal
+        totalWholeAmount:
+          type: number
+          description: 총 수량 = 사용가능 + 상쇄 + 선물전송 + 잠김 + 구매취소
+          format: bigdecimal
+        unitPrice:
+          type: number
+          description: 탄소배출권 단위 가격
+          format: bigdecimal
+    Proof:
+      title: Proof
+      type: object
+      properties:
+        created:
+          type: string
+        jws:
+          type: string
+        proofPurpose:
+          type: string
+        type:
+          type: string
+        verificationMethod:
+          type: string
+    CarbonOffsetCertificateDocument:
+      title: CarbonOffsetCertificateDocument
+      type: object
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        credentialSubject:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarbonOffsetCertificateSubject'
+        id:
+          type: string
+        issuanceDate:
+          type: string
+        issuer:
+          type: string
+        proof:
+          $ref: '#/components/schemas/Proof'
+        type:
+          type: array
+          items:
+            type: string
+    CertificateBoxItemEntry:
+      title: CertificateBoxItemEntry
+      type: object
+      properties:
+        blockchainPurchaseStatus:
+          type: string
+          description: 블록체인에 기록된 구매 상태
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        blockchainTransactionType:
+          type: string
+          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
+        creditId:
+          type: string
+          description: 탄소배출권 ID
+        expectedExpirationDateTime:
+          type: string
+          description: 예정된 유효기한 타임스탬프
+          format: date-time
+        expectedExpirationTimestamp:
+          type: integer
+          description: 예정된 유효기한 타임스탬프
+          format: int64
+        productCurrency:
+          type: string
+          description: 제품 기본 통화
+          enum:
+          - KRW
+          - USD
+        transactionAmount:
+          type: number
+          description: 트랜잭션 수량
+          format: bigdecimal
+        transactionDateTime:
+          type: string
+          description: 트랜잭션 일시
+          format: date-time
+        transactionPrice:
+          type: number
+          description: ' 금액'
+          format: bigdecimal
+        transactionStatus:
+          type: string
+          description: '트랜잭션 상태: [SUCCESS, PENDING, CANCELED, RECEIVE, SND_CANCEL]'
+          enum:
+          - CANCELED
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+          - SUCCESS
+          - UNSPECIFIED
+        transactionTimestamp:
+          type: integer
+          description: 트랜잭션 타임스탬프
+          format: int64
+        transactionType:
+          type: string
+          description: 트랜잭션 타입
+          enum:
+          - OFFSET
+          - PURCHASE
+          - PURCHASE_CANCEL
+          - RECEIVE
+          - SEND
+          - SEND_CANCEL
+          - UNSPECIFIED
+        unitPrice:
+          type: number
+          description: 제품 단위 가격
           format: bigdecimal
   securitySchemes:
     Bearer:

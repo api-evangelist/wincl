@@ -248,6 +248,13 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
+    AdminUpdateAnswerRequest:
+      title: AdminUpdateAnswerRequest
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
     WinclResponse:
       title: WinclResponse
       type: object
@@ -352,13 +359,6 @@ components:
           $ref: '#/components/schemas/QnaDetail'
         message:
           type: string
-    AdminUpdateAnswerRequest:
-      title: AdminUpdateAnswerRequest
-      type: object
-      properties:
-        answer:
-          type: string
-          description: 답변 내용
   securitySchemes:
     Bearer:
       type: http

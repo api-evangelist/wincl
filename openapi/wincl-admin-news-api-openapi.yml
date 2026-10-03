@@ -284,55 +284,6 @@ paths:
         - global
 components:
   schemas:
-    News:
-      title: News
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        createTimestamp:
-          type: integer
-          format: int64
-        'no':
-          type: integer
-          format: int32
-        title:
-          type: string
-        updateTimestamp:
-          type: integer
-          format: int64
-    WinclResponseData_News:
-      title: WinclResponseData«News»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/News'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData_List_CommonCode:
-      title: WinclResponseData«List«CommonCode»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
-        message:
-          type: string
     WinclResponseDataList_News:
       title: WinclResponseDataList«News»
       type: object
@@ -374,41 +325,13 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    AddNewsCategoryRequest:
-      title: AddNewsCategoryRequest
+    WinclResponse:
+      title: WinclResponse
       type: object
       properties:
         code:
           type: string
-        nameEn:
-          type: string
-        nameKr:
-          type: string
-    DeleteNewsCategoryRequest:
-      title: DeleteNewsCategoryRequest
-      type: object
-      properties:
-        code:
-          type: string
-    AddNewsRequest:
-      title: AddNewsRequest
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        title:
-          type: string
-    UpdateNewsRequest:
-      title: UpdateNewsRequest
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        title:
+        message:
           type: string
     CommonCode:
       title: CommonCode
@@ -438,6 +361,83 @@ components:
           type: integer
           description: 표시 순서
           format: int32
+    WinclResponseData_News:
+      title: WinclResponseData«News»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/News'
+        message:
+          type: string
+    AddNewsRequest:
+      title: AddNewsRequest
+      type: object
+      properties:
+        category:
+          type: string
+        contents:
+          type: string
+        title:
+          type: string
+    UpdateNewsRequest:
+      title: UpdateNewsRequest
+      type: object
+      properties:
+        category:
+          type: string
+        contents:
+          type: string
+        title:
+          type: string
+    News:
+      title: News
+      type: object
+      properties:
+        category:
+          type: string
+        contents:
+          type: string
+        createTimestamp:
+          type: integer
+          format: int64
+        'no':
+          type: integer
+          format: int32
+        title:
+          type: string
+        updateTimestamp:
+          type: integer
+          format: int64
+    DeleteNewsCategoryRequest:
+      title: DeleteNewsCategoryRequest
+      type: object
+      properties:
+        code:
+          type: string
+    AddNewsCategoryRequest:
+      title: AddNewsCategoryRequest
+      type: object
+      properties:
+        code:
+          type: string
+        nameEn:
+          type: string
+        nameKr:
+          type: string
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http

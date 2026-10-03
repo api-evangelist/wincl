@@ -675,6 +675,772 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_GiftDetail:
+      title: WinclResponseData«GiftDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GiftDetail'
+        message:
+          type: string
+    CreditSummaryAggregation:
+      title: CreditSummaryAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+        totalAcquiredAmount:
+          type: number
+          description: '획득한 총 탄소배출권 양 (톤): 선물, 상쇄한 양 포함'
+          format: bigdecimal
+        totalUsableAmount:
+          type: number
+          description: '보유한 총 탄소배출권 양 (톤): 선물하거나 상쇄하지 않은 보유량'
+          format: bigdecimal
+        totalUsablePrice:
+          type: number
+          description: 보유한 총 탄소배출권 가격
+          format: bigdecimal
+    TransferCreditRequest:
+      title: TransferCreditRequest
+      type: object
+      properties:
+        contents:
+          type: string
+          description: 선물 내용
+        email:
+          type: string
+          description: 선물수령인 이메일
+        giftCode:
+          type: string
+        phone_number:
+          type: string
+          description: 선물수령인 전화번호
+        tp_transfer:
+          type: string
+          description: 선물수령 타입
+          enum:
+          - COUPON
+          - EMAIL
+          - PHONE
+        transfer_list:
+          type: array
+          description: 선물할 credit List
+          items:
+            $ref: '#/components/schemas/TransferCredit'
+    AmountInfo:
+      title: AmountInfo
+      type: object
+      properties:
+        total_available_amt:
+          type: number
+          description: 총 소멸/선물 가능수량
+          format: bigdecimal
+        total_offset_amt:
+          type: number
+          description: 총 소멸량
+          format: bigdecimal
+        total_purchase_amt:
+          type: number
+          description: 총 구매량
+          format: bigdecimal
+    WinclAggregationResponse_BuyHistory_PurchaseHistoryAggregation:
+      title: WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/PurchaseHistoryAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuyHistory'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData_CertDetail:
+      title: WinclResponseData«CertDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CertDetail'
+        message:
+          type: string
+    ReceiveGiftRequest:
+      title: ReceiveGiftRequest
+      type: object
+      properties:
+        cd_gift:
+          type: string
+          description: Gift Code
+    BuyHistory:
+      title: BuyHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 구매 구매수량
+          format: bigdecimal
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        cd_nation:
+          type: string
+          description: 프로덕트 생성국가
+        certificateAgency:
+          type: string
+          description: 프로젝트 인증기관
+        currency:
+          type: string
+          description: 통화
+        dttm_buy:
+          type: integer
+          description: 구매 날짜
+          format: int64
+        id_usr_prod_buy:
+          type: string
+          description: 구매 아이디
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일
+        nm_prod:
+          type: string
+          description: 프로덕트 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+        orderId:
+          type: string
+          description: 윈클 내부 주문 ID
+        paymentMethod:
+          type: string
+          description: 결제수단
+        pgOrderId:
+          type: string
+          description: orderId와 맵핑되는 PG 주문 ID
+        price_tot_krw:
+          type: number
+          description: 총 구매가격
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 총 구매가격 usd
+          format: bigdecimal
+        projectId:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        project_type:
+          type: string
+          description: 프로덕트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        status_act:
+          type: string
+          description: 구매 상태
+          enum:
+          - CANCELED
+          - FAIL
+          - PENDING
+          - SUCCESS
+    ProjectCreditDetail:
+      title: ProjectCreditDetail
+      type: object
+      properties:
+        blockchainPurchaseStatus:
+          type: string
+          description: 블록체인에 기록된 구매 상태
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬
+        blockchainTransactionType:
+          type: string
+          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
+        canTransfer:
+          type: boolean
+          description: 선물가능한지
+          example: false
+        creditId:
+          type: string
+          description: credit id
+        expireTimestamp:
+          type: integer
+          description: 유효기한
+          format: int64
+        purchaseTimestamp:
+          type: integer
+          description: 구매 일자
+          format: int64
+        usableAmount:
+          type: number
+          description: 보유수량
+          format: bigdecimal
+    SentGift:
+      title: SentGift
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        blockchainTransactionHash:
+          type: string
+          description: 블록체인 트랜잭션 해쉬; blockchainTransactionStatus=PENDING이면 null
+        blockchainTransactionStatus:
+          type: string
+          description: 블록체인 동기화 상태
+        cancelTransactionHash:
+          type: string
+          description: 선물 취소 트랜잭션 해쉬
+        dttm_deadline:
+          type: integer
+          format: int64
+        dttm_receive:
+          type: integer
+          format: int64
+        dttm_send:
+          type: integer
+          format: int64
+        email:
+          type: string
+        id_gift:
+          type: string
+        id_login_send:
+          type: string
+        id_prod:
+          type: string
+          description: 탄소배출권 ID
+        id_usr_send:
+          type: string
+        nm_prod:
+          type: string
+          description: 탄소배출권 이름
+        phone:
+          type: string
+        projectId:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - AUTO_CANCEL
+          - PENDING
+          - RECEIVE
+          - SND_CANCEL
+        tp_transfer:
+          type: string
+          enum:
+          - COUPON
+          - EMAIL
+          - PHONE
+    WinclResponseData_AmountInfo:
+      title: WinclResponseData«AmountInfo»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AmountInfo'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    CreditDetailAggregation:
+      title: CreditDetailAggregation
+      type: object
+      properties:
+        acquiredAmount:
+          type: number
+          description: 구매/획득 수량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        dttm_expire:
+          type: integer
+          description: 유효기간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: 구매날짜
+          format: int64
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        projectRegistrationTimestamp:
+          type: integer
+          description: 프로젝트 인증 시간
+          format: int64
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        receivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        sentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능 수량
+          format: bigdecimal
+        usablePrice:
+          type: number
+          description: 사용가능한 탄소배출권 가격
+          format: bigdecimal
+    WinclAggregationResponse_ProjectCreditDetail_CreditDetailAggregation:
+      title: WinclAggregationResponse«ProjectCreditDetail,CreditDetailAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/CreditDetailAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectCreditDetail'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    OffsetCredit:
+      title: OffsetCredit
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 소멸할 수량
+          format: bigdecimal
+        id_credit:
+          type: string
+          description: credit id
+    SentGiftHistoryAggregation:
+      title: SentGiftHistoryAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+          enum:
+          - KRW
+          - USD
+        totalGiftPrice:
+          type: number
+          description: 선물 보낸 총 탄소배출권 가격
+          format: bigdecimal
+        totalSentAmount:
+          type: number
+          description: 선물 보낸 총 탄소배출권 양 (톤)
+          format: bigdecimal
+    WinclAggregationResponse_SentGift_SentGiftHistoryAggregation:
+      title: WinclAggregationResponse«SentGift,SentGiftHistoryAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/SentGiftHistoryAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentGift'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclAggregationResponse_ProjectCert_ProjectCertListAggregation:
+      title: WinclAggregationResponse«ProjectCert,ProjectCertListAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/ProjectCertListAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectCert'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    ReceivedGiftHistoryAggregation:
+      title: ReceivedGiftHistoryAggregation
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 통화
+          enum:
+          - KRW
+          - USD
+        totalGiftPrice:
+          type: number
+          description: 선물받은 총 탄소배출권 가격
+          format: bigdecimal
+        totalReceivedAmount:
+          type: number
+          description: 선물받은 총 탄소배출권 양 (톤)
+          format: bigdecimal
+    PurchaseHistoryAggregation:
+      title: PurchaseHistoryAggregation
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 집합한 구매수량
+          format: bigdecimal
+        price_tot_krw:
+          type: number
+          description: 집합한 구매가격 (원화)
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 집합한 구매가격 (달러)
+          format: bigdecimal
+    ProjectCreditSummary:
+      title: ProjectCreditSummary
+      type: object
+      properties:
+        acquiredAmount:
+          type: number
+          description: 구매/획득 수량
+          format: bigdecimal
+        cd_nation:
+          type: string
+          description: 프로젝트 생성국가
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+        currency:
+          type: string
+          description: 통화
+        dttm_expire:
+          type: integer
+          description: 유효기간
+          format: int64
+        dttm_reg:
+          type: integer
+          description: 구매날짜
+          format: int64
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_thumbnail_proj:
+          type: string
+          description: 프로젝트 이미지
+        nm_cert_agc:
+          type: string
+          description: 인증기관 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자이름
+        offsetAmount:
+          type: number
+          description: 상쇄한 수량
+          format: bigdecimal
+        project_effect:
+          type: array
+          description: 프로젝트 이펙트
+          items:
+            type: string
+            enum:
+            - AFFORDABLE_AND_CLEAN_ENERGY
+            - CLEAN_WATER_AND_SANITATION
+            - CLIMATE_ACTION
+            - DECENT_WORK_AND_ECONOMIC_GROWTH
+            - GENDER_EQUALITY
+            - GOOD_HEALTH_AND_WELLBEING
+            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+            - LIFE_BELLOW_WATER
+            - LIFE_ON_LAND
+            - NO_POVERTY
+            - PARTNERSHIPS_FOR_THE_GOALS
+            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+            - QUALITY_EDUCATION
+            - REDUCED_INEQUALITIES
+            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+            - SUSTAINABLE_CITIES_AND_COMMUNITIES
+            - ZERO_HUNGER
+        project_type:
+          type: string
+          description: 프로젝트 타입
+          enum:
+          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
+          - AGRICULTURAL_LAND_MANAGEMENT
+          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
+          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
+          - CHEMICAL_INDUSTRY
+          - CLIMATE_CHANGE_ADAPTION
+          - CONSTRUCTION
+          - ENERGY
+          - ENERGY_DEMAND
+          - ENERGY_DISTRIBUTION
+          - ENERGY_INDUSTRIES
+          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
+          - IMPROVED_FOREST_MANAGEMENT
+          - LIVELIHOODS
+          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
+          - MANUFACTURING_INDUSTRIES
+          - METAL_PRODUCTION
+          - MINING_MINERAL_ODUCTION
+          - PLASTIC_WASTE_COLLECTION
+          - PLASTIC_WASTE_RECYCLING
+          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
+          - TRANSPORT
+          - UNSPECIFIED
+          - WASTE_HANDLING_AND_DISPOSAL
+          - WATER_ACCESS_AND_SANITATIO
+          - WETLAND_REWETTING_AND_CONSVATION
+        receivedAmount:
+          type: number
+          description: 선물받은 수량
+          format: bigdecimal
+        sentAmount:
+          type: number
+          description: 선물한 수량
+          format: bigdecimal
+        usableAmount:
+          type: number
+          description: 사용가능 수량
+          format: bigdecimal
+        usablePrice:
+          type: number
+          description: 사용가능한 탄소배출권 가격
+          format: bigdecimal
     CertDetail:
       title: CertDetail
       type: object
@@ -807,40 +1573,13 @@ components:
           description: serial list
           items:
             $ref: '#/components/schemas/CertSerial'
-    WinclResponseData_AmountInfo:
-      title: WinclResponseData«AmountInfo»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/AmountInfo'
-        message:
-          type: string
-    GiftDetail:
-      title: GiftDetail
-      type: object
-      properties:
-        amt:
-          type: number
-          format: bigdecimal
-        email:
-          type: string
-        id_login:
-          type: string
-        nickname:
-          type: string
-        nm_prod:
-          type: string
-        nm_proj:
-          type: string
-    WinclAggregationResponse_ProjectCreditDetail_CreditDetailAggregation:
-      title: WinclAggregationResponse«ProjectCreditDetail,CreditDetailAggregation»
+    WinclAggregationResponse_ProjectCreditSummary_CreditSummaryAggregation:
+      title: WinclAggregationResponse«ProjectCreditSummary,CreditSummaryAggregation»
       type: object
       properties:
         aggregation:
           description: 집합 데이터
-          $ref: '#/components/schemas/CreditDetailAggregation'
+          $ref: '#/components/schemas/CreditSummaryAggregation'
         code:
           type: string
         currentPageNum:
@@ -850,7 +1589,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ProjectCreditDetail'
+            $ref: '#/components/schemas/ProjectCreditSummary'
         message:
           type: string
         pageSize:
@@ -878,103 +1617,27 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    BuyHistory:
-      title: BuyHistory
+    CreditOffset:
+      title: CreditOffset
       type: object
       properties:
-        amt:
+        amt_offset:
           type: number
-          description: 구매 구매수량
+          description: 상쇄 수량
           format: bigdecimal
         blockchainTransactionHash:
           type: string
           description: 블록체인 트랜잭션 해쉬
-        cd_nation:
+        blockchainTransactionStatus:
           type: string
-          description: 프로덕트 생성국가
-        certificateAgency:
-          type: string
-          description: 프로젝트 인증기관
-        currency:
-          type: string
-          description: 통화
-        dttm_buy:
+          description: 블록체인 동기화 상태
+        dttm_offset:
           type: integer
-          description: 구매 날짜
+          description: 상쇄 일시
           format: int64
-        id_usr_prod_buy:
+        id_credit:
           type: string
-          description: 구매 아이디
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일
-        nm_prod:
-          type: string
-          description: 프로덕트 이름
-        nm_proj:
-          type: string
-          description: 프로젝트 이름
-        nm_proj_dev:
-          type: string
-        orderId:
-          type: string
-          description: 윈클 내부 주문 ID
-        paymentMethod:
-          type: string
-          description: 결제수단
-        pgOrderId:
-          type: string
-          description: orderId와 맵핑되는 PG 주문 ID
-        price_tot_krw:
-          type: number
-          description: 총 구매가격
-          format: bigdecimal
-        price_tot_usd:
-          type: number
-          description: 총 구매가격 usd
-          format: bigdecimal
-        projectId:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        project_type:
-          type: string
-          description: 프로덕트 타입
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        status_act:
-          type: string
-          description: 구매 상태
-          enum:
-          - CANCELED
-          - FAIL
-          - PENDING
-          - SUCCESS
+          description: 크레딧 아이디
     ProjectCert:
       title: ProjectCert
       type: object
@@ -1076,730 +1739,23 @@ components:
           - WASTE_HANDLING_AND_DISPOSAL
           - WATER_ACCESS_AND_SANITATIO
           - WETLAND_REWETTING_AND_CONSVATION
-    WinclAggregationResponse_SentGift_SentGiftHistoryAggregation:
-      title: WinclAggregationResponse«SentGift,SentGiftHistoryAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/SentGiftHistoryAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SentGift'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    CreditSummaryAggregation:
-      title: CreditSummaryAggregation
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 통화
-        totalAcquiredAmount:
-          type: number
-          description: '획득한 총 탄소배출권 양 (톤): 선물, 상쇄한 양 포함'
-          format: bigdecimal
-        totalUsableAmount:
-          type: number
-          description: '보유한 총 탄소배출권 양 (톤): 선물하거나 상쇄하지 않은 보유량'
-          format: bigdecimal
-        totalUsablePrice:
-          type: number
-          description: 보유한 총 탄소배출권 가격
-          format: bigdecimal
-    PurchaseHistoryAggregation:
-      title: PurchaseHistoryAggregation
-      type: object
-      properties:
-        amt:
-          type: number
-          description: 집합한 구매수량
-          format: bigdecimal
-        price_tot_krw:
-          type: number
-          description: 집합한 구매가격 (원화)
-          format: bigdecimal
-        price_tot_usd:
-          type: number
-          description: 집합한 구매가격 (달러)
-          format: bigdecimal
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ProjectCreditSummary:
-      title: ProjectCreditSummary
-      type: object
-      properties:
-        acquiredAmount:
-          type: number
-          description: 구매/획득 수량
-          format: bigdecimal
-        cd_nation:
-          type: string
-          description: 프로젝트 생성국가
-        corrs_adj:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-        currency:
-          type: string
-          description: 통화
-        dttm_expire:
-          type: integer
-          description: 유효기간
-          format: int64
-        dttm_reg:
-          type: integer
-          description: 구매날짜
-          format: int64
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_thumbnail_proj:
-          type: string
-          description: 프로젝트 이미지
-        nm_cert_agc:
-          type: string
-          description: 인증기관 이름
-        nm_proj:
-          type: string
-          description: 프로젝트 이름
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자이름
-        offsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        project_effect:
-          type: array
-          description: 프로젝트 이펙트
-          items:
-            type: string
-            enum:
-            - AFFORDABLE_AND_CLEAN_ENERGY
-            - CLEAN_WATER_AND_SANITATION
-            - CLIMATE_ACTION
-            - DECENT_WORK_AND_ECONOMIC_GROWTH
-            - GENDER_EQUALITY
-            - GOOD_HEALTH_AND_WELLBEING
-            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-            - LIFE_BELLOW_WATER
-            - LIFE_ON_LAND
-            - NO_POVERTY
-            - PARTNERSHIPS_FOR_THE_GOALS
-            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-            - QUALITY_EDUCATION
-            - REDUCED_INEQUALITIES
-            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-            - SUSTAINABLE_CITIES_AND_COMMUNITIES
-            - ZERO_HUNGER
-        project_type:
-          type: string
-          description: 프로젝트 타입
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        receivedAmount:
-          type: number
-          description: 선물받은 수량
-          format: bigdecimal
-        sentAmount:
-          type: number
-          description: 선물한 수량
-          format: bigdecimal
-        usableAmount:
-          type: number
-          description: 사용가능 수량
-          format: bigdecimal
-        usablePrice:
-          type: number
-          description: 사용가능한 탄소배출권 가격
-          format: bigdecimal
-    WinclResponseData_CertDetail:
-      title: WinclResponseData«CertDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CertDetail'
-        message:
-          type: string
-    TransferCreditRequest:
-      title: TransferCreditRequest
-      type: object
-      properties:
-        contents:
-          type: string
-          description: 선물 내용
-        email:
-          type: string
-          description: 선물수령인 이메일
-        giftCode:
-          type: string
-        phone_number:
-          type: string
-          description: 선물수령인 전화번호
-        tp_transfer:
-          type: string
-          description: 선물수령 타입
-          enum:
-          - COUPON
-          - EMAIL
-          - PHONE
-        transfer_list:
-          type: array
-          description: 선물할 credit List
-          items:
-            $ref: '#/components/schemas/TransferCredit'
-    CreditDetailAggregation:
-      title: CreditDetailAggregation
-      type: object
-      properties:
-        acquiredAmount:
-          type: number
-          description: 구매/획득 수량
-          format: bigdecimal
-        cd_nation:
-          type: string
-          description: 프로젝트 생성국가
-        corrs_adj:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-        currency:
-          type: string
-          description: 통화
-        dttm_expire:
-          type: integer
-          description: 유효기간
-          format: int64
-        dttm_reg:
-          type: integer
-          description: 구매날짜
-          format: int64
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_thumbnail_proj:
-          type: string
-          description: 프로젝트 이미지
-        nm_cert_agc:
-          type: string
-          description: 인증기관 이름
-        nm_proj:
-          type: string
-          description: 프로젝트 이름
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자이름
-        offsetAmount:
-          type: number
-          description: 상쇄한 수량
-          format: bigdecimal
-        projectRegistrationTimestamp:
-          type: integer
-          description: 프로젝트 인증 시간
-          format: int64
-        project_effect:
-          type: array
-          description: 프로젝트 이펙트
-          items:
-            type: string
-            enum:
-            - AFFORDABLE_AND_CLEAN_ENERGY
-            - CLEAN_WATER_AND_SANITATION
-            - CLIMATE_ACTION
-            - DECENT_WORK_AND_ECONOMIC_GROWTH
-            - GENDER_EQUALITY
-            - GOOD_HEALTH_AND_WELLBEING
-            - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-            - LIFE_BELLOW_WATER
-            - LIFE_ON_LAND
-            - NO_POVERTY
-            - PARTNERSHIPS_FOR_THE_GOALS
-            - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-            - QUALITY_EDUCATION
-            - REDUCED_INEQUALITIES
-            - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-            - SUSTAINABLE_CITIES_AND_COMMUNITIES
-            - ZERO_HUNGER
-        project_type:
-          type: string
-          description: 프로젝트 타입
-          enum:
-          - AFFORESTATION_REFORESTATION_AND_REVEGETATION
-          - AGRICULTURAL_LAND_MANAGEMENT
-          - AGRICULTURE_FORESTRY_AND_OTHER_LAND_USE
-          - AVOIDED_CONVERSION_OF_GRASSLANDS_AND_SHRUBLANDS
-          - CHEMICAL_INDUSTRY
-          - CLIMATE_CHANGE_ADAPTION
-          - CONSTRUCTION
-          - ENERGY
-          - ENERGY_DEMAND
-          - ENERGY_DISTRIBUTION
-          - ENERGY_INDUSTRIES
-          - FUGITIVE_EMISSIONS_FROM_FUELS__SOLID_OIL_AND_GAS
-          - IMPROVED_FOREST_MANAGEMENT
-          - LIVELIHOODS
-          - LIVESTOCK_ENTERIC_FERMENTATION_AND_MANURE_MANAGEMENT
-          - MANUFACTURING_INDUSTRIES
-          - METAL_PRODUCTION
-          - MINING_MINERAL_ODUCTION
-          - PLASTIC_WASTE_COLLECTION
-          - PLASTIC_WASTE_RECYCLING
-          - REDUCED_EMISSONS_FROM_FORESTATION_AND_DEGRADATION
-          - TRANSPORT
-          - UNSPECIFIED
-          - WASTE_HANDLING_AND_DISPOSAL
-          - WATER_ACCESS_AND_SANITATIO
-          - WETLAND_REWETTING_AND_CONSVATION
-        receivedAmount:
-          type: number
-          description: 선물받은 수량
-          format: bigdecimal
-        sentAmount:
-          type: number
-          description: 선물한 수량
-          format: bigdecimal
-        usableAmount:
-          type: number
-          description: 사용가능 수량
-          format: bigdecimal
-        usablePrice:
-          type: number
-          description: 사용가능한 탄소배출권 가격
-          format: bigdecimal
-    CreditOffset:
-      title: CreditOffset
-      type: object
-      properties:
-        amt_offset:
-          type: number
-          description: 상쇄 수량
-          format: bigdecimal
-        blockchainTransactionHash:
-          type: string
-          description: 블록체인 트랜잭션 해쉬
-        blockchainTransactionStatus:
-          type: string
-          description: 블록체인 동기화 상태
-        dttm_offset:
-          type: integer
-          description: 상쇄 일시
-          format: int64
-        id_credit:
-          type: string
-          description: 크레딧 아이디
-    WinclAggregationResponse_ProjectCreditSummary_CreditSummaryAggregation:
-      title: WinclAggregationResponse«ProjectCreditSummary,CreditSummaryAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/CreditSummaryAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectCreditSummary'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    SentGift:
-      title: SentGift
+    GiftDetail:
+      title: GiftDetail
       type: object
       properties:
         amt:
           type: number
           format: bigdecimal
-        blockchainTransactionHash:
-          type: string
-          description: 블록체인 트랜잭션 해쉬; blockchainTransactionStatus=PENDING이면 null
-        blockchainTransactionStatus:
-          type: string
-          description: 블록체인 동기화 상태
-        cancelTransactionHash:
-          type: string
-          description: 선물 취소 트랜잭션 해쉬
-        dttm_deadline:
-          type: integer
-          format: int64
-        dttm_receive:
-          type: integer
-          format: int64
-        dttm_send:
-          type: integer
-          format: int64
         email:
           type: string
-        id_gift:
+        id_login:
           type: string
-        id_login_send:
-          type: string
-        id_prod:
-          type: string
-          description: 탄소배출권 ID
-        id_usr_send:
+        nickname:
           type: string
         nm_prod:
           type: string
-          description: 탄소배출권 이름
-        phone:
+        nm_proj:
           type: string
-        projectId:
-          type: integer
-          format: int32
-        status:
-          type: string
-          enum:
-          - AUTO_CANCEL
-          - PENDING
-          - RECEIVE
-          - SND_CANCEL
-        tp_transfer:
-          type: string
-          enum:
-          - COUPON
-          - EMAIL
-          - PHONE
-    WinclAggregationResponse_ProjectCert_ProjectCertListAggregation:
-      title: WinclAggregationResponse«ProjectCert,ProjectCertListAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/ProjectCertListAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectCert'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    ProjectCertListAggregation:
-      title: ProjectCertListAggregation
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 통화
-          enum:
-          - KRW
-          - USD
-        totalOffsetAmount:
-          type: number
-          description: '상쇄한 총 탄소배출권 양 (톤): 선물하거나 상쇄하지 않은 보유량'
-          format: bigdecimal
-        totalOffsetPrice:
-          type: number
-          description: 상쇄한 총 탄소배출권 가격
-          format: bigdecimal
-    ProjectCreditDetail:
-      title: ProjectCreditDetail
-      type: object
-      properties:
-        blockchainPurchaseStatus:
-          type: string
-          description: 블록체인에 기록된 구매 상태
-        blockchainTransactionHash:
-          type: string
-          description: 블록체인 트랜잭션 해쉬
-        blockchainTransactionType:
-          type: string
-          description: '블록체인 트랜잭션 종류: [MINT, TRANSFER, OFFSET]'
-        canTransfer:
-          type: boolean
-          description: 선물가능한지
-          example: false
-        creditId:
-          type: string
-          description: credit id
-        expireTimestamp:
-          type: integer
-          description: 유효기한
-          format: int64
-        purchaseTimestamp:
-          type: integer
-          description: 구매 일자
-          format: int64
-        usableAmount:
-          type: number
-          description: 보유수량
-          format: bigdecimal
-    TransferCredit:
-      title: TransferCredit
-      type: object
-      properties:
-        amt:
-          type: number
-          description: 선물할 수량
-          format: bigdecimal
-        id_credit:
-          type: string
-          description: credit id
-    WinclAggregationResponse_BuyHistory_PurchaseHistoryAggregation:
-      title: WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/PurchaseHistoryAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuyHistory'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    CertSerial:
-      title: CertSerial
-      type: object
-      properties:
-        cert_serial_end:
-          type: string
-          description: serial 끝번호
-        cert_serial_start:
-          type: string
-          description: serial 시작번호
-        ton:
-          type: number
-          description: offset ton
-          format: bigdecimal
-    OffsetCredit:
-      title: OffsetCredit
-      type: object
-      properties:
-        amt:
-          type: number
-          description: 소멸할 수량
-          format: bigdecimal
-        id_credit:
-          type: string
-          description: credit id
-    WinclResponseData_GiftDetail:
-      title: WinclResponseData«GiftDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/GiftDetail'
-        message:
-          type: string
-    AmountInfo:
-      title: AmountInfo
-      type: object
-      properties:
-        total_available_amt:
-          type: number
-          description: 총 소멸/선물 가능수량
-          format: bigdecimal
-        total_offset_amt:
-          type: number
-          description: 총 소멸량
-          format: bigdecimal
-        total_purchase_amt:
-          type: number
-          description: 총 구매량
-          format: bigdecimal
-    WinclAggregationResponse_ReceivedGift_ReceivedGiftHistoryAggregation:
-      title: WinclAggregationResponse«ReceivedGift,ReceivedGiftHistoryAggregation»
-      type: object
-      properties:
-        aggregation:
-          description: 집합 데이터
-          $ref: '#/components/schemas/ReceivedGiftHistoryAggregation'
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedGift'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
     ReceivedGift:
       title: ReceivedGift
       type: object
@@ -1859,15 +1815,8 @@ components:
           - COUPON
           - EMAIL
           - PHONE
-    ReceiveGiftRequest:
-      title: ReceiveGiftRequest
-      type: object
-      properties:
-        cd_gift:
-          type: string
-          description: Gift Code
-    ReceivedGiftHistoryAggregation:
-      title: ReceivedGiftHistoryAggregation
+    ProjectCertListAggregation:
+      title: ProjectCertListAggregation
       type: object
       properties:
         currency:
@@ -1876,32 +1825,83 @@ components:
           enum:
           - KRW
           - USD
-        totalGiftPrice:
+        totalOffsetAmount:
           type: number
-          description: 선물받은 총 탄소배출권 가격
+          description: '상쇄한 총 탄소배출권 양 (톤): 선물하거나 상쇄하지 않은 보유량'
           format: bigdecimal
-        totalReceivedAmount:
+        totalOffsetPrice:
           type: number
-          description: 선물받은 총 탄소배출권 양 (톤)
+          description: 상쇄한 총 탄소배출권 가격
           format: bigdecimal
-    SentGiftHistoryAggregation:
-      title: SentGiftHistoryAggregation
+    CertSerial:
+      title: CertSerial
       type: object
       properties:
-        currency:
+        cert_serial_end:
           type: string
-          description: 통화
+          description: serial 끝번호
+        cert_serial_start:
+          type: string
+          description: serial 시작번호
+        ton:
+          type: number
+          description: offset ton
+          format: bigdecimal
+    WinclAggregationResponse_ReceivedGift_ReceivedGiftHistoryAggregation:
+      title: WinclAggregationResponse«ReceivedGift,ReceivedGiftHistoryAggregation»
+      type: object
+      properties:
+        aggregation:
+          description: 집합 데이터
+          $ref: '#/components/schemas/ReceivedGiftHistoryAggregation'
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedGift'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
           enum:
-          - KRW
-          - USD
-        totalGiftPrice:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    TransferCredit:
+      title: TransferCredit
+      type: object
+      properties:
+        amt:
           type: number
-          description: 선물 보낸 총 탄소배출권 가격
+          description: 선물할 수량
           format: bigdecimal
-        totalSentAmount:
-          type: number
-          description: 선물 보낸 총 탄소배출권 양 (톤)
-          format: bigdecimal
+        id_credit:
+          type: string
+          description: credit id
     OffsetCreditRequest:
       title: OffsetCreditRequest
       type: object

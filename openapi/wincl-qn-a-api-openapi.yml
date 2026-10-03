@@ -305,24 +305,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    UpdateQuestionRequest:
-      title: UpdateQuestionRequest
-      type: object
-      properties:
-        cd_tp_qna:
-          type: string
-          description: Qna 타입
-          enum:
-          - ACCOUNT
-          - GIFT_AND_DECLARATION
-          - OTHERS
-          - PAYMENT
-        cts:
-          type: string
-          description: 질문 내용
-        ttl:
-          type: string
-          description: 질문 타이틀
     Qna:
       title: Qna
       type: object
@@ -371,6 +353,24 @@ components:
           $ref: '#/components/schemas/QnaDetail'
         message:
           type: string
+    UpdateQuestionRequest:
+      title: UpdateQuestionRequest
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: 질문 내용
+        ttl:
+          type: string
+          description: 질문 타이틀
   securitySchemes:
     Bearer:
       type: http

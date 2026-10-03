@@ -34,6 +34,18 @@ paths:
         - global
 components:
   schemas:
+    Transaction:
+      title: Transaction
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        productName:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
     WinclResponseDataList_TransactionCard:
       title: WinclResponseDataList«TransactionCard»
       type: object
@@ -101,18 +113,6 @@ components:
           type: number
           description: 총 가격
           format: bigdecimal
-    Transaction:
-      title: Transaction
-      type: object
-      properties:
-        amount:
-          type: number
-          format: bigdecimal
-        productName:
-          type: string
-        timestamp:
-          type: integer
-          format: int64
   securitySchemes:
     Bearer:
       type: http

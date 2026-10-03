@@ -183,6 +183,66 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_GatherEventApplyResult:
+      title: WinclResponseData«GatherEventApplyResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GatherEventApplyResult'
+        message:
+          type: string
+    DeleteEventResult:
+      title: DeleteEventResult
+      type: object
+      properties:
+        deleteed:
+          type: boolean
+        eventId:
+          type: string
+    ConsumeMagicCouponRequest:
+      title: ConsumeMagicCouponRequest
+      type: object
+      properties:
+        eventId:
+          type: string
+        magicCouponCode:
+          type: string
+    GatherEventAnswersRequest:
+      title: GatherEventAnswersRequest
+      type: object
+      properties:
+        answers:
+          type: array
+          description: 응답 목록 (참가자 답변을 질문 순서대로 Array 형태에 담음)
+          items:
+            type: string
+        emissionAmount:
+          type: number
+          description: 결과 탄소배출량
+          format: bigdecimal
+        eventId:
+          type: string
+          description: 이벤트 ID
+        questionSetId:
+          type: string
+          description: 질문 세트 ID (한 이벤트에 질문지 세트가 여럿인 경우 구별)
+    ConsumeCouponResult:
+      title: ConsumeCouponResult
+      type: object
+      properties:
+        couponCode:
+          type: string
+        couponId:
+          type: string
+        couponStatus:
+          type: string
+          enum:
+          - ENABLED
+          - UNUSED
+          - USED
+          - USING
     GatherEventApplyResult:
       title: GatherEventApplyResult
       type: object
@@ -212,47 +272,41 @@ components:
           $ref: '#/components/schemas/WinclCoupon'
         message:
           type: string
-    ConsumeCouponResult:
-      title: ConsumeCouponResult
+    WinclResponseData_DeleteEventResult:
+      title: WinclResponseData«DeleteEventResult»
       type: object
       properties:
-        couponCode:
+        code:
           type: string
-        couponId:
+        data:
+          $ref: '#/components/schemas/DeleteEventResult'
+        message:
           type: string
-        couponStatus:
-          type: string
-          enum:
-          - ENABLED
-          - UNUSED
-          - USED
-          - USING
-    GatherEventAnswersRequest:
-      title: GatherEventAnswersRequest
+    IssueIndividualCouponsRequest:
+      title: IssueIndividualCouponsRequest
       type: object
       properties:
-        answers:
-          type: array
-          description: 응답 목록 (참가자 답변을 질문 순서대로 Array 형태에 담음)
-          items:
-            type: string
-        emissionAmount:
+        amount:
           type: number
-          description: 결과 탄소배출량
+          description: 참자가에게 지급할 배출권 양 (톤)
           format: bigdecimal
-        eventId:
-          type: string
-          description: 이벤트 ID
-        questionSetId:
-          type: string
-          description: 질문 세트 ID (한 이벤트에 질문지 세트가 여럿인 경우 구별)
-    ConsumeMagicCouponRequest:
-      title: ConsumeMagicCouponRequest
-      type: object
-      properties:
+        couponCount:
+          type: integer
+          description: 생성할 개인쿠폰 갯수
+          format: int32
         eventId:
           type: string
         magicCouponCode:
+          type: string
+    WinclResponseData_ConsumeCouponResult:
+      title: WinclResponseData«ConsumeCouponResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ConsumeCouponResult'
+        message:
           type: string
     WinclResponseData_IssueCouponsResult:
       title: WinclResponseData«IssueCouponsResult»
@@ -264,23 +318,27 @@ components:
           $ref: '#/components/schemas/IssueCouponsResult'
         message:
           type: string
-    WinclResponseData_DeleteEventResult:
-      title: WinclResponseData«DeleteEventResult»
+    RegisterMagicCouponRequest:
+      title: RegisterMagicCouponRequest
       type: object
       properties:
-        code:
+        amount:
+          type: number
+          description: 참자가에게 지급할 배출권 양 (톤)
+          format: bigdecimal
+        creditId:
           type: string
-        data:
-          $ref: '#/components/schemas/DeleteEventResult'
-        message:
+        eventDescription:
           type: string
-    DeleteEventResult:
-      title: DeleteEventResult
-      type: object
-      properties:
-        deleteed:
-          type: boolean
         eventId:
+          type: string
+        eventName:
+          type: string
+        magicCouponCode:
+          type: string
+        productId:
+          type: string
+        senderUserId:
           type: string
     WinclCoupon:
       title: WinclCoupon
@@ -315,64 +373,6 @@ components:
         productId:
           type: string
         userId:
-          type: string
-    RegisterMagicCouponRequest:
-      title: RegisterMagicCouponRequest
-      type: object
-      properties:
-        amount:
-          type: number
-          description: 참자가에게 지급할 배출권 양 (톤)
-          format: bigdecimal
-        creditId:
-          type: string
-        eventDescription:
-          type: string
-        eventId:
-          type: string
-        eventName:
-          type: string
-        magicCouponCode:
-          type: string
-        productId:
-          type: string
-        senderUserId:
-          type: string
-    IssueIndividualCouponsRequest:
-      title: IssueIndividualCouponsRequest
-      type: object
-      properties:
-        amount:
-          type: number
-          description: 참자가에게 지급할 배출권 양 (톤)
-          format: bigdecimal
-        couponCount:
-          type: integer
-          description: 생성할 개인쿠폰 갯수
-          format: int32
-        eventId:
-          type: string
-        magicCouponCode:
-          type: string
-    WinclResponseData_GatherEventApplyResult:
-      title: WinclResponseData«GatherEventApplyResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/GatherEventApplyResult'
-        message:
-          type: string
-    WinclResponseData_ConsumeCouponResult:
-      title: WinclResponseData«ConsumeCouponResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ConsumeCouponResult'
-        message:
           type: string
   securitySchemes:
     Bearer:

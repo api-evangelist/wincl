@@ -143,18 +143,6 @@ components:
           description: 국가코드 숫자
           format: int32
           example: 410
-    WinclResponseData_List_Nation:
-      title: WinclResponseData«List«Nation»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nation'
-        message:
-          type: string
     AdminModifyNationRequest:
       title: AdminModifyNationRequest
       required:
@@ -185,6 +173,18 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    WinclResponseData_List_Nation:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
         message:
           type: string
   securitySchemes:

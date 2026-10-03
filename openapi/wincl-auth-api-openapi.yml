@@ -229,14 +229,30 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_OAuthSignInResponse:
-      title: WinclResponseData«OAuthSignInResponse»
+    WinclResponseData_PaycoAccessTokenResponse:
+      title: WinclResponseData«PaycoAccessTokenResponse»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/OAuthSignInResponse'
+          $ref: '#/components/schemas/PaycoAccessTokenResponse'
+        message:
+          type: string
+    CheckLoginIdResponse:
+      title: CheckLoginIdResponse
+      type: object
+      properties:
+        conflict:
+          type: boolean
+    WinclResponseData_OAuthSignUpResponse:
+      title: WinclResponseData«OAuthSignUpResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAuthSignUpResponse'
         message:
           type: string
     OAuthSignInRequest:
@@ -254,90 +270,6 @@ components:
           - GOOGLE
           - KAKAO
           - PAYCO
-    WinclResponseData_CheckLoginIdResponse:
-      title: WinclResponseData«CheckLoginIdResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CheckLoginIdResponse'
-        message:
-          type: string
-    OAuthSignUpResponse:
-      title: OAuthSignUpResponse
-      type: object
-      properties:
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        token_type:
-          type: string
-          description: jwt 토큰 타입
-    CreateJwtRequest:
-      title: CreateJwtRequest
-      type: object
-      properties:
-        email:
-          type: string
-        id_corp:
-          type: string
-          enum:
-          - FACEBOOK
-          - GOOGLE
-          - KAKAO
-          - PAYCO
-        phoneNumber:
-          type: string
-    CheckLoginIdResponse:
-      title: CheckLoginIdResponse
-      type: object
-      properties:
-        conflict:
-          type: boolean
-    CheckEmailRequest:
-      title: CheckEmailRequest
-      type: object
-      properties:
-        email:
-          type: string
-    PaycoAccessTokenResponse:
-      title: PaycoAccessTokenResponse
-      type: object
-      properties:
-        access_token:
-          type: string
-        access_token_secret:
-          type: string
-        expires_in:
-          type: string
-        refresh_token:
-          type: string
-        state:
-          type: string
-        token_type:
-          type: string
-    WinclResponseData_CheckEmailResponse:
-      title: WinclResponseData«CheckEmailResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CheckEmailResponse'
-        message:
-          type: string
-    WinclResponseData_CreateJwtResponse:
-      title: WinclResponseData«CreateJwtResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/CreateJwtResponse'
-        message:
-          type: string
     OAuthSignUpRequest:
       title: OAuthSignUpRequest
       type: object
@@ -363,38 +295,6 @@ components:
         verifiedPhoneNumber:
           type: string
           description: '인증된 전화번호 (E.164 포맷. 예: +821012345678)'
-    CheckNicknameRequest:
-      title: CheckNicknameRequest
-      type: object
-      properties:
-        nickname:
-          type: string
-    WinclResponseData_OAuthSignUpResponse:
-      title: WinclResponseData«OAuthSignUpResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/OAuthSignUpResponse'
-        message:
-          type: string
-    WinclResponseData_PaycoAccessTokenResponse:
-      title: WinclResponseData«PaycoAccessTokenResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/PaycoAccessTokenResponse'
-        message:
-          type: string
-    CheckLoginIdRequest:
-      title: CheckLoginIdRequest
-      type: object
-      properties:
-        id_login:
-          type: string
     WinclResponseData_CheckNicknameResponse:
       title: WinclResponseData«CheckNicknameResponse»
       type: object
@@ -405,12 +305,42 @@ components:
           $ref: '#/components/schemas/CheckNicknameResponse'
         message:
           type: string
-    CheckNicknameResponse:
-      title: CheckNicknameResponse
+    WinclResponseData_OAuthSignInResponse:
+      title: WinclResponseData«OAuthSignInResponse»
       type: object
       properties:
-        conflict:
-          type: boolean
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OAuthSignInResponse'
+        message:
+          type: string
+    PaycoAccessTokenResponse:
+      title: PaycoAccessTokenResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+        access_token_secret:
+          type: string
+        expires_in:
+          type: string
+        refresh_token:
+          type: string
+        state:
+          type: string
+        token_type:
+          type: string
+    WinclResponseData_CheckLoginIdResponse:
+      title: WinclResponseData«CheckLoginIdResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CheckLoginIdResponse'
+        message:
+          type: string
     OAuthSignInResponse:
       title: OAuthSignInResponse
       type: object
@@ -455,6 +385,55 @@ components:
       properties:
         conflict:
           type: boolean
+    WinclResponseData_CheckEmailResponse:
+      title: WinclResponseData«CheckEmailResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CheckEmailResponse'
+        message:
+          type: string
+    WinclResponseData_CreateJwtResponse:
+      title: WinclResponseData«CreateJwtResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/CreateJwtResponse'
+        message:
+          type: string
+    CheckNicknameResponse:
+      title: CheckNicknameResponse
+      type: object
+      properties:
+        conflict:
+          type: boolean
+    CheckEmailRequest:
+      title: CheckEmailRequest
+      type: object
+      properties:
+        email:
+          type: string
+    OAuthSignUpResponse:
+      title: OAuthSignUpResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+          description: jwt 토큰 타입
+    CheckNicknameRequest:
+      title: CheckNicknameRequest
+      type: object
+      properties:
+        nickname:
+          type: string
     CreateJwtResponse:
       title: CreateJwtResponse
       type: object
@@ -462,6 +441,27 @@ components:
         accessToken:
           type: string
         refreshToken:
+          type: string
+    CheckLoginIdRequest:
+      title: CheckLoginIdRequest
+      type: object
+      properties:
+        id_login:
+          type: string
+    CreateJwtRequest:
+      title: CreateJwtRequest
+      type: object
+      properties:
+        email:
+          type: string
+        id_corp:
+          type: string
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+        phoneNumber:
           type: string
   securitySchemes:
     Bearer:

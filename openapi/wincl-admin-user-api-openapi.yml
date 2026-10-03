@@ -122,117 +122,6 @@ paths:
         - global
 components:
   schemas:
-    UserDetail:
-      title: UserDetail
-      type: object
-      properties:
-        addr:
-          type: string
-          description: 지갑 주소
-        cd_country:
-          type: string
-          description: 거주국가코드
-        company_code:
-          type: string
-          description: 기관 코드
-        dttm_expire:
-          type: string
-          description: 마감날짜
-        dttm_reg:
-          type: integer
-          description: 가입날짜
-          format: int64
-        dttm_upd:
-          type: integer
-          description: 변경날짜
-          format: int64
-        email:
-          type: string
-          description: 유저가 설정한 이메일
-        email_social:
-          type: string
-          description: 소셜로그인 에서 받아온 이메일
-        id_corp:
-          type: string
-          description: 소셜 로그인 회사
-          enum:
-          - FACEBOOK
-          - GOOGLE
-          - KAKAO
-          - PAYCO
-        id_login:
-          type: string
-          description: 유저가 설정한 아이디, 외부노출용
-        id_social_usr:
-          type: string
-          description: 소셜로그인에서 주는 유저식별 아이디
-        id_usr:
-          type: string
-          description: 유저 아이디
-        img_profile:
-          type: string
-          description: 유저 프로필 이미지
-        nickname:
-          type: string
-          description: 유저 닉네임
-        nm_usr:
-          type: string
-          description: 유저 이름
-        reg_unixtime:
-          type: integer
-          description: 가입 유닉스 시간
-          format: int64
-    WinclResponseDataList_User:
-      title: WinclResponseDataList«User»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData_UserDetail:
-      title: WinclResponseData«UserDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UserDetail'
-        message:
-          type: string
     User:
       title: User
       type: object
@@ -302,6 +191,117 @@ components:
           - DEREGISTERED
           - REGISTERED
           - REGISTERING
+    WinclResponseData_UserDetail:
+      title: WinclResponseData«UserDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserDetail'
+        message:
+          type: string
+    WinclResponseDataList_User:
+      title: WinclResponseDataList«User»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    UserDetail:
+      title: UserDetail
+      type: object
+      properties:
+        addr:
+          type: string
+          description: 지갑 주소
+        cd_country:
+          type: string
+          description: 거주국가코드
+        company_code:
+          type: string
+          description: 기관 코드
+        dttm_expire:
+          type: string
+          description: 마감날짜
+        dttm_reg:
+          type: integer
+          description: 가입날짜
+          format: int64
+        dttm_upd:
+          type: integer
+          description: 변경날짜
+          format: int64
+        email:
+          type: string
+          description: 유저가 설정한 이메일
+        email_social:
+          type: string
+          description: 소셜로그인 에서 받아온 이메일
+        id_corp:
+          type: string
+          description: 소셜 로그인 회사
+          enum:
+          - FACEBOOK
+          - GOOGLE
+          - KAKAO
+          - PAYCO
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        id_social_usr:
+          type: string
+          description: 소셜로그인에서 주는 유저식별 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        img_profile:
+          type: string
+          description: 유저 프로필 이미지
+        nickname:
+          type: string
+          description: 유저 닉네임
+        nm_usr:
+          type: string
+          description: 유저 이름
+        reg_unixtime:
+          type: integer
+          description: 가입 유닉스 시간
+          format: int64
   securitySchemes:
     Bearer:
       type: http

@@ -170,29 +170,22 @@ paths:
         - global
 components:
   schemas:
-    WinclResponse:
-      title: WinclResponse
+    ModifyUserProfileRequest:
+      title: ModifyUserProfileRequest
       type: object
       properties:
-        code:
+        cd_country:
           type: string
-        message:
+          description: 거주국가 코드
+        email:
           type: string
-    DeregisterResponse:
-      title: DeregisterResponse
-      type: object
-      properties:
-        id_login:
+          description: 유저가 설정한 이메일
+        nickname:
           type: string
-          description: 유저가 설정한 아이디, 외부노출용
-        status:
+          description: 유저 닉네임
+        phone_number:
           type: string
-          description: '유저 상태: DEREGISTERED 만 가능'
-          enum:
-          - ARCHIVED
-          - DEREGISTERED
-          - REGISTERED
-          - REGISTERING
+          description: 휴대 전화번호
     UserProfile:
       title: UserProfile
       type: object
@@ -266,6 +259,24 @@ components:
         walletStatusMessage:
           type: string
           description: Human-readable status message about Hedera wallet provisioning
+    WinclResponseData_ModifyUserProfileImageResponse:
+      title: WinclResponseData«ModifyUserProfileImageResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ModifyUserProfileImageResponse'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ModifyUserProfileImageResponse:
       title: ModifyUserProfileImageResponse
       type: object
@@ -283,42 +294,6 @@ components:
           $ref: '#/components/schemas/ReincarnationResponse'
         message:
           type: string
-    WinclResponseData_UserProfile:
-      title: WinclResponseData«UserProfile»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UserProfile'
-        message:
-          type: string
-    ModifyUserProfileRequest:
-      title: ModifyUserProfileRequest
-      type: object
-      properties:
-        cd_country:
-          type: string
-          description: 거주국가 코드
-        email:
-          type: string
-          description: 유저가 설정한 이메일
-        nickname:
-          type: string
-          description: 유저 닉네임
-        phone_number:
-          type: string
-          description: 휴대 전화번호
-    WinclResponseData_ModifyUserProfileImageResponse:
-      title: WinclResponseData«ModifyUserProfileImageResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ModifyUserProfileImageResponse'
-        message:
-          type: string
     ReincarnationResponse:
       title: ReincarnationResponse
       type: object
@@ -334,6 +309,31 @@ components:
           - DEREGISTERED
           - REGISTERED
           - REGISTERING
+    DeregisterResponse:
+      title: DeregisterResponse
+      type: object
+      properties:
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디, 외부노출용
+        status:
+          type: string
+          description: '유저 상태: DEREGISTERED 만 가능'
+          enum:
+          - ARCHIVED
+          - DEREGISTERED
+          - REGISTERED
+          - REGISTERING
+    WinclResponseData_UserProfile:
+      title: WinclResponseData«UserProfile»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        message:
+          type: string
     WinclResponseData_DeregisterResponse:
       title: WinclResponseData«DeregisterResponse»
       type: object

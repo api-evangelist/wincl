@@ -100,6 +100,20 @@ paths:
         - global
 components:
   schemas:
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SignInAdminRequest:
+      title: SignInAdminRequest
+      type: object
+      properties:
+        google_id_token:
+          type: string
     WinclResponseData_SignInAdminResponse:
       title: WinclResponseData«SignInAdminResponse»
       type: object
@@ -108,14 +122,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/SignInAdminResponse'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
         message:
           type: string
     SignInAdminResponse:
@@ -131,12 +137,6 @@ components:
         token_type:
           type: string
           description: jwt 토큰 타입
-    SignInAdminRequest:
-      title: SignInAdminRequest
-      type: object
-      properties:
-        google_id_token:
-          type: string
   securitySchemes:
     Bearer:
       type: http

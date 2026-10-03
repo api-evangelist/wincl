@@ -44,6 +44,16 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_RefundPaymentResultData:
+      title: WinclResponseData«RefundPaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/RefundPaymentResultData'
+        message:
+          type: string
     RefundPaymentResultData:
       title: RefundPaymentResultData
       type: object
@@ -77,16 +87,6 @@ components:
           description: 구매 ID (`id_usr_prod_buy`)
         successful:
           type: boolean
-    WinclResponseData_RefundPaymentResultData:
-      title: WinclResponseData«RefundPaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/RefundPaymentResultData'
-        message:
-          type: string
   securitySchemes:
     Bearer:
       type: http
