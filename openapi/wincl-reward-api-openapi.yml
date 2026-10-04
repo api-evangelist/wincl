@@ -377,100 +377,6 @@ paths:
         - global
 components:
   schemas:
-    RewardOrder:
-      title: RewardOrder
-      type: object
-      properties:
-        buyerId:
-          type: string
-          description: 구매자 ID (user.id_usr)
-        cancelReason:
-          type: string
-          description: 취소 사유
-        canceledAt:
-          type: string
-          description: 취소 일시
-          format: date-time
-        canceledBy:
-          type: string
-          description: 취소 주체
-          enum:
-          - ADMIN
-          - SYSTEM
-          - USER
-        carrier:
-          type: string
-          description: 택배사명
-        completedAt:
-          type: string
-          description: 거래 완료일
-          format: date-time
-        createdAt:
-          type: string
-          description: 주문 생성일
-          format: date-time
-        creditUsed:
-          type: string
-          description: 크레딧 사용 내역 (JSON)
-        deliveryStatus:
-          type: string
-          description: 배송 상태
-          enum:
-          - DELIVERED
-          - READY
-          - RETURNED
-          - SHIPPED
-          - UNSET
-        id:
-          type: string
-          description: 주문 ID (UUID)
-        paidAt:
-          type: string
-          description: 결제 집행일
-          format: date-time
-        postalCode:
-          type: string
-          description: 우편번호
-        programId:
-          type: string
-          description: 프로그램 ID (UUID)
-        qty:
-          type: integer
-          description: 구매 수량
-          format: int32
-        recipientAddress:
-          type: string
-          description: 배송지 주소
-        recipientAddressDetail:
-          type: string
-          description: 상세 주소
-        recipientName:
-          type: string
-          description: 수령인 이름
-        recipientPhone:
-          type: string
-          description: 수령인 전화번호
-        status:
-          type: string
-          description: 상태
-          enum:
-          - CANCELLED
-          - CANCEL_REQUESTED
-          - COMPLETED
-          - PAID
-          - PAY_REQUESTED
-          - PENDING
-        trackingNo:
-          type: string
-          description: 운송장 번호
-        unitCreditSnapshot:
-          type: number
-          description: 주문 시점 크레딧 단가 스냅샷
-          format: bigdecimal
-        updatedAt:
-          type: string
-          description: 수정일
-          format: date-time
     RewardCompany:
       title: RewardCompany
       type: object
@@ -543,34 +449,6 @@ components:
           type: string
           description: 수정일
           format: date-time
-    PageInfo:
-      title: PageInfo
-      type: object
-      properties:
-        pageNo:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        pageSize:
-          type: integer
-          description: 페이지 사이즈
-          format: int32
-        totalPage:
-          type: integer
-          description: 전체 아이템 수
-          format: int32
-    PagedResponse_RewardProgram:
-      title: PagedResponse«RewardProgram»
-      type: object
-      properties:
-        items:
-          type: array
-          description: 목록 데이터
-          items:
-            $ref: '#/components/schemas/RewardProgram'
-        pageInfo:
-          description: 페이징 정보
-          $ref: '#/components/schemas/PageInfo'
     RewardProgram:
       title: RewardProgram
       type: object
@@ -668,6 +546,128 @@ components:
         validPeriod:
           type: string
           description: 유효기간 및 이용조건
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
+    PagedResponse_RewardProgram:
+      title: PagedResponse«RewardProgram»
+      type: object
+      properties:
+        items:
+          type: array
+          description: 목록 데이터
+          items:
+            $ref: '#/components/schemas/RewardProgram'
+        pageInfo:
+          description: 페이징 정보
+          $ref: '#/components/schemas/PageInfo'
+    RewardOrder:
+      title: RewardOrder
+      type: object
+      properties:
+        buyerId:
+          type: string
+          description: 구매자 ID (user.id_usr)
+        cancelReason:
+          type: string
+          description: 취소 사유
+        canceledAt:
+          type: string
+          description: 취소 일시
+          format: date-time
+        canceledBy:
+          type: string
+          description: 취소 주체
+          enum:
+          - ADMIN
+          - SYSTEM
+          - USER
+        carrier:
+          type: string
+          description: 택배사명
+        completedAt:
+          type: string
+          description: 거래 완료일
+          format: date-time
+        createdAt:
+          type: string
+          description: 주문 생성일
+          format: date-time
+        creditUsed:
+          type: string
+          description: 크레딧 사용 내역 (JSON)
+        deliveryStatus:
+          type: string
+          description: 배송 상태
+          enum:
+          - DELIVERED
+          - READY
+          - RETURNED
+          - SHIPPED
+          - UNSET
+        id:
+          type: string
+          description: 주문 ID (UUID)
+        paidAt:
+          type: string
+          description: 결제 집행일
+          format: date-time
+        postalCode:
+          type: string
+          description: 우편번호
+        programId:
+          type: string
+          description: 프로그램 ID (UUID)
+        qty:
+          type: integer
+          description: 구매 수량
+          format: int32
+        recipientAddress:
+          type: string
+          description: 배송지 주소
+        recipientAddressDetail:
+          type: string
+          description: 상세 주소
+        recipientName:
+          type: string
+          description: 수령인 이름
+        recipientPhone:
+          type: string
+          description: 수령인 전화번호
+        status:
+          type: string
+          description: 상태
+          enum:
+          - CANCELLED
+          - CANCEL_REQUESTED
+          - COMPLETED
+          - PAID
+          - PAY_REQUESTED
+          - PENDING
+        trackingNo:
+          type: string
+          description: 운송장 번호
+        unitCreditSnapshot:
+          type: number
+          description: 주문 시점 크레딧 단가 스냅샷
+          format: bigdecimal
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
   securitySchemes:
     Bearer:
       type: http

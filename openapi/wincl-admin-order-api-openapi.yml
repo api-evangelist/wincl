@@ -122,6 +122,16 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    WinclResponseData_Order:
+      title: WinclResponseData«Order»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Order'
+        message:
+          type: string
     Order:
       title: Order
       type: object
@@ -156,16 +166,6 @@ components:
         unit_price_avg_usd:
           type: number
           format: bigdecimal
-    WinclResponseData_Order:
-      title: WinclResponseData«Order»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/Order'
-        message:
-          type: string
   securitySchemes:
     Bearer:
       type: http

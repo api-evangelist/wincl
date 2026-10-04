@@ -299,28 +299,22 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_ProjectDetail:
-      title: WinclResponseData«ProjectDetail»
+    CertificationAgency:
+      title: CertificationAgency
       type: object
       properties:
-        code:
+        cert_desc:
           type: string
-        data:
-          $ref: '#/components/schemas/ProjectDetail'
-        message:
+          description: 인증기관 설명
+        id_cert_agc:
+          type: integer
+          description: 인증기관 아이디
+          format: int32
+        nm_cert_agc:
           type: string
-    WinclResponseData_ProjectResponse:
-      title: WinclResponseData«ProjectResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ProjectResponse'
-        message:
-          type: string
-    WinclResponseDataList_ProjectDetail:
-      title: WinclResponseDataList«ProjectDetail»
+          description: 인증기관 이름
+    WinclResponseDataList_ProjectBalanceHistory:
+      title: WinclResponseDataList«ProjectBalanceHistory»
       type: object
       properties:
         code:
@@ -332,7 +326,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ProjectDetail'
+            $ref: '#/components/schemas/ProjectBalanceHistory'
         message:
           type: string
         pageSize:
@@ -360,6 +354,26 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    WinclResponseData_List_CertificationAgency:
+      title: WinclResponseData«List«CertificationAgency»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CertificationAgency'
+        message:
+          type: string
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     AdminInsertProjectRequest:
       title: AdminInsertProjectRequest
       type: object
@@ -464,73 +478,6 @@ components:
           enum:
           - N
           - Y
-    ProjectResponse:
-      title: ProjectResponse
-      type: object
-      properties:
-        id_proj:
-          type: integer
-          format: int32
-    AdminUpdateProjectVolumeRequest:
-      title: AdminUpdateProjectVolumeRequest
-      type: object
-      properties:
-        serial_end:
-          type: string
-          description: 프로젝트 인증서 시리얼 마지막 번호
-        serial_postfix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Postfix
-        serial_prefix:
-          type: string
-          description: 프로젝트 인증서 시리얼 Prefix
-        serial_start:
-          type: string
-          description: 프로젝트 인증서 시리얼 시작 번호
-        type:
-          type: string
-          description: + or -
-          enum:
-          - MINUS
-          - PLUS
-        value:
-          type: number
-          description: 변경할 수량 절대값
-          format: bigdecimal
-    CertificationAgency:
-      title: CertificationAgency
-      type: object
-      properties:
-        cert_desc:
-          type: string
-          description: 인증기관 설명
-        id_cert_agc:
-          type: integer
-          description: 인증기관 아이디
-          format: int32
-        nm_cert_agc:
-          type: string
-          description: 인증기관 이름
-    WinclResponseData_List_CertificationAgency:
-      title: WinclResponseData«List«CertificationAgency»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CertificationAgency'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     AdminModifyProjectRequest:
       title: AdminModifyProjectRequest
       type: object
@@ -647,6 +594,16 @@ components:
           type: integer
           description: 표시 순서
           format: int32
+    WinclResponseData_ProjectDetail:
+      title: WinclResponseData«ProjectDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProjectDetail'
+        message:
+          type: string
     ProjectDetail:
       title: ProjectDetail
       type: object
@@ -782,36 +739,44 @@ components:
           enum:
           - N
           - Y
-    ProjectBalanceHistory:
-      title: ProjectBalanceHistory
+    AdminUpdateProjectVolumeRequest:
+      title: AdminUpdateProjectVolumeRequest
       type: object
       properties:
-        amt:
-          type: number
-          format: bigdecimal
-        dttm_reg:
-          type: integer
-          format: int64
-        id_proj:
-          type: integer
-          format: int32
-        id_proj_bal:
+        serial_end:
           type: string
-        id_usr_admin:
+          description: 프로젝트 인증서 시리얼 마지막 번호
+        serial_postfix:
           type: string
-        nm_proj:
+          description: 프로젝트 인증서 시리얼 Postfix
+        serial_prefix:
           type: string
-        status_act:
+          description: 프로젝트 인증서 시리얼 Prefix
+        serial_start:
           type: string
+          description: 프로젝트 인증서 시리얼 시작 번호
+        type:
+          type: string
+          description: + or -
           enum:
           - MINUS
           - PLUS
-        vol_after:
+        value:
           type: number
+          description: 변경할 수량 절대값
           format: bigdecimal
-        vol_before:
-          type: number
-          format: bigdecimal
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonCode'
+        message:
+          type: string
     ProjectAgencyRegistry:
       title: ProjectAgencyRegistry
       type: object
@@ -839,47 +804,6 @@ components:
         vintage:
           type: integer
           description: 빈티지
-          format: int32
-    WinclResponseDataList_ProjectBalanceHistory:
-      title: WinclResponseDataList«ProjectBalanceHistory»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectBalanceHistory'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
           format: int32
     ProjectEffect:
       title: ProjectEffect
@@ -915,18 +839,94 @@ components:
         effectImageUrl:
           type: string
           description: 프로젝트 효과 이미지 URL
-    WinclResponseData_List_CommonCode:
-      title: WinclResponseData«List«CommonCode»»
+    WinclResponseDataList_ProjectDetail:
+      title: WinclResponseDataList«ProjectDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDetail'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    WinclResponseData_ProjectResponse:
+      title: WinclResponseData«ProjectResponse»
       type: object
       properties:
         code:
           type: string
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
+          $ref: '#/components/schemas/ProjectResponse'
         message:
           type: string
+    ProjectBalanceHistory:
+      title: ProjectBalanceHistory
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        dttm_reg:
+          type: integer
+          format: int64
+        id_proj:
+          type: integer
+          format: int32
+        id_proj_bal:
+          type: string
+        id_usr_admin:
+          type: string
+        nm_proj:
+          type: string
+        status_act:
+          type: string
+          enum:
+          - MINUS
+          - PLUS
+        vol_after:
+          type: number
+          format: bigdecimal
+        vol_before:
+          type: number
+          format: bigdecimal
+    ProjectResponse:
+      title: ProjectResponse
+      type: object
+      properties:
+        id_proj:
+          type: integer
+          format: int32
   securitySchemes:
     Bearer:
       type: http

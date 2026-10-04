@@ -167,22 +167,13 @@ components:
             $ref: '#/components/schemas/MyRank'
         message:
           type: string
-    PersonalRank:
-      title: PersonalRank
+    NationalRank:
+      title: NationalRank
       type: object
       properties:
         cd_nation:
           type: string
-          description: 유저 거주국가코드
-        id_login:
-          type: string
-          description: 유저가 설정한 아이디
-        image_url:
-          type: string
-          description: 사용자 아이콘 이미지 URL
-        nickname:
-          type: string
-          description: 유저 닉네임
+          description: 국가 코드
         rank:
           type: integer
           description: 순위
@@ -190,6 +181,10 @@ components:
         tot_amt_retire:
           type: number
           description: 포인트, 리타이어 총 수량
+          format: bigdecimal
+        tot_cnt_retire:
+          type: number
+          description: 리타이어 횟수
           format: bigdecimal
     MyRank:
       title: MyRank
@@ -215,6 +210,30 @@ components:
           type: integer
           description: 순위
           format: int32
+    PersonalRank:
+      title: PersonalRank
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 유저 거주국가코드
+        id_login:
+          type: string
+          description: 유저가 설정한 아이디
+        image_url:
+          type: string
+          description: 사용자 아이콘 이미지 URL
+        nickname:
+          type: string
+          description: 유저 닉네임
+        rank:
+          type: integer
+          description: 순위
+          format: int32
+        tot_amt_retire:
+          type: number
+          description: 포인트, 리타이어 총 수량
+          format: bigdecimal
     WinclResponseDataList_PersonalRank:
       title: WinclResponseDataList«PersonalRank»
       type: object
@@ -297,25 +316,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    NationalRank:
-      title: NationalRank
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 국가 코드
-        rank:
-          type: integer
-          description: 순위
-          format: int32
-        tot_amt_retire:
-          type: number
-          description: 포인트, 리타이어 총 수량
-          format: bigdecimal
-        tot_cnt_retire:
-          type: number
-          description: 리타이어 횟수
-          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

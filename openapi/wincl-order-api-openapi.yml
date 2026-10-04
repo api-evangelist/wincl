@@ -324,11 +324,25 @@ components:
         totalPrice:
           type: number
           format: bigdecimal
-    CancelOrderRequest:
-      title: CancelOrderRequest
+    StripeReserveOrderWebRequest:
+      title: StripeReserveOrderWebRequest
       type: object
       properties:
-        orderId:
+        id_ord:
+          type: string
+        payment_intent:
+          type: string
+    OrderWebRequest:
+      title: OrderWebRequest
+      type: object
+      properties:
+        currency:
+          type: string
+    OrderWebResponse:
+      title: OrderWebResponse
+      type: object
+      properties:
+        id_ord:
           type: string
     WinclResponse:
       title: WinclResponse
@@ -365,16 +379,6 @@ components:
             type: string
         success:
           type: boolean
-    WinclResponseData_OrderWebResponse:
-      title: WinclResponseData«OrderWebResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/OrderWebResponse'
-        message:
-          type: string
     WinclResponseData_ConfirmPaymentWebResponse:
       title: WinclResponseData«ConfirmPaymentWebResponse»
       type: object
@@ -383,6 +387,68 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/ConfirmPaymentWebResponse'
+        message:
+          type: string
+    StripeCreatePaymentIntentWebRequest:
+      title: StripeCreatePaymentIntentWebRequest
+      type: object
+      properties:
+        id_ord:
+          type: string
+    CancelOrderRequest:
+      title: CancelOrderRequest
+      type: object
+      properties:
+        orderId:
+          type: string
+    OrderHistoryWebResponse:
+      title: OrderHistoryWebResponse
+      type: object
+      properties:
+        amt_tot:
+          type: number
+          format: bigdecimal
+        currency:
+          type: string
+        id_ord:
+          type: string
+        price_tot:
+          type: number
+          format: bigdecimal
+    WinclResponseData_OrderHistoryWebResponse:
+      title: WinclResponseData«OrderHistoryWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/OrderHistoryWebResponse'
+        message:
+          type: string
+    StripeConfirmOrderWebRequest:
+      title: StripeConfirmOrderWebRequest
+      type: object
+      properties:
+        payment_intent:
+          type: string
+    WinclResponseData_StripeCreatePaymentIntentWebResponse:
+      title: WinclResponseData«StripeCreatePaymentIntentWebResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/StripeCreatePaymentIntentWebResponse'
+        message:
+          type: string
+    WinclResponseData_GetOrderSheetResultData:
+      title: WinclResponseData«GetOrderSheetResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetOrderSheetResultData'
         message:
           type: string
     GetOrderSheetItem:
@@ -399,65 +465,14 @@ components:
           type: string
         productName:
           type: string
-    WinclResponseData_OrderHistoryWebResponse:
-      title: WinclResponseData«OrderHistoryWebResponse»
+    WinclResponseData_OrderWebResponse:
+      title: WinclResponseData«OrderWebResponse»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/OrderHistoryWebResponse'
-        message:
-          type: string
-    OrderOneDollarProductWebRequest:
-      title: OrderOneDollarProductWebRequest
-      type: object
-      properties:
-        currency:
-          type: string
-          enum:
-          - KRW
-          - USD
-    OrderWebRequest:
-      title: OrderWebRequest
-      type: object
-      properties:
-        currency:
-          type: string
-    OrderHistoryWebResponse:
-      title: OrderHistoryWebResponse
-      type: object
-      properties:
-        amt_tot:
-          type: number
-          format: bigdecimal
-        currency:
-          type: string
-        id_ord:
-          type: string
-        price_tot:
-          type: number
-          format: bigdecimal
-    StripeCreatePaymentIntentWebRequest:
-      title: StripeCreatePaymentIntentWebRequest
-      type: object
-      properties:
-        id_ord:
-          type: string
-    StripeConfirmOrderWebRequest:
-      title: StripeConfirmOrderWebRequest
-      type: object
-      properties:
-        payment_intent:
-          type: string
-    WinclResponseData_GetOrderSheetResultData:
-      title: WinclResponseData«GetOrderSheetResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/GetOrderSheetResultData'
+          $ref: '#/components/schemas/OrderWebResponse'
         message:
           type: string
     StripeCreatePaymentIntentWebResponse:
@@ -471,30 +486,15 @@ components:
         price_tot_usd:
           type: number
           format: bigdecimal
-    OrderWebResponse:
-      title: OrderWebResponse
+    OrderOneDollarProductWebRequest:
+      title: OrderOneDollarProductWebRequest
       type: object
       properties:
-        id_ord:
+        currency:
           type: string
-    StripeReserveOrderWebRequest:
-      title: StripeReserveOrderWebRequest
-      type: object
-      properties:
-        id_ord:
-          type: string
-        payment_intent:
-          type: string
-    WinclResponseData_StripeCreatePaymentIntentWebResponse:
-      title: WinclResponseData«StripeCreatePaymentIntentWebResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/StripeCreatePaymentIntentWebResponse'
-        message:
-          type: string
+          enum:
+          - KRW
+          - USD
   securitySchemes:
     Bearer:
       type: http

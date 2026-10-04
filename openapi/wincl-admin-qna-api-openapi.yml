@@ -197,6 +197,44 @@ paths:
         - global
 components:
   schemas:
+    Qna:
+      title: Qna
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
     QnaDetail:
       title: QnaDetail
       type: object
@@ -248,8 +286,8 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
-    AdminUpdateAnswerRequest:
-      title: AdminUpdateAnswerRequest
+    AdminInsertAnswerRequest:
+      title: AdminInsertAnswerRequest
       type: object
       properties:
         answer:
@@ -304,51 +342,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    Qna:
-      title: Qna
-      type: object
-      properties:
-        cd_tp_qna:
-          type: string
-          description: Qna 타입
-          enum:
-          - ACCOUNT
-          - GIFT_AND_DECLARATION
-          - OTHERS
-          - PAYMENT
-        cts:
-          type: string
-          description: Qna 내용
-        dttm_reg:
-          type: integer
-          description: Qna 등록일자
-          format: int64
-        id_login:
-          type: string
-          description: id_login
-        id_qna:
-          type: string
-          description: Qna 아이디
-        id_usr:
-          type: string
-          description: 유저 아이디
-        status_prog:
-          type: string
-          description: Qna 진행 상태
-          enum:
-          - CANCEL
-          - COMPLETE
-          - PENDING
-        ttl:
-          type: string
-          description: Qna 타이틀
-    AdminInsertAnswerRequest:
-      title: AdminInsertAnswerRequest
-      type: object
-      properties:
-        answer:
-          type: string
-          description: 답변 내용
     WinclResponseData_QnaDetail:
       title: WinclResponseData«QnaDetail»
       type: object
@@ -359,6 +352,13 @@ components:
           $ref: '#/components/schemas/QnaDetail'
         message:
           type: string
+    AdminUpdateAnswerRequest:
+      title: AdminUpdateAnswerRequest
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
   securitySchemes:
     Bearer:
       type: http

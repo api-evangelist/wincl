@@ -178,8 +178,18 @@ paths:
         - global
 components:
   schemas:
-    HomeProduct:
-      title: HomeProduct
+    WinclResponseData_ProductDetail:
+      title: WinclResponseData«ProductDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProductDetail'
+        message:
+          type: string
+    Product:
+      title: Product
       type: object
       properties:
         cd_nation:
@@ -201,18 +211,51 @@ components:
         img_thumbnail_prod:
           type: string
           description: 프로덕트 썸네일 이미지 url
-        nm_prod:
+        nm_cert_agc:
           type: string
-          description: 상품 이름
-        nm_proj:
-          type: string
-          description: 프로젝트 이름
+          description: 탄소배출권 인증기관명
         nm_proj_dev:
           type: string
           description: 프로젝트 개발자 이름
-        order:
+        productNameEn:
           type: string
-          description: 프로덕트 순서
+          description: 상품 이름 (영어)
+        productNameKr:
+          type: string
+          description: 상품 이름 (한국어)
+        product_stock_amount:
+          type: string
+          description: 상품 재고량 (톤)
+        projectNameEn:
+          type: string
+          description: 프로젝트 이름 (영어)
+        projectNameKr:
+          type: string
+          description: 프로젝트 이름 (한국어)
+        project_effect:
+          type: array
+          description: 프로젝트 효과 코드 리스트
+          items:
+            type: string
+        project_type:
+          type: string
+          description: 프로젝트 타입 코드 리스트
+        unit_price:
+          type: number
+          description: 톤당 가격
+          format: bigdecimal
+    WinclResponseData_List_HomeProduct:
+      title: WinclResponseData«List«HomeProduct»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeProduct'
+        message:
+          type: string
     WinclResponseDataList_Product:
       title: WinclResponseDataList«Product»
       type: object
@@ -254,18 +297,41 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    WinclResponseData_List_HomeProduct:
-      title: WinclResponseData«List«HomeProduct»»
+    HomeProduct:
+      title: HomeProduct
       type: object
       properties:
-        code:
+        cd_nation:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HomeProduct'
-        message:
+          description: 프로젝트 생성국가
+        id_prod:
           type: string
+          description: 프로덕트 아이디
+        id_proj:
+          type: integer
+          description: 프로젝트 아이디
+          format: int32
+        img_background_prod:
+          type: string
+          description: 프로덕트 배경 이미지 url
+        img_mobile_background_prod:
+          type: string
+          description: 프로덕트 모바일 배경 이미지 url
+        img_thumbnail_prod:
+          type: string
+          description: 프로덕트 썸네일 이미지 url
+        nm_prod:
+          type: string
+          description: 상품 이름
+        nm_proj:
+          type: string
+          description: 프로젝트 이름
+        nm_proj_dev:
+          type: string
+          description: 프로젝트 개발자 이름
+        order:
+          type: string
+          description: 프로덕트 순서
     ProjectAgencyRegistry:
       title: ProjectAgencyRegistry
       type: object
@@ -294,6 +360,40 @@ components:
           type: integer
           description: 빈티지
           format: int32
+    ProjectEffect:
+      title: ProjectEffect
+      type: object
+      properties:
+        effectCode:
+          type: string
+          description: 프로젝트 효과 코드
+          enum:
+          - AFFORDABLE_AND_CLEAN_ENERGY
+          - CLEAN_WATER_AND_SANITATION
+          - CLIMATE_ACTION
+          - DECENT_WORK_AND_ECONOMIC_GROWTH
+          - GENDER_EQUALITY
+          - GOOD_HEALTH_AND_WELLBEING
+          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
+          - LIFE_BELLOW_WATER
+          - LIFE_ON_LAND
+          - NO_POVERTY
+          - PARTNERSHIPS_FOR_THE_GOALS
+          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
+          - QUALITY_EDUCATION
+          - REDUCED_INEQUALITIES
+          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
+          - SUSTAINABLE_CITIES_AND_COMMUNITIES
+          - ZERO_HUNGER
+        effectDescriptionEn:
+          type: string
+          description: 프로젝트 효과 설명 (영어)
+        effectDescriptionKr:
+          type: string
+          description: 프로젝트 효과 설명 (한국어)
+        effectImageUrl:
+          type: string
+          description: 프로젝트 효과 이미지 URL
     ProductDetail:
       title: ProductDetail
       type: object
@@ -509,106 +609,6 @@ components:
           enum:
           - N
           - Y
-    WinclResponseData_ProductDetail:
-      title: WinclResponseData«ProductDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ProductDetail'
-        message:
-          type: string
-    ProjectEffect:
-      title: ProjectEffect
-      type: object
-      properties:
-        effectCode:
-          type: string
-          description: 프로젝트 효과 코드
-          enum:
-          - AFFORDABLE_AND_CLEAN_ENERGY
-          - CLEAN_WATER_AND_SANITATION
-          - CLIMATE_ACTION
-          - DECENT_WORK_AND_ECONOMIC_GROWTH
-          - GENDER_EQUALITY
-          - GOOD_HEALTH_AND_WELLBEING
-          - INDUSTRY_INNOVATION_AND_INFRASTRUCTURE
-          - LIFE_BELLOW_WATER
-          - LIFE_ON_LAND
-          - NO_POVERTY
-          - PARTNERSHIPS_FOR_THE_GOALS
-          - PEACE_JUSTICE_AND_STRONG_INSTITUTIONS
-          - QUALITY_EDUCATION
-          - REDUCED_INEQUALITIES
-          - RESPONSIBLE_CONSUMPTION_AND_PRODUCTION
-          - SUSTAINABLE_CITIES_AND_COMMUNITIES
-          - ZERO_HUNGER
-        effectDescriptionEn:
-          type: string
-          description: 프로젝트 효과 설명 (영어)
-        effectDescriptionKr:
-          type: string
-          description: 프로젝트 효과 설명 (한국어)
-        effectImageUrl:
-          type: string
-          description: 프로젝트 효과 이미지 URL
-    Product:
-      title: Product
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 프로젝트 생성국가
-        id_prod:
-          type: string
-          description: 프로덕트 아이디
-        id_proj:
-          type: integer
-          description: 프로젝트 아이디
-          format: int32
-        img_background_prod:
-          type: string
-          description: 프로덕트 배경 이미지 url
-        img_mobile_background_prod:
-          type: string
-          description: 프로덕트 모바일 배경 이미지 url
-        img_thumbnail_prod:
-          type: string
-          description: 프로덕트 썸네일 이미지 url
-        nm_cert_agc:
-          type: string
-          description: 탄소배출권 인증기관명
-        nm_proj_dev:
-          type: string
-          description: 프로젝트 개발자 이름
-        productNameEn:
-          type: string
-          description: 상품 이름 (영어)
-        productNameKr:
-          type: string
-          description: 상품 이름 (한국어)
-        product_stock_amount:
-          type: string
-          description: 상품 재고량 (톤)
-        projectNameEn:
-          type: string
-          description: 프로젝트 이름 (영어)
-        projectNameKr:
-          type: string
-          description: 프로젝트 이름 (한국어)
-        project_effect:
-          type: array
-          description: 프로젝트 효과 코드 리스트
-          items:
-            type: string
-        project_type:
-          type: string
-          description: 프로젝트 타입 코드 리스트
-        unit_price:
-          type: number
-          description: 톤당 가격
-          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

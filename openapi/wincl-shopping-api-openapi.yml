@@ -151,33 +151,24 @@ paths:
         - global
 components:
   schemas:
-    ShoppingBasketListResponse:
-      title: ShoppingBasketListResponse
+    WinclResponseData_InsertShoppingResponse:
+      title: WinclResponseData«InsertShoppingResponse»
       type: object
       properties:
-        average_price:
-          type: number
-          format: bigdecimal
-        average_price_usd:
-          type: number
-          format: bigdecimal
         code:
           type: string
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShoppingBasket'
+          $ref: '#/components/schemas/InsertShoppingResponse'
         message:
           type: string
-        total_amount:
-          type: number
-          format: bigdecimal
-        total_price:
-          type: number
-          format: bigdecimal
-        total_price_usd:
-          type: number
-          format: bigdecimal
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     InsertShoppingResponse:
       title: InsertShoppingResponse
       type: object
@@ -199,63 +190,6 @@ components:
         unit_price_usd:
           type: number
           format: bigdecimal
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseData_InsertShoppingResponse:
-      title: WinclResponseData«InsertShoppingResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/InsertShoppingResponse'
-        message:
-          type: string
-    InsertShoppingRequest:
-      title: InsertShoppingRequest
-      type: object
-      properties:
-        amt:
-          type: number
-          format: bigdecimal
-        id_prod:
-          type: string
-        id_proj:
-          type: integer
-          format: int32
-    WinclResponseData_UpdateShoppingItemResponse:
-      title: WinclResponseData«UpdateShoppingItemResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UpdateShoppingItemResponse'
-        message:
-          type: string
-    ModifyShoppingRequest:
-      title: ModifyShoppingRequest
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateShoppingDto'
-    UpdateShoppingDto:
-      title: UpdateShoppingDto
-      type: object
-      properties:
-        amt:
-          type: number
-          format: bigdecimal
-        id_shopping_basket:
-          type: string
     UpdateShoppingItemResponse:
       title: UpdateShoppingItemResponse
       type: object
@@ -275,14 +209,14 @@ components:
         total_price_usd:
           type: number
           format: bigdecimal
-    DeleteShoppingRequest:
-      title: DeleteShoppingRequest
+    ModifyShoppingRequest:
+      title: ModifyShoppingRequest
       type: object
       properties:
-        id_shopping_baskets:
+        items:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/UpdateShoppingDto'
     ShoppingBasket:
       title: ShoppingBasket
       type: object
@@ -361,6 +295,72 @@ components:
           enum:
           - N
           - Y
+    WinclResponseData_UpdateShoppingItemResponse:
+      title: WinclResponseData«UpdateShoppingItemResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UpdateShoppingItemResponse'
+        message:
+          type: string
+    UpdateShoppingDto:
+      title: UpdateShoppingDto
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        id_shopping_basket:
+          type: string
+    InsertShoppingRequest:
+      title: InsertShoppingRequest
+      type: object
+      properties:
+        amt:
+          type: number
+          format: bigdecimal
+        id_prod:
+          type: string
+        id_proj:
+          type: integer
+          format: int32
+    DeleteShoppingRequest:
+      title: DeleteShoppingRequest
+      type: object
+      properties:
+        id_shopping_baskets:
+          type: array
+          items:
+            type: string
+    ShoppingBasketListResponse:
+      title: ShoppingBasketListResponse
+      type: object
+      properties:
+        average_price:
+          type: number
+          format: bigdecimal
+        average_price_usd:
+          type: number
+          format: bigdecimal
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingBasket'
+        message:
+          type: string
+        total_amount:
+          type: number
+          format: bigdecimal
+        total_price:
+          type: number
+          format: bigdecimal
+        total_price_usd:
+          type: number
+          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

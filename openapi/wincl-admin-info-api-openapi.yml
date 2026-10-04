@@ -444,56 +444,6 @@ paths:
         - global
 components:
   schemas:
-    NoticePopupResponse:
-      title: NoticePopupResponse
-      type: object
-      properties:
-        id_notice_popup:
-          type: string
-    WinclResponseData_Banner:
-      title: WinclResponseData«Banner»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/Banner'
-        message:
-          type: string
-    WinclResponseData_NoticePopupResponse:
-      title: WinclResponseData«NoticePopupResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/NoticePopupResponse'
-        message:
-          type: string
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    AdminInsertBannerRequest:
-      title: AdminInsertBannerRequest
-      type: object
-      properties:
-        description_en:
-          type: string
-        description_kr:
-          type: string
-          description: 마케팅 배너 설명
-        ttl_en:
-          type: string
-        ttl_kr:
-          type: string
-          description: 마케팅 배너 타이틀 Kr
-        url:
-          type: string
     NoticePopupDto:
       title: NoticePopupDto
       type: object
@@ -542,6 +492,16 @@ components:
         titleKr:
           type: string
           description: 공지팝업 한글 제목
+    WinclResponseData_Banner:
+      title: WinclResponseData«Banner»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Banner'
+        message:
+          type: string
     AdminNoticePopupRequest:
       title: AdminNoticePopupRequest
       type: object
@@ -578,6 +538,62 @@ components:
         titleKr:
           type: string
           description: 공지팝업 한글 제목
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    BannerResponse:
+      title: BannerResponse
+      type: object
+      properties:
+        id_banner:
+          type: string
+    WinclResponseData_BannerResponse:
+      title: WinclResponseData«BannerResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/BannerResponse'
+        message:
+          type: string
+    WinclResponseData_NoticePopupResponse:
+      title: WinclResponseData«NoticePopupResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupResponse'
+        message:
+          type: string
+    NoticePopupResponse:
+      title: NoticePopupResponse
+      type: object
+      properties:
+        id_notice_popup:
+          type: string
+    AdminInsertBannerRequest:
+      title: AdminInsertBannerRequest
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+          description: 마케팅 배너 설명
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+          description: 마케팅 배너 타이틀 Kr
+        url:
+          type: string
     WinclResponseDataList_NoticePopupDto:
       title: WinclResponseDataList«NoticePopupDto»
       type: object
@@ -619,6 +635,27 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    Banner:
+      title: Banner
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+        dttm_reg:
+          type: integer
+          format: int64
+        id_banner:
+          type: string
+        is_showing:
+          type: boolean
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+        url:
+          type: string
     WinclResponseData_NoticePopupDto:
       title: WinclResponseData«NoticePopupDto»
       type: object
@@ -670,43 +707,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    BannerResponse:
-      title: BannerResponse
-      type: object
-      properties:
-        id_banner:
-          type: string
-    Banner:
-      title: Banner
-      type: object
-      properties:
-        description_en:
-          type: string
-        description_kr:
-          type: string
-        dttm_reg:
-          type: integer
-          format: int64
-        id_banner:
-          type: string
-        is_showing:
-          type: boolean
-        ttl_en:
-          type: string
-        ttl_kr:
-          type: string
-        url:
-          type: string
-    WinclResponseData_BannerResponse:
-      title: WinclResponseData«BannerResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/BannerResponse'
-        message:
-          type: string
   securitySchemes:
     Bearer:
       type: http

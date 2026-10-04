@@ -183,32 +183,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_GatherEventApplyResult:
-      title: WinclResponseData«GatherEventApplyResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/GatherEventApplyResult'
-        message:
-          type: string
-    DeleteEventResult:
-      title: DeleteEventResult
-      type: object
-      properties:
-        deleteed:
-          type: boolean
-        eventId:
-          type: string
-    ConsumeMagicCouponRequest:
-      title: ConsumeMagicCouponRequest
-      type: object
-      properties:
-        eventId:
-          type: string
-        magicCouponCode:
-          type: string
     GatherEventAnswersRequest:
       title: GatherEventAnswersRequest
       type: object
@@ -228,60 +202,6 @@ components:
         questionSetId:
           type: string
           description: 질문 세트 ID (한 이벤트에 질문지 세트가 여럿인 경우 구별)
-    ConsumeCouponResult:
-      title: ConsumeCouponResult
-      type: object
-      properties:
-        couponCode:
-          type: string
-        couponId:
-          type: string
-        couponStatus:
-          type: string
-          enum:
-          - ENABLED
-          - UNUSED
-          - USED
-          - USING
-    GatherEventApplyResult:
-      title: GatherEventApplyResult
-      type: object
-      properties:
-        eventId:
-          type: string
-        gathered:
-          type: boolean
-    IssueCouponsResult:
-      title: IssueCouponsResult
-      type: object
-      properties:
-        eventId:
-          type: string
-        issuedCount:
-          type: integer
-          format: int32
-        magicCouponCode:
-          type: string
-    WinclResponseData_WinclCoupon:
-      title: WinclResponseData«WinclCoupon»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/WinclCoupon'
-        message:
-          type: string
-    WinclResponseData_DeleteEventResult:
-      title: WinclResponseData«DeleteEventResult»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/DeleteEventResult'
-        message:
-          type: string
     IssueIndividualCouponsRequest:
       title: IssueIndividualCouponsRequest
       type: object
@@ -298,6 +218,16 @@ components:
           type: string
         magicCouponCode:
           type: string
+    WinclResponseData_DeleteEventResult:
+      title: WinclResponseData«DeleteEventResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/DeleteEventResult'
+        message:
+          type: string
     WinclResponseData_ConsumeCouponResult:
       title: WinclResponseData«ConsumeCouponResult»
       type: object
@@ -308,16 +238,31 @@ components:
           $ref: '#/components/schemas/ConsumeCouponResult'
         message:
           type: string
-    WinclResponseData_IssueCouponsResult:
-      title: WinclResponseData«IssueCouponsResult»
+    WinclResponseData_GatherEventApplyResult:
+      title: WinclResponseData«GatherEventApplyResult»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/IssueCouponsResult'
+          $ref: '#/components/schemas/GatherEventApplyResult'
         message:
           type: string
+    ConsumeCouponResult:
+      title: ConsumeCouponResult
+      type: object
+      properties:
+        couponCode:
+          type: string
+        couponId:
+          type: string
+        couponStatus:
+          type: string
+          enum:
+          - ENABLED
+          - UNUSED
+          - USED
+          - USING
     RegisterMagicCouponRequest:
       title: RegisterMagicCouponRequest
       type: object
@@ -339,6 +284,43 @@ components:
         productId:
           type: string
         senderUserId:
+          type: string
+    IssueCouponsResult:
+      title: IssueCouponsResult
+      type: object
+      properties:
+        eventId:
+          type: string
+        issuedCount:
+          type: integer
+          format: int32
+        magicCouponCode:
+          type: string
+    WinclResponseData_IssueCouponsResult:
+      title: WinclResponseData«IssueCouponsResult»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/IssueCouponsResult'
+        message:
+          type: string
+    ConsumeMagicCouponRequest:
+      title: ConsumeMagicCouponRequest
+      type: object
+      properties:
+        eventId:
+          type: string
+        magicCouponCode:
+          type: string
+    DeleteEventResult:
+      title: DeleteEventResult
+      type: object
+      properties:
+        deleteed:
+          type: boolean
+        eventId:
           type: string
     WinclCoupon:
       title: WinclCoupon
@@ -374,6 +356,24 @@ components:
           type: string
         userId:
           type: string
+    WinclResponseData_WinclCoupon:
+      title: WinclResponseData«WinclCoupon»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/WinclCoupon'
+        message:
+          type: string
+    GatherEventApplyResult:
+      title: GatherEventApplyResult
+      type: object
+      properties:
+        eventId:
+          type: string
+        gathered:
+          type: boolean
   securitySchemes:
     Bearer:
       type: http

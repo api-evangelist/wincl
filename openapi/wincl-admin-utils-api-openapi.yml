@@ -103,6 +103,44 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_List_Nation:
+      title: WinclResponseData«List«Nation»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nation'
+        message:
+          type: string
+    WinclResponseData_UploadFileResponse:
+      title: WinclResponseData«UploadFileResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/UploadFileResponse'
+        message:
+          type: string
+    AdminModifyNationRequest:
+      title: AdminModifyNationRequest
+      required:
+      - cd_nation
+      - corrs_adj
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가코드 3자리
+          example: KOR
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+          example: 0.3
     WinclResponse:
       title: WinclResponse
       type: object
@@ -143,49 +181,11 @@ components:
           description: 국가코드 숫자
           format: int32
           example: 410
-    AdminModifyNationRequest:
-      title: AdminModifyNationRequest
-      required:
-      - cd_nation
-      - corrs_adj
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 국가코드 3자리
-          example: KOR
-        corrs_adj:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-          example: 0.3
     UploadFileResponse:
       title: UploadFileResponse
       type: object
       properties:
         url:
-          type: string
-    WinclResponseData_UploadFileResponse:
-      title: WinclResponseData«UploadFileResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/UploadFileResponse'
-        message:
-          type: string
-    WinclResponseData_List_Nation:
-      title: WinclResponseData«List«Nation»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nation'
-        message:
           type: string
   securitySchemes:
     Bearer:

@@ -414,6 +414,43 @@ paths:
         - global
 components:
   schemas:
+    PaymentReserveRequest:
+      title: PaymentReserveRequest
+      type: object
+      properties:
+        orderChannel:
+          type: string
+          enum:
+          - MOBILE
+          - PC
+        orderId:
+          type: string
+        relayed:
+          type: boolean
+          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
+          example: false
+        returnUrl:
+          type: string
+    WinclResponseData_LatestOrderData:
+      title: WinclResponseData«LatestOrderData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/LatestOrderData'
+        message:
+          type: string
+    WinclResponseData_ReservePaymentResultData:
+      title: WinclResponseData«ReservePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ReservePaymentResultData'
+        message:
+          type: string
     ReservePaymentResultData:
       title: ReservePaymentResultData
       type: object
@@ -434,48 +471,6 @@ components:
           type: string
         successful:
           type: boolean
-    WinclResponseData_ReservePaymentResultData:
-      title: WinclResponseData«ReservePaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ReservePaymentResultData'
-        message:
-          type: string
-    WinclResponseData_ApprovePaymentResultData:
-      title: WinclResponseData«ApprovePaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ApprovePaymentResultData'
-        message:
-          type: string
-    StripeApproveRequest:
-      title: StripeApproveRequest
-      type: object
-      properties:
-        checkoutSessionId:
-          type: string
-        orderId:
-          type: string
-        totalPaymentCent:
-          type: number
-          description: 센트단위의 주문금액
-          format: bigdecimal
-    WinclResponseData_LatestOrderData:
-      title: WinclResponseData«LatestOrderData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/LatestOrderData'
-        message:
-          type: string
     ApprovePaymentResultData:
       title: ApprovePaymentResultData
       type: object
@@ -498,23 +493,6 @@ components:
           - STRIPE
         successful:
           type: boolean
-    PaymentReserveRequest:
-      title: PaymentReserveRequest
-      type: object
-      properties:
-        orderChannel:
-          type: string
-          enum:
-          - MOBILE
-          - PC
-        orderId:
-          type: string
-        relayed:
-          type: boolean
-          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
-          example: false
-        returnUrl:
-          type: string
     LatestOrderData:
       title: LatestOrderData
       type: object
@@ -525,6 +503,54 @@ components:
         orderId:
           type: string
         price:
+          type: number
+          format: bigdecimal
+    WinclResponseData_ApprovePaymentResultData:
+      title: WinclResponseData«ApprovePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ApprovePaymentResultData'
+        message:
+          type: string
+    StripeApproveRequest:
+      title: StripeApproveRequest
+      type: object
+      properties:
+        checkoutSessionId:
+          type: string
+        orderId:
+          type: string
+        totalPaymentCent:
+          type: number
+          description: 센트단위의 주문금액
+          format: bigdecimal
+    PaycoApproveRequest:
+      title: PaycoApproveRequest
+      type: object
+      properties:
+        code:
+          type: string
+        discountAmt:
+          type: number
+          format: bigdecimal
+        mainPgCode:
+          type: string
+        paymentCertifyToken:
+          type: string
+        pointAmt:
+          type: number
+          format: bigdecimal
+        reserveOrderNo:
+          type: string
+        sellerOrderReferenceKey:
+          type: string
+        totalPaymentAmt:
+          type: number
+          format: bigdecimal
+        totalRemoteAreaDeliveryFeeAmt:
           type: number
           format: bigdecimal
     Payment:
@@ -597,32 +623,6 @@ components:
           enum:
           - N
           - Y
-    PaycoApproveRequest:
-      title: PaycoApproveRequest
-      type: object
-      properties:
-        code:
-          type: string
-        discountAmt:
-          type: number
-          format: bigdecimal
-        mainPgCode:
-          type: string
-        paymentCertifyToken:
-          type: string
-        pointAmt:
-          type: number
-          format: bigdecimal
-        reserveOrderNo:
-          type: string
-        sellerOrderReferenceKey:
-          type: string
-        totalPaymentAmt:
-          type: number
-          format: bigdecimal
-        totalRemoteAreaDeliveryFeeAmt:
-          type: number
-          format: bigdecimal
   securitySchemes:
     Bearer:
       type: http

@@ -223,6 +223,51 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_List_AdminUser:
+      title: WinclResponseData«List«AdminUser»»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUser'
+        message:
+          type: string
+    UpdateAdminRequest:
+      title: UpdateAdminRequest
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            type: string
+            enum:
+            - ADMIN
+            - BANNER
+            - CERTIFICATE
+            - CREDIT
+            - FAQ
+            - GIFT_RECEIVE
+            - GIFT_SEND
+            - HEDERA
+            - HOME_PRODUCT
+            - INQUIRY
+            - NEWS
+            - NOTICE
+            - PAYMENT
+            - PRODUCT
+            - PROJECT
+            - REFUND
+            - REWARD_COMPANY
+            - REWARD_ISSUED
+            - REWARD_ORDER
+            - REWARD_PAYMENT_LOG
+            - REWARD_PROGRAM
+            - USER
+        name:
+          type: string
     AdminTabResponse:
       title: AdminTabResponse
       type: object
@@ -262,6 +307,16 @@ components:
           type: string
         message:
           type: string
+    WinclResponseData_AdminUser:
+      title: WinclResponseData«AdminUser»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/AdminUser'
+        message:
+          type: string
     CommonCode:
       title: CommonCode
       type: object
@@ -290,60 +345,27 @@ components:
           type: integer
           description: 표시 순서
           format: int32
-    UpdateAdminRequest:
-      title: UpdateAdminRequest
+    WinclResponseData_List_CommonCode:
+      title: WinclResponseData«List«CommonCode»»
       type: object
       properties:
-        authorities:
+        code:
+          type: string
+        data:
           type: array
           items:
-            type: string
-            enum:
-            - ADMIN
-            - BANNER
-            - CERTIFICATE
-            - CREDIT
-            - FAQ
-            - GIFT_RECEIVE
-            - GIFT_SEND
-            - HEDERA
-            - HOME_PRODUCT
-            - INQUIRY
-            - NEWS
-            - NOTICE
-            - PAYMENT
-            - PRODUCT
-            - PROJECT
-            - REFUND
-            - REWARD_COMPANY
-            - REWARD_ISSUED
-            - REWARD_ORDER
-            - REWARD_PAYMENT_LOG
-            - REWARD_PROGRAM
-            - USER
-        name:
+            $ref: '#/components/schemas/CommonCode'
+        message:
           type: string
-    AdminUser:
-      title: AdminUser
+    WinclResponseData_AdminTabResponse:
+      title: WinclResponseData«AdminTabResponse»
       type: object
       properties:
-        authorities:
-          type: array
-          items:
-            type: string
-        dttm_expire:
-          type: integer
-          format: int64
-        dttm_reg:
-          type: integer
-          format: int64
-        email:
+        code:
           type: string
-        google_uid:
-          type: string
-        id_adm_reg:
-          type: string
-        nm_adm:
+        data:
+          $ref: '#/components/schemas/AdminTabResponse'
+        message:
           type: string
     CreateAdminRequest:
       title: CreateAdminRequest
@@ -380,49 +402,27 @@ components:
           type: string
         name:
           type: string
-    WinclResponseData_AdminTabResponse:
-      title: WinclResponseData«AdminTabResponse»
+    AdminUser:
+      title: AdminUser
       type: object
       properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/AdminTabResponse'
-        message:
-          type: string
-    WinclResponseData_AdminUser:
-      title: WinclResponseData«AdminUser»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/AdminUser'
-        message:
-          type: string
-    WinclResponseData_List_AdminUser:
-      title: WinclResponseData«List«AdminUser»»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
+        authorities:
           type: array
           items:
-            $ref: '#/components/schemas/AdminUser'
-        message:
+            type: string
+        dttm_expire:
+          type: integer
+          format: int64
+        dttm_reg:
+          type: integer
+          format: int64
+        email:
           type: string
-    WinclResponseData_List_CommonCode:
-      title: WinclResponseData«List«CommonCode»»
-      type: object
-      properties:
-        code:
+        google_uid:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonCode'
-        message:
+        id_adm_reg:
+          type: string
+        nm_adm:
           type: string
   securitySchemes:
     Bearer:

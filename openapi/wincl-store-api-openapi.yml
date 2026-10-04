@@ -34,16 +34,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_StoreMetrics:
-      title: WinclResponseData«StoreMetrics»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/StoreMetrics'
-        message:
-          type: string
     StoreMetrics:
       title: StoreMetrics
       type: object
@@ -56,6 +46,16 @@ components:
           type: number
           description: 총 판매된 탄소배출량
           format: bigdecimal
+    WinclResponseData_StoreMetrics:
+      title: WinclResponseData«StoreMetrics»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/StoreMetrics'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http

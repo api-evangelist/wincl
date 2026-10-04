@@ -187,6 +187,44 @@ paths:
         - global
 components:
   schemas:
+    Qna:
+      title: Qna
+      type: object
+      properties:
+        cd_tp_qna:
+          type: string
+          description: Qna 타입
+          enum:
+          - ACCOUNT
+          - GIFT_AND_DECLARATION
+          - OTHERS
+          - PAYMENT
+        cts:
+          type: string
+          description: Qna 내용
+        dttm_reg:
+          type: integer
+          description: Qna 등록일자
+          format: int64
+        id_login:
+          type: string
+          description: id_login
+        id_qna:
+          type: string
+          description: Qna 아이디
+        id_usr:
+          type: string
+          description: 유저 아이디
+        status_prog:
+          type: string
+          description: Qna 진행 상태
+          enum:
+          - CANCEL
+          - COMPLETE
+          - PENDING
+        ttl:
+          type: string
+          description: Qna 타이틀
     QnaDetail:
       title: QnaDetail
       type: object
@@ -238,6 +276,14 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     InsertQuestionRequest:
       title: InsertQuestionRequest
       type: object
@@ -256,14 +302,6 @@ components:
         ttl:
           type: string
           description: 질문 타이틀
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     WinclResponseDataList_Qna:
       title: WinclResponseDataList«Qna»
       type: object
@@ -305,54 +343,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    Qna:
-      title: Qna
-      type: object
-      properties:
-        cd_tp_qna:
-          type: string
-          description: Qna 타입
-          enum:
-          - ACCOUNT
-          - GIFT_AND_DECLARATION
-          - OTHERS
-          - PAYMENT
-        cts:
-          type: string
-          description: Qna 내용
-        dttm_reg:
-          type: integer
-          description: Qna 등록일자
-          format: int64
-        id_login:
-          type: string
-          description: id_login
-        id_qna:
-          type: string
-          description: Qna 아이디
-        id_usr:
-          type: string
-          description: 유저 아이디
-        status_prog:
-          type: string
-          description: Qna 진행 상태
-          enum:
-          - CANCEL
-          - COMPLETE
-          - PENDING
-        ttl:
-          type: string
-          description: Qna 타이틀
-    WinclResponseData_QnaDetail:
-      title: WinclResponseData«QnaDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/QnaDetail'
-        message:
-          type: string
     UpdateQuestionRequest:
       title: UpdateQuestionRequest
       type: object
@@ -371,6 +361,16 @@ components:
         ttl:
           type: string
           description: 질문 타이틀
+    WinclResponseData_QnaDetail:
+      title: WinclResponseData«QnaDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/QnaDetail'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http
