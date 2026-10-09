@@ -1,75 +1,36 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/wincl-openapi-original.json
+source: openapi/wincl-admin-api-openapi.yml, openapi/wincl-admin-auth-api-openapi.yml, openapi/wincl-admin-faq-api-openapi.yml,
+  openapi/wincl-admin-hedera-api-openapi.yml, openapi/wincl-admin-info-api-openapi.yml, openapi/wincl-admin-news-api-openapi.yml,
+  openapi/wincl-admin-notice-api-openapi.yml, openapi/wincl-admin-order-api-openapi.yml, openapi/wincl-admin-payment-api-openapi.yml,
+  openapi/wincl-admin-product-api-openapi.yml, openapi/wincl-admin-project-api-openapi.yml,
+  openapi/wincl-admin-qna-api-openapi.yml, openapi/wincl-admin-reward-api-openapi.yml, openapi/wincl-admin-smart-contract-api-openapi.yml,
+  openapi/wincl-admin-user-api-openapi.yml, openapi/wincl-admin-utils-api-openapi.yml, openapi/wincl-admin-wallet-api-openapi.yml,
+  openapi/wincl-apis-for-the-b2b-service-ex-bespin-api-openapi.yml, openapi/wincl-auth-api-openapi.yml,
+  openapi/wincl-certificatebox-api-openapi.yml, openapi/wincl-coupon-api-openapi.yml, openapi/wincl-creditbox-api-openapi.yml,
+  openapi/wincl-dashboard-api-openapi.yml, openapi/wincl-faq-api-openapi.yml, openapi/wincl-health-check-controller-api-openapi.yml,
+  openapi/wincl-hedera-contract-info-api-openapi.yml, openapi/wincl-info-api-openapi.yml, openapi/wincl-internal-reward-api-openapi.yml,
+  openapi/wincl-news-api-openapi.yml, openapi/wincl-notice-api-openapi.yml, openapi/wincl-order-api-openapi.yml,
+  openapi/wincl-partner-api-openapi.yml, openapi/wincl-payment-api-openapi.yml, openapi/wincl-product-api-openapi.yml,
+  openapi/wincl-project-api-openapi.yml, openapi/wincl-qn-a-api-openapi.yml, openapi/wincl-ranking-api-openapi.yml,
+  openapi/wincl-reward-api-openapi.yml, openapi/wincl-shopping-api-openapi.yml, openapi/wincl-store-api-openapi.yml,
+  openapi/wincl-user-api-openapi.yml, openapi/wincl-utils-api-openapi.yml, openapi/wincl-wallet-api-openapi.yml,
+  openapi/wincl-webhook-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 271
   by_action_class:
-    acting: 127
-    connected: 144
+    connected: 146
+    acting: 125
   by_consequence:
+    read: 146
+    write: 95
     safety-critical: 1
-    write: 97
-    read: 144
     physical: 29
   human_in_the_loop_required: 1
 operations:
-- path: /bapi/v1/auth/clear-firebase-claim
-  method: post
-  operationId: passwordResetUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /bapi/v1/auth/forgot-password
-  method: post
-  operationId: requestForgotPasswordUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /bapi/v1/auth/signin
-  method: post
-  operationId: signInUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /bapi/v1/admin
   method: get
   operationId: getAdminListUsingGET
@@ -184,9 +145,27 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /bapi/v2/coupons/events/{eventId}
-  method: delete
-  operationId: deleteEventUsingDELETE
+- path: /bapi/v1/auth/clear-firebase-claim
+  method: post
+  operationId: passwordResetUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /bapi/v1/auth/forgot-password
+  method: post
+  operationId: requestForgotPasswordUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -202,27 +181,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /bapi/v2/coupons/magic/issue
+- path: /bapi/v1/auth/signin
   method: post
-  operationId: issueIndividualCouponsUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /bapi/v2/coupons/magic/register
-  method: post
-  operationId: registerMagicCouponsUsingPOST
+  operationId: signInUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1796,20 +1757,14 @@ operations:
   method: post
   operationId: getPaymasterUserInfoUsingPOST
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
+    action-class: connected
+    consequence: read
+    subject: optional
     scope:
     - global
-    audience: null
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /bapi/v1/hedera/contracts/paymaster/withdraw
   method: post
   operationId: withdrawFromPaymasterUsingPOST
@@ -1846,20 +1801,14 @@ operations:
   method: post
   operationId: getOffsetRecordUsingPOST
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
+    action-class: connected
+    consequence: read
+    subject: optional
     scope:
     - global
-    audience: null
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /bapi/v1/hedera/contracts/registry/transfer-record
   method: post
   operationId: getTransferRecordUsingPOST
@@ -2132,6 +2081,102 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /b2b/v2/auth/signup
+  method: post
+  operationId: b2bSignUpUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b2b/v2/auth/token
+  method: post
+  operationId: b2bSignInUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b2b/v2/emails/{email}/duplicated
+  method: get
+  operationId: b2bCheckEmailUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b2b/v2/products
+  method: get
+  operationId: b2bListProductsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b2b/v2/users/duplicated
+  method: get
+  operationId: b2bCheckPhoneNumberUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b2b/v2/users/{userId}/transactions/purchase
+  method: get
+  operationId: listPurchaseHistoryUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b2b/v2/users/{userId}/transactions/purchase/{purchaseId}
+  method: get
+  operationId: b2bGetPurchaseDetailUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v1/auth/check/email
   method: post
   operationId: checkEmailUsingPOST
@@ -2252,102 +2297,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /b2b/v2/auth/signup
-  method: post
-  operationId: b2bSignUpUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /b2b/v2/auth/token
-  method: post
-  operationId: b2bSignInUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /b2b/v2/emails/{email}/duplicated
-  method: get
-  operationId: b2bCheckEmailUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /b2b/v2/products
-  method: get
-  operationId: b2bListProductsUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /b2b/v2/users/duplicated
-  method: get
-  operationId: b2bCheckPhoneNumberUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /b2b/v2/users/{userId}/transactions/purchase
-  method: get
-  operationId: listPurchaseHistoryUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /b2b/v2/users/{userId}/transactions/purchase/{purchaseId}
-  method: get
-  operationId: b2bGetPurchaseDetailUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/v2/certificatebox/item
   method: get
   operationId: listCertificateItemsUsingGET
@@ -2384,6 +2333,60 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /bapi/v2/coupons/events/{eventId}
+  method: delete
+  operationId: deleteEventUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bapi/v2/coupons/magic/issue
+  method: post
+  operationId: issueIndividualCouponsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bapi/v2/coupons/magic/register
+  method: post
+  operationId: registerMagicCouponsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/v2/coupons/magic/answer
   method: post
   operationId: gatherEventAnswerUsingPOST
@@ -2776,46 +2779,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2/payment/kcp/approve
-  method: post
-  operationId: approveKcpPaymentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/payment/kcp/reserve
-  method: post
-  operationId: reserveKcpPaymentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/v1/news
   method: get
   operationId: getNewsUsingGET_1
@@ -3056,6 +3019,46 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v2/payment/kcp/approve
+  method: post
+  operationId: approveKcpPaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/payment/kcp/reserve
+  method: post
+  operationId: reserveKcpPaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/v2/payment/payco/approve
   method: post
   operationId: approvePaycoPaymentUsingPOST
@@ -3079,6 +3082,134 @@ operations:
 - path: /api/v2/payment/payco/reserve
   method: post
   operationId: reservePaycoPaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/payment/stripe/approve
+  method: post
+  operationId: approveStripePaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/payment/stripe/latest-order
+  method: get
+  operationId: retrieveLatestOrderUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/payment/stripe/reserve
+  method: post
+  operationId: reserveStripePaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/payment/stripe/test/approve
+  method: get
+  operationId: testApproveStripePaymentUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/payment/stripe/test/checkout
+  method: get
+  operationId: testHtmlCheckoutUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/payment/stripe/test/greeting
+  method: get
+  operationId: testGreetingUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/payment/stripe/test/reserve
+  method: post
+  operationId: testReserveStripePaymentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - global
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/payment/stripe/webhook
+  method: post
+  operationId: handleWebhookUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -3510,134 +3641,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2/payment/stripe/approve
-  method: post
-  operationId: approveStripePaymentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/payment/stripe/latest-order
-  method: get
-  operationId: retrieveLatestOrderUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/payment/stripe/reserve
-  method: post
-  operationId: reserveStripePaymentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/payment/stripe/test/approve
-  method: get
-  operationId: testApproveStripePaymentUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/payment/stripe/test/checkout
-  method: get
-  operationId: testHtmlCheckoutUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/payment/stripe/test/greeting
-  method: get
-  operationId: testGreetingUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - global
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/payment/stripe/test/reserve
-  method: post
-  operationId: testReserveStripePaymentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/payment/stripe/webhook
-  method: post
-  operationId: handleWebhookUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - global
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/v1/user/profile
   method: get
   operationId: userProfileUsingGET
