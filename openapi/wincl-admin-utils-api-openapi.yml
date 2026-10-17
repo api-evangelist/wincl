@@ -103,6 +103,38 @@ paths:
         - global
 components:
   schemas:
+    Nation:
+      title: Nation
+      type: object
+      properties:
+        cd_nation:
+          type: string
+          description: 국가코드 3자리
+          example: KOR
+        cd_nation2:
+          type: string
+          description: 국가코드 2자리
+          example: KR
+        cd_phone:
+          type: string
+          description: 국제전화 국가번호
+          example: '+82'
+        corrs_adj:
+          type: number
+          description: 상응조정률
+          format: bigdecimal
+          example: 0.3
+        nm_en:
+          type: string
+          description: 국가 영어 이름
+        nm_kr:
+          type: string
+          description: 국가 한글 이름
+        num_nation:
+          type: integer
+          description: 국가코드 숫자
+          format: int32
+          example: 410
     WinclResponseData_List_Nation:
       title: WinclResponseData«List«Nation»»
       type: object
@@ -149,38 +181,6 @@ components:
           type: string
         message:
           type: string
-    Nation:
-      title: Nation
-      type: object
-      properties:
-        cd_nation:
-          type: string
-          description: 국가코드 3자리
-          example: KOR
-        cd_nation2:
-          type: string
-          description: 국가코드 2자리
-          example: KR
-        cd_phone:
-          type: string
-          description: 국제전화 국가번호
-          example: '+82'
-        corrs_adj:
-          type: number
-          description: 상응조정률
-          format: bigdecimal
-          example: 0.3
-        nm_en:
-          type: string
-          description: 국가 영어 이름
-        nm_kr:
-          type: string
-          description: 국가 한글 이름
-        num_nation:
-          type: integer
-          description: 국가코드 숫자
-          format: int32
-          example: 410
     UploadFileResponse:
       title: UploadFileResponse
       type: object

@@ -414,43 +414,6 @@ paths:
         - global
 components:
   schemas:
-    PaymentReserveRequest:
-      title: PaymentReserveRequest
-      type: object
-      properties:
-        orderChannel:
-          type: string
-          enum:
-          - MOBILE
-          - PC
-        orderId:
-          type: string
-        relayed:
-          type: boolean
-          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
-          example: false
-        returnUrl:
-          type: string
-    WinclResponseData_LatestOrderData:
-      title: WinclResponseData«LatestOrderData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/LatestOrderData'
-        message:
-          type: string
-    WinclResponseData_ReservePaymentResultData:
-      title: WinclResponseData«ReservePaymentResultData»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ReservePaymentResultData'
-        message:
-          type: string
     ReservePaymentResultData:
       title: ReservePaymentResultData
       type: object
@@ -471,49 +434,32 @@ components:
           type: string
         successful:
           type: boolean
-    ApprovePaymentResultData:
-      title: ApprovePaymentResultData
-      type: object
-      properties:
-        orderId:
-          type: string
-        payment:
-          $ref: '#/components/schemas/Payment'
-        pgApproveId:
-          type: string
-        pgCode:
-          type: string
-        pgMessage:
-          type: string
-        pgProvider:
-          type: string
-          enum:
-          - KCP
-          - PAYCO
-          - STRIPE
-        successful:
-          type: boolean
-    LatestOrderData:
-      title: LatestOrderData
-      type: object
-      properties:
-        amount:
-          type: number
-          format: bigdecimal
-        orderId:
-          type: string
-        price:
-          type: number
-          format: bigdecimal
-    WinclResponseData_ApprovePaymentResultData:
-      title: WinclResponseData«ApprovePaymentResultData»
+    WinclResponseData_LatestOrderData:
+      title: WinclResponseData«LatestOrderData»
       type: object
       properties:
         code:
           type: string
         data:
-          $ref: '#/components/schemas/ApprovePaymentResultData'
+          $ref: '#/components/schemas/LatestOrderData'
         message:
+          type: string
+    PaymentReserveRequest:
+      title: PaymentReserveRequest
+      type: object
+      properties:
+        orderChannel:
+          type: string
+          enum:
+          - MOBILE
+          - PC
+        orderId:
+          type: string
+        relayed:
+          type: boolean
+          description: 'false: 해당 PG 직접 이용 (기본값), true: 해당 PG 경유한 제3의 PG 이용'
+          example: false
+        returnUrl:
           type: string
     StripeApproveRequest:
       title: StripeApproveRequest
@@ -551,6 +497,60 @@ components:
           type: number
           format: bigdecimal
         totalRemoteAreaDeliveryFeeAmt:
+          type: number
+          format: bigdecimal
+    ApprovePaymentResultData:
+      title: ApprovePaymentResultData
+      type: object
+      properties:
+        orderId:
+          type: string
+        payment:
+          $ref: '#/components/schemas/Payment'
+        pgApproveId:
+          type: string
+        pgCode:
+          type: string
+        pgMessage:
+          type: string
+        pgProvider:
+          type: string
+          enum:
+          - KCP
+          - PAYCO
+          - STRIPE
+        successful:
+          type: boolean
+    WinclResponseData_ReservePaymentResultData:
+      title: WinclResponseData«ReservePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ReservePaymentResultData'
+        message:
+          type: string
+    WinclResponseData_ApprovePaymentResultData:
+      title: WinclResponseData«ApprovePaymentResultData»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ApprovePaymentResultData'
+        message:
+          type: string
+    LatestOrderData:
+      title: LatestOrderData
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        orderId:
+          type: string
+        price:
           type: number
           format: bigdecimal
     Payment:

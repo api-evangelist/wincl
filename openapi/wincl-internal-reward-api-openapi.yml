@@ -506,78 +506,6 @@ paths:
         - global
 components:
   schemas:
-    RewardCompany:
-      title: RewardCompany
-      type: object
-      properties:
-        agreedTermsPrivacy:
-          type: string
-          description: 개인정보처리방침 동의 일시
-          format: date-time
-        agreedTermsReward:
-          type: string
-          description: 리워드 운영정책 동의 일시
-          format: date-time
-        agreedTermsService:
-          type: string
-          description: 서비스 이용약관 동의 일시
-          format: date-time
-        approvedAt:
-          type: string
-          description: 승인일
-          format: date-time
-        approvedBy:
-          type: string
-          description: 승인자
-        commerceRegDoc:
-          type: string
-          description: 통신판매업 신고 서류 스토리지 URL
-        commerceRegNo:
-          type: string
-          description: 통신판매업 신고 번호
-        companyName:
-          type: string
-          description: 기업명
-        companyNo:
-          type: string
-          description: 기업번호
-        companyRegDoc:
-          type: string
-          description: 등록증 스토리지 URL (JSON)
-        contactEmail:
-          type: string
-          description: 담당자 이메일
-        contactName:
-          type: string
-          description: 담당자 이름
-        contactPhone:
-          type: string
-          description: 담당자 전화번호
-        createdAt:
-          type: string
-          description: 작성일
-          format: date-time
-        id:
-          type: string
-          description: 리워드용 기업 ID (UUID)
-        rejectionReason:
-          type: string
-          description: 반려 사유
-        representativeName:
-          type: string
-          description: 대표자명
-        status:
-          type: string
-          description: 상태
-          enum:
-          - APPROVED
-          - PENDING
-          - REJECTED
-          - SUSPENDED
-        updatedAt:
-          type: string
-          description: 수정일
-          format: date-time
     PagedResponse_RewardOrder:
       title: PagedResponse«RewardOrder»
       type: object
@@ -687,116 +615,6 @@ components:
         validPeriod:
           type: string
           description: 유효기간 및 이용조건
-    RewardIssued:
-      title: RewardIssued
-      type: object
-      properties:
-        createdAt:
-          type: string
-          description: 기록일
-          format: date-time
-        deliveredAt:
-          type: string
-          description: 상품 확인 완료 일시
-          format: date-time
-        deliveryType:
-          type: string
-          description: 배송 방식
-          enum:
-          - OFFLINE
-          - ONLINE
-        id:
-          type: string
-          description: 발급 ID (UUID)
-        orderId:
-          type: string
-          description: 주문 ID (UUID)
-        sentAt:
-          type: string
-          description: 발송 완료 일시
-          format: date-time
-        sentTo:
-          type: string
-          description: 배송지 정보
-        status:
-          type: string
-          description: 상태
-          enum:
-          - CANCELLED
-          - DELIVERED
-          - ISSUED
-          - SENT
-    PageInfo:
-      title: PageInfo
-      type: object
-      properties:
-        pageNo:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        pageSize:
-          type: integer
-          description: 페이지 사이즈
-          format: int32
-        totalPage:
-          type: integer
-          description: 전체 아이템 수
-          format: int32
-    RewardPaymentLog:
-      title: RewardPaymentLog
-      type: object
-      properties:
-        amountCredit:
-          type: number
-          description: 이벤트 시점 크레딧 처리량
-          format: bigdecimal
-        amountPartial:
-          type: number
-          description: 부분 취소 수량
-          format: bigdecimal
-        createdAt:
-          type: string
-          description: 이벤트 발생 일시
-          format: date-time
-        errorCode:
-          type: string
-          description: 실패 시 에러 코드
-        errorMessage:
-          type: string
-          description: 실패 시 에러 메시지
-        eventType:
-          type: string
-          description: 이벤트 타입
-          enum:
-          - CANCEL_COMPLETED
-          - CANCEL_REQUESTED
-          - DELIVERY_COMPLETED
-          - PARTIAL_CANCEL
-          - PAYMENT_COMPLETED
-          - PAYMENT_REQUESTED
-        id:
-          type: string
-          description: 로그 ID (UUID)
-        initiatedBy:
-          type: string
-          description: 이벤트 주체
-          enum:
-          - ADMIN
-          - SYSTEM
-          - USER
-        metadata:
-          type: string
-          description: 추가 데이터 (JSON)
-        orderId:
-          type: string
-          description: 주문 ID (UUID)
-        status:
-          type: string
-          description: 상태
-          enum:
-          - FAIL
-          - PENDING
-          - SUCCESS
     PagedResponse_RewardProgram:
       title: PagedResponse«RewardProgram»
       type: object
@@ -903,6 +721,188 @@ components:
           type: string
           description: 수정일
           format: date-time
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
+    RewardCompany:
+      title: RewardCompany
+      type: object
+      properties:
+        agreedTermsPrivacy:
+          type: string
+          description: 개인정보처리방침 동의 일시
+          format: date-time
+        agreedTermsReward:
+          type: string
+          description: 리워드 운영정책 동의 일시
+          format: date-time
+        agreedTermsService:
+          type: string
+          description: 서비스 이용약관 동의 일시
+          format: date-time
+        approvedAt:
+          type: string
+          description: 승인일
+          format: date-time
+        approvedBy:
+          type: string
+          description: 승인자
+        commerceRegDoc:
+          type: string
+          description: 통신판매업 신고 서류 스토리지 URL
+        commerceRegNo:
+          type: string
+          description: 통신판매업 신고 번호
+        companyName:
+          type: string
+          description: 기업명
+        companyNo:
+          type: string
+          description: 기업번호
+        companyRegDoc:
+          type: string
+          description: 등록증 스토리지 URL (JSON)
+        contactEmail:
+          type: string
+          description: 담당자 이메일
+        contactName:
+          type: string
+          description: 담당자 이름
+        contactPhone:
+          type: string
+          description: 담당자 전화번호
+        createdAt:
+          type: string
+          description: 작성일
+          format: date-time
+        id:
+          type: string
+          description: 리워드용 기업 ID (UUID)
+        rejectionReason:
+          type: string
+          description: 반려 사유
+        representativeName:
+          type: string
+          description: 대표자명
+        status:
+          type: string
+          description: 상태
+          enum:
+          - APPROVED
+          - PENDING
+          - REJECTED
+          - SUSPENDED
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
+    RewardIssued:
+      title: RewardIssued
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: 기록일
+          format: date-time
+        deliveredAt:
+          type: string
+          description: 상품 확인 완료 일시
+          format: date-time
+        deliveryType:
+          type: string
+          description: 배송 방식
+          enum:
+          - OFFLINE
+          - ONLINE
+        id:
+          type: string
+          description: 발급 ID (UUID)
+        orderId:
+          type: string
+          description: 주문 ID (UUID)
+        sentAt:
+          type: string
+          description: 발송 완료 일시
+          format: date-time
+        sentTo:
+          type: string
+          description: 배송지 정보
+        status:
+          type: string
+          description: 상태
+          enum:
+          - CANCELLED
+          - DELIVERED
+          - ISSUED
+          - SENT
+    RewardPaymentLog:
+      title: RewardPaymentLog
+      type: object
+      properties:
+        amountCredit:
+          type: number
+          description: 이벤트 시점 크레딧 처리량
+          format: bigdecimal
+        amountPartial:
+          type: number
+          description: 부분 취소 수량
+          format: bigdecimal
+        createdAt:
+          type: string
+          description: 이벤트 발생 일시
+          format: date-time
+        errorCode:
+          type: string
+          description: 실패 시 에러 코드
+        errorMessage:
+          type: string
+          description: 실패 시 에러 메시지
+        eventType:
+          type: string
+          description: 이벤트 타입
+          enum:
+          - CANCEL_COMPLETED
+          - CANCEL_REQUESTED
+          - DELIVERY_COMPLETED
+          - PARTIAL_CANCEL
+          - PAYMENT_COMPLETED
+          - PAYMENT_REQUESTED
+        id:
+          type: string
+          description: 로그 ID (UUID)
+        initiatedBy:
+          type: string
+          description: 이벤트 주체
+          enum:
+          - ADMIN
+          - SYSTEM
+          - USER
+        metadata:
+          type: string
+          description: 추가 데이터 (JSON)
+        orderId:
+          type: string
+          description: 주문 ID (UUID)
+        status:
+          type: string
+          description: 상태
+          enum:
+          - FAIL
+          - PENDING
+          - SUCCESS
   securitySchemes:
     Bearer:
       type: http

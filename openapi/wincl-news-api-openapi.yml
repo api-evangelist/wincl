@@ -135,35 +135,6 @@ paths:
         - global
 components:
   schemas:
-    WinclResponseData_News:
-      title: WinclResponseData«News»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/News'
-        message:
-          type: string
-    News:
-      title: News
-      type: object
-      properties:
-        category:
-          type: string
-        contents:
-          type: string
-        createTimestamp:
-          type: integer
-          format: int64
-        'no':
-          type: integer
-          format: int32
-        title:
-          type: string
-        updateTimestamp:
-          type: integer
-          format: int64
     WinclResponseDataList_News:
       title: WinclResponseDataList«News»
       type: object
@@ -205,6 +176,16 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    WinclResponseData_News:
+      title: WinclResponseData«News»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/News'
+        message:
+          type: string
     CommonCode:
       title: CommonCode
       type: object
@@ -245,6 +226,25 @@ components:
             $ref: '#/components/schemas/CommonCode'
         message:
           type: string
+    News:
+      title: News
+      type: object
+      properties:
+        category:
+          type: string
+        contents:
+          type: string
+        createTimestamp:
+          type: integer
+          format: int64
+        'no':
+          type: integer
+          format: int32
+        title:
+          type: string
+        updateTimestamp:
+          type: integer
+          format: int64
   securitySchemes:
     Bearer:
       type: http

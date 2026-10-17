@@ -197,6 +197,16 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_QnaDetail:
+      title: WinclResponseData«QnaDetail»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/QnaDetail'
+        message:
+          type: string
     Qna:
       title: Qna
       type: object
@@ -235,6 +245,62 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    WinclResponseDataList_Qna:
+      title: WinclResponseDataList«Qna»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Qna'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
+    AdminInsertAnswerRequest:
+      title: AdminInsertAnswerRequest
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 답변 내용
     QnaDetail:
       title: QnaDetail
       type: object
@@ -286,72 +352,6 @@ components:
         ttl:
           type: string
           description: Qna 타이틀
-    AdminInsertAnswerRequest:
-      title: AdminInsertAnswerRequest
-      type: object
-      properties:
-        answer:
-          type: string
-          description: 답변 내용
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    WinclResponseDataList_Qna:
-      title: WinclResponseDataList«Qna»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Qna'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseData_QnaDetail:
-      title: WinclResponseData«QnaDetail»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/QnaDetail'
-        message:
-          type: string
     AdminUpdateAnswerRequest:
       title: AdminUpdateAnswerRequest
       type: object

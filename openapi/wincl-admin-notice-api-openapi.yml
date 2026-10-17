@@ -241,58 +241,6 @@ paths:
         - global
 components:
   schemas:
-    AdminInsertNoticeRequest:
-      title: AdminInsertNoticeRequest
-      type: object
-      properties:
-        category:
-          type: string
-          description: 공지사항 타입
-          enum:
-          - EVENT
-          - GENERAL
-          - MAINTENANCE
-        contents:
-          type: string
-          description: 공지사항 내용
-        title:
-          type: string
-          description: 공지사항 타이틀
-    WinclResponse:
-      title: WinclResponse
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    AdminModifyNoticeRequest:
-      title: AdminModifyNoticeRequest
-      type: object
-      properties:
-        category:
-          type: string
-          description: 공지사항 타입
-          enum:
-          - EVENT
-          - GENERAL
-          - MAINTENANCE
-        contents:
-          type: string
-          description: 공지사항 내용
-        title:
-          type: string
-          description: 공지사항 타이틀
-    WinclResponseData_Notice:
-      title: WinclResponseData«Notice»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/Notice'
-        message:
-          type: string
     WinclResponseDataList_Notice:
       title: WinclResponseDataList«Notice»
       type: object
@@ -334,6 +282,58 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    WinclResponse:
+      title: WinclResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    AdminModifyNoticeRequest:
+      title: AdminModifyNoticeRequest
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 내용
+        title:
+          type: string
+          description: 공지사항 타이틀
+    WinclResponseData_Notice:
+      title: WinclResponseData«Notice»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/Notice'
+        message:
+          type: string
+    AdminInsertNoticeRequest:
+      title: AdminInsertNoticeRequest
+      type: object
+      properties:
+        category:
+          type: string
+          description: 공지사항 타입
+          enum:
+          - EVENT
+          - GENERAL
+          - MAINTENANCE
+        contents:
+          type: string
+          description: 공지사항 내용
+        title:
+          type: string
+          description: 공지사항 타이틀
     Notice:
       title: Notice
       type: object

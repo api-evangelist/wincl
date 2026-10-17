@@ -377,78 +377,6 @@ paths:
         - global
 components:
   schemas:
-    RewardCompany:
-      title: RewardCompany
-      type: object
-      properties:
-        agreedTermsPrivacy:
-          type: string
-          description: 개인정보처리방침 동의 일시
-          format: date-time
-        agreedTermsReward:
-          type: string
-          description: 리워드 운영정책 동의 일시
-          format: date-time
-        agreedTermsService:
-          type: string
-          description: 서비스 이용약관 동의 일시
-          format: date-time
-        approvedAt:
-          type: string
-          description: 승인일
-          format: date-time
-        approvedBy:
-          type: string
-          description: 승인자
-        commerceRegDoc:
-          type: string
-          description: 통신판매업 신고 서류 스토리지 URL
-        commerceRegNo:
-          type: string
-          description: 통신판매업 신고 번호
-        companyName:
-          type: string
-          description: 기업명
-        companyNo:
-          type: string
-          description: 기업번호
-        companyRegDoc:
-          type: string
-          description: 등록증 스토리지 URL (JSON)
-        contactEmail:
-          type: string
-          description: 담당자 이메일
-        contactName:
-          type: string
-          description: 담당자 이름
-        contactPhone:
-          type: string
-          description: 담당자 전화번호
-        createdAt:
-          type: string
-          description: 작성일
-          format: date-time
-        id:
-          type: string
-          description: 리워드용 기업 ID (UUID)
-        rejectionReason:
-          type: string
-          description: 반려 사유
-        representativeName:
-          type: string
-          description: 대표자명
-        status:
-          type: string
-          description: 상태
-          enum:
-          - APPROVED
-          - PENDING
-          - REJECTED
-          - SUSPENDED
-        updatedAt:
-          type: string
-          description: 수정일
-          format: date-time
     RewardProgram:
       title: RewardProgram
       type: object
@@ -546,22 +474,6 @@ components:
         validPeriod:
           type: string
           description: 유효기간 및 이용조건
-    PageInfo:
-      title: PageInfo
-      type: object
-      properties:
-        pageNo:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        pageSize:
-          type: integer
-          description: 페이지 사이즈
-          format: int32
-        totalPage:
-          type: integer
-          description: 전체 아이템 수
-          format: int32
     PagedResponse_RewardProgram:
       title: PagedResponse«RewardProgram»
       type: object
@@ -664,6 +576,94 @@ components:
           type: number
           description: 주문 시점 크레딧 단가 스냅샷
           format: bigdecimal
+        updatedAt:
+          type: string
+          description: 수정일
+          format: date-time
+    PageInfo:
+      title: PageInfo
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        pageSize:
+          type: integer
+          description: 페이지 사이즈
+          format: int32
+        totalPage:
+          type: integer
+          description: 전체 아이템 수
+          format: int32
+    RewardCompany:
+      title: RewardCompany
+      type: object
+      properties:
+        agreedTermsPrivacy:
+          type: string
+          description: 개인정보처리방침 동의 일시
+          format: date-time
+        agreedTermsReward:
+          type: string
+          description: 리워드 운영정책 동의 일시
+          format: date-time
+        agreedTermsService:
+          type: string
+          description: 서비스 이용약관 동의 일시
+          format: date-time
+        approvedAt:
+          type: string
+          description: 승인일
+          format: date-time
+        approvedBy:
+          type: string
+          description: 승인자
+        commerceRegDoc:
+          type: string
+          description: 통신판매업 신고 서류 스토리지 URL
+        commerceRegNo:
+          type: string
+          description: 통신판매업 신고 번호
+        companyName:
+          type: string
+          description: 기업명
+        companyNo:
+          type: string
+          description: 기업번호
+        companyRegDoc:
+          type: string
+          description: 등록증 스토리지 URL (JSON)
+        contactEmail:
+          type: string
+          description: 담당자 이메일
+        contactName:
+          type: string
+          description: 담당자 이름
+        contactPhone:
+          type: string
+          description: 담당자 전화번호
+        createdAt:
+          type: string
+          description: 작성일
+          format: date-time
+        id:
+          type: string
+          description: 리워드용 기업 ID (UUID)
+        rejectionReason:
+          type: string
+          description: 반려 사유
+        representativeName:
+          type: string
+          description: 대표자명
+        status:
+          type: string
+          description: 상태
+          enum:
+          - APPROVED
+          - PENDING
+          - REJECTED
+          - SUSPENDED
         updatedAt:
           type: string
           description: 수정일

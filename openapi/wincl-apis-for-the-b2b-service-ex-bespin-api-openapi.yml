@@ -262,24 +262,6 @@ paths:
         - global
 components:
   schemas:
-    ContactDuplicated:
-      title: ContactDuplicated
-      type: object
-      properties:
-        emailDuplidated:
-          type: boolean
-        phoneNumberDuplidated:
-          type: boolean
-    WinclResponseData_B2BSignInResponse:
-      title: WinclResponseData«B2BSignInResponse»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/B2BSignInResponse'
-        message:
-          type: string
     Product:
       title: Product
       type: object
@@ -336,39 +318,6 @@ components:
           type: number
           description: 톤당 가격
           format: bigdecimal
-    CpInfo:
-      title: CpInfo
-      type: object
-      properties:
-        cpId:
-          type: string
-        cpNm:
-          type: string
-        cpNo:
-          type: string
-    WinclResponseData_boolean:
-      title: WinclResponseData«boolean»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          type: boolean
-        message:
-          type: string
-    B2BSignInResponse:
-      title: B2BSignInResponse
-      type: object
-      properties:
-        accessToken:
-          type: string
-        refreshToken:
-          type: string
-        tokenType:
-          type: string
-          description: jwt 토큰 타입
-        userId:
-          type: string
     BuyHistory:
       title: BuyHistory
       type: object
@@ -466,6 +415,39 @@ components:
           - FAIL
           - PENDING
           - SUCCESS
+    B2BSignInResponse:
+      title: B2BSignInResponse
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+          description: jwt 토큰 타입
+        userId:
+          type: string
+    WinclResponseData_B2BSignInResponse:
+      title: WinclResponseData«B2BSignInResponse»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/B2BSignInResponse'
+        message:
+          type: string
+    CpInfo:
+      title: CpInfo
+      type: object
+      properties:
+        cpId:
+          type: string
+        cpNm:
+          type: string
+        cpNo:
+          type: string
     WinclResponseDataList_Product:
       title: WinclResponseDataList«Product»
       type: object
@@ -507,78 +489,6 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
-    PurchaseHistoryAggregation:
-      title: PurchaseHistoryAggregation
-      type: object
-      properties:
-        amt:
-          type: number
-          description: 집합한 구매수량
-          format: bigdecimal
-        price_tot_krw:
-          type: number
-          description: 집합한 구매가격 (원화)
-          format: bigdecimal
-        price_tot_usd:
-          type: number
-          description: 집합한 구매가격 (달러)
-          format: bigdecimal
-    B2BSignUpRequest:
-      title: B2BSignUpRequest
-      type: object
-      properties:
-        b2bCustomerCode:
-          type: string
-          description: Passed from the B2B API service. user.b2b_customer_code
-        b2bRpCode:
-          type: string
-          description: Relying party code. user.b2b_rp_code
-        customerCompanyName:
-          type: string
-          description: Company name the user enter manually. user.company_code
-        customerCountryCode:
-          type: string
-          description: Customer country code
-        customerDisplayName:
-          type: string
-          description: Customer display name (unique)
-        customerEmail:
-          type: string
-          description: Customer email (unique)
-        customerPhoneNumber:
-          type: string
-          description: 'Customer phone number (E.164 format. ex: +821012345678)'
-        customerUserName:
-          type: string
-          description: 사용자 이름
-    WinclResponseData_ContactDuplicated:
-      title: WinclResponseData«ContactDuplicated»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/ContactDuplicated'
-        message:
-          type: string
-    B2BTokenRequest:
-      title: B2BTokenRequest
-      type: object
-      properties:
-        cpInfo:
-          $ref: '#/components/schemas/CpInfo'
-        userId:
-          type: string
-    WinclResponseData_BuyHistory:
-      title: WinclResponseData«BuyHistory»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/BuyHistory'
-        message:
-          type: string
     WinclAggregationResponse_BuyHistory_PurchaseHistoryAggregation:
       title: WinclAggregationResponse«BuyHistory,PurchaseHistoryAggregation»
       type: object
@@ -623,6 +533,96 @@ components:
           type: integer
           description: 전체 페이지 수
           format: int32
+    ContactDuplicated:
+      title: ContactDuplicated
+      type: object
+      properties:
+        emailDuplidated:
+          type: boolean
+        phoneNumberDuplidated:
+          type: boolean
+    B2BTokenRequest:
+      title: B2BTokenRequest
+      type: object
+      properties:
+        cpInfo:
+          $ref: '#/components/schemas/CpInfo'
+        userId:
+          type: string
+    B2BSignUpRequest:
+      title: B2BSignUpRequest
+      type: object
+      properties:
+        b2bCustomerCode:
+          type: string
+          description: Passed from the B2B API service. user.b2b_customer_code
+        b2bRpCode:
+          type: string
+          description: Relying party code. user.b2b_rp_code
+        customerCompanyName:
+          type: string
+          description: Company name the user enter manually. user.company_code
+        customerCountryCode:
+          type: string
+          description: Customer country code
+        customerDisplayName:
+          type: string
+          description: Customer display name (unique)
+        customerEmail:
+          type: string
+          description: Customer email (unique)
+        customerPhoneNumber:
+          type: string
+          description: 'Customer phone number (E.164 format. ex: +821012345678)'
+        customerUserName:
+          type: string
+          description: 사용자 이름
+    WinclResponseData_BuyHistory:
+      title: WinclResponseData«BuyHistory»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/BuyHistory'
+        message:
+          type: string
+    WinclResponseData_boolean:
+      title: WinclResponseData«boolean»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: boolean
+        message:
+          type: string
+    PurchaseHistoryAggregation:
+      title: PurchaseHistoryAggregation
+      type: object
+      properties:
+        amt:
+          type: number
+          description: 집합한 구매수량
+          format: bigdecimal
+        price_tot_krw:
+          type: number
+          description: 집합한 구매가격 (원화)
+          format: bigdecimal
+        price_tot_usd:
+          type: number
+          description: 집합한 구매가격 (달러)
+          format: bigdecimal
+    WinclResponseData_ContactDuplicated:
+      title: WinclResponseData«ContactDuplicated»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/ContactDuplicated'
+        message:
+          type: string
   securitySchemes:
     Bearer:
       type: http

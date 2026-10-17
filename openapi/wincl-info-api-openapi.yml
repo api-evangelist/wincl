@@ -56,6 +56,37 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseData_NoticePopupDto:
+      title: WinclResponseData«NoticePopupDto»
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          $ref: '#/components/schemas/NoticePopupDto'
+        message:
+          type: string
+    Banner:
+      title: Banner
+      type: object
+      properties:
+        description_en:
+          type: string
+        description_kr:
+          type: string
+        dttm_reg:
+          type: integer
+          format: int64
+        id_banner:
+          type: string
+        is_showing:
+          type: boolean
+        ttl_en:
+          type: string
+        ttl_kr:
+          type: string
+        url:
+          type: string
     NoticePopupDto:
       title: NoticePopupDto
       type: object
@@ -104,37 +135,6 @@ components:
         titleKr:
           type: string
           description: 공지팝업 한글 제목
-    Banner:
-      title: Banner
-      type: object
-      properties:
-        description_en:
-          type: string
-        description_kr:
-          type: string
-        dttm_reg:
-          type: integer
-          format: int64
-        id_banner:
-          type: string
-        is_showing:
-          type: boolean
-        ttl_en:
-          type: string
-        ttl_kr:
-          type: string
-        url:
-          type: string
-    WinclResponseData_NoticePopupDto:
-      title: WinclResponseData«NoticePopupDto»
-      type: object
-      properties:
-        code:
-          type: string
-        data:
-          $ref: '#/components/schemas/NoticePopupDto'
-        message:
-          type: string
     WinclResponseData_Banner:
       title: WinclResponseData«Banner»
       type: object

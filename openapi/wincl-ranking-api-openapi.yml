@@ -155,6 +155,47 @@ paths:
         - global
 components:
   schemas:
+    WinclResponseDataList_NationalRank:
+      title: WinclResponseDataList«NationalRank»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NationalRank'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
     WinclResponseData_List_MyRank:
       title: WinclResponseData«List«MyRank»»
       type: object
@@ -186,6 +227,47 @@ components:
           type: number
           description: 리타이어 횟수
           format: bigdecimal
+    WinclResponseDataList_PersonalRank:
+      title: WinclResponseDataList«PersonalRank»
+      type: object
+      properties:
+        code:
+          type: string
+        currentPageNum:
+          type: integer
+          description: 현재 페이지 번호
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonalRank'
+        message:
+          type: string
+        pageSize:
+          type: integer
+          description: 페이지당 아이템 개수
+          format: int32
+        sortType:
+          type: string
+          description: 정렬 기준
+          enum:
+          - AMOUNT_ASC
+          - AMOUNT_DESC
+          - ASC
+          - DESC
+          - NONE
+          - PRICE_ASC
+          - PRICE_DESC
+          - UNIT_PRICE_ASC
+          - UNIT_PRICE_DESC
+        totalCount:
+          type: integer
+          description: 전체 아이템 개수
+          format: int32
+        totalPages:
+          type: integer
+          description: 전체 페이지 수
+          format: int32
     MyRank:
       title: MyRank
       type: object
@@ -234,88 +316,6 @@ components:
           type: number
           description: 포인트, 리타이어 총 수량
           format: bigdecimal
-    WinclResponseDataList_PersonalRank:
-      title: WinclResponseDataList«PersonalRank»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PersonalRank'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
-    WinclResponseDataList_NationalRank:
-      title: WinclResponseDataList«NationalRank»
-      type: object
-      properties:
-        code:
-          type: string
-        currentPageNum:
-          type: integer
-          description: 현재 페이지 번호
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NationalRank'
-        message:
-          type: string
-        pageSize:
-          type: integer
-          description: 페이지당 아이템 개수
-          format: int32
-        sortType:
-          type: string
-          description: 정렬 기준
-          enum:
-          - AMOUNT_ASC
-          - AMOUNT_DESC
-          - ASC
-          - DESC
-          - NONE
-          - PRICE_ASC
-          - PRICE_DESC
-          - UNIT_PRICE_ASC
-          - UNIT_PRICE_DESC
-        totalCount:
-          type: integer
-          description: 전체 아이템 개수
-          format: int32
-        totalPages:
-          type: integer
-          description: 전체 페이지 수
-          format: int32
   securitySchemes:
     Bearer:
       type: http
